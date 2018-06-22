@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="546c011329144bf6975f4f7586d74a94" Name="Diagram1" ZoomLevel="73" ShowGrid="true">
+        <EntityTypeShape EntityType="DorllyResModel.T_Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Permission" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Role" Width="1.5" PointX="7.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DorllyResModel.T_User" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="DorllyResModel.FK_Menu_PER" ManuallyRouted="false" />
+        <AssociationConnector Association="DorllyResModel.FK_ROLE_PER" ManuallyRouted="false" />
+        <AssociationConnector Association="DorllyResModel.FK_ROLE_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DorllyResModel.T_RType" Width="1.5" PointX="4.75" PointY="7.25" />
+        <EntityTypeShape EntityType="DorllyResModel.T_RGroup" Width="1.5" PointX="2.5" PointY="7.25" />
+        <AssociationConnector Association="DorllyResModel.FK_RG_RType" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Resource" Width="1.5" PointX="7.625" PointY="6.625" />
+        <EntityTypeShape EntityType="DorllyResModel.T_RPrice" Width="1.5" PointX="9.875" PointY="3.75" />
+        <EntityTypeShape EntityType="DorllyResModel.T_SProvider" Width="1.5" PointX="0.875" PointY="4" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Unit" Width="1.5" PointX="10.125" PointY="1" />
+        <AssociationConnector Association="DorllyResModel.FK_RPrice_Unit" />
+        <AssociationConnector Association="DorllyResModel.FK_TR_RType" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Building" Width="1.5" PointX="13" PointY="4.5" />
+        <EntityTypeShape EntityType="DorllyResModel.T_City" Width="1.5" PointX="13" PointY="0.625" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Floor" Width="1.5" PointX="15.125" PointY="5.625" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Park" Width="1.5" PointX="15" PointY="0.875" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Region" Width="1.5" PointX="13" PointY="2.375" />
+        <EntityTypeShape EntityType="DorllyResModel.T_Stage" Width="1.5" PointX="15" PointY="3.5" />
+        <EntityTypeShape EntityType="DorllyResModel.T_RImage" Width="1.5" PointX="5.875" PointY="3.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

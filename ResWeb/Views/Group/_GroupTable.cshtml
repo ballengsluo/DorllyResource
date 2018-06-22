@@ -1,0 +1,42 @@
+﻿@model List<Resource.Model.T_RGroup>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>分组编号</th>
+            <th>分组名称</th>
+            <th>分组类别</th>
+            <th>所属园区</th>
+            <th>状态</th>
+            <th>修改人</th>
+            <th>修改时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int id = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@id</td>
+                <td class="sr-only" style="display:none">@item.ID</td>
+                <td>@item.RGroupCode</td>
+                <td>@item.RGroupName</td>
+                <td>@item.T_RType.Name</td>
+                <td>@item.T_Location.Name</td>
+                @if ((bool)item.Status || item.Status == null)
+                {
+                    <td><span class="status-enable">有效</span></td>
+
+                }
+                else
+                {
+                    <td><span class="status-disable">停用</span></td>
+                }
+                <td>@item.UpdateUser</td>
+                <td>@item.UpdateTime</td>
+            </tr>
+            id++;
+        }
+    </tbody>
+</table>
+

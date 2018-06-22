@@ -1,0 +1,42 @@
+﻿@model List<Resource.Model.T_RImage>
+<form class="img-container">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            string rid = @Guid.NewGuid().ToString();
+            <div class="img-box">
+                <span class="close-box" data-id="@item.ID"></span>
+                <img src="@item.ImgURL" />
+                <div class="select-box">
+                    <span class="radio-box">
+                        @{
+                            if (item.IsCover == true)
+                            {
+                                <input type="radio" name="isCover" id="@rid" checked data-id="@item.ID">
+                            }
+                            else
+                            {
+                                <input type="radio" name="isCover" id="@rid" data-id="@item.ID">
+                            }
+                        }
+
+                        <label for="@rid"></label>
+                    </span>
+                </div>
+            </div>
+                                }
+                            }
+    <div class="add-box">
+        <span class="inflag">+</span>
+        <input type="hidden" name="product" id="product" value="FTYQ-1-01-001-K/101" />
+        <input type="file" name="img-upload" id="img-upload" />
+        @*<div class="select-box">
+                <span class="radio-box">
+                    <input type="radio" id="isCover" name="isCover">
+                    <label for="isCover"></label>
+                </span>
+            </div>*@
+
+    </div>
+</form>

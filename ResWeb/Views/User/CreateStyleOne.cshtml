@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/user/css")
+</head>
+<body>
+    <div class="container">
+        <div class="form-action">
+            @using (Html.BeginForm("Create", "User", FormMethod.Post))
+            {
+                //new { @class = "form-horizontal" }
+                <div class="row">
+                    <div class="name col-md-3">
+                        <label for="loginName">账户名称：</label>
+                    </div>
+                    <div class="content col-md-6">
+                        <input type="text" class="form-control" id="loginName" name="loginName" placeholder="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="name col-md-3">
+                        <label for="pwd">登录密码：</label>
+                    </div>
+                    <div class="content col-md-6">
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="name col-md-3">
+                        <label for="userName">用户名称：</label>
+                    </div>
+                    <div class="content col-md-6">
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="">
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="name col-md-3">
+                            <label for="phone">联系电话：</label>
+                        </div>
+                        <div class="content col-md-6">
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-md-3">
+                            <label for="email">邮箱地址：</label>
+                        </div>
+                        <div class="content col-md-6">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-md-3">
+                            <label for="addr">通讯地址：</label>
+                        </div>
+                        <div class="content col-md-6">
+                            <input type="text" class="form-control" id="addr" name="addr" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="name col-md-3">
+                            <label for="role">所属角色：</label>
+                        </div>
+                        <div class="content col-md-6">
+                            @Html.DropDownList("role", ViewData["rList"] as SelectList, new { @class = "selectpicker", @title = "请选择..." })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button id="add" type="submit" class="btn btn-lg btn-primary">添&nbsp;&nbsp;加</button>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    @Scripts.Render("~/user/js")
+</body>
+</html>

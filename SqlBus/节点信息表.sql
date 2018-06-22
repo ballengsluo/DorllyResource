@@ -1,0 +1,100 @@
+/*
+ * 城市表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_City')
+	DROP TABLE T_City;
+CREATE TABLE T_City(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(30) NOT NULL CONSTRAINT UQ_CITYCODE UNIQUE,			
+	Name NVARCHAR(50)
+)
+INSERT INTO T_City VALUES('GDSZ','深圳');
+INSERT INTO T_City VALUES('GZGY','贵阳');
+INSERT INTO T_City VALUES('SXXA','西安');
+INSERT INTO T_City VALUES('QC','重庆');
+
+/*
+ * 行政区域表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Region')
+	DROP TABLE T_Region;
+CREATE TABLE T_Region(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(30) NOT NULL CONSTRAINT UQ_REGIONCODE UNIQUE,
+	Name NVARCHAR(50),
+	CityCode NVARCHAR(30) 
+)
+INSERT INTO T_Region VALUES('001','福田区','GDSZ');
+INSERT INTO T_Region VALUES('002','龙岗区','GDSZ');
+INSERT INTO T_Region VALUES('011','高新区','GZGY');
+INSERT INTO T_Region VALUES('021','高新区','SXXA');
+INSERT INTO T_Region VALUES('031','南岸区','QC');
+
+/*
+ * 园区表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Park')
+	DROP TABLE T_Park;
+CREATE TABLE T_Park(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(30) NOT NULL CONSTRAINT UQ_PARKCODE UNIQUE,
+	Name NVARCHAR(50),
+	RegionCode NVARCHAR(30),
+	Addr NVARCHAR(200),	
+	GisX NVARCHAR(30),
+	GisY NVARCHAR(30)
+)
+INSERT INTO T_Park VALUES('01','福田园区','001','深圳市福田区上梅林梅华路105号科技楼一楼服务中心','114.062318','22.56899');
+INSERT INTO T_Park VALUES('02','贵阳园区','011','贵州省贵阳市高新区长岭路31号','106.658586','26.620337');
+INSERT INTO T_Park VALUES('03','西安园区','021','陕西省西安市高新区云水一路925号','108.846185','34.222564');
+INSERT INTO T_Park VALUES('04','龙岗园区','002','广东省深圳市龙岗区佳兴路一号','22.7926492889','114.3045935677');
+INSERT INTO T_Park VALUES('05','重庆园区','031','重庆市南岸区南坪街道南城大道199号','106.568984','29.527807');
+
+/*
+ * 建设期表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Stage')
+	DROP TABLE T_Stage;
+CREATE TABLE T_Stage(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(10) NOT NULL CONSTRAINT UQ_STAGECODE UNIQUE,				--建设期编码	
+	Name NVARCHAR(50),														--建设期名称
+	ParkCode NVARCHAR(30),													--园区编码
+)
+INSERT INTO T_Stage VALUES('1','一期','01');
+/*
+ * 建筑表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Building')
+	DROP TABLE T_Building;
+CREATE TABLE T_Building(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(30) NOT NULL CONSTRAINT UQ_BUILDCODE UNIQUE,				--建筑编码	
+	Name NVARCHAR(50),														--建筑名称
+	StageCode NVARCHAR(30),													--建设期编码
+	GisX NVARCHAR(30),
+	GisY NVARCHAR(30)
+)
+INSERT INTO T_Building(Code,Name,StageCode,GisX,GisY)
+SELECT LOCNo,LOCName,'1',0,0 FROM DorllyOrder.DBO.Mstr_Location WHERE LOCLevel=3;
+
+/*
+ * 楼层表
+ */
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Floor')
+	DROP TABLE T_Floor;
+CREATE TABLE T_Floor(
+	ID INT IDENTITY(1,1) PRIMARY KEY,	
+	Code NVARCHAR(30) NOT NULL CONSTRAINT UQ_FLOORCODE UNIQUE,				--楼层编码	
+	Name NVARCHAR(50),														--楼层名称
+	BuildingCode NVARCHAR(30),												--建筑编码
+)
+INSERT INTO T_Floor(Code,Name,BuildingCode)
+SELECT LOCNo,LOCName,ParentLOCNo FROM DorllyOrder.DBO.Mstr_Location WHERE LOCLevel=4;
+
+SELECT * FROM T_City;
+SELECT * FROM T_Region;
+SELECT * FROM T_Park;
+SELECT * FROM T_Stage;
+SELECT * FROM T_Building;
+SELECT * FROM T_Floor;

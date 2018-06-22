@@ -1,0 +1,48 @@
+﻿@model List<Resource.Model.T_Role>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色管理</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/user/css")
+</head>
+<body>
+    <div class="container"> 
+        @* 功能操作 *@
+        <div class="func-action">
+            <button type="button" class="btn btn-primary" id="r_create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+            <button type="button" class="btn btn-primary" id="r_update"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" id="r_delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>         
+        </div>
+        @* 数据展示 *@
+        <div class="data-action">
+            @Html.Partial("_RoleTable", Model);
+        </div>
+    </div>
+    @* 增加或编辑操作 *@
+    <div class="form-action rolediv" style="">
+        <h3 style="text-align:center;margin-bottom:15px;" id="r_title"></h3>
+        <form id="r_form">
+            <input type="hidden" id="chooseID" name="roleID" />
+            <div class="form-group">
+                <span class="glyphicon glyphicon-lock"></span>
+                <input type="text" class="form-control" name="roleName" id="r_name" required placeholder="请输入角色名称">
+            </div>
+            <div class="form-group">
+                <span class="glyphicon glyphicon-lock"></span>
+                <input type="text" class="form-control" name="roleDesc" id="r_desc" placeholder="请输入角色描述">
+            </div>
+            <div class="form-group">
+                <input type="button" class="form-control" name="r_commit" id="r_commit" value="提交">
+            </div>
+        </form>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/app/js/app.role.js"></script>
+</body>
+</html>

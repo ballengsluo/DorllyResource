@@ -1,0 +1,169 @@
+﻿/*功能模块样式*/
+
+.func-action {
+    margin: 5px 0px;
+    padding: 8px 0px;
+    box-shadow: 0px 0px 4px #ccc;
+}
+
+.func-action button {
+    margin-left: 8px;
+}
+
+/*查询模块样式*/
+
+.select-action {
+    margin: 5px 0px;
+    padding: 8px 8px;
+    box-shadow: 0px 0px 4px #ccc;
+}
+.select-action .row{
+    padding-left: 0px;
+    margin-left: 0px;
+}
+/* 查询单元块 */
+.select-action .row div {  
+    padding-left: 0px;
+}
+
+.select-action .row .input-group-addon {
+    padding: 6px 6px;
+}
+
+.select-action .row .btn {
+    margin-left: 10px;
+}
+/* 下拉样式调整 */
+.row div .input-group .drop .btn{
+    margin-left: 0px;
+}
+
+/*表格数据样式*/
+
+.data-action>table>thead>tr>th {
+    background-color: #E0FFFF;
+}
+
+.data-action .table, .data-action .table tr th, .data-action .table tr td {
+    text-align: center;
+}
+
+.data-action .status-enable {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    padding: 4px 8px;
+}
+
+.data-action .status-disable {
+    color: #fff;
+    background-color: #fb3d3d;
+    border-color: #fa4747;
+    padding: 6px 8px;
+}
+
+/* 采用行操作 */
+/*
+.form-action {
+    margin: 30px auto;
+    padding: 20px 10px;
+    box-shadow: 0px 0px 4px #ccc;
+    width: 80%;
+    font-size: 17px;
+}
+.form-action .row {
+    margin-bottom: 2em;
+}
+
+.form-action .row .name {
+    margin-left: 20px;
+}
+
+.form-action .row .name label {
+    height: 34px;
+    margin: 0px;
+    line-height: 34px;
+    float: right;
+}
+
+.form-action .row .content {
+    padding: 0px;
+}
+*/
+/* 注册另外一种样式 */
+
+.form-action {
+    width: 80%;
+    margin: 40px auto;
+}
+.form-header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-action .form-group {
+    position: relative;
+    font-size: 18px;
+}
+
+.form-action .form-group>span {
+    position: absolute;
+    top: 0px;
+    z-index: 4;
+    width: 45px;
+    height: 38px;
+    text-align: center;
+    color: #404040;
+}
+
+.form-action .form-group input {
+    text-indent: 40px;
+}
+
+.form-action .form-group:last-of-type input {
+    background-color: #fa5252;
+    line-height: 0px;
+    font-weight: 700;
+    font-family: '微软雅黑';
+    font-size: 22px;
+    letter-spacing: 5px;
+}
+
+.form-action .form-group .form-control, .form-action .form-group>span, .form-action .form-group input {
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    font-size: 18px;
+}
+
+.form-action .form-group>lable {
+    display: inline-block;
+    width: 45px;
+    height: 38px;
+    text-align: center;
+    color: #404040;
+    line-height: 38px;
+    /* padding-left: 13.5px; */
+}
+
+.form-action .form-group>div>button>.pull-left {
+    text-indent: 40px;
+}
+
+.form-action .form-group>div>button, .form-action .form-group>div>div {
+    font-size: 18px;
+}
+/* .resetdiv{
+    width:360px;
+}
+.resetdiv input{
+    width: 350px;
+} */
+/* .form-action .form-group input::-webkit-input-placeholder {
+    padding-left: 40px;
+}
+.form-action .form-group input::-moz-input-placeholder{
+    padding-left: 40px;
+}
+.form-action .form-group input::-ms-input-placeholde{
+    padding-left: 40px;
+} */

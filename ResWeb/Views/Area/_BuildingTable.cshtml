@@ -1,0 +1,43 @@
+﻿
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>建筑编码</th>
+            <th>园区名称</th>
+            <th>建设期</th>
+            <th>建筑名称</th>
+            <th>经度</th>
+            <th>纬度</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int id = 1;
+            if (ViewBag.buildList != null)
+            {
+                foreach (var item in ViewBag.buildList)
+                {
+                    <tr>
+                        <td class="pkey" style="display:none">@item.build.ID</td>
+                        <td>@id</td>
+                        <td>@item.build.Code</td>
+                        <td>@item.park.Name</td>
+                        <td>@item.stage.Name</td>
+                        <td>@item.build.Name</td>
+                        <td>@item.build.GisX</td>
+                        <td>@item.build.GisY</td>
+                    </tr>
+                    id++;
+                }
+            }
+            else
+            {
+                <tr><td style="text-align:center" colspan="7">数据加载异常</td></tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+

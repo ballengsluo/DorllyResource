@@ -1,0 +1,40 @@
+
+/* 
+ *   平行表单样式
+ *   
+*/
+
+.form-horizontal {    
+    padding:10px 25px;
+}
+.form-horizontal,.form-horizontal input{
+    font-size: 16px;
+    
+}
+.form-horizontal .control-label{
+    text-align: center;
+    padding-right: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+}
+.form-horizontal .form-group div{
+    padding-left: 0px;
+}
+.form-horizontal .form-group:last-child>div>.btn{
+    letter-spacing: 5px;
+}
+.form-header{
+    text-align:center;
+    margin-bottom: 20px;
+}
+/* 资源分组 */
+.groupdiv{
+    width:400px;
+    /* border: 1px solid red; */
+    padding-top:30px;
+}
+.form-edit-horizontal{
+    border: 1px solid red;
+    max-width:400px;
+    padding-top:30px;
+}

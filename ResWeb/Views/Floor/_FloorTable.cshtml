@@ -1,0 +1,42 @@
+﻿
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>楼层编码</th>
+            <th>园区名称</th>
+            <th>建设期</th>
+            <th>建筑名称</th>
+            <th>楼层名称</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int id = 1;
+            if (ViewBag.floorList != null)
+            {
+                foreach (var item in ViewBag.floorList)
+                {
+                    <tr>
+                        <td class="pkey" style="display:none">@item.floor.ID</td>
+                        <td>@id</td>
+                        <td>@item.floor.Code</td>
+                        <td>@item.park.Name</td>
+                        <td>@item.stage.Name</td>
+                        <td>@item.build.Name</td>
+                        <td>@item.floor.Name</td>
+                    </tr>
+                    id++;
+                }
+            }
+            else
+            {
+                <tr><td style="text-align:center" colspan="6">数据加载异常</td></tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+
+

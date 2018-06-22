@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA21F0DE-261E-4653-B0D6-CE4CF04B1F79}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Resource.BLL</RootNamespace>
+    <AssemblyName>Resource.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseService.cs" />
+    <Compile Include="BLLTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Container.cs">
+      <DependentUpon>ContainerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContainerService.cs" />
+    <Compile Include="ContainerTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContainerTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FloorService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MenuService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParkService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PermissionService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RGroupService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RImageService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RPriceService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RTypeService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SProviderService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StageService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reource.DAL\Resource.DAL.csproj">
+      <Project>{f9301eb2-cfb8-4f6b-adf9-7263258cf5c1}</Project>
+      <Name>Resource.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource.IBLL\Resource.IBLL.csproj">
+      <Project>{2934d4b7-12ac-484f-ba75-788ace3f1f1f}</Project>
+      <Name>Resource.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource.IDAL\Resource.IDAL.csproj">
+      <Project>{a2c00ba4-9212-4439-aa2c-c1c1c005cb79}</Project>
+      <Name>Resource.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource.Model\Resource.Model.csproj">
+      <Project>{9aea9f31-9981-41ce-ae22-f829c747774a}</Project>
+      <Name>Resource.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BLLTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BLLTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="ContainerTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContainerTemplate.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

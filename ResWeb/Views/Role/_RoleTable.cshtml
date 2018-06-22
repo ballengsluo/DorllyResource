@@ -1,0 +1,23 @@
+﻿@model List<Resource.Model.T_Role>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>角色名称</th>
+            <th>角色描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int id = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@id</td>
+                <td class="sr-only" style="display:none">@item.RoleID</td>
+                <td>@item.RoleName</td>
+                <td>@item.RoleDesc</td>
+            </tr>
+            id++;
+        }
+    </tbody>
+</table>

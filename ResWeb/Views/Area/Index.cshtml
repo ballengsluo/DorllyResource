@@ -1,0 +1,310 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>区域管理</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/app/css")
+</head>
+<body>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">城市</li>
+            <li>行政区域</li>
+            <li>园区</li>
+            <li>建设期</li>
+            <li>建筑</li>
+            <li>楼层</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show" data-type="city">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="city-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="city-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="city-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">城市名称：</span>
+                                <input type="text" class="form-control pull-right" id="select-cityName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="select-city">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                    @Html.Action("CityTable", "Area");
+                </div>
+            </div>
+            <div class="layui-tab-item" data-type="region">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="region-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="region-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="region-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">城市名称：</span>
+                                @{
+                                    if (ViewData["cityList"] != null)
+                                    {
+                                        @Html.DropDownList("region-citySelect", ViewData["cityList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="region-citySelect" title="请选择..">
+
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="region-select">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                    @*@Html.Action("RegionTable", "Area");*@
+                </div>
+            </div>
+            <div class="layui-tab-item" data-type="park">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="park-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="park-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="park-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">城市名称：</span>
+                                @{
+                                    if (ViewData["cityList"] != null)
+                                    {
+                                        @Html.DropDownList("park-citySelect", ViewData["cityList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="park-citySelect" title="请选择..">
+
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="park-select">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                   @* @Html.Action("ParkTable", "Area");*@
+                </div>
+            </div>
+            <div class="layui-tab-item" data-type="stage">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="stage-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="stage-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="stage-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">城市名称：</span>
+                                @{
+                                    if (ViewData["cityList"] != null)
+                                    {
+                                        @Html.DropDownList("stage-citySelect", ViewData["cityList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="stage-citySelect" title="请选择..">
+
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">园区名称：</span>
+                                @{
+                                    if (ViewData["parkList"] != null)
+                                    {
+                                        @Html.DropDownList("stage-parkSelect", ViewData["parkList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="stage-parkSelect" title="请选择..">
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">建设期：</span>
+                                <input type="text" class="form-control pull-righ" id="stage-name" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="stage-select">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                    @*@Html.Action("StageTable", "Area");*@
+                </div>
+            </div>
+            <div class="layui-tab-item" data-type="building">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="building-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="building-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="building-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">园区名称：</span>
+                                @{
+                                    if (ViewData["parkList"] != null)
+                                    {
+                                       @Html.DropDownList("building-parkSelect", ViewData["parkList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="building-parkSelect" title="请选择..">
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">建设期：</span>
+                                @{
+                                    if (ViewData["stageList"] != null)
+                                    {
+                                        @Html.DropDownList("building-stageSelect", ViewData["stageList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+                                    }
+                                    else
+                                    {
+                                        <select class="selectpicker form-control pull-righ" id="building-stageSelect" title="请选择..">
+                                            <option>数据加载异常</option>
+                                        </select>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">建筑名称：</span>
+                                <input type="text" class="form-control pull-righ" id="building-name" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="building-select">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                    @*@Html.Action("BuildingTable", "Area");*@
+                </div>
+            </div>
+            <div class="layui-tab-item" data-type="floor">
+                <div class="func-action">
+                    <button type="button" class="btn btn-primary" id="floor-create"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                    <button type="button" class="btn btn-primary" id="floor-edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                    <button type="button" class="btn btn-danger" id="floor-delete"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                </div>
+                <div class="select-action">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">建筑名称：</span>
+                                <input type="text" class="form-control pull-righ" id="floor-buildingName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">楼层名称：</span>
+                                <input type="text" class="form-control pull-righ" id="floor-name" />
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary" id="floor-select">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-action">
+                    @*@Html.Action("FloorTable", "Area")*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div-city div-samll">
+        <h3 class="form-header">城市</h3>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-4">城市编码：</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="city-code" id="city-code">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">城市名称：</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="city-name" id="city-name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4" style="visibility:hidden">操作要素：</label>
+                <div class="col-md-8">
+                    <input type="button" class="btn btn-primary" name="submit-city" id="city-submit" value="提交">
+                </div>
+            </div>
+        </form>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Plugins/app/js/app.common.js"></script>
+    <script src="~/Plugins/app/js/app.area.js"></script>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+    </script>
+</body>
+</html>

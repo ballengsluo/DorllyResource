@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户注册</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/user/css")
+</head>
+<body>
+    <div class="container">
+
+        <div class="form-action reg">
+            @*@using (Html.BeginForm("Create", "User", FormMethod.Post))
+            {*@
+                <form>
+                <div class="form-header"><h2>Dorlly</h2></div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input type="text" class="form-control" name="userName" id="userName" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" class="form-control" name="pwd" id="pwd" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-lock"></span>
+                    <input type="password" class="form-control" name="confirmPwd" id="confirmPwd" placeholder="请再次输入密码">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-earphone"></span>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="请输入手机号码">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="请输入邮箱地址">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <input type="text" class="form-control" name="addr" id="addr" placeholder="请输入联系地址">
+                </div>
+                <div class="form-group">
+                    <span class="control-label glyphicon glyphicon-paperclip"></span>
+                    @Html.DropDownList("role", ViewData["rList"] as SelectList, new { @class = "selectpicker", @data_width = "100%", @title = "请选择所属角色..." })
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="userID"/>
+                    <input type="submit" class="form-control" id="add" value="注&nbsp;&nbsp;&nbsp;&nbsp;册">
+                </div>
+                </form>
+            @*}*@
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    @Scripts.Render("~/user/js")
+    <script>
+        //$(function () {
+        //    $(".reg").resize(function () {
+        //        alert($(this).outerHeight());
+        //    });
+        //});
+    </script>
+</body>
+</html>

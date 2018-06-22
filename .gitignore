@@ -1,0 +1,18 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/packages
+/Reource.DAL/obj
+/Reource.DAL/bin
+/Resource.BLL/bin
+/Resource.BLL/obj
+/Resource.IBLL/bin
+/Resource.IBLL/obj
+/Resource.IDAL/bin
+/Resource.IDAL/obj
+/Resource.Model/bin
+/Resource.Model/obj
+/ResWeb/bin
+
+

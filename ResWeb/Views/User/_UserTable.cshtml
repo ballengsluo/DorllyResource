@@ -1,0 +1,41 @@
+﻿@model List<Resource.Model.T_User>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>用户名称</th>
+            <th>用户角色</th>
+            <th>联系电话</th>
+            <th>联系邮箱</th>
+            <th>通讯地址</th>
+            <th>创建日期</th>
+            <th>用户状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int id = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@id</td>
+                <td class="sr-only" style="display:none">@item.UserID</td>
+                <td>@item.UserName</td>
+                <td>@item.T_Role.RoleName</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>@item.Addr</td>
+                <td>@item.CreateDate</td>
+                @if ((bool)item.Status || item.Status == null)
+                {
+                    <td><span class="status-enable">有效</span></td>
+
+                }
+                else
+                {
+                    <td><span class="status-disable">停用</span></td>
+                }
+            </tr>
+            id++;
+        }
+    </tbody>
+</table>

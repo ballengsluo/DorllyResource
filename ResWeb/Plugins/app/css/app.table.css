@@ -1,0 +1,27 @@
+/*
+ *  数据表格样式
+*/
+
+.data-action>table>thead>tr>th {
+    background-color: #E0FFFF;
+}
+
+.data-action .table, .data-action .table tr th, .data-action .table tr td {
+    text-align: center;
+}
+
+.data-action .status-enable {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+
+.data-action .status-disable {
+    color: #fff;
+    background-color: #fb3d3d;
+    border-color: #fa4747;
+    padding: 6px 8px;
+}
+
