@@ -18,8 +18,16 @@ namespace ResWeb.Controllers
         public ActionResult Index()
         {
             ViewBag.regionList = _regionService.GetModels(r => true).ToList();
-            ViewData["cityList"] = new SelectList(_cityService.GetModels(c => true).ToList(), "code", "name");
+            ViewData["cityList"] = new SelectList(_cityService.GetModels(c => true).ToList(), "Code", "Name");
             return View();
+        }
+
+        public ActionResult GetDropData(string parentCode)
+        {
+            var list = _regionService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(parentCode)) list = _regionService.GetModels(a => a.CityCode == parentCode);
+            ViewData["dataList"] = new SelectList(list.ToList(), "Code", "Name");
+            return PartialView("_GetRegionDropDownList");
         }
 
         // GET: Region/Details/5

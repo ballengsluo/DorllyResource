@@ -5,7 +5,11 @@ $(function () {
         if ($("#product").val() == "" || !$("#product").val()) {
             layer.msg("请选择资源！");
         } else {
-            ajax_form("/Upload/SaveImage", "POST", new FormData($(".img-container")[0]), "json", function (data) {
+            var form = new FormData();
+            form.append("product","FTYQ-1-01-001-K/101");
+            form.append("img-upload",$(this).get(0).files[0]);
+            // new FormData($(".img-container")[0])
+            ajax_form("/Image/SaveResImg", "POST",form, "json", function (data) {
                 if (data.result == 1) {
                     $(".img-container").prepend("<div class='img-box'>"
                         + "<span class='close-box'  data-id='" + data.id + "'></span>"
@@ -29,7 +33,7 @@ $(function () {
 var setImg = function () {
     $(".close-box").off("click").on("click", function () {
         $this = $(this);
-        ajax("/Upload/DeleteImage", "POST", { id: $this.attr("data-id") }, "json", 2, function (data) {
+        ajax("/Image/DeleteResImg", "POST", { id: $this.attr("data-id") }, "json", 2, function (data) {
             if (data.result == 1) {
                 $this.parent().remove();
             }
@@ -38,7 +42,7 @@ var setImg = function () {
 
     });
     $("input[name=isCover]").off("change").on("change", function () {
-        ajax("/Upload/UpdateImage", "GET", { id: $(this).attr("data-id") }, "json", 2, function (data) {
+        ajax("/Image/UpdateResImg", "GET", { id: $(this).attr("data-id") }, "json", 2, function (data) {
             layer.msg(data.msg, { icon: data.result });
         });
     });

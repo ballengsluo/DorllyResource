@@ -61,8 +61,11 @@ namespace Resource.BLL
     			            builder.RegisterType<RTypeService>().As<IRTypeService>().InstancePerLifetimeScope();   
     			            builder.RegisterType<SProviderService>().As<ISProviderService>().InstancePerLifetimeScope();   
     			            builder.RegisterType<StageService>().As<IStageService>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<StandardPriceService>().As<IStandardPriceService>().InstancePerLifetimeScope();   
     			            builder.RegisterType<UnitService>().As<IUnitService>().InstancePerLifetimeScope();   
     			            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<ResOtherService>().As<IResOtherService>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<ResRoomService>().As<IResRoomService>().InstancePerLifetimeScope();   
     			      
                 container = builder.Build();
             }

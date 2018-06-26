@@ -12,21 +12,40 @@ namespace ResWeb.Controllers
     public class CityController : Controller
     {
         private ICityService _cityService = Container.Resolve<ICityService>();
-        // GET: City
+  
         public ActionResult Index()
         {
             ViewBag.cityList = _cityService.GetModels(c => true).ToList();
             return View();
         }
 
-        // GET: City/Details/5
+        public ActionResult Select(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                ViewBag.cityList = _cityService.GetModels(c => true).ToList();
+            }
+            else
+            {
+                ViewBag.cityList = _cityService.GetModels(c => c.Name == name).ToList();
+            }
+            return PartialView("_CityTable");
+        }
+
+        public ActionResult GetDropData()
+        {
+            var list = _cityService.GetModels(f => true).ToList();
+            ViewData["dataList"] = new SelectList(list, "Code", "Name");
+            //ViewBag.nodeId = "cityList";
+            return PartialView("_GetCityDropDownList");
+        }
+
         public ActionResult Details()
         {
             ViewBag.cityList = _cityService.GetModels(c => true).ToList();
             return PartialView("_CityTable");
         }
 
-        // POST: City/Create
         [HttpPost]
         public ContentResult Create(FormCollection collection)
         {
@@ -46,14 +65,12 @@ namespace ResWeb.Controllers
             }
         }
 
-        // GET: City/Edit/5
         public JsonResult Edit(int id)
         {
             T_City city = _cityService.GetModels(c => c.ID == id).FirstOrDefault();
             return Json(city, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: City/Edit/5
         [HttpPost]
         public ContentResult Edit(int id, FormCollection collection)
         {
@@ -73,7 +90,6 @@ namespace ResWeb.Controllers
             }
         }
 
-        // GET: City/Delete/5
         public ContentResult Delete(int id)
         {
             try
@@ -90,18 +106,7 @@ namespace ResWeb.Controllers
             }
         }
 
-        public ActionResult Select(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                ViewBag.cityList = _cityService.GetModels(c => true).ToList();
-            }
-            else
-            {
-                ViewBag.cityList = _cityService.GetModels(c => c.Name == name).ToList();
-            }
-            return PartialView("_CityTable");
-        }
+    
 
     }
 }

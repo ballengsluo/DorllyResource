@@ -1,0 +1,12 @@
+﻿
+@if (ViewData["unitList"] != null)
+{
+    @Html.DropDownList("unitList", ViewData["unitList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." });
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" id="unitList" title="请选择..">
+        <option selected>暂无数据</option>
+    </select>
+}
+

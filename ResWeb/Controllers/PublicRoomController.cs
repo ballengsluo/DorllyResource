@@ -12,17 +12,36 @@ namespace ResWeb.Controllers
 {
     public class PublicRoomController : Controller
     {
-        IRImageService _imgServcie = Container.Resolve<IRImageService>();
+        IResourceService _resourceService = Container.Resolve<IResourceService>();
+        IResRoomService _roomService = Container.Resolve<IResRoomService>();
         // GET: PublicRoom
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: PublicRoom/Details/5
-        public ActionResult Details(int id)
-        {
+        public ActionResult Search()
+        {          
             return View();
+        }
+        
+        // GET: PublicRoom/Details/5
+        public ActionResult Details(string cityCode, string regionCode, string parkCode, string stageCode, string buildingCode, string floorCode)
+        {
+            var list = _roomService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(floorCode))
+                list = _roomService.GetModels(a => a.FCODE == floorCode);
+            else if (!string.IsNullOrEmpty(buildingCode))
+                list = _roomService.GetModels(a => a.BCODE == buildingCode);
+            else if (!string.IsNullOrEmpty(stageCode))
+                list = _roomService.GetModels(a => a.SCODE == stageCode);
+            else if (!string.IsNullOrEmpty(parkCode))
+                list = _roomService.GetModels(a => a.PCODE == parkCode);
+            else if (!string.IsNullOrEmpty(regionCode))
+                list = _roomService.GetModels(a => a.GCODE == regionCode);
+            else if (!string.IsNullOrEmpty(cityCode))
+                list = _roomService.GetModels(a => a.CCODE == cityCode);
+            ViewBag.roomList = list.ToList();
+            return PartialView("_RoomTable");
         }
 
         // GET: PublicRoom/Create

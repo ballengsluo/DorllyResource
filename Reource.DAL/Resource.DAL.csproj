@@ -91,7 +91,13 @@
     <Compile Include="RegionDal.cs">
       <DependentUpon>DalTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="ResOtherDal.cs">
+      <DependentUpon>DalTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResourceDal.cs">
+      <DependentUpon>DalTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResRoomDal.cs">
       <DependentUpon>DalTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="RGroupDal.cs">
@@ -113,6 +119,9 @@
       <DependentUpon>DalTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="StageDal.cs">
+      <DependentUpon>DalTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StandardPriceDal.cs">
       <DependentUpon>DalTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitDal.cs">

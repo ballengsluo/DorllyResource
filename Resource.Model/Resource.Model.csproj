@@ -112,10 +112,19 @@
     <Compile Include="T_Stage.cs">
       <DependentUpon>DorllyRes.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_StandardPrice.cs">
+      <DependentUpon>DorllyRes.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_Unit.cs">
       <DependentUpon>DorllyRes.tt</DependentUpon>
     </Compile>
     <Compile Include="T_User.cs">
+      <DependentUpon>DorllyRes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ResOther.cs">
+      <DependentUpon>DorllyRes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ResRoom.cs">
       <DependentUpon>DorllyRes.tt</DependentUpon>
     </Compile>
   </ItemGroup>

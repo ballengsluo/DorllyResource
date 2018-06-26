@@ -32,15 +32,12 @@ namespace Resource.Model
         public Nullable<int> RentOutNum { get; set; }
         public Nullable<int> PersonNum { get; set; }
         public string Size { get; set; }
-        public Nullable<decimal> Deposit { get; set; }
-        public string Position { get; set; }
-        public string Detail { get; set; }
-        public string Matching { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public string UpdateUser { get; set; }
         public string Rmark { get; set; }
         public string FloorID { get; set; }
+        public string Content { get; set; }
     
         public virtual T_RType T_RType { get; set; }
     }

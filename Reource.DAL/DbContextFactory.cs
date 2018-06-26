@@ -17,9 +17,11 @@ namespace Resource.DAL
         /// <returns>only thread DbContext</returns>
         public static  DbContext Create() {
             DbContext dbContext = CallContext.GetData("DbContext") as DbContext;
+           
             if (dbContext == null)
             {
                 dbContext = new DorllyResEntities();
+                DorllyResEntities dc = new DorllyResEntities();
                 //dbContext.Configuration.ProxyCreationEnabled = false;
                 CallContext.SetData("DbContext",dbContext);
             }

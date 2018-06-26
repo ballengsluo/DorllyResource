@@ -40,7 +40,13 @@ namespace ResWeb.Controllers
             return View("_FloorTable");
         }
 
-
+        public ActionResult GetDropData(string parentCode)
+        {
+            var list = _floorService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(parentCode)) list = _floorService.GetModels(a => a.BuildingCode == parentCode);
+            ViewData["dataList"] = new SelectList(list.ToList(), "Code", "Name");
+            return PartialView("_GetFloorDropDownList");
+        }
 
         // POST: Floor/Create
         [HttpPost]
@@ -66,13 +72,13 @@ namespace ResWeb.Controllers
         // GET: Floor/Edit/5
         public JsonResult Edit(int id)
         {
-            var linqList = from floor in _floorService.GetModels(f => f.ID==id)
+            var linqList = from floor in _floorService.GetModels(f => f.ID == id)
                            join build in _buildService.GetModels(b => true) on floor.BuildingCode equals build.Code
                            join stage in _stageService.GetModels(s => true) on build.StageCode equals stage.Code
                            join park in _parkService.GetModels(p => true) on stage.ParkCode equals park.Code
                            join region in _regionService.GetModels(r => true) on park.RegionCode equals region.Code
                            join city in _cityService.GetModels(c => true) on region.CityCode equals city.Code
-                           select new { floor, build, stage, park ,region,city};
+                           select new { floor, build, stage, park, region, city };
             //var floorObject = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(linqList)); 
             return Json(linqList, JsonRequestBehavior.AllowGet);
         }

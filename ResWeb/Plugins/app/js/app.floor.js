@@ -1,4 +1,10 @@
 $(function () {
+    $("#search").on("click",function(){
+        $.get("/Floor/GetFloorDropDownList",function(data){
+            $("#cityList").parent().after(data).remove();
+            $("#floorList").selectpicker("reflash");
+        });
+    });
     // 添加
     $("#add").on("click", function () {
         $(".form-header").html("添加楼层");

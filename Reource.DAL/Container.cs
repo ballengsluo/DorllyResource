@@ -61,8 +61,11 @@ namespace Resource.DAL
     			            builder.RegisterType<RTypeDal>().As<IRTypeDal>().InstancePerLifetimeScope();   
     			            builder.RegisterType<SProviderDal>().As<ISProviderDal>().InstancePerLifetimeScope();   
     			            builder.RegisterType<StageDal>().As<IStageDal>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<StandardPriceDal>().As<IStandardPriceDal>().InstancePerLifetimeScope();   
     			            builder.RegisterType<UnitDal>().As<IUnitDal>().InstancePerLifetimeScope();   
     			            builder.RegisterType<UserDal>().As<IUserDal>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<ResOtherDal>().As<IResOtherDal>().InstancePerLifetimeScope();   
+    			            builder.RegisterType<ResRoomDal>().As<IResRoomDal>().InstancePerLifetimeScope();   
     			      
                 container = builder.Build();
             }

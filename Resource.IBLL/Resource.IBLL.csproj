@@ -76,7 +76,13 @@
     <Compile Include="IRegionService.cs">
       <DependentUpon>IBLLTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="IResOtherService.cs">
+      <DependentUpon>IBLLTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="IResourceService.cs">
+      <DependentUpon>IBLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IResRoomService.cs">
       <DependentUpon>IBLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IRGroupService.cs">
@@ -98,6 +104,9 @@
       <DependentUpon>IBLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IStageService.cs">
+      <DependentUpon>IBLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IStandardPriceService.cs">
       <DependentUpon>IBLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IUnitService.cs">

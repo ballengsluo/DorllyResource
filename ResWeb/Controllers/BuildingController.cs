@@ -37,7 +37,13 @@ namespace ResWeb.Controllers
             ViewBag.buildList = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(linqList));
             return PartialView("_BuildingTable");
         }
-
+        public ActionResult GetDropData(string parentCode)
+        {
+            var list = _buildService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(parentCode)) list = _buildService.GetModels(a => a.StageCode == parentCode);
+            ViewData["dataList"] = new SelectList(list.ToList(), "Code", "Name");
+            return PartialView("_GetBuildingDropDownList");
+        }
         // POST: Building/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -64,12 +70,12 @@ namespace ResWeb.Controllers
         // GET: Building/Edit/5
         public ActionResult Edit(int id)
         {
-            var obj = from build in _buildService.GetModels(b => b.ID==id)
-                       join stage in _stageService.GetModels(s => true) on build.StageCode equals stage.Code
-                       join park in _parkService.GetModels(p => true) on stage.ParkCode equals park.Code
-                       join region in _regionService.GetModels(r => true) on park.RegionCode equals region.Code
-                       join city in _cityService.GetModels(c => true) on region.CityCode equals city.Code
-                       select new { build, stage, park, region, city };
+            var obj = from build in _buildService.GetModels(b => b.ID == id)
+                      join stage in _stageService.GetModels(s => true) on build.StageCode equals stage.Code
+                      join park in _parkService.GetModels(p => true) on stage.ParkCode equals park.Code
+                      join region in _regionService.GetModels(r => true) on park.RegionCode equals region.Code
+                      join city in _cityService.GetModels(c => true) on region.CityCode equals city.Code
+                      select new { build, stage, park, region, city };
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 

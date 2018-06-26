@@ -1,0 +1,12 @@
+﻿
+@if (ViewData["resTypeList"] != null)
+{
+    @Html.DropDownList("resTypeList", ViewData["resTypeList"] as List<SelectListItem>, new { @class = "selectpicker form-control pull-righ", @title = "请选择..."});
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" id="resTypeList" disabled>
+        <option>暂无数据</option>
+    </select>
+}
+

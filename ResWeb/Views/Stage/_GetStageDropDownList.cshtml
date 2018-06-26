@@ -1,0 +1,12 @@
+﻿
+@if (ViewData["dataList"] != null)
+{
+    @Html.DropDownList("stageList", ViewData["dataList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" id="stageList" title="暂无数据" disabled></select>
+}
+
+
+

@@ -9,17 +9,31 @@
 }
 .form-horizontal,.form-horizontal input{
     font-size: 16px;
-    
+    /* padding:6px 4px; */
 }
 .form-horizontal .control-label{
-    text-align: center;
-    padding-right: 0px;
+    /* text-align: center; */
+    padding-right: 10px;
     margin-right: 0px;
     padding-left: 0px;
 }
 .form-horizontal .form-group div{
     padding-left: 0px;
 }
+/* 连体下拉框 */
+.form-horizontal .form-group .input-group .input-group-addon,.form-horizontal .form-group .input-group .btn,
+.form-horizontal .form-group .input-group input{
+    padding:6px 16px 6px 6px;
+}
+/* 连体下拉框箭头 */
+.form-horizontal .form-group .input-group .bootstrap-select.btn-group .dropdown-toggle .caret{
+    right: 6px;
+}
+/* 连体框内输入框 */
+.form-horizontal .form-group .input-group input,.form-horizontal .form-group .input-group input{
+    font-size: 14px;
+}
+
 .form-horizontal .form-group:last-child>div>.btn{
     letter-spacing: 5px;
 }
@@ -37,4 +51,17 @@
     border: 1px solid red;
     max-width:400px;
     padding-top:30px;
+}
+/* 资源价格容器样式 */
+#price-container>div{
+    box-shadow: 0px 0px 4px #ccc;
+    padding:10px;margin:10px;
+    display:inline-block;
+}
+#price-container div:first-child>label{
+    padding-top: 0px;
+    text-align: center;
+}
+#price-container .form-group{
+    margin:15px 0px;
 }

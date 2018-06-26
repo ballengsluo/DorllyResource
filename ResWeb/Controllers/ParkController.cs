@@ -34,7 +34,13 @@ namespace ResWeb.Controllers
             return PartialView("_ParkTable");
         }
 
-
+        public ActionResult GetDropData(string parentCode)
+        {
+            var list = _parkService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(parentCode)) list = _parkService.GetModels(a => a.RegionCode == parentCode);
+            ViewData["dataList"] = new SelectList(list.ToList(), "Code", "Name");
+            return PartialView("_GetParkDropDownList");
+        }
 
         // POST: Park/Create
         [HttpPost]

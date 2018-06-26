@@ -13,6 +13,8 @@ namespace Resource.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DorllyResEntities : DbContext
     {
@@ -43,5 +45,41 @@ namespace Resource.Model
         public virtual DbSet<T_Region> T_Region { get; set; }
         public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_RImage> T_RImage { get; set; }
+        public virtual DbSet<T_StandardPrice> T_StandardPrice { get; set; }
+        public virtual DbSet<V_ResOther> V_ResOther { get; set; }
+        public virtual DbSet<V_ResRoom> V_ResRoom { get; set; }
+    
+        public virtual int SP_ResSearch(Nullable<int> model, string floorCode, string buildingCode, string stageCode, string parkCode, string regionCode, string cityCode)
+        {
+            var modelParameter = model.HasValue ?
+                new ObjectParameter("Model", model) :
+                new ObjectParameter("Model", typeof(int));
+    
+            var floorCodeParameter = floorCode != null ?
+                new ObjectParameter("FloorCode", floorCode) :
+                new ObjectParameter("FloorCode", typeof(string));
+    
+            var buildingCodeParameter = buildingCode != null ?
+                new ObjectParameter("BuildingCode", buildingCode) :
+                new ObjectParameter("BuildingCode", typeof(string));
+    
+            var stageCodeParameter = stageCode != null ?
+                new ObjectParameter("StageCode", stageCode) :
+                new ObjectParameter("StageCode", typeof(string));
+    
+            var parkCodeParameter = parkCode != null ?
+                new ObjectParameter("ParkCode", parkCode) :
+                new ObjectParameter("ParkCode", typeof(string));
+    
+            var regionCodeParameter = regionCode != null ?
+                new ObjectParameter("RegionCode", regionCode) :
+                new ObjectParameter("RegionCode", typeof(string));
+    
+            var cityCodeParameter = cityCode != null ?
+                new ObjectParameter("CityCode", cityCode) :
+                new ObjectParameter("CityCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ResSearch", modelParameter, floorCodeParameter, buildingCodeParameter, stageCodeParameter, parkCodeParameter, regionCodeParameter, cityCodeParameter);
+        }
     }
 }

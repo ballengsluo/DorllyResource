@@ -24,7 +24,13 @@ namespace ResWeb.Controllers
             ViewData["parkList"] = new SelectList(_parkService.GetModels(c => true).ToList(), "code", "name");
             return View();
         }
-
+        public ActionResult GetDropData(string parentCode)
+        {
+            var list = _stageService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(parentCode)) list = _stageService.GetModels(a => a.ParkCode == parentCode);
+            ViewData["dataList"] = new SelectList(list.ToList(), "Code", "Name");
+            return PartialView("_GetStageDropDownList");
+        }
         // GET: Stage/Details/5
         public ActionResult Details()
         {

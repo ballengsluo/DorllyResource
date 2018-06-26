@@ -90,7 +90,13 @@
     <Compile Include="RegionService.cs">
       <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="ResOtherService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResourceService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResRoomService.cs">
       <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="RGroupService.cs">
@@ -112,6 +118,9 @@
       <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="StageService.cs">
+      <DependentUpon>BLLTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StandardPriceService.cs">
       <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="UnitService.cs">

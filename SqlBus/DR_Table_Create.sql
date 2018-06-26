@@ -89,8 +89,7 @@ CREATE TABLE T_Resource(
 	PersonNum INT,							--容纳人数
 	Size NVARCHAR(30),						--尺寸大小（长*宽/长*宽*高）
 	Deposit DECIMAL(15,4),					--资源押金
-	Position NVARCHAR(200),					--具体位置描述
-	Introduce NVARCHAR(MAX),
+	Content NVARCHAR(MAX),
 	Status BIT,								--资源状态
 	UpdateTime DATETIME DEFAULT(GETDATE()),	--修改时间
 	UpdateUser NVARCHAR(30),				--修改用户

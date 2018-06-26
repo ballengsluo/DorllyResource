@@ -76,7 +76,13 @@
     <Compile Include="IRegionDal.cs">
       <DependentUpon>IDALTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="IResOtherDal.cs">
+      <DependentUpon>IDALTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="IResourceDal.cs">
+      <DependentUpon>IDALTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IResRoomDal.cs">
       <DependentUpon>IDALTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IRGroupDal.cs">
@@ -98,6 +104,9 @@
       <DependentUpon>IDALTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IStageDal.cs">
+      <DependentUpon>IDALTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IStandardPriceDal.cs">
       <DependentUpon>IDALTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="IUnitDal.cs">
