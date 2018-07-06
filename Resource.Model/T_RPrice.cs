@@ -15,26 +15,16 @@ namespace Resource.Model
     public partial class T_RPrice
     {
         public int ID { get; set; }
-        public string ResourceID { get; set; }
+        public string PriceName { get; set; }
+        public string ResourceCode { get; set; }
         public Nullable<decimal> MinPrice { get; set; }
         public Nullable<decimal> MaxPrice { get; set; }
-        public Nullable<decimal> InMinPrice { get; set; }
-        public Nullable<decimal> InMaxPrice { get; set; }
-        public Nullable<decimal> InDelayPrice { get; set; }
-        public Nullable<decimal> OutMinPrice { get; set; }
-        public Nullable<decimal> OutMaxPrice { get; set; }
-        public Nullable<decimal> OutDelayPrice { get; set; }
-        public string UnitCode { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string UpdateUser { get; set; }
-        public string Name { get; set; }
-        public int Model { get; set; }
-        public Nullable<decimal> OverPrice { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<decimal> DelayPrice { get; set; }
         public Nullable<decimal> InPrice { get; set; }
         public Nullable<decimal> OutPrice { get; set; }
-    
-        public virtual T_Unit T_Unit { get; set; }
+        public Nullable<decimal> InDelayPrice { get; set; }
+        public Nullable<decimal> OutDelayPrice { get; set; }
+        public string UnitName { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string UpdateUser { get; set; }
     }
 }

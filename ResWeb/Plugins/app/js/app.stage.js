@@ -1,3 +1,4 @@
+/*
 $(function () {
     // 添加
     $("#add").on("click", function () {
@@ -119,7 +120,7 @@ $(function () {
     });
     //区域联动
     $("#select-region").on("change", function () {
-        ajax("/Floor/GetPark", "GET", { pcode: $("#select-region").val() }, "json", 2, function (resdata) {
+        ajax("/Floor/GetStage", "GET", { pcode: $("#select-region").val() }, "json", 2, function (resdata) {
             var html = "<option value=''>全部</option>";
             for (var i = 0; i < resdata.length; i++) {
                 html += "<option value='" + resdata[i].Code + "'>" + resdata[i].Name + "</option>";
@@ -129,7 +130,69 @@ $(function () {
     });
 
 });
+*/
+$(function () {
+    // 添加
+    $("#add").on("click", function () {
+       ceOpen("/Stage/Create");
+   });
 
+   // 编辑
+   $("#edit").on("click", function () {
+       if (!choose || choose == "") {
+           layer.msg("请选择数据！");
+       } else {
+           ceOpen("/Stage/Edit?id=" + choose);
+       }
+   });
+
+   //删除
+   $("#del").on("click", function () {
+       if (!choose || choose == "") {
+           layer.msg("请选择数据！");
+       } else {
+           layer.confirm("是否删除？", function () {
+               $.post("/Stage/Delete", { id: choose }, function (data) {
+                   layer.msg(data.msg, { icon: data.result })
+                   if(data.result=1){
+                       choose="";
+                       refresh();
+                   }
+                   
+               }, "json");
+           });
+       }
+   });
+
+   //查询
+   $("#Check").on("click", function () {
+       refresh($("#CityCode").val(),$("#RegionCode").val(),$("#ParkCode").val());
+   });
+   refresh();
+
+});
+function ceOpen (url) {
+   var index = layer.open({
+       type: 2,
+       content: url,
+        title:' '        
+   });
+   layer.full(index);
+}
+
+function tableDblClick() {
+   $(".table tr").dblclick(function () {
+       ceOpen("/Stage/Edit?id=" + $(this).find("#key").html());
+   })
+}
+
+function refresh(cityCode,regionCode,parkCode){
+   $.get("/Stage/Details", {cityCode:cityCode,regionCode:regionCode,parkCode:parkCode},function (data) {
+       $(".data-action").html(data);
+       tableClick();
+       tableDblClick();
+   });
+}
 
 
 

@@ -42,6 +42,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\ResWeb\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,86 +57,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
-    <Compile Include="BLLTemplate.cs">
+    <Compile Include="BLL.cs">
+      <DependentUpon>BLL.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="BuildingService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CityService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Container.cs">
-      <DependentUpon>ContainerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContainerService.cs" />
-    <Compile Include="ContainerTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContainerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FloorService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParkService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PermissionService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
+    <Compile Include="ParameterFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegionService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResOtherService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResourceService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResRoomService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RGroupService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RImageService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RoleService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RPriceService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RTypeService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SProviderService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StageService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPriceService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UnitService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserService.cs">
-      <DependentUpon>BLLTemplate.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reource.DAL\Resource.DAL.csproj">
       <Project>{f9301eb2-cfb8-4f6b-adf9-7263258cf5c1}</Project>
       <Name>Resource.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource.DAL.Container\Resource.DAL.Container.csproj">
+      <Project>{cd266fd3-4a8c-4641-ad10-3f2ef0b0f445}</Project>
+      <Name>Resource.DAL.Container</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resource.IBLL\Resource.IBLL.csproj">
       <Project>{2934d4b7-12ac-484f-ba75-788ace3f1f1f}</Project>
@@ -149,17 +88,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BLLTemplate.tt">
+    <Content Include="BLL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BLLTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="ContainerTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ContainerTemplate.cs</LastGenOutput>
+      <LastGenOutput>BLL.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

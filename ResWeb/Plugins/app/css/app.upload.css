@@ -1,6 +1,6 @@
-.img-container div {
+#ImgContainer div {
     float: left;    
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 20px;
 }
 
@@ -125,7 +125,7 @@
     position: relative;
 }
 
-.add-box .inflag {
+.add-box .add-flag {
     font-size: 5rem;
     color: #ccc;
     cursor: pointer;

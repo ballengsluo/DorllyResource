@@ -1,0 +1,148 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>房屋发布</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/ce/css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:900px;margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">房屋发布</h3>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">城市：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="City" id="City" title="请选择"></select>
+                    </div>
+                    <label class="control-label col-md-2">行政区：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="Region" id="Region" title="请选择"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">园区：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="Park" id="Park" title="请选择"></select>
+                    </div>
+                    <label class="control-label col-md-2">建设期：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="Stage" id="Stage" title="请选择"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">建筑：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="Building" id="Building" title="请选择"></select>
+                    </div>
+                    <label class="control-label col-md-2">楼层：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="Floor" id="Floor" title="请选择"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">房间编码：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RoomCode" id="RoomCode">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">房间号：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RoomName" id="RoomName">
+                    </div>
+                    <label class="control-label col-md-2">出租类型：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="RentTypeID" id="RentType" title="请选择"></select>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">建筑面积：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RoomArea" id="RoomArea">
+                    </div>
+                    <label class="control-label col-md-2">出租面积：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RentArea" id="RentArea">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">可租面积：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RentRangeArea" id="RentRangeArea">
+                    </div>
+                    <label class="control-label col-md-2">起租面积：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RentBeginArea" id="RentBeginArea">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">房间分组：</label>
+                    <div class="col-md-4">
+                        <select class="selectpicker form-control pull-righ" name="GroupCode" id="Group" title="请选择"></select>
+                    </div>
+                    <label class="control-label col-md-2">位置：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="RoomAddr" id="RoomAddr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">基础图片：</label>
+                    <div class="col-md-10">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">详情描述：</label>
+                    <div class="col-md-10">
+                        <script id="Content" name="RoomContent" type="text/plain">
+                        </script>
+                    </div>
+                </div>
+            </form>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">发布时间：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="UpdateUser" id="UpdateUser">
+                    </div>
+                    <label class="control-label col-md-2">发布等级：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="UpdateTime" id="UpdateTime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">发布渠道：</label>
+                    <div class="col-md-10 checkbox">
+                        <label><input type="checkbox" name="AZW" id="AZW" value="3">艾众网</label>
+                        <label style="margin-left:20px;"><input type="checkbox" name="AZGJ" id="AZGJ" value="2">艾众管家</label>
+                        <label style="margin-left:20px;"><input type="checkbox" name="ZYPT" id="ZYPT" value="1">资源平台Web</label>
+                    </div>
+                </div>
+                <p style="text-align:center;margin:40px 0px;">
+                    <input type="submit" class="btn btn-primary" value="提交">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();" style="margin-left:10px;">
+                </p>
+            </form>
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    @Scripts.Render("~/ce/js")
+</body>
+</html>

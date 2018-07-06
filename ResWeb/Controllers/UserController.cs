@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Resource.BLL;
+using Resource.BLL.Container;
 using Resource.IBLL;
 using Resource.Model;
 using System;
@@ -15,13 +15,13 @@ namespace ResWeb.Controllers
 
     public class UserController : Controller
     {
-        private IUserService us = ContainerService.Resolve<IUserService>();
-        private IRoleService rs = ContainerService.Resolve<IRoleService>();
+        private IUserService us = Container.Resolve<IUserService>();
+        private IRoleService rs = Container.Resolve<IRoleService>();
 
         public void GetUserList()
         {
             var userList = from u in us.GetModels(u => true)
-                           join r in rs.GetModels(r => true) on u.RoleID equals r.RoleID
+                           join r in rs.GetModels(r => true) on u.RoleID equals r.ID
                            select new
                            {
                                u.UserName,
@@ -100,7 +100,7 @@ namespace ResWeb.Controllers
         public ActionResult CloseOrOpenUser(string id, string type)
         {
             int userId = Convert.ToInt32(id);
-            var user = us.GetModels(u => u.UserID == userId).FirstOrDefault();
+            var user = us.GetModels(u => u.ID == userId).FirstOrDefault();
             if (type == "open")
                 user.Status = true;
             else
@@ -115,7 +115,7 @@ namespace ResWeb.Controllers
         {
             try
             {
-                T_User user = us.GetModels(u => u.UserID == id).FirstOrDefault();
+                T_User user = us.GetModels(u => u.ID == id).FirstOrDefault();
                 user.Password = pwd;
                 if (us.Update(user))
                     return Content("1:更改密码成功！");
@@ -166,7 +166,7 @@ namespace ResWeb.Controllers
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
-            T_User user = us.GetModels(u => u.UserID == id).FirstOrDefault();
+            T_User user = us.GetModels(u => u.ID == id).FirstOrDefault();
             List<T_Role> rList = rs.GetModels(r => true).ToList();
             ViewData["rList"] = new SelectList(rList, "RoleID", "RoleName");
             return View(user);
@@ -179,7 +179,7 @@ namespace ResWeb.Controllers
             try
             {
                 int userId = Convert.ToInt32(collection["userID"]);
-                T_User user = us.GetModels(u => u.UserID == userId).FirstOrDefault();
+                T_User user = us.GetModels(u => u.ID == userId).FirstOrDefault();
                 user.UserName = collection["userName"];
                 user.Password = collection["pwd"];
                 user.Phone = collection["phone"];
@@ -201,7 +201,7 @@ namespace ResWeb.Controllers
         public ActionResult Delete(int id)
         {
             int userId = Convert.ToInt32(id);
-            var user = us.GetModels(u => u.UserID == userId).FirstOrDefault();
+            var user = us.GetModels(u => u.ID == userId).FirstOrDefault();
             us.Delete(user);
             var userList = us.GetModels(u => true).ToList();
             return PartialView("_UserTable", userList);

@@ -1,0 +1,55 @@
+﻿@model Resource.Model.T_Region
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑区域</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/app/css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:400px;margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">编辑区域</h3>
+            @using (Ajax.BeginForm("Edit", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "commitResult",
+                OnFailure = "commitResult"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group" style="display:none;">
+                    <label class="control-label col-md-4">pkey：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="ID" value="@Model.ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">城市：</label>
+                    <div class="col-md-8">
+                        @Html.Action("GetDropData", "City",new { selectCode = Model.CityCode})
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <label class="control-label col-md-4">区域编码：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="RegionCode" value="@Model.RegionCode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">区域名称：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="RegionName" value="@Model.RegionName">
+                    </div>
+                </div>
+                <p style="text-align:center;margin:20px 0px;">
+                    <input type="submit" class="btn btn-primary" value="提交">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();" style="margin-left:10px;">
+                </p>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+</body>
+</html>

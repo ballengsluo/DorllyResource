@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DorllyResourceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_Building">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="BuildingName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StageCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="GisX" Type="nvarchar" MaxLength="30" />
+          <Property Name="GisY" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Cubicle">
+          <Key>
+            <PropertyRef Name="CubicleCode" />
+          </Key>
+          <Property Name="CubicleCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CubicleName" Type="nvarchar" MaxLength="30" />
+          <Property Name="RoomCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="CubicleAddr" Type="nvarchar" MaxLength="300" />
+          <Property Name="CubicleEnable" Type="bit" />
+          <Property Name="CubicleStatus" Type="int" />
+          <Property Name="CubicleSeat" Type="int" />
+          <Property Name="CubicleContent" Type="nvarchar(max)" />
+          <Property Name="RentRangeSeat" Type="nvarchar" MaxLength="20" />
+          <Property Name="RentBeginSeat" Type="nvarchar" MaxLength="20" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_Floor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FloorCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FloorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BuildingCode" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_HomePage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="PPID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="200" />
+          <Property Name="OrderNum" Type="int" />
+          <Property Name="ImgURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="LinkURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_MeetingRoom">
+          <Key>
+            <PropertyRef Name="MRCode" />
+          </Key>
+          <Property Name="MRCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MRName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ParkCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="MRAddr" Type="nvarchar" MaxLength="300" />
+          <Property Name="MREnable" Type="bit" />
+          <Property Name="MRStatus" Type="int" />
+          <Property Name="MRSeat" Type="int" />
+          <Property Name="MRArea" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="MRDeposit" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="MRContent" Type="nvarchar(max)" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuPath" Type="nvarchar" MaxLength="200" />
+          <Property Name="MenuLevel" Type="int" />
+          <Property Name="OrderNum" Type="int" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="20" />
+          <Property Name="FuncCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="FuncName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="T_PageFoot">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="PPID" Type="int" Nullable="false" />
+          <Property Name="CSEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="CSPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="QQServcie" Type="nvarchar" MaxLength="18" />
+          <Property Name="QRCode1" Type="nvarchar" MaxLength="200" />
+          <Property Name="QRCode2" Type="nvarchar" MaxLength="200" />
+          <Property Name="BusinessPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContactAddr" Type="nvarchar" MaxLength="200" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_PagePosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PPType" Type="int" Nullable="false" />
+          <Property Name="PPName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_Park">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParkCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RegionCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="ParkName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParkShortName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="11" />
+          <Property Name="ContactMobile" Type="nvarchar" MaxLength="11" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactAddr" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactMark" Type="nvarchar" MaxLength="200" />
+          <Property Name="GisX" Type="nvarchar" MaxLength="30" />
+          <Property Name="GisY" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="FuncCode" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="T_Region">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityCode" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_RentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentTypeName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_RGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceTypeID" Type="int" />
+          <Property Name="ParkCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_RImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ImgURL" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsCover" Type="bit" />
+        </EntityType>
+        <EntityType Name="T_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleDesc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="T_Room">
+          <Key>
+            <PropertyRef Name="RoomCode" />
+          </Key>
+          <Property Name="RoomCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RoomName" Type="nvarchar" MaxLength="30" />
+          <Property Name="FloorCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="RoomAddr" Type="nvarchar" MaxLength="300" />
+          <Property Name="RoomEnable" Type="bit" />
+          <Property Name="RoomStatus" Type="int" />
+          <Property Name="RentTypeID" Type="int" />
+          <Property Name="RoomArea" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="RoomContent" Type="nvarchar(max)" />
+          <Property Name="RentRangeArea" Type="nvarchar" MaxLength="20" />
+          <Property Name="RentBeginArea" Type="nvarchar" MaxLength="20" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_RPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PriceName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MinPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="InPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="OutPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="InDelayPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="OutDelayPrice" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="10" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_RType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResourceTypeName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="StageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParkCode" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="T_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <Association Name="FK_ROLE_User">
+          <End Role="T_Role" Type="Self.T_Role" Multiplicity="1" />
+          <End Role="T_User" Type="Self.T_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DorllyResourceModelStoreContainer">
+          <EntitySet Name="T_Building" EntityType="Self.T_Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_City" EntityType="Self.T_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Cubicle" EntityType="Self.T_Cubicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Floor" EntityType="Self.T_Floor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_HomePage" EntityType="Self.T_HomePage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_MeetingRoom" EntityType="Self.T_MeetingRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Menu" EntityType="Self.T_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PageFoot" EntityType="Self.T_PageFoot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_PagePosition" EntityType="Self.T_PagePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Park" EntityType="Self.T_Park" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Permission" EntityType="Self.T_Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Region" EntityType="Self.T_Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RentType" EntityType="Self.T_RentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RGroup" EntityType="Self.T_RGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RImage" EntityType="Self.T_RImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Role" EntityType="Self.T_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Room" EntityType="Self.T_Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RPrice" EntityType="Self.T_RPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RType" EntityType="Self.T_RType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_Stage" EntityType="Self.T_Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_User" EntityType="Self.T_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ROLE_User" Association="Self.FK_ROLE_User">
+            <End Role="T_Role" EntitySet="T_Role" />
+            <End Role="T_User" EntitySet="T_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DorllyResourceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_Building">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StageCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GisX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GisY" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="T_Cubicle">
+          <Key>
+            <PropertyRef Name="CubicleCode" />
+          </Key>
+          <Property Name="CubicleCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CubicleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RoomCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CubicleAddr" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CubicleEnable" Type="Boolean" />
+          <Property Name="CubicleStatus" Type="Int32" />
+          <Property Name="CubicleSeat" Type="Int32" />
+          <Property Name="CubicleContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RentRangeSeat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RentBeginSeat" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Floor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FloorCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_HomePage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PPID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNum" Type="Int32" />
+          <Property Name="ImgURL" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LinkURL" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_MeetingRoom">
+          <Key>
+            <PropertyRef Name="MRCode" />
+          </Key>
+          <Property Name="MRCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MRName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParkCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MRAddr" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="MREnable" Type="Boolean" />
+          <Property Name="MRStatus" Type="Int32" />
+          <Property Name="MRSeat" Type="Int32" />
+          <Property Name="MRArea" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="MRDeposit" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="MRContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_PageFoot">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PPID" Type="Int32" Nullable="false" />
+          <Property Name="CSEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CSPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="QQServcie" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="QRCode1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="QRCode2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactAddr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_PagePosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PPType" Type="Int32" Nullable="false" />
+          <Property Name="PPName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Park">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParkCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParkShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="ContactMobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactAddr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GisX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GisY" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Region">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_RentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_RGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeID" Type="Int32" />
+          <Property Name="ParkCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_RImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImgURL" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsCover" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="T_Room">
+          <Key>
+            <PropertyRef Name="RoomCode" />
+          </Key>
+          <Property Name="RoomCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoomName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FloorCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RoomAddr" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="RoomEnable" Type="Boolean" />
+          <Property Name="RoomStatus" Type="Int32" />
+          <Property Name="RentTypeID" Type="Int32" />
+          <Property Name="RoomArea" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="RoomContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RentRangeArea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RentBeginArea" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_RPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PriceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="InPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="OutPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="InDelayPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="OutDelayPrice" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="UnitName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_RType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StageCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParkCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DorllyResourceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Building" EntityType="Self.T_Building" />
+          <EntitySet Name="T_City" EntityType="Self.T_City" />
+          <EntitySet Name="T_Cubicle" EntityType="Self.T_Cubicle" />
+          <EntitySet Name="T_Floor" EntityType="Self.T_Floor" />
+          <EntitySet Name="T_HomePage" EntityType="Self.T_HomePage" />
+          <EntitySet Name="T_MeetingRoom" EntityType="Self.T_MeetingRoom" />
+          <EntitySet Name="T_PageFoot" EntityType="Self.T_PageFoot" />
+          <EntitySet Name="T_PagePosition" EntityType="Self.T_PagePosition" />
+          <EntitySet Name="T_Park" EntityType="Self.T_Park" />
+          <EntitySet Name="T_Region" EntityType="Self.T_Region" />
+          <EntitySet Name="T_RentType" EntityType="Self.T_RentType" />
+          <EntitySet Name="T_RGroup" EntityType="Self.T_RGroup" />
+          <EntitySet Name="T_RImage" EntityType="Self.T_RImage" />
+          <EntitySet Name="T_Room" EntityType="Self.T_Room" />
+          <EntitySet Name="T_RPrice" EntityType="Self.T_RPrice" />
+          <EntitySet Name="T_RType" EntityType="Self.T_RType" />
+          <EntitySet Name="T_Stage" EntityType="Self.T_Stage" />
+          <EntitySet Name="T_Menu" EntityType="DorllyResourceModel.T_Menu" />
+          <EntitySet Name="T_Permission" EntityType="DorllyResourceModel.T_Permission" />
+          <EntitySet Name="T_Role" EntityType="DorllyResourceModel.T_Role" />
+          <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
+          <AssociationSet Name="FK_ROLE_User" Association="DorllyResourceModel.FK_ROLE_User">
+            <End Role="T_Role" EntitySet="T_Role" />
+            <End Role="T_User" EntitySet="T_User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="T_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MenuLevel" Type="Int32" />
+          <Property Name="OrderNum" Type="Int32" />
+          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FuncCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FuncName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <Property Name="FuncCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_ROLE_User" FromRole="T_Role" ToRole="T_User" />
+        </EntityType>
+        <EntityType Name="T_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="T_Role" Relationship="DorllyResourceModel.FK_ROLE_User" FromRole="T_User" ToRole="T_Role" />
+        </EntityType>
+        <Association Name="FK_ROLE_User">
+          <End Type="DorllyResourceModel.T_Role" Role="T_Role" Multiplicity="1" />
+          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DorllyResourceModelStoreContainer" CdmEntityContainer="DorllyResourceEntities">
+          <EntitySetMapping Name="T_Building">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Building">
+              <MappingFragment StoreEntitySet="T_Building">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BuildingCode" ColumnName="BuildingCode" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+                <ScalarProperty Name="StageCode" ColumnName="StageCode" />
+                <ScalarProperty Name="GisX" ColumnName="GisX" />
+                <ScalarProperty Name="GisY" ColumnName="GisY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_City">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_City">
+              <MappingFragment StoreEntitySet="T_City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Cubicle">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Cubicle">
+              <MappingFragment StoreEntitySet="T_Cubicle">
+                <ScalarProperty Name="CubicleCode" ColumnName="CubicleCode" />
+                <ScalarProperty Name="CubicleName" ColumnName="CubicleName" />
+                <ScalarProperty Name="RoomCode" ColumnName="RoomCode" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+                <ScalarProperty Name="CubicleAddr" ColumnName="CubicleAddr" />
+                <ScalarProperty Name="CubicleEnable" ColumnName="CubicleEnable" />
+                <ScalarProperty Name="CubicleStatus" ColumnName="CubicleStatus" />
+                <ScalarProperty Name="CubicleSeat" ColumnName="CubicleSeat" />
+                <ScalarProperty Name="CubicleContent" ColumnName="CubicleContent" />
+                <ScalarProperty Name="RentRangeSeat" ColumnName="RentRangeSeat" />
+                <ScalarProperty Name="RentBeginSeat" ColumnName="RentBeginSeat" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Floor">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Floor">
+              <MappingFragment StoreEntitySet="T_Floor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FloorCode" ColumnName="FloorCode" />
+                <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+                <ScalarProperty Name="BuildingCode" ColumnName="BuildingCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_HomePage">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_HomePage">
+              <MappingFragment StoreEntitySet="T_HomePage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="PPID" ColumnName="PPID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="ImgURL" ColumnName="ImgURL" />
+                <ScalarProperty Name="LinkURL" ColumnName="LinkURL" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_MeetingRoom">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_MeetingRoom">
+              <MappingFragment StoreEntitySet="T_MeetingRoom">
+                <ScalarProperty Name="MRCode" ColumnName="MRCode" />
+                <ScalarProperty Name="MRName" ColumnName="MRName" />
+                <ScalarProperty Name="ParkCode" ColumnName="ParkCode" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+                <ScalarProperty Name="MRAddr" ColumnName="MRAddr" />
+                <ScalarProperty Name="MREnable" ColumnName="MREnable" />
+                <ScalarProperty Name="MRStatus" ColumnName="MRStatus" />
+                <ScalarProperty Name="MRSeat" ColumnName="MRSeat" />
+                <ScalarProperty Name="MRArea" ColumnName="MRArea" />
+                <ScalarProperty Name="MRDeposit" ColumnName="MRDeposit" />
+                <ScalarProperty Name="MRContent" ColumnName="MRContent" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PageFoot">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_PageFoot">
+              <MappingFragment StoreEntitySet="T_PageFoot">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="PPID" ColumnName="PPID" />
+                <ScalarProperty Name="CSEmail" ColumnName="CSEmail" />
+                <ScalarProperty Name="CSPhone" ColumnName="CSPhone" />
+                <ScalarProperty Name="QQServcie" ColumnName="QQServcie" />
+                <ScalarProperty Name="QRCode1" ColumnName="QRCode1" />
+                <ScalarProperty Name="QRCode2" ColumnName="QRCode2" />
+                <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactAddr" ColumnName="ContactAddr" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PagePosition">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_PagePosition">
+              <MappingFragment StoreEntitySet="T_PagePosition">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PPType" ColumnName="PPType" />
+                <ScalarProperty Name="PPName" ColumnName="PPName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Park">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Park">
+              <MappingFragment StoreEntitySet="T_Park">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ParkCode" ColumnName="ParkCode" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
+                <ScalarProperty Name="ParkShortName" ColumnName="ParkShortName" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactMobile" ColumnName="ContactMobile" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactAddr" ColumnName="ContactAddr" />
+                <ScalarProperty Name="ContactMark" ColumnName="ContactMark" />
+                <ScalarProperty Name="GisX" ColumnName="GisX" />
+                <ScalarProperty Name="GisY" ColumnName="GisY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Region">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Region">
+              <MappingFragment StoreEntitySet="T_Region">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RentType">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_RentType">
+              <MappingFragment StoreEntitySet="T_RentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RentTypeName" ColumnName="RentTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RGroup">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_RGroup">
+              <MappingFragment StoreEntitySet="T_RGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="ParkCode" ColumnName="ParkCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RImage">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_RImage">
+              <MappingFragment StoreEntitySet="T_RImage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResourceCode" ColumnName="ResourceCode" />
+                <ScalarProperty Name="ImgURL" ColumnName="ImgURL" />
+                <ScalarProperty Name="IsCover" ColumnName="IsCover" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Room">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Room">
+              <MappingFragment StoreEntitySet="T_Room">
+                <ScalarProperty Name="RoomCode" ColumnName="RoomCode" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="FloorCode" ColumnName="FloorCode" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+                <ScalarProperty Name="RoomAddr" ColumnName="RoomAddr" />
+                <ScalarProperty Name="RoomEnable" ColumnName="RoomEnable" />
+                <ScalarProperty Name="RoomStatus" ColumnName="RoomStatus" />
+                <ScalarProperty Name="RentTypeID" ColumnName="RentTypeID" />
+                <ScalarProperty Name="RoomArea" ColumnName="RoomArea" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="RoomContent" ColumnName="RoomContent" />
+                <ScalarProperty Name="RentRangeArea" ColumnName="RentRangeArea" />
+                <ScalarProperty Name="RentBeginArea" ColumnName="RentBeginArea" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RPrice">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_RPrice">
+              <MappingFragment StoreEntitySet="T_RPrice">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PriceName" ColumnName="PriceName" />
+                <ScalarProperty Name="ResourceCode" ColumnName="ResourceCode" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="InPrice" ColumnName="InPrice" />
+                <ScalarProperty Name="OutPrice" ColumnName="OutPrice" />
+                <ScalarProperty Name="InDelayPrice" ColumnName="InDelayPrice" />
+                <ScalarProperty Name="OutDelayPrice" ColumnName="OutDelayPrice" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RType">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_RType">
+              <MappingFragment StoreEntitySet="T_RType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Stage">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Stage">
+              <MappingFragment StoreEntitySet="T_Stage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StageCode" ColumnName="StageCode" />
+                <ScalarProperty Name="StageName" ColumnName="StageName" />
+                <ScalarProperty Name="ParkCode" ColumnName="ParkCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Menu">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Menu">
+              <MappingFragment StoreEntitySet="T_Menu">
+                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
+                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Permission">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Permission">
+              <MappingFragment StoreEntitySet="T_Permission">
+                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Role">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_Role">
+              <MappingFragment StoreEntitySet="T_Role">
+                <ScalarProperty Name="RoleDesc" ColumnName="RoleDesc" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_User">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_User">
+              <MappingFragment StoreEntitySet="T_User">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

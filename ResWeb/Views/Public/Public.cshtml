@@ -1,0 +1,181 @@
+﻿@model Resource.Model.T_Resource
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源发布</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/app/css")
+    <link href="~/Plugins/app/css/app.form.css" rel="stylesheet" />
+    <link href="~/Plugins/app/css/app.upload.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <form class="form-horizontal" style="margin:0px auto;" name="res-form">
+            <div id="FormHeader">
+                <div class="form-group">
+                    <label class="control-label col-md-2">发布编号：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="PublicCode" id="PublicCode" value="@DateTime.Now.ToString("yyyyMMddhhmmsss")" readonly />
+                    </div>
+                    @*<label class="control-label col-md-2">选择资源：</label>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" id="Check" style="font-size:15px;"><i class="layui-icon layui-icon-search"></i> 查  询</button>
+                        </div>*@
+                </div>
+                @*<div class="form-group" style="display:none;"></div>*@
+            </div>
+            <div id="FormContent">
+                <div class="form-group">
+                    <label class="control-label col-md-2">资源编号：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ResourceCode" id="ResourceCode" value="@Model.ResourceCode" />
+                    </div>
+                    <label class="control-label col-md-2">资源名称：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ResourceName" id="ResourceName" value="@Model.ResourceName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">资源类别：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ResourceName" id="ResourceName" value="@Model.T_RType.Name" readonly />
+                        @*@Html.Action("GetRTypeName", "ResType", new { id = Model.RTypeID })*@
+                        @*@Html.Action("GetDropData", "ResType")*@
+                    </div>
+                    <label class="control-label col-md-2">资源分组：</label>
+                    <div class="col-md-4">
+                        @Html.Action("GetDropData", "Group", new { id = Model.RGroupCode })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">所属园区：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="Park" id="Park" value="@Html.Action("GetParkName", "Park", new { parkCode = Model.ParkCode })" readonly />
+                        @*@Html.Action("GetDropData", "Park")*@
+                    </div>
+                    <label class="control-label col-md-2">所属主体：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="SProvider" id="SProvider" value="@Html.Action("GetProviderName", "SProvider", new { providerCode = Model.SProviderCode })" readonly />
+                        @*@Html.Action("GetDropData", "SProvider")*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">出租面积：</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="RentArea" id="RentArea" value="@Model.RentArea" />
+                    </div>
+                    <label class="control-label col-md-2">押金金额：</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="Deposit" id="Deposit" value="@Model.Deposit" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">容纳人数：</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="PersonNum" id="PersonNum" value="@Model.PersonNum" />
+                    </div>
+                    <label class="control-label col-md-2">资源尺寸：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="Size" id="Size" value="@Model.Size" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">详细位置：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="FullAddr" id="FullAddr" value="@Model.FullAddr" />
+                    </div>
+                    <label class="control-label col-md-2">位置简称：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ShortAddr" id="ShortAddr" value="@Model.ShortAddr" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">发布时间：</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="PublicTime" id="PublicTime" />
+                    </div>
+                    @*<div class="col-md-2">
+                            <input type="text" class="form-control" name="startTime" id="startTime" />
+                            <label style="position:absolute;top:20%; right:3px;">~</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" name="endTime" id="endTime" />
+                        </div>*@
+                    <label class="control-label col-md-2">发布等级：</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="PublicLevel" id="PublicLevel" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">资源价格：</label>
+                    <div class="col-md-2">
+                        <div class="input-group">
+                            <span class="input-group-addon"> 定价模式</span>
+                            <select class="selectpicker form-control pull-righ" name="PriceModel" id="PriceModel" title="请选择..">
+                                <option value="1" selected>正常价</option>
+                                <option value="2">区间价</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2" id="NormalModel">
+                        <label style="position:absolute;top:15%; left:5px;">￥</label>
+                        <input type="number" class="form-control" name="Price" id="Price" style="text-indent:10px;" placeholder="请输入价格" />
+                    </div>
+                    <div id="IntervalModel" style="display:none;">
+                        <div class="col-md-2">
+                            <label style="position:absolute;top:15%; left:5px;">￥</label>
+                            <input type="number" class="form-control" name="MinPrice" id="MinPrice" style="text-indent:10px;" placeholder="请输入最低价" />
+                            <label style="position:absolute;top:20%; right:3px;">~</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label style="position:absolute;top:15%; left:5px;">￥</label>
+                            <input type="number" class="form-control" name="MaxPrice" id="MaxPrice" style="text-indent:10px;" placeholder="请输入最高价" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Action("GetDropData", "Unit")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">资源图片：</label>
+                    <div class="col-md-10" id="ImgContainer">
+                        <div class="add-box">
+                            <span class="add-flag">+</span>
+                            <input type="file" name="ImgUpload" id="ImgUpload" data-id="@Model.ResourceCode" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">资源介绍：</label>
+                    <div class="col-md-10">
+                        <script id="Content" name="Content" type="text/plain">
+                            @Html.Raw(Model.Content)
+                        </script>
+                    </div>
+                </div>
+                <div class="form-group" style="padding:15px 0px; text-align:center;border:1px solid #0094ff;border-radius:2px;">
+                    <input type="button" class="layui-btn layui-btn-normal" id="Commit" value="保存">
+                    <input type="button" class="layui-btn layui-btn-normal" id="Close" value="关闭">
+                </div>
+            </div>
+        </form>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Plugins/ueditor/ueditor.config.js"></script>
+    <script src="~/Plugins/ueditor/ueditor.all.js"></script>
+    <script src="~/Plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Plugins/app/js/app.public.js"></script>
+    <script>
+        var ue = UE.getEditor('Content', {
+            initialFrameHeight: 300,
+            allowDivTransToP: false,
+            initialFrameWidth: '100%'
+        });
+        @*ue.ready(function () {
+            ue.setContent("@Model.Content",false);
+        });*@ 
+    </script>
+</body>
+</html>

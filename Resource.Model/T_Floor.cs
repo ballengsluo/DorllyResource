@@ -15,8 +15,8 @@ namespace Resource.Model
     public partial class T_Floor
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string FloorCode { get; set; }
+        public string FloorName { get; set; }
         public string BuildingCode { get; set; }
     }
 }

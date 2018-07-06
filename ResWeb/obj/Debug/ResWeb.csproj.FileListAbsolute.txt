@@ -60,3 +60,9 @@ E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Resource.DAL.pdb
 E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\EntityFramework.xml
 E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\EntityFramework.SqlServer.dll
 E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\EntityFramework.SqlServer.xml
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Resource.BLL.Container.dll
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Resource.DAL.Container.dll
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Resource.BLL.Container.pdb
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Resource.DAL.Container.pdb
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Project.Common.dll
+E:\LuoFile\DevProject\DorllyResource\ResWeb\bin\Project.Common.pdb

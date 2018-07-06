@@ -15,8 +15,8 @@ namespace Resource.Model
     public partial class T_Stage
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string StageCode { get; set; }
+        public string StageName { get; set; }
         public string ParkCode { get; set; }
     }
 }

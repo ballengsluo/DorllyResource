@@ -14,19 +14,7 @@ namespace Resource.Model
     
     public partial class T_RType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_RType()
-        {
-            this.T_RGroup = new HashSet<T_RGroup>();
-            this.T_Resource = new HashSet<T_Resource>();
-        }
-    
         public int ID { get; set; }
-        public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_RGroup> T_RGroup { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Resource> T_Resource { get; set; }
+        public string ResourceTypeName { get; set; }
     }
 }

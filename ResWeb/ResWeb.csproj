@@ -158,17 +158,19 @@
     <Content Include="Plugins\app\css\app.table.css" />
     <Content Include="Plugins\app\css\app.upload.css" />
     <Content Include="Plugins\app\css\app.user.css" />
-    <Content Include="Plugins\app\js\ajaxfileupload.js" />
     <Content Include="Plugins\app\js\app.area.js" />
     <Content Include="Plugins\app\js\app.building.js" />
     <Content Include="Plugins\app\js\app.city.js" />
     <Content Include="Plugins\app\js\app.common.js" />
     <Content Include="Plugins\app\js\app.floor.js" />
     <Content Include="Plugins\app\js\app.group.js" />
+    <Content Include="Plugins\app\js\app.homemost.js" />
     <Content Include="Plugins\app\js\app.main.js" />
     <Content Include="Plugins\app\js\app.park.js" />
+    <Content Include="Plugins\app\js\app.public.js" />
     <Content Include="Plugins\app\js\app.region.js" />
     <Content Include="Plugins\app\js\app.role.js" />
+    <Content Include="Plugins\app\js\app.search.js" />
     <Content Include="Plugins\app\js\app.stage.js" />
     <Content Include="Plugins\app\js\app.upload.js" />
     <Content Include="Plugins\app\js\app.user.js" />
@@ -294,58 +296,15 @@
     <Content Include="Plugins\bootstrap\js\bootstrap.js" />
     <Content Include="Plugins\bootstrap\js\bootstrap.min.js" />
     <Content Include="Plugins\bootstrap\js\npm.js" />
-    <Content Include="Plugins\daterangepicker\css\daterangepicker.css" />
-    <Content Include="Plugins\daterangepicker\js\daterangepicker.js" />
-    <Content Include="Plugins\daterangepicker\js\moment.js" />
-    <Content Include="Plugins\daterangepicker\js\moment.min.js" />
     <Content Include="Plugins\font-awesome\css\font-awesome.css" />
     <Content Include="Plugins\font-awesome\css\font-awesome.min.css" />
     <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Plugins\h-ui.admin\css\H-ui.admin.css" />
-    <Content Include="Plugins\h-ui.admin\css\H-ui.login.css" />
-    <Content Include="Plugins\h-ui.admin\css\style.css" />
-    <Content Include="Plugins\h-ui.admin\js\H-ui.admin.js" />
     <Content Include="Plugins\jquery\core.js" />
     <Content Include="Plugins\jquery\jquery.js" />
     <Content Include="Plugins\jquery\jquery.min.js" />
     <Content Include="Plugins\jquery\jquery.slim.js" />
     <Content Include="Plugins\jquery\jquery.slim.min.js" />
-    <Content Include="Plugins\layer\css\layui.css" />
-    <Content Include="Plugins\layer\css\layui.mobile.css" />
-    <Content Include="Plugins\layer\css\modules\code.css" />
-    <Content Include="Plugins\layer\css\modules\laydate\default\laydate.css" />
-    <Content Include="Plugins\layer\css\modules\layer\default\icon-ext.png" />
-    <Content Include="Plugins\layer\css\modules\layer\default\icon.png" />
-    <Content Include="Plugins\layer\css\modules\layer\default\layer.css" />
-    <Content Include="Plugins\layer\css\modules\layer\default\loading-0.gif" />
-    <Content Include="Plugins\layer\css\modules\layer\default\loading-1.gif" />
-    <Content Include="Plugins\layer\css\modules\layer\default\loading-2.gif" />
-    <Content Include="Plugins\layer\js\layer.js" />
-    <Content Include="Plugins\layer\js\layui.all.js" />
-    <Content Include="Plugins\layer\js\layui.js" />
-    <Content Include="Plugins\layer\js\modules\carousel.js" />
-    <Content Include="Plugins\layer\js\modules\code.js" />
-    <Content Include="Plugins\layer\js\modules\element.js" />
-    <Content Include="Plugins\layer\js\modules\flow.js" />
-    <Content Include="Plugins\layer\js\modules\form.js" />
-    <Content Include="Plugins\layer\js\modules\jquery.js" />
-    <Content Include="Plugins\layer\js\modules\laydate.js" />
-    <Content Include="Plugins\layer\js\modules\layedit.js" />
-    <Content Include="Plugins\layer\js\modules\layer.js" />
-    <Content Include="Plugins\layer\js\modules\laypage.js" />
-    <Content Include="Plugins\layer\js\modules\laytpl.js" />
-    <Content Include="Plugins\layer\js\modules\mobile.js" />
-    <Content Include="Plugins\layer\js\modules\rate.js" />
-    <Content Include="Plugins\layer\js\modules\table.js" />
-    <Content Include="Plugins\layer\js\modules\tree.js" />
-    <Content Include="Plugins\layer\js\modules\upload.js" />
-    <Content Include="Plugins\layer\js\modules\util.js" />
-    <Content Include="Plugins\layer\js\theme\default\icon-ext.png" />
-    <Content Include="Plugins\layer\js\theme\default\icon.png" />
-    <Content Include="Plugins\layer\js\theme\default\layer.css" />
-    <Content Include="Plugins\layer\js\theme\default\loading-0.gif" />
-    <Content Include="Plugins\layer\js\theme\default\loading-1.gif" />
-    <Content Include="Plugins\layer\js\theme\default\loading-2.gif" />
+    <Content Include="Plugins\jquery\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Plugins\layui\css\layui.css" />
     <Content Include="Plugins\layui\css\layui.mobile.css" />
     <Content Include="Plugins\layui\css\modules\code.css" />
@@ -719,6 +678,14 @@
     <Content Include="Plugins\ueditor\ueditor.config.js" />
     <Content Include="Plugins\ueditor\ueditor.parse.js" />
     <Content Include="Plugins\ueditor\ueditor.parse.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -726,22 +693,25 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ADController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\CubicleController.cs" />
     <Compile Include="Controllers\FloorController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\MeetingRoomController.cs" />
+    <Compile Include="Controllers\PageFootController.cs" />
+    <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ParkController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
-    <Compile Include="Controllers\PublicController.cs" />
-    <Compile Include="Controllers\PublicRoomController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ResTypeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\RoomPublicController.cs" />
     <Compile Include="Controllers\StageController.cs" />
-    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -776,7 +746,6 @@
     <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Plugins\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Views\Admin\Main.cshtml" />
     <Content Include="Views\Admin\Test.cshtml" />
     <Content Include="Plugins\jquery\jquery-2.2.3.js" />
     <Content Include="Views\User\Index.cshtml" />
@@ -793,19 +762,6 @@
     <Content Include="Views\Role\_RoleTable.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\_GroupTable.cshtml" />
-    <Content Include="Views\Public\PublicWP.cshtml" />
-    <Content Include="Views\Public\PublicCR.cshtml" />
-    <Content Include="Views\Public\PublicAD.cshtml" />
-    <Content Include="Views\Public\PublicRM.cshtml" />
-    <Content Include="Views\Public\_ResourceDetail.cshtml" />
-    <Content Include="Views\Area\Index.cshtml" />
-    <Content Include="Views\Area\_CityTable.cshtml" />
-    <Content Include="Views\Area\_RegionTable.cshtml" />
-    <Content Include="Views\Area\_ParkTable.cshtml" />
-    <Content Include="Views\Area\_StageTable.cshtml" />
-    <Content Include="Views\Area\_BuildingTable.cshtml" />
-    <Content Include="Views\Area\_FloorTable.cshtml" />
-    <Content Include="Views\Area\Test.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\_CityTable.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
@@ -832,19 +788,53 @@
     <Content Include="Plugins\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Plugins\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Plugins\ueditor\third-party\video-js\font\vjs.woff" />
-    <Content Include="Views\Group\_GroupDropDownList.cshtml" />
-    <Content Include="Views\Unit\_GetUnitDropDownList.cshtml" />
-    <Content Include="Views\ResType\_GetTypeDropDownList.cshtml" />
+    <Content Include="Views\Group\_GroupDrop.cshtml" />
+    <Content Include="Views\Unit\_UnitDrop.cshtml" />
+    <Content Include="Views\ResType\_RTypeDrop.cshtml" />
     <Content Include="Views\PublicRoom\Search.cshtml" />
-    <Content Include="Views\City\_GetCityDropDownList.cshtml" />
-    <Content Include="Views\Floor\_GetFloorDropDownList.cshtml" />
-    <Content Include="Views\Park\_GetParkDropDownList.cshtml" />
-    <Content Include="Views\Region\_GetRegionDropDownList.cshtml" />
-    <Content Include="Views\Stage\_GetStageDropDownList.cshtml" />
-    <Content Include="Views\Building\_GetBuildingDropDownList.cshtml" />
-    <Content Include="Views\_LayoutDropDownPage.cshtml" />
+    <Content Include="Views\City\_CityDrop.cshtml" />
+    <Content Include="Views\Floor\_FloorDrop.cshtml" />
+    <Content Include="Views\Park\_ParkDrop.cshtml" />
+    <Content Include="Views\Region\_RegionDrop.cshtml" />
+    <Content Include="Views\Stage\_StageDrop.cshtml" />
+    <Content Include="Views\Building\_BuildingDrop.cshtml" />
     <Content Include="Views\Shared\_DataDropDown.cshtml" />
     <Content Include="Views\PublicRoom\_RoomTable.cshtml" />
+    <Content Include="Views\SProvider\_SProviderDrop.cshtml" />
+    <Content Include="Views\Resource\_ResourceTable.cshtml" />
+    <Content Include="Views\Resource\CheckResource.cshtml" />
+    <Content Include="Views\Public\CheckResource.cshtml" />
+    <Content Include="Views\Public\Public.cshtml" />
+    <Content Include="Views\Public\_ResourceTable.cshtml" />
+    <Content Include="Views\HomePage\Index_bak.cshtml" />
+    <Content Include="Views\HomePage\_MostTable.cshtml" />
+    <Content Include="Views\HomePage\Most.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\Create.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Region\Create.cshtml" />
+    <Content Include="Views\Region\Edit.cshtml" />
+    <Content Include="Views\Park\Create.cshtml" />
+    <Content Include="Views\Park\Edit.cshtml" />
+    <Content Include="Views\Stage\Create.cshtml" />
+    <Content Include="Views\Stage\Edit.cshtml" />
+    <Content Include="Views\Building\Create.cshtml" />
+    <Content Include="Views\Building\Edit.cshtml" />
+    <Content Include="Views\Floor\Create.cshtml" />
+    <Content Include="Views\Floor\Edit.cshtml" />
+    <Content Include="Views\Admin\Main.cshtml" />
+    <Content Include="Views\PageFoot\Index.cshtml" />
+    <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Cubicle\Create.cshtml" />
+    <Content Include="Views\Cubicle\Edit.cshtml" />
+    <Content Include="Views\MeetingRoom\Create.cshtml" />
+    <Content Include="Views\MeetingRoom\Edit.cshtml" />
+    <Content Include="Views\AD\Create.cshtml" />
+    <Content Include="Views\AD\Edit.cshtml" />
+    <Content Include="Views\RoomPublic\Create.cshtml" />
+    <Content Include="Views\RoomPublic\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -857,6 +847,14 @@
     <Folder Include="Content\image\public\FTYQ-1-01-001-K101\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Reource.DAL\Resource.DAL.csproj">
+      <Project>{f9301eb2-cfb8-4f6b-adf9-7263258cf5c1}</Project>
+      <Name>Resource.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resource.BLL.Container\Resource.BLL.Container.csproj">
+      <Project>{d6b4411c-3218-4fc2-9079-c3242a0560df}</Project>
+      <Name>Resource.BLL.Container</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resource.BLL\Resource.BLL.csproj">
       <Project>{fa21f0de-261e-4653-b0d6-ce4cf04b1f79}</Project>
       <Name>Resource.BLL</Name>

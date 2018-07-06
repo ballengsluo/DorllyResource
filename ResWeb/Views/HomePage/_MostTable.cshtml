@@ -1,0 +1,46 @@
+﻿@*@model List<Resource.Model.T_HomeImage>*@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>城市</th>
+            <th>位置</th>
+            <th>标题</th>
+            <th>副标题</th>
+            <th>图片</th>
+            <th>修改人</th>
+            <th>修改时间</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int id = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="pkey" style="display:none">@item.ID</td>
+                <td>@id</td>
+                <td>@item.CityName</td>
+                <td>@item.PositionName</td>
+                <td>@item.Title</td>
+                <td>@item.SubTitle</td>
+                <td>
+                    <img src="@item.ImgURL" style="max-height:80px;max-width:80px;" />
+                </td>
+                <td>@item.UpdateUser</td>
+                <td>@item.UpdateTime</td>
+                <td>
+                    @if (item.Status == true)
+                    {
+                        <span class="open">已发布</span>
+                    }
+                    else
+                    {
+                        <span class="close">未发布</span>
+                    }
+                </td>
+            </tr>
+            id++;
+        }
+    </tbody>
+</table>

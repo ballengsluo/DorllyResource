@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源查询</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/app/css")
+</head>
+<body>
+    <div class="container">
+        <div class="select-action">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">城市：</span>
+                        @Html.Action("GetDropData", "City")
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">区域：</span>
+                        <select class="selectpicker form-control pull-righ" id="Region" title="暂无数据" disabled></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区：</span>
+                        <select class="selectpicker form-control pull-righ" id="Park" title="暂无数据" disabled></select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">建设期：</span>
+                        <select class="selectpicker form-control pull-righ" id="Stage" title="暂无数据" disabled></select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">建筑：</span>
+                        <select class="selectpicker form-control pull-righ" id="Building" title="暂无数据" disabled></select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">楼层：</span>
+                        <select class="selectpicker form-control pull-righ" id="Floor" title="暂无数据" disabled></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源类型：</span>
+                        @Html.Action("GetDropData", "ResType")
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源编码：</span>
+                        <input type="text" class="form-control" id="ResourceCode" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary" id="Check" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="data-action">
+            @Html.Action("Check", "Public")
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="~/Plugins/app/js/app.search.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Resource.IBLL;
 using Resource.Model;
-using Resource.BLL;
+using Resource.BLL.Container;
 using Newtonsoft.Json;
 
 namespace ResWeb.Controllers
@@ -13,8 +13,8 @@ namespace ResWeb.Controllers
 
     public class GroupController : Controller
     {
-        private IRGroupService _groupService = ContainerService.Resolve<IRGroupService>();
-        private IRTypeService ts = ContainerService.Resolve<IRTypeService>();
+        private IRGroupService _groupService = Container.Resolve<IRGroupService>();
+        private IRTypeService ts = Container.Resolve<IRTypeService>();
         // GET: RGourp
         public ActionResult Index()
         {
@@ -37,9 +37,9 @@ namespace ResWeb.Controllers
         {
             var gList = _groupService.GetModels(g => true);
             if (typeId != null)
-                gList = gList.Where(g => g.RTypeID == typeId);
+                gList = gList.Where(g => g.ResourceTypeID == typeId);
             if (!string.IsNullOrEmpty(parkId))
-                gList = gList.Where(g => g.ParkID == parkId);
+                gList = gList.Where(g => g.ParkCode == parkId);
             if (status != null)
                 gList = gList.Where(g => g.Status == status);
             return PartialView("_GroupTable", gList.ToList());
@@ -73,10 +73,10 @@ namespace ResWeb.Controllers
         public ContentResult Create(FormCollection form)
         {
             T_RGroup group = new T_RGroup();
-            group.RGroupCode = form["groupCode"];
-            group.RGroupName = form["groupName"];
-            group.RTypeID = Convert.ToInt32(form["type"]);
-            group.ParkID = form["park"];
+            group.GroupCode = form["groupCode"];
+            group.GroupName = form["groupName"];
+            group.ResourceTypeID = Convert.ToInt32(form["type"]);
+            group.ParkCode = form["park"];
             group.Status = true;
             group.UpdateTime = DateTime.Now;
             if (_groupService.Add(group)) return Content("1:添加成！");
@@ -85,29 +85,31 @@ namespace ResWeb.Controllers
 
         public JsonResult Edit(int id)
         {
-            var group = _groupService.GetModels(g => g.ID == id).Select(g => new { g.RGroupCode, g.RGroupName, g.RTypeID, g.ParkID });
+            var group = _groupService.GetModels(g => g.ID == id).Select(g => new { g.GroupCode, g.GroupName, g.ResourceTypeID, g.ParkCode });
             return Json(group, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ContentResult Edit(FormCollection form)
-        {
-            int id = Convert.ToInt32(form["groupid"]);
-            var group = _groupService.GetModels(g => g.ID == id).FirstOrDefault();
-            group.RGroupCode = form["groupCode"];
-            group.RGroupName = form["groupName"];
-            group.RTypeID = Convert.ToInt32(form["f_type"]);
-            group.ParkID = form["f_park"];
-            if (_groupService.Update(group)) return Content("1:更新成功！");
-            else return Content("5:更新失败！");
-        }
+        //[HttpPost]
+        //public ContentResult Edit(FormCollection form)
+        //{
+        //    int id = Convert.ToInt32(form["groupid"]);
+        //    var group = _groupService.GetModels(g => g.ID == id).FirstOrDefault();
+        //    group.GroupCode = form["groupCode"];
+        //    group.GroupName = form["groupName"];
+        //    group.RTypeID = Convert.ToInt32(form["f_type"]);
+        //    group.ParkCode = form["f_park"];
+        //    if (_groupService.Update(group)) return Content("1:更新成功！");
+        //    else return Content("5:更新失败！");
+        //}
 
-        public ActionResult GetGroupDropDownList(int? groupId)
+        public ActionResult GetDropData(string RGroupCode)
         {
-            if (groupId == null) ViewData["groupList"] = new SelectList(_groupService.GetModels(g => true).ToList(), "ID", "RGroupName");
-            else ViewData["groupList"] = new SelectList(_groupService.GetModels(g => g.ID==groupId).ToList(), "ID", "RGroupName");
-            return PartialView("_GroupDropDownList");
+            if (string.IsNullOrEmpty(RGroupCode)) ViewData["dataList"] = new SelectList(_groupService.GetModels(a => true).ToList(), "GroupCode", "GroupName");
+            else ViewData["dataList"] = new SelectList(_groupService.GetModels(a => a.GroupCode== RGroupCode).ToList(), "GroupCode", "GroupName");
+            return PartialView("_GroupDrop");
         }
+        
+
 
     }
 }

@@ -3,10 +3,12 @@
     <thead>
         <tr>
             <th>序号</th>
-            <th>建筑编码</th>
-            <th>园区名称</th>
+            <th>城市</th>
+            <th>区域</th>
+            <th>园区</th>
             <th>建设期</th>
-            <th>建筑名称</th>
+            <th>编码</th> 
+            <th>名称</th>
             <th>经度</th>
             <th>纬度</th>
         </tr>
@@ -14,26 +16,24 @@
     <tbody>
         @{
             int id = 1;
-            if (ViewBag.buildList != null)
+            if (Model != null)
             {
-                foreach (var item in ViewBag.buildList)
+                foreach (var item in Model)
                 {
                     <tr>
-                        <td class="pkey" style="display:none">@item.build.ID</td>
+                        <td id="key" style="display:none">@item.ID</td>
                         <td>@id</td>
-                        <td>@item.build.Code</td>
-                        <td>@item.park.Name</td>
-                        <td>@item.stage.Name</td>
-                        <td>@item.build.Name</td>
-                        <td>@item.build.GisX</td>
-                        <td>@item.build.GisY</td>
+                        <td>@item.CityName</td>
+                        <td>@item.RegionName</td>
+                        <td>@item.ParkName</td>
+                        <td>@item.StageName</td>
+                        <td>@item.BuildingCode</td>
+                        <td>@item.BuildingName</td>
+                        <td>@item.GisX</td>
+                        <td>@item.GisY</td>
                     </tr>
                     id++;
                 }
-            }
-            else
-            {
-                <tr><td style="text-align:center" colspan="7">数据加载异常</td></tr>
             }
         }
     </tbody>

@@ -20,8 +20,8 @@ namespace Resource.DAL
            
             if (dbContext == null)
             {
-                dbContext = new DorllyResEntities();
-                DorllyResEntities dc = new DorllyResEntities();
+                dbContext = new DorllyResourceEntities();
+                //dbContext.Configuration.ProxyCreationEnabled = false;
                 //dbContext.Configuration.ProxyCreationEnabled = false;
                 CallContext.SetData("DbContext",dbContext);
             }

@@ -1,0 +1,45 @@
+﻿
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>资源编码</th>
+            <th>资源名称</th>
+            <th>资源类型</th>
+            <th>资源位置</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int id = 1;
+            if (ViewBag.resList != null)
+            {
+                foreach (var item in ViewBag.resList)
+                {
+                    <tr>
+                        <td class="pkey" style="display:none">@item.RID</td>
+                        <td>@id</td>
+                        <td>@item.RID</td>
+                        <td>@item.RNAME</td>
+                        <td>@item.TNAME</td>
+                        @if (item.TID == 1)
+                        {
+                            <td>@item.CNAME / @item.GNAME/ @item.PNAME/ @item.SNAME / @item.BNAME /@item.FNAME</td>
+                        }
+                        else
+                        {
+                            <td> @item.CNAME / @item.GNAME / @item.PNAME </td>
+                        }
+                        <td><button class="btn btn-primary public"> 发 布 </button></td>
+                    </tr>
+                    id++;
+                }
+            }
+            else
+            {
+                <tr><td style="text-align:center" colspan="7">数据加载异常</td></tr>
+            }
+        }
+    </tbody>
+</table>

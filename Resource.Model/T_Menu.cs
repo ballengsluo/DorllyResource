@@ -14,23 +14,14 @@ namespace Resource.Model
     
     public partial class T_Menu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_Menu()
-        {
-            this.T_Permission = new HashSet<T_Permission>();
-        }
-    
-        public int MenuID { get; set; }
-        public Nullable<int> MenuPID { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> PID { get; set; }
         public string MenuName { get; set; }
         public string MenuPath { get; set; }
-        public Nullable<int> Level { get; set; }
+        public Nullable<int> MenuLevel { get; set; }
         public Nullable<int> OrderNum { get; set; }
         public string ClassName { get; set; }
         public string FuncCode { get; set; }
         public string FuncName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Permission> T_Permission { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace Resource.Model
     
     public partial class T_User
     {
-        public int UserID { get; set; }
+        public int ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string NickName { get; set; }
@@ -22,7 +22,6 @@ namespace Resource.Model
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Addr { get; set; }
-        public string ImgURL { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> Status { get; set; }
     

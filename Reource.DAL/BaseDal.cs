@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Project.Common.DBUtility;
 
 namespace Resource.DAL
 {
-    public class BaseDal<T> where T : class, new()
+    public class BaseDAL<T> where T : class, new()
     {
         /// <summary>
         /// EF上下文对象
@@ -24,6 +24,12 @@ namespace Resource.DAL
         {
             dc.Set<T>().AddOrUpdate(t);
         }
+        public int Update(string sqlText, params SqlParameter[] parameter)
+        {
+            if (parameter != null) return dc.Database.ExecuteSqlCommand(sqlText, parameter);
+            else return dc.Database.ExecuteSqlCommand(sqlText);
+
+        }
         public void Delete(T t)
         {
             dc.Set<T>().Remove(t);
@@ -35,6 +41,10 @@ namespace Resource.DAL
         public IQueryable<T> GetModels(Expression<Func<T, bool>> whereLambda)
         {
             return dc.Set<T>().Where(whereLambda);
+        }
+        public DataSet ExecuteSql(string sqlText, CommandType cmdType, params SqlParameter[] parameters)
+        {
+            return SQLFactory.Create().GetDataSet(sqlText, cmdType, parameters);
         }
         public IQueryable<T> GetModelsByPage<type>(int pageSize, int pageIndex, bool isAsc,
             Expression<Func<T, bool>> WhereLambda,

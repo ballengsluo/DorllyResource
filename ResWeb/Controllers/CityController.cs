@@ -1,4 +1,4 @@
-﻿using Resource.BLL;
+﻿using Resource.BLL.Container;
 using Resource.IBLL;
 using Resource.Model;
 using System;
@@ -9,104 +9,99 @@ using System.Web.Mvc;
 
 namespace ResWeb.Controllers
 {
+    public class Result
+    {
+        public static object get(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return new { result = 1, msg = "操作成功！" };
+                case 2:
+                    return new { result = 5, msg = "操作失败！" };
+                case 3:
+                    return new { result = 2, msg = "数据异常！" };
+                case 4:
+                    return new { result = 2, msg = "参数错误！" };
+            }
+            return new { result = 3, msg = "错误！" };
+        }
+
+    }
     public class CityController : Controller
     {
         private ICityService _cityService = Container.Resolve<ICityService>();
-  
+
         public ActionResult Index()
         {
-            ViewBag.cityList = _cityService.GetModels(c => true).ToList();
             return View();
         }
 
-        public ActionResult Select(string name)
+        public ActionResult Details(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                ViewBag.cityList = _cityService.GetModels(c => true).ToList();
-            }
-            else
-            {
-                ViewBag.cityList = _cityService.GetModels(c => c.Name == name).ToList();
-            }
+            var list = _cityService.GetModels(a => true);
+            if (!string.IsNullOrEmpty(name)) list = list.Where(a => a.CityName.Contains(name));
+            ViewBag.cityList = list.ToList();
             return PartialView("_CityTable");
         }
-
-        public ActionResult GetDropData()
+        public ActionResult Create()
         {
-            var list = _cityService.GetModels(f => true).ToList();
-            ViewData["dataList"] = new SelectList(list, "Code", "Name");
-            //ViewBag.nodeId = "cityList";
-            return PartialView("_GetCityDropDownList");
+            return View();
         }
-
-        public ActionResult Details()
-        {
-            ViewBag.cityList = _cityService.GetModels(c => true).ToList();
-            return PartialView("_CityTable");
-        }
-
         [HttpPost]
-        public ContentResult Create(FormCollection collection)
+        public JsonResult Create(T_City city)
         {
             try
             {
-                T_City city = new T_City();
-                city.Code = collection["edit-code"];
-                city.Name = collection["edit-name"];
-                if (_cityService.Add(city))
-                    return Content("1:添加成功！");
-                else
-                    return Content("5:添加失败！");
+                if (_cityService.Add(city)) return Json(Result.get(1));
+                else return Json(Result.get(2));
             }
-            catch
+            catch (Exception e)
             {
-                return Content("3:数据异常！");
+                System.Diagnostics.Debug.Print(e.ToString());
+                return Json(Result.get(3));
             }
         }
-
-        public JsonResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             T_City city = _cityService.GetModels(c => c.ID == id).FirstOrDefault();
-            return Json(city, JsonRequestBehavior.AllowGet);
+            return View(city);
         }
-
         [HttpPost]
-        public ContentResult Edit(int id, FormCollection collection)
+        public JsonResult Edit(T_City city)
+        {
+            try
+            {
+                if (_cityService.Update(city)) return Json(Result.get(1));
+                else return Json(Result.get(2));
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Print(e.ToString());
+                return Json(Result.get(3));
+            }
+        }
+        [HttpPost]
+        public JsonResult Delete(int id)
         {
             try
             {
                 T_City city = _cityService.GetModels(c => c.ID == id).FirstOrDefault();
-                city.Code = collection["edit-code"];
-                city.Name = collection["edit-name"];
-                if (_cityService.Update(city))
-                    return Content("1:更新成功！");
-                else
-                    return Content("5:更新失败！");
+                if (_cityService.Delete(city)) return Json(Result.get(1));
+                else return Json(Result.get(2));
             }
-            catch
+            catch (Exception e)
             {
-                return Content("3:数据异常！");
+                System.Diagnostics.Debug.Print(e.ToString());
+                return Json(Result.get(3));
             }
         }
-
-        public ContentResult Delete(int id)
+        public ActionResult GetDropData(string selectCode)
         {
-            try
-            {
-                T_City city = _cityService.GetModels(c => c.ID == id).FirstOrDefault();
-                if (_cityService.Delete(city))
-                    return Content("1:删除成功！");
-                else
-                    return Content("5:删除失败！");
-            }
-            catch
-            {
-                return Content("3:数据异常！");
-            }
+            var list = _cityService.GetModels(f => true).ToList();
+            if (!string.IsNullOrEmpty(selectCode)) ViewData["dataList"] = new SelectList(list, "CityCode", "CityName", selectCode);
+            else ViewData["dataList"] = new SelectList(list, "CityCode", "CityName");
+            return PartialView("_CityDrop");
         }
-
-    
-
     }
 }

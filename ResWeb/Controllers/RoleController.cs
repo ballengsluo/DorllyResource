@@ -1,4 +1,4 @@
-﻿using Resource.BLL;
+﻿using Resource.BLL.Container;
 using Resource.IBLL;
 using Resource.Model;
 using System;
@@ -11,7 +11,7 @@ namespace ResWeb.Controllers
 {
     public class RoleController : Controller
     {
-        private IRoleService rs = ContainerService.Resolve<IRoleService>();
+        private IRoleService rs = Container.Resolve<IRoleService>();
         // GET: Role
         public ActionResult Index()
         {
@@ -25,7 +25,7 @@ namespace ResWeb.Controllers
         }
         public JsonResult Edit(int id)
         {
-            var role = rs.GetModels(r => r.RoleID == id).Select(r=>new { r.RoleName,r.RoleDesc});
+            var role = rs.GetModels(r => r.ID == id).Select(r=>new { r.RoleName,r.RoleDesc});
             return Json(role,JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -40,7 +40,7 @@ namespace ResWeb.Controllers
         [HttpPost]
         public ContentResult Edit(int id, string roleName, string roleDesc)
         {
-            T_Role role = rs.GetModels(r => r.RoleID == id).FirstOrDefault();
+            T_Role role = rs.GetModels(r => r.ID == id).FirstOrDefault();
             role.RoleDesc = roleDesc;
             role.RoleName = roleName;
             if (rs.Update(role)) return Content("1:更新成功！");
@@ -49,7 +49,7 @@ namespace ResWeb.Controllers
         [HttpPost]
         public ContentResult Delete(int id)
         {
-            T_Role role = rs.GetModels(r => r.RoleID == id).FirstOrDefault();
+            T_Role role = rs.GetModels(r => r.ID == id).FirstOrDefault();
             if (rs.Delete(role)) return Content("1:删除成功！");
             else return Content("5:删除失败！");
         }

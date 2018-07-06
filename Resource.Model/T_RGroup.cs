@@ -15,14 +15,12 @@ namespace Resource.Model
     public partial class T_RGroup
     {
         public int ID { get; set; }
-        public Nullable<int> RTypeID { get; set; }
-        public string ParkID { get; set; }
+        public string GroupCode { get; set; }
+        public string GroupName { get; set; }
+        public Nullable<int> ResourceTypeID { get; set; }
+        public string ParkCode { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public string UpdateUser { get; set; }
-        public string RGroupCode { get; set; }
-        public string RGroupName { get; set; }
-    
-        public virtual T_RType T_RType { get; set; }
     }
 }

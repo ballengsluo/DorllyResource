@@ -16,7 +16,7 @@ namespace ResWeb
             routes.MapRoute( 
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "PublicRoom", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Floor", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

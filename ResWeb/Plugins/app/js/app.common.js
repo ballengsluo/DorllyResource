@@ -3,7 +3,7 @@ $(function () {
     layui.use('layer', function () {
         layer = layui.layer;
     });
-    table_bund();
+    tableClick();
 });
 var ajax = function (reqUrl, reqType, reqData, resType, dealType, callback) {
     $.ajax({
@@ -33,7 +33,7 @@ var ajax = function (reqUrl, reqType, reqData, resType, dealType, callback) {
         }
     });
 };
-var ajax_form = function (reqUrl, reqType, reqData, resType, callback) {
+var ajaxForm = function (reqUrl, reqType, reqData, resType, callback) {
     $.ajax({
         type: reqType,
         url: reqUrl,
@@ -56,15 +56,26 @@ var ajax_form = function (reqUrl, reqType, reqData, resType, callback) {
         }
     });
 };
-var tr_select_id;
-var table_bund = function () {
+var choose;
+var tableClick = function () {
     $(".table tr").click(function () {
         $(".table tr").each(function () {
             $(this).removeClass("active");
         });
         $(this).addClass("active");
-        // console.log($(this).find(".pkey").eq(0).html());
-        tr_select_id = $(this).find(".pkey").eq(0).html();
-
+        choose = $(this).find("#key").html();
     });
+}
+// var tableDblClick=function(openFun){
+//     $(".table tr").dblclick(function () {
+//         openFun();
+//         var index = layer.open({
+//             type: 2,
+//             content: url + data
+//         });
+//         layer.full(index);
+//     })
+// }
+var commitResult=function(data){
+    layer.msg(data.msg,{icon:data.result})
 }

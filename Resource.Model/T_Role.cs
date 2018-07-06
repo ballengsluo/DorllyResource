@@ -17,16 +17,13 @@ namespace Resource.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_Role()
         {
-            this.T_Permission = new HashSet<T_Permission>();
             this.T_User = new HashSet<T_User>();
         }
     
-        public int RoleID { get; set; }
+        public int ID { get; set; }
         public string RoleName { get; set; }
         public string RoleDesc { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Permission> T_Permission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_User> T_User { get; set; }
     }

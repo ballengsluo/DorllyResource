@@ -15,27 +15,23 @@
     <tbody>
         @{
             int id = 1;
-            if (ViewBag.parkList != null)
+            if (Model != null)
             {
-                foreach (var item in ViewBag.parkList)
+                foreach (var item in Model)
                 {
                     <tr>
-                        <td class="pkey" style="display:none">@item.park.ID</td>
+                        <td id="key" style="display:none">@item.ID</td>
                         <td>@id</td>                        
-                        <td>@item.city.Name</td>
-                        <td>@item.region.Name</td>
-                        <td>@item.park.Code</td>
-                        <td>@item.park.Name</td>
-                        <td>@item.park.Addr</td>
-                        <td>@item.park.GisX</td>
-                        <td>@item.park.GisY</td>
+                        <td>@item.CityName</td>
+                        <td>@item.RegionName</td>
+                        <td>@item.Code</td>
+                        <td>@item.ParkShortName</td>
+                        <td>@item.Addr</td>
+                        <td>@item.GisX</td>
+                        <td>@item.GisY</td>
                     </tr>
                     id++;
                 }
-            }
-            else
-            {
-                <tr><td style="text-align:center" colspan="8">数据加载异常</td></tr>
             }
         }
     </tbody>

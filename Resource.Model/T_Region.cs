@@ -15,8 +15,8 @@ namespace Resource.Model
     public partial class T_Region
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string RegionCode { get; set; }
+        public string RegionName { get; set; }
         public string CityCode { get; set; }
     }
 }

@@ -13,225 +13,56 @@
     @Styles.Render("~/app/css")
 </head>
 <body>
-    <div class="func-action">
-        <button type="button" class="btn btn-primary" id="add"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-        <button type="button" class="btn btn-primary" id="edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
-        <button type="button" class="btn btn-danger" id="del"><i class="glyphicon glyphicon-trash"></i> 删除</button>
-    </div>
-    <div class="select-action">
-        <div class="row">
+    <div class="container">
+        <div class="func-action">
+            <button type="button" class="btn btn-primary" id="add"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+            <button type="button" class="btn btn-primary" id="edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" id="del"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+        </div>
+        <div class="select-action">
+            <div class="row">
 
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon">城市：</span>
-                    @{
-                        if (ViewData["cityList"] != null)
-                        {
-                            @Html.DropDownList("select-city", ViewData["cityList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="select-city" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">城市：</span>
+                        @Html.Action("GetDropData", "City")
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon">区域：</span>
-                    @{
-                        if (ViewData["regionList"] != null)
-                        {
-                            @Html.DropDownList("select-region", ViewData["regionList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="select-region" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">区域：</span>
+                        @Html.Action("GetDropData", "Region")
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon">园区：</span>
-                    @{
-                        if (ViewData["parkList"] != null)
-                        {
-                            @Html.DropDownList("select-park", ViewData["parkList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="select-park" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区：</span>
+                        @Html.Action("GetDropData", "Park")
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon">建设期：</span>
-                    @{
-                        if (ViewData["stageList"] != null)
-                        {
-                            @Html.DropDownList("select-stag e", ViewData["stageList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="select-stage" title="请选择.." disabled>
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">建设期：</span>
+                        @Html.Action("GetDropData", "Stage")
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <span class="input-group-addon">建筑：</span>
-                    @{
-                        if (ViewData["buildList"] != null)
-                        {
-                            @Html.DropDownList("select-build", ViewData["buildList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="select-build" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">建筑：</span>
+                        @Html.Action("GetDropData", "Building")
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="input-group">
-                    <button type="button" class="btn btn-primary" id="select">查询</button>
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary" id="Check" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="data-action">
-        @Html.Action("Details", "Floor")
-    </div>
-    <div class="form-edit-horizontal">
-        <h3 class="form-header">建筑</h3>
-        <form class="form-horizontal">
-
-            <div class="form-group">
-                <label class="control-label col-md-4">城市：</label>
-                <div class="col-md-8">
-                    @{
-                        if (ViewData["cityList"] != null)
-                        {
-                            @Html.DropDownList("edit-city", ViewData["cityList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="edit-city" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">区域：</label>
-                <div class="col-md-8">
-                    @{
-                        if (ViewData["regionList"] != null)
-                        {
-                            @Html.DropDownList("edit-region", ViewData["regionList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="edit-region" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">园区：</label>
-                <div class="col-md-8">
-                    @{
-                        if (ViewData["parkList"] != null)
-                        {
-                            @Html.DropDownList("edit-park", ViewData["parkList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="edit-park" title="请选择.." disabled>
-
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">建设期：</label>
-                <div class="col-md-8">
-                    @{
-                        if (ViewData["stageList"] != null)
-                        {
-                            @Html.DropDownList("edit-stage", ViewData["stageList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="edit-stage" title="请选择.." disabled>
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">建筑：</label>
-                <div class="col-md-8">
-                    @{
-                        if (ViewData["buildList"] != null)
-                        {
-                            @Html.DropDownList("edit-build", ViewData["buildList"] as SelectList, new { @class = "selectpicker form-control pull-righ", @title = "请选择..." })
-                        }
-                        else
-                        {
-                            <select class="selectpicker form-control pull-righ" id="edit-build" title="请选择.." disabled>
-                                <option>数据加载异常</option>
-                            </select>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">楼层编码：</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" name="edit-code" id="edit-code">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4">楼层名称：</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" name="edit-name" id="edit-name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-4" style="visibility:hidden">操作要素：</label>
-                <div class="col-md-8">
-                    <input type="button" class="btn btn-primary" name="commit" id="commit" value="提交">
-                </div>
-            </div>
-        </form>
+        <div class="data-action">
+            @Html.Action("Details", "Floor")
+        </div>
     </div>
     @Scripts.Render("~/common/js")
     <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>

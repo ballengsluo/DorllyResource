@@ -6,7 +6,7 @@ USE DORLLYRES
 IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Role')
 	DROP TABLE T_Role;
 CREATE TABLE T_Role(
-	RoleID INT IDENTITY(20001,1) PRIMARY KEY,	--角色编号
+	ID INT IDENTITY(20001,1) PRIMARY KEY,		--角色编号
 	RoleName NVARCHAR(50) NOT NULL,				--角色名称
 	RoleDesc NVARCHAR(100)						--角色描述
 )
@@ -16,15 +16,15 @@ CREATE TABLE T_Role(
 IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Menu')
 	DROP TABLE T_Menu;
 CREATE TABLE T_Menu(
-	MenuID INT IDENTITY(30001,1) PRIMARY KEY,	--菜单编号
-	MenuPID INT,								--父级编号
+	ID INT IDENTITY(30001,1) PRIMARY KEY,	--菜单编号
+	PID INT,								--父级编号
 	MenuName NVARCHAR(50),						--菜单名称
 	MenuPath NVARCHAR(200),						--菜单路径
-	Level INT,									--菜单层级
+	MenuLevel INT,									--菜单层级
 	OrderNum INT,								--排序序号
 	ClassName NVARCHAR(20),						--样式名称
-	FuncCode NVARCHAR(50),						--功能编号
-	FuncName NVARCHAR(200)						--功能名称
+	FuncCode NVARCHAR(500),						--功能编号
+	FuncName NVARCHAR(500)						--功能名称
 )
 
 /*
@@ -33,24 +33,23 @@ CREATE TABLE T_Menu(
 IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Permission')
 	DROP TABLE T_Permission;
 CREATE TABLE T_Permission(
-	PerID INT IDENTITY(1001,1) PRIMARY KEY,	--权限编号
+	ID INT IDENTITY(1001,1) PRIMARY KEY,	--权限编号
 	RoleID INT NOT NULL ,					--角色编号
 	MenuID INT NOT NULL,				    --菜单编号
-	FuncCode INT							--功能编号
+	FuncCode NVARCHAR(500)					--功能编号
 )
-ALTER TABLE T_Permission ADD CONSTRAINT FK_ROLE_PER FOREIGN KEY(RoleID) REFERENCES T_ROLE(RoleID)
-ALTER TABLE T_Permission ADD CONSTRAINT FK_Menu_PER FOREIGN KEY(MenuID) REFERENCES T_Menu(MenuID)
+
 /*
  * 用户表
  */
 IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_User')
 	DROP TABLE T_User;
 CREATE TABLE T_User(
-	UserID INT IDENTITY(40001,1) PRIMARY KEY,	--用户编号
+	ID INT IDENTITY(40001,1) PRIMARY KEY,	--用户编号
 	UserName NVARCHAR(50) NOT NULL,				--登录名称
 	Password NVARCHAR(100) NOT NULL,			--登录密码
 	NickName NVARCHAR(50),						--用户昵称
-	RoleID INT NOT NULL,						--角色编号
+	RoleID INT NOT NULL CONSTRAINT FK_ROLE_User REFERENCES T_ROLE(ID),--角色编号
 	Phone NVARCHAR(11),							--手机号码
 	Email NVARCHAR(100),						--邮箱地址
 	Addr NVARCHAR(200),							--联系地址
@@ -58,7 +57,6 @@ CREATE TABLE T_User(
 	CreateDate DATETIME,						--创建时间
 	Status BIT									--用户状态
 )
-ALTER TABLE T_User ADD CONSTRAINT FK_ROLE_User FOREIGN KEY(RoleID) REFERENCES T_ROLE(RoleID)
 ---------------------------- 权限部分 END ----------------------------
 
 ---------------------------- 基础资料部分 START ----------------------
@@ -69,14 +67,14 @@ ALTER TABLE T_User ADD CONSTRAINT FK_ROLE_User FOREIGN KEY(RoleID) REFERENCES T_
  IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Resource')
 	DROP TABLE T_Resource;
 CREATE TABLE T_Resource(
-	ID NVARCHAR(30) PRIMARY KEY,			--资源编码	
-	Name NVARCHAR(30),						--资源名称
-	ParkID NVARCHAR(10),					--园区编码:外键
-	FloorID NVARCHAR(30),					--楼层编码：外键
+	ResrouceCode NVARCHAR(30) PRIMARY KEY,			--资源编码	
+	ResourceName NVARCHAR(30),						--资源名称
+	ParkCode NVARCHAR(10),					--园区编码:外键
+	FloorCode NVARCHAR(30),					--楼层编码：外键
 	ShortAddr NVARCHAR(30),					--位置简称：产品介绍页地址
 	FullAddr NVARCHAR(30),					--详细位置：产品详细页地址
-	SProviderID NVARCHAR(30),				--服务商编码：外键
-	RTypeID INT,							--资源类别编码：外键
+	SProviderCode NVARCHAR(30),				--服务商编码：外键
+	RTypeID INT CONSTRAINT FK_Resrouce_RType REFERENCES T_RType(ID),
 	RGroupID INT,							--资源分组编码：外键
 	OriginalArea DECIMAL(12,4),				--初始面积(建筑面积)
 	RentArea DECIMAL(12,4),					--可租面积
@@ -99,35 +97,24 @@ CREATE TABLE T_Resource(
 	--Detail NVARCHAR(MAX),					--详情资料
 	--Matching NVARCHAR(MAX),				--配套资料	
 )
-ALTER TABLE T_Resource ADD CONSTRAINT FK_TR_RType FOREIGN KEY(RTypeID) REFERENCES T_RType(ID)
 --房屋
-INSERT INTO T_Resource(ID,Name,ParkID,FloorID,SProviderID,RTypeID,OriginalArea,RentArea)
-SELECT RMID,RMNo,'01',rmlocno4,'FWC-003' AS SProviderID,1,RMBuildSize,RMRentSize FROM DorllyOrder.dbo.Mstr_Room;
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,FloorCode,SProviderCode,RTypeID,OriginalArea,RentArea)
+SELECT RMID,RMNo,'01',rmlocno4,'FWC-003' AS SProviderCode,1,RMBuildSize,RMRentSize FROM DorllyOrder.dbo.Mstr_Room;
 --工位
-INSERT INTO T_Resource(ID,Name,ParkID,SProviderID,RTypeID,RentNum,ShortAddr,FullAddr)
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,SProviderCode,RTypeID,RentNum,ShortAddr,FullAddr)
 SELECT WPNo,SUBSTRING(WPAddr,CHARINDEX('三',WPAddr),LEN(WPAddr)),'01','FWC-001',2,1,
 WPProject,WPAddr FROM DorllyOrder.DBO.Mstr_WorkPlace;
 --会议室
-INSERT INTO T_Resource(ID,Name,ParkID,SProviderID,RTypeID,PersonNum,RentArea) VALUES('00002','博会中心(含LED屏)','01','FWC-001',3,'300','367.2000');
-INSERT INTO T_Resource(ID,Name,ParkID,SProviderID,RTypeID,PersonNum,RentArea,FullAddr) VALUES('00004','火花岛咖啡厅','01','FWC-001',3,'60','90.0000','福田国际电子商务产业园3栋1楼火花岛智慧双创社区');
-INSERT INTO T_Resource(ID,Name,ParkID,SProviderID,RTypeID,PersonNum,RentArea,FullAddr) VALUES('00005','火花岛洽谈室','01','FWC-001',3,'6','8.0000','福田国际电子商务产业园3栋1楼火花岛智慧双创社区');
-INSERT INTO T_Resource(ID,Name,ParkID,SProviderID,RTypeID,PersonNum,RentArea,ShortAddr) VALUES('00006','火花岛大会议室','01','FWC-001',3,'15','30.0000','火花岛');
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,SProviderCode,RTypeID,PersonNum,RentArea) VALUES('00002','博会中心(含LED屏)','01','FWC-001',3,'300','367.2000');
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,SProviderCode,RTypeID,PersonNum,RentArea,FullAddr) VALUES('00004','火花岛咖啡厅','01','FWC-001',3,'60','90.0000','福田国际电子商务产业园3栋1楼火花岛智慧双创社区');
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,SProviderCode,RTypeID,PersonNum,RentArea,FullAddr) VALUES('00005','火花岛洽谈室','01','FWC-001',3,'6','8.0000','福田国际电子商务产业园3栋1楼火花岛智慧双创社区');
+INSERT INTO T_Resource(ResrouceCode,ResourceName,ParkCode,SProviderCode,RTypeID,PersonNum,RentArea,ShortAddr) VALUES('00006','火花岛大会议室','01','FWC-001',3,'15','30.0000','火花岛');
 select * from T_Resource;
 
 
 
 
-/*
- * 资源图片表
- */
- IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_RImage')
-	DROP TABLE T_RImage;
-CREATE TABLE T_RImage(
-	ID INT IDENTITY(1,1) PRIMARY KEY,
-	ResourceID NVARCHAR(30) NOT NULL,
-	ImgURL NVARCHAR(300),
-	IsCover BIT
-)
+
 
 ---------------------------- 基础资料部分 END ------------------------
 
@@ -136,9 +123,9 @@ CREATE TABLE T_RImage(
 /*
  * 资源状态表
  */
- IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='ResourceStatus')
-	DROP TABLE ResourceStatus;
-CREATE TABLE ResourceStatus(
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_RStatus')
+	DROP TABLE T_RStatus;
+CREATE TABLE T_RStatus(
 	ResourceID NVARCHAR(30),	--资源编号
 	CustID NVARCHAR(30),		--客户编号
 	ChannelID INT,				--渠道编号
@@ -151,11 +138,10 @@ CREATE TABLE ResourceStatus(
 /*
  * 资源发布表
  */
- IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='ResourcePublic')
-	DROP TABLE ResourcePublic;
-CREATE TABLE ResourcePublic(
-	ID INT IDENTITY(10001,1) PRIMARY KEY,	--编号
-	Code NVARCHAR(50),
+ IF EXISTS(SELECT * FROM DBO.SYSOBJECTS WHERE name='T_Public')
+	DROP TABLE T_Public;
+CREATE TABLE T_Public(
+	PublicCode NVARCHAR(50) PRIMARY KEY,
 	ResourceID NVARCHAR(30),				--资源编号
 	BeginTime DATETIME,						--发布开始时间
 	EndTime DATETIME,						--发布结束时间

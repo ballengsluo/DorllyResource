@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using Resource.BLL;
+using Resource.BLL.Container;
 using Resource.IBLL;
 using Resource.Model;
 
@@ -15,16 +15,19 @@ namespace ResWeb.Controllers
     public class ImageController : Controller
     {
         IRImageService _imgServcie = Container.Resolve<IRImageService>();
-        public ActionResult GetResImg()
+
+        public ActionResult GetResourceImgList()
         {
             List<T_RImage> imgList = _imgServcie.GetModels(i => true).ToList();
             return PartialView("_ImgBox", imgList);
         }
-        public ActionResult GetResImgByID(string resourceID)
+
+        public ActionResult GetImgByrResCode(string resourceCode)
         {
-            List<T_RImage> imgList = _imgServcie.GetModels(i => i.ResourceID==resourceID).ToList();
+            List<T_RImage> imgList = _imgServcie.GetModels(a => a.ResourceCode == resourceCode).ToList();
             return PartialView("_ImgBox", imgList);
         }
+
         [HttpPost]
         public JsonResult SaveResImg(FormCollection collection)
         {
@@ -34,8 +37,8 @@ namespace ResWeb.Controllers
                 if (Request.Files.Count > 0)
                 {
                     T_RImage img = new T_RImage();
-                    string product = collection["product"];
-                    img.ResourceID = product;
+                    string resourceCode = collection["product"];
+                    img.ResourceCode = resourceCode;
                     //获取文件
                     HttpPostedFileBase uploadImg = Request.Files[0];//获取上传的图片
                     ////判断上传文件大小，小于5M
@@ -49,12 +52,9 @@ namespace ResWeb.Controllers
                     if (filetypes[1] == "jpg" || filetypes[1] == "gif" || filetypes[1] == "png" || filetypes[1] == "bmg" || filetypes[1] == "jpeg")
                     {
                         Regex regex = new Regex("[\\/:*?\"<>|]");
-                        string filename = regex.Replace(product, "") + "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "." + filetypes[1]; //给上传文件重命名
-                        string path = "~/Content/image/public/" + regex.Replace(product, "");
-                        if (Directory.Exists(Server.MapPath(path)) == false)//如果不存在就创建file文件夹
-                        {
-                            Directory.CreateDirectory(Server.MapPath(path));
-                        }
+                        string filename = regex.Replace(resourceCode, "") + "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "." + filetypes[1]; //给上传文件重命名
+                        string path = "~/Content/image/public/" + regex.Replace(resourceCode, "");
+                        if (Directory.Exists(Server.MapPath(path)) == false) Directory.CreateDirectory(Server.MapPath(path));
                         path = path + "/" + filename;
                         uploadImg.SaveAs(Server.MapPath(path));
                         img.ImgURL = path.Replace("~", "..");
@@ -66,7 +66,7 @@ namespace ResWeb.Controllers
                             return Json(new { result = "1", msg = "图片保存成功！", path = img.ImgURL, id = imgID, tempid = tempID });
                         }
                         else
-                            return Json(new { result = "5", msg = "删除失败，请检查数据！" });
+                            return Json(new { result = "5", msg = "添加失败，请检查数据！" });
                     }
                     else
                     {
@@ -80,7 +80,7 @@ namespace ResWeb.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { result = "2", msg = "重大错误：" + ex.Message });
+                return Json(new { result = "2", msg = "添加错误：" + ex.ToString() });
             }
         }
 
@@ -95,23 +95,24 @@ namespace ResWeb.Controllers
                     System.IO.File.Delete(Server.MapPath(img.ImgURL.Replace("..", "~")));
                     return Json(new { result = "1", msg = "删除成功！" });
                 }
-                    
+
                 else
                     return Json(new { result = "5", msg = "删除失败，请检查数据！" });
             }
             catch (Exception ex)
             {
-                return Json(new { result = "2", msg = "重大错误：" + ex.Message });
+                return Json(new { result = "2", msg = "删除错误：" + ex.Message });
             }
 
         }
+
         public JsonResult UpdateResImg(int id)
         {
             try
             {
-                T_RImage img = _imgServcie.GetModels(i => i.ID == id).FirstOrDefault();
+                T_RImage img = _imgServcie.GetModels(a => a.ID == id).FirstOrDefault();
 
-                List<T_RImage> iList = _imgServcie.GetModels(i => i.ResourceID == img.ResourceID).ToList();
+                List<T_RImage> iList = _imgServcie.GetModels(a => a.ResourceCode == img.ResourceCode).ToList();
                 foreach (var item in iList)
                 {
                     item.IsCover = false;
@@ -125,7 +126,7 @@ namespace ResWeb.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { result = "2", msg = "重大错误：" + ex.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { result = "2", msg = "更改错误：" + ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 

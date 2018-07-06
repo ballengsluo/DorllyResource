@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑建筑</title>
+    @Styles.Render("~/common/css")
+    @Styles.Render("~/app/css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:400px;margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">编辑建筑</h3>
+            @using (Ajax.BeginForm("Edit", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "commitResult",
+                OnFailure = "commitResult"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-4">城市：</label>
+                    <div class="col-md-8">
+                        @Html.Action("GetDropData", "City", new { selectCode = Model.CityCode })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">区域：</label>
+                    <div class="col-md-8">
+                        @Html.Action("GetDropData", "Region", new { parentCode = "", selectCode = Model.RegionCode })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4">园区：</label>
+                    <div class="col-md-8">
+                        @Html.Action("GetDropData", "Park", new { parentCode = "", selectCode = Model.ParkCode })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">建设期：</label>
+                    <div class="col-md-8">
+                        @Html.Action("GetDropData", "Stage", new { parentCode = "", selectCode = Model.StageCode })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">编码：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="BuildingCode" value="@Model.BuildingCode">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">名称：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="BuildingName" value="@Model.BuildingName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">经度坐标：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="GisX" value="@Model.GisX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">纬度坐标：</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="GisY" value="@Model.GisY">
+                    </div>
+                </div>
+                <p style="text-align:center;margin:20px 0px;">
+                    <input type="submit" class="btn btn-primary" value="提交">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();" style="margin-left:10px;">
+                </p>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/common/js")
+    <script src="~/Plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+</body>
+</html>

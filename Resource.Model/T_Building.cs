@@ -15,8 +15,8 @@ namespace Resource.Model
     public partial class T_Building
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string BuildingCode { get; set; }
+        public string BuildingName { get; set; }
         public string StageCode { get; set; }
         public string GisX { get; set; }
         public string GisY { get; set; }

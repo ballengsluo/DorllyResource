@@ -14,5 +14,13 @@
 /Resource.Model/bin
 /Resource.Model/obj
 /ResWeb/bin
-
+/ResWeb/obj
+/ResWeb/Content/image
+/ConsoleApplication1
+/Resource.BLL.Container/bin
+/Resource.BLL.Container/obj
+/Resource.DAL.Container/bin
+/Resource.DAL.Container/obj
+/Project.Common/bin
+/Project.Common/obj
 

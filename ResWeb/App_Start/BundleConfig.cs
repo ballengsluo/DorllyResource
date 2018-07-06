@@ -17,33 +17,31 @@ namespace ResWeb.App_Start
                 "~/Plugins/adminlte/css/adminlte.css",
                 "~/Plugins/adminlte/css/skins/_all-skins.css"
             ));
-            bundles.Add(new StyleBundle("~/user/css").Include(
-                "~/Plugins/bootstrap-select/css/bootstrap-select.min.css",    
-                 "~/Plugins/bootstrap-validator/css/bootstrapValidator.min.css",
-                 "~/Plugins/app/css/app.user.css"
-             ));
-            bundles.Add(new StyleBundle("~/app/css").Include(
+            bundles.Add(new StyleBundle("~/ce/css").Include(               
+               "~/Plugins/bootstrap-select/css/bootstrap-select.min.css",
+               "~/Plugins/app/css/app.form.css"
+           ));
+            bundles.Add(new StyleBundle("~/index/css").Include(
                 "~/Plugins/bootstrap-select/css/bootstrap-select.min.css",
                  "~/Plugins/app/css/app.func.css",
                  "~/Plugins/app/css/app.select.css",
-                 "~/Plugins/app/css/app.table.css",
-                 "~/Plugins/app/css/app.form.css"
+                 "~/Plugins/app/css/app.table.css"
              ));
             /*************************************    JS    ***********************************/
             bundles.Add(new ScriptBundle("~/common/js").Include(
                 "~/Plugins/jquery/jquery-2.2.4.js",
                 "~/Plugins/bootstrap/js/bootstrap.min.js",
                 "~/Plugins/layui/layui.js",
-                 "~/Plugins/app/js/app.common.js"
+                 "~/Plugins/app/js/app.common.js"                
             ));
             bundles.Add(new ScriptBundle("~/main/js").Include(
                "~/Plugins/adminlte/js/adminlte.js",
                "~/Plugins/app/js/app.main.js"
              ));
-            bundles.Add(new ScriptBundle("~/user/js").Include(               
+            bundles.Add(new ScriptBundle("~/ce/js").Include(
+                 "~/Plugins/jquery/jquery.unobtrusive-ajax.min.js",
                  "~/Plugins/bootstrap-select/js/bootstrap-select.min.js",
-                 "~/Plugins/bootstrap-validator/js/bootstrapValidator.min.js",
-                 "~/Plugins/app/js/app.user.js"
+                 "~/Plugins/bootstrap-validator/js/bootstrapValidator.min.js"
              ));
            
         }

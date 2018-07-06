@@ -38,6 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,91 +55,95 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DorllyRes.Context.cs">
+    <Compile Include="Area.cs" />
+    <Compile Include="DorllyResource.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DorllyRes.Context.tt</DependentUpon>
+      <DependentUpon>DorllyResource.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DorllyRes.cs">
+    <Compile Include="DorllyResource.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="DorllyRes.Designer.cs">
+    <Compile Include="DorllyResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DorllyRes.edmx</DependentUpon>
+      <DependentUpon>DorllyResource.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="T_Building.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_City.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Cubicle.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Floor.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_HomePage.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_MeetingRoom.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Menu.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PageFoot.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_PagePosition.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Park.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Permission.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Region.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_Resource.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+    <Compile Include="T_RentType.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_RGroup.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_RImage.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Role.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Room.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_RPrice.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_RType.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_SProvider.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Stage.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_StandardPrice.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_Unit.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_User.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_ResOther.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_ResRoom.cs">
-      <DependentUpon>DorllyRes.tt</DependentUpon>
+      <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DorllyRes.edmx">
+    <EntityDeploy Include="DorllyResource.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DorllyRes.Designer.cs</LastGenOutput>
+      <LastGenOutput>DorllyResource.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DorllyRes.edmx.diagram">
-      <DependentUpon>DorllyRes.edmx</DependentUpon>
+    <None Include="DorllyResource.edmx.diagram">
+      <DependentUpon>DorllyResource.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -143,15 +151,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DorllyRes.Context.tt">
+    <Content Include="DorllyResource.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DorllyRes.edmx</DependentUpon>
-      <LastGenOutput>DorllyRes.Context.cs</LastGenOutput>
+      <DependentUpon>DorllyResource.edmx</DependentUpon>
+      <LastGenOutput>DorllyResource.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DorllyRes.tt">
+    <Content Include="DorllyResource.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DorllyRes.edmx</DependentUpon>
-      <LastGenOutput>DorllyRes.cs</LastGenOutput>
+      <DependentUpon>DorllyResource.edmx</DependentUpon>
+      <LastGenOutput>DorllyResource.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

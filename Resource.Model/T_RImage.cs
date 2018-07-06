@@ -15,7 +15,7 @@ namespace Resource.Model
     public partial class T_RImage
     {
         public int ID { get; set; }
-        public string ResourceID { get; set; }
+        public string ResourceCode { get; set; }
         public string ImgURL { get; set; }
         public Nullable<bool> IsCover { get; set; }
     }

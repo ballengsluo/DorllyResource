@@ -53,89 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDal.cs" />
-    <Compile Include="BuildingDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CityDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Container.cs">
-      <DependentUpon>ContainerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContainerDal.cs" />
-    <Compile Include="ContainerTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContainerTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DalTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
+    <Compile Include="BaseDAL.cs" />
     <Compile Include="DbContextFactory.cs" />
-    <Compile Include="FloorDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MenuDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParkDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PermissionDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
+    <Compile Include="DAL.cs">
+      <DependentUpon>DAL.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegionDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResOtherDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResourceDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ResRoomDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RGroupDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RImageDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RoleDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RPriceDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RTypeDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SProviderDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StageDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPriceDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UnitDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserDal.cs">
-      <DependentUpon>DalTemplate.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.Common\Project.Common.csproj">
+      <Project>{e982f274-caf1-4134-91b9-f639115c44c6}</Project>
+      <Name>Project.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resource.IDAL\Resource.IDAL.csproj">
       <Project>{a2c00ba4-9212-4439-aa2c-c1c1c005cb79}</Project>
       <Name>Resource.IDAL</Name>
@@ -146,13 +81,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ContainerTemplate.tt">
+    <Content Include="DAL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ContainerTemplate.cs</LastGenOutput>
-    </Content>
-    <Content Include="DalTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DalTemplate.cs</LastGenOutput>
+      <LastGenOutput>DAL.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

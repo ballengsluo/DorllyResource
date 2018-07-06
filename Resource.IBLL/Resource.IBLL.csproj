@@ -50,70 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseService.cs" />
-    <Compile Include="IBLLTemplate.cs">
+    <Compile Include="IBLL.cs">
+      <DependentUpon>IBLL.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IBuildingService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ICityService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IFloorService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IMenuService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IParkService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IPermissionService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRegionService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResOtherService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResourceService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResRoomService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRGroupService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRImageService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRoleService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRPriceService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRTypeService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ISProviderService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IStageService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IStandardPriceService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IUnitService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IUserService.cs">
-      <DependentUpon>IBLLTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,9 +64,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IBLLTemplate.tt">
+    <Content Include="IBLL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IBLLTemplate.cs</LastGenOutput>
+      <LastGenOutput>IBLL.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

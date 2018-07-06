@@ -15,10 +15,17 @@ namespace Resource.Model
     public partial class T_Park
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
+        public string ParkCode { get; set; }
         public string RegionCode { get; set; }
+        public string ParkName { get; set; }
+        public string ParkShortName { get; set; }
         public string Addr { get; set; }
+        public string ContactName { get; set; }
+        public string ContactPhone { get; set; }
+        public string ContactMobile { get; set; }
+        public string ContactEmail { get; set; }
+        public string ContactAddr { get; set; }
+        public string ContactMark { get; set; }
         public string GisX { get; set; }
         public string GisY { get; set; }
     }

@@ -1,17 +1,17 @@
 ﻿using Resource.IBLL;
-using Resource.BLL;
+using Resource.BLL.Container;
 using Resource.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace ResWeb.Controllers
 {
     public class AdminController : Controller
     {
-        private IMenuService ms = ContainerService.Resolve<IMenuService>();
+        private IMenuService ms = Container.Resolve<IMenuService>();
+
         // GET: Admin
         public ActionResult Index()
         {

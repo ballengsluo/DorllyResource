@@ -14,12 +14,9 @@ namespace Resource.Model
     
     public partial class T_Permission
     {
-        public int PerID { get; set; }
+        public int ID { get; set; }
         public int RoleID { get; set; }
         public int MenuID { get; set; }
-        public Nullable<int> FuncCode { get; set; }
-    
-        public virtual T_Menu T_Menu { get; set; }
-        public virtual T_Role T_Role { get; set; }
+        public string FuncCode { get; set; }
     }
 }

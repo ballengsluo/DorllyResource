@@ -1,34 +1,27 @@
-var pro = "FTYQ-1-01-001-K/101";
 $(function () {
     setImg();
-    $("#img-upload").change(function () {
-        if ($("#product").val() == "" || !$("#product").val()) {
-            layer.msg("请选择资源！");
-        } else {
-            var form = new FormData();
-            form.append("product","FTYQ-1-01-001-K/101");
-            form.append("img-upload",$(this).get(0).files[0]);
-            // new FormData($(".img-container")[0])
-            ajax_form("/Image/SaveResImg", "POST",form, "json", function (data) {
-                if (data.result == 1) {
-                    $(".img-container").prepend("<div class='img-box'>"
-                        + "<span class='close-box'  data-id='" + data.id + "'></span>"
-                        + "<img src='" + data.path + "'/>"
-                        + "<div class='select-box'>"
-                        + "<span class='radio-box'>"
-                        + "<input type='radio' name='isCover' id='" + data.tempid + "' data-id='" + data.id + "' />"
-                        + "<label for='" + data.tempid + "'></label>"
-                        + "</span></div>"
-                        + "</div>"
-                    );
-                    setImg();
-                }
-                layer.msg(data.msg, { icon: data.result });
-            });
-        }
-
+    $("#ImgUpload").change(function () {
+        var form = new FormData();
+        form.append("product", $("#ImgUpload").attr("data-id"));
+        form.append("imgUpload", $(this).get(0).files[0]);
+        // new FormData($(".img-container")[0])
+        ajax_form("/Image/SaveResImg", "POST", form, "json", function (data) {
+            if (data.result == 1) {
+                $("#ImgContainer").prepend("<div class='img-box'>"
+                    + "<span class='close-box'  data-id='" + data.id + "'></span>"
+                    + "<img src='" + data.path + "'/>"
+                    + "<div class='select-box'>"
+                    + "<span class='radio-box'>"
+                    + "<input type='radio' name='isCover' id='" + data.tempid + "' data-id='" + data.id + "' />"
+                    + "<label for='" + data.tempid + "'></label>"
+                    + "</span></div>"
+                    + "</div>"
+                );
+                setImg();
+            }
+            layer.msg(data.msg, { icon: data.result });
+        });
     });
-
 });
 var setImg = function () {
     $(".close-box").off("click").on("click", function () {

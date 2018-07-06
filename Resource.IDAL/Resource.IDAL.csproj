@@ -49,71 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseDal.cs" />
-    <Compile Include="IBuildingDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ICityDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IDALTemplate.cs">
+    <Compile Include="IBaseDAL.cs" />
+    <Compile Include="IDAL.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IFloorDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IMenuDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IParkDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IPermissionDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRegionDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResOtherDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResourceDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IResRoomDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRGroupDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRImageDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRoleDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRPriceDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IRTypeDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ISProviderDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IStageDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IStandardPriceDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IUnitDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="IUserDal.cs">
-      <DependentUpon>IDALTemplate.tt</DependentUpon>
+      <DependentUpon>IDAL.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IDALTemplate.tt">
+    <Content Include="IDAL.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IDALTemplate.cs</LastGenOutput>
+      <LastGenOutput>IDAL.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
