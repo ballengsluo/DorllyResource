@@ -1,0 +1,35 @@
+﻿@*@if (ViewData["dataList"] != null)
+{
+    @Html.DropDownList("StageID", ViewData["dataList"] as SelectList, "全部", new { @class = "selectpicker form-control pull-righ", @id = "stage" })
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" name="StageID" id="stage" title="暂无数据" disabled></select>
+}*@
+
+@if (ViewBag.model == 1)
+{
+    @Html.DropDownList("StageID", ViewData["dataList"] as SelectList,
+    new
+    {
+        @class = "selectpicker form-control pull-righ",
+        @id = "stage",
+        @required = "required",
+        @title = "请选择..."
+    })
+}
+else
+{
+    @Html.DropDownList("StageID",
+        ViewData["dataList"] as SelectList,
+        "全部",
+        new
+        {
+            @class = "selectpicker form-control pull-righ",
+            @id = "stage"
+        })
+}
+
+
+
+

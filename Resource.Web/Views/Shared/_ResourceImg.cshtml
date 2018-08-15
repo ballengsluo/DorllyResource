@@ -1,0 +1,23 @@
+﻿
+<div class="imgContainer">
+    @if (ViewBag.img != null)
+    {
+        var imgList = ViewBag.img as List<T_ResourceImg>;
+        foreach (var item in imgList)
+        {
+            <div class="imgbox">
+                <img src="@item.ImgUrl" />
+                <span class="imgdel" title="删除" data-id="@item.ID">
+                    
+                    @*<i class="glyphicon glyphicon-remove" style="color:#ff0000;"></i>*@
+                    <i class="layui-icon layui-icon-close" style="color:#ff0000;"></i>
+                </span>
+            </div>
+        }
+    }
+    <div class="addbox">
+        <span>+</span>
+        <input type="file" multiple name="resourceimg" />
+    </div>
+
+</div>

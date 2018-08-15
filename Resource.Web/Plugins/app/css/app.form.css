@@ -1,0 +1,212 @@
+/* 
+ *   平行表单样式
+ *   
+*/
+
+.form-horizontal {
+    padding: 10px 25px;
+}
+
+.form-horizontal {
+    font-size: 15px;
+    /* padding:6px 4px; */
+}
+
+
+/* .form-horizontal,.form-horizontal input{
+    font-size: 16px;
+     padding:6px 4px; 
+} */
+
+.form-horizontal .control-label {
+    /* text-align: center; */
+    padding-right: 10px;
+    margin-right: 0px;
+    padding-left: 0px;
+}
+
+.form-horizontal .form-group div {
+    padding-left: 0px;
+}
+
+
+/* 连体下拉框 */
+
+.form-horizontal .form-group .input-group .input-group-addon,
+.form-horizontal .form-group .input-group .btn,
+.form-horizontal .form-group .input-group input {
+    padding: 6px 16px 6px 6px;
+}
+
+
+/* 连体下拉框箭头 */
+
+.form-horizontal .form-group .input-group .bootstrap-select.btn-group .dropdown-toggle .caret {
+    right: 6px;
+}
+
+
+/* 连体框内输入框 */
+
+.form-horizontal .form-group .input-group input,
+.form-horizontal .form-group .input-group input {
+    font-size: 14px;
+}
+
+.form-horizontal .form-group:last-child>div>.btn {
+    letter-spacing: 5px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+/* 资源分组 */
+
+.groupdiv {
+    width: 400px;
+    /* border: 1px solid red; */
+    padding-top: 30px;
+}
+
+.form-edit-horizontal {
+    border: 1px solid red;
+    max-width: 400px;
+    padding-top: 30px;
+}
+
+
+/* 资源价格容器样式 */
+
+#price-container>div {
+    box-shadow: 0px 0px 4px #ccc;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+#price-container div:first-child>label {
+    padding-top: 0px;
+    text-align: center;
+}
+
+#price-container .form-group {
+    margin: 15px 0px;
+}
+
+#upload>div {
+    float: left;
+    margin-right: 20px;
+}
+
+
+/*
+*  图片div样式
+*/
+
+.imgbox a {
+    cursor: pointer;
+    color: #337ab7;
+    font-size: 14px;
+}
+
+.imgbox img {
+    width: 130px;
+    height: 130px;
+}
+
+.imgdel {
+    margin-left: 45px;
+}
+
+
+/*
+*  上传div样式
+*/
+
+#upbox {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    border: 1px dashed gray;
+}
+
+#upbox>span {
+    position: absolute;
+    font-size: 7rem;
+    top: 20px;
+    left: 45px;
+    color: #b4b4b4;
+}
+
+#upbtn {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    overflow: hidden;
+    border: 1px solid blue;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.adimgbox {
+    width: 100px;
+    margin-right: 25px;
+}
+
+.adimgbox .imgbox {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    border: 1px dashed #ccc;
+}
+
+.adimgbox .imgbox img {
+    width: 100%;
+    height: 100%;
+}
+
+.adimgbox .addbox {
+    position: relative;
+    margin-top: 10px;
+}
+
+.adimgbox .addbox span {
+    width: 100px;
+    height: 32px;
+}
+
+.adimgbox .addbox input {
+    width: 100px;
+    height: 32px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.cmtdiv {
+    text-align: center;
+    padding: 15px 0px;
+    /* box-shadow: 0px 0px 4px #ccc; */
+}
+
+.cmtdiv input {
+    font-size: 16px;
+    margin-right: 13px;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

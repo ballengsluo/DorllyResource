@@ -1,0 +1,31 @@
+﻿<div class="form-group">
+    <label class="control-label col-md-1">计价方式</label>
+    <label class="control-label col-md-2">
+        <input type="checkbox" />
+        <span style="margin-left:10px;margin-right:20px;">按/个/月</span>
+    </label>
+    <label class="control-label col-md-1" style="max-width:140px;">价格</label>
+    <div class="col-md-3">
+        <input type="text" class="form-control" name="SinglePrice" id="SinglePrice" value="@Model.SinglePrice">
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">
+        <input type="checkbox" />
+        <span style="margin-left:10px;margin-right:10px;">按/一口价</span>
+    </label>
+    <label class="control-label col-md-1" style="max-width:140px;">价格</label>
+    <div class="col-md-3">
+        <input type="text" class="form-control" name="OncePrice" id="OncePrice" value="@Model.OncePrice">
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">
+        <input type="checkbox" />
+        <span style="margin-left:10px;margin-right:25px;">按/其他</span>
+    </label>
+    <label class="control-label col-md-1" style="max-width:140px;">价格</label>
+    <div class="col-md-3">
+        <input type="text" class="form-control" name="OtherPrice" id="OtherPrice" value="@Model.OtherPrice">
+    </div>
+</div>

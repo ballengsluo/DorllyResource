@@ -14,9 +14,9 @@ namespace Resource.Model
     
     public partial class T_City
     {
-        public int ID { get; set; }
-        public string CityCode { get; set; }
-        public string CityName { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
         public Nullable<bool> IsDefault { get; set; }
+        public Nullable<bool> Enable { get; set; }
     }
 }

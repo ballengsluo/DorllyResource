@@ -4,29 +4,59 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="63512cdfd2994d72b43e3bced577b779" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Building" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_City" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Cubicle" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Floor" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_HomePage" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_MeetingRoom" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_PageFoot" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_PagePosition" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Park" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Region" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_RentType" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_RGroup" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_RImage" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Room" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_RPrice" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_RType" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Stage" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Menu" Width="1.5" PointX="9.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Permission" Width="1.5" PointX="11.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Role" Width="1.5" PointX="0.75" PointY="12.625" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_User" Width="1.5" PointX="3" PointY="12" />
-        <AssociationConnector Association="DorllyResourceModel.FK_ROLE_User" />
+      <Diagram DiagramId="63512cdfd2994d72b43e3bced577b779" Name="Diagram1" ZoomLevel="61" ShowGrid="true" DisplayType="true">
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Building" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_City" Width="1.5" PointX="12.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ExtraInfo" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Floor" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_HomePage" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_LoginInfo" Width="1.5" PointX="10" PointY="12.875" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Menu" Width="1.5" PointX="7.75" PointY="8.25" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_MenuFunc" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_PageFoot" Width="1.5" PointX="14.75" PointY="1.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Park" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Region" Width="1.5" PointX="9.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Resource" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceGroup" Width="1.5" PointX="3" PointY="22.25" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceImg" Width="1.5" PointX="5.25" PointY="17.125" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceKind" Width="1.5" PointX="0.75" PointY="13.125" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourcePrice" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourcePublic" Width="1.5" PointX="5.25" PointY="12.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceType" Width="1.5" PointX="3" PointY="19.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Role" Width="1.5" PointX="7.75" PointY="4.25" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_RoleFunc" Width="1.5" PointX="10" PointY="7.875" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_RoleMenu" Width="1.5" PointX="10" PointY="1.875" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Stage" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_User" Width="1.5" PointX="7.75" PointY="11.875" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_UserRole" Width="1.5" PointX="10" PointY="4.875" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Login_MF" />
+        <AssociationConnector Association="DorllyResourceModel.FK_MF_M" />
+        <AssociationConnector Association="DorllyResourceModel.FK_RM_Menu" />
+        <AssociationConnector Association="DorllyResourceModel.FK_RMF_MF" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Img_RID" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Price_RID" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Public_RID" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Resource_RKID" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Group_RKind" />
+        <AssociationConnector Association="DorllyResourceModel.FK_RT_RK" />
+        <AssociationConnector Association="DorllyResourceModel.FK_RM_Role" />
+        <AssociationConnector Association="DorllyResourceModel.FK_RMF_Role" />
+        <AssociationConnector Association="DorllyResourceModel.FK_UR_Role" />
+        <AssociationConnector Association="DorllyResourceModel.FK_UR_User" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_AD" Width="1.5" PointX="12.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Building" Width="1.5" PointX="15.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_CB" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Floor" Width="1.5" PointX="17.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_MR" Width="1.5" PointX="17.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Park" Width="1.5" PointX="7.375" PointY="18.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Public" Width="1.5" PointX="9.375" PointY="18.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Releasing" Width="1.5" PointX="14.375" PointY="18.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_RM" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Stage" Width="1.5" PointX="19.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Order" Width="1.5" PointX="19.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_SRM" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_SCB" Width="1.5" PointX="21.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_SAD" Width="1.5" PointX="21.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

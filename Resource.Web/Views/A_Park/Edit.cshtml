@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑园区</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:900px;margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">编辑园区</h3>
+            @using (Ajax.BeginForm("Edit", new { id = Model.ID }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "cmtSuccess",
+                OnFailure = "cmtFailed"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-2">城市</label>
+                    <div class="col-md-4">
+                        @{Html.RenderAction("CityDrop", "Drop", new { id = Model.CityID, model = 1 });}
+                    </div>
+                    <label class="control-label col-md-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>区域
+                    </label>
+                    <div class="col-md-4">
+                        @{Html.RenderAction("RegionDrop", "Drop", new { pid = Model.CityID, id = Model.RegionID, model = 1 });}
+                        @*<select class="selectpicker form-control pull-righ" name="RegionID" id="region">
+                            <option value="@Model.RegionID">@Model.RegionName</option>
+                        </select>*@
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>园区编码
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ID" value="@Model.ID" readonly>
+                    </div>
+                    <label class="control-label col-md-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>园区名称
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="Name" value="@Model.Name" required maxlength="50">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">园区全称</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="FullName" value="@Model.FullName">
+                    </div>
+                    <label class="control-label col-md-2">园区地址</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="Addr" value="@Model.Addr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">园区经度(X)</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="GisX" value="@Model.GisX">
+                    </div>
+                    <label class="control-label col-md-2">园区纬度(Y)</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="GisY" value="@Model.GisY">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">联系人</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactsName" value="@Model.ContactsName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">联系人电话号码</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactsPhone" value="@Model.ContactsPhone">
+                    </div>
+                    <label class="control-label col-md-2">联系人手机电话</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactsMobile" value="@Model.ContactsMobile">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">联系人邮箱地址</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactsEmail" value="@Model.ContactsEmail">
+                    </div>
+                    <label class="control-label col-md-2">联系人通讯地址</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactsAddr" value="@Model.ContactsAddr">
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">备注</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="ReMark" value="@Model.ReMark">
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin:20px 0px;">
+                    <input type="submit" class="btn btn-primary" value="保存">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();" style="margin-left:10px;">
+                </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () { dropChange(2) });
+    </script>
+</body>
+</html>

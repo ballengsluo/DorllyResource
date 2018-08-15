@@ -1,0 +1,83 @@
+﻿@model Resource.Model.T_User
+
+@helper isChecked(int id)
+{
+    bool flag = false;
+    if (Model.T_UserRole.Count > 0)
+    {
+        foreach (var item in Model.T_UserRole)
+        {
+            if (item.RoleID == id)
+            {
+                flag = true;
+                @Html.CheckBox("ur", flag, new { id = "", data_rid = id, data_uid = Model.Account })
+            }
+        }
+    }
+    if (!flag)
+    {
+        @Html.CheckBox("ur", flag, new { id = "", data_rid = id, data_uid = Model.Account })
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>绑定角色</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+</head>
+<body>
+    <div class="container col-md-5" style="margin:0px auto;float:none;">
+        <h3 style="margin:30px;text-align:center">@Model.Account 用户绑定角色</h3>
+        <div class="data-action">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>角色名称</th>
+                        <th>角色说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Role)
+                    {
+                        <tr>
+                            <td>@isChecked(item.ID)</td>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align:center;margin:30px 0px;">
+            <input type="button" class="btn btn-primary" style="font-size:16px;" value="保存" id="commit">
+            <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.layer.closeAll();">
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () {
+            $('#commit').click(function () {
+                var param = [];
+                $("input:checkbox[name='ur']:checked").each(function () {
+                    param.push({ RID: $(this).attr('data-rid'), UID: $(this).attr('data-uid') });
+                });
+                var uid = $("input:checkbox[name='ur']").attr('data-uid');
+                ajax('post', '@Url.Action("Role")', { id: uid, urList: param }, 'json', function (data) {
+                    layer.msg(data.msg, { icon: data.result })
+                    if (data.result == 1) {
+                        setTimeout(function () { window.parent.layer.closeAll(); }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

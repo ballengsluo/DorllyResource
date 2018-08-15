@@ -1,0 +1,10 @@
+﻿@if (ViewData["dataList"] != null)
+{
+    @Html.DropDownList("GroupID", ViewData["dataList"] as SelectList, "全部", new { @class = "selectpicker form-control pull-righ", @id = "group" })
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" name="GroupID" id="group" title="暂无数据" disabled></select>
+}
+
+

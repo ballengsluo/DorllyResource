@@ -1,0 +1,12 @@
+﻿@model List<Resource.Model.T_ResourceImg>
+
+@foreach (var item in Model)
+{
+    <div class="imgbox">
+        @if (item.IsCover == true) {<img src="@item.ImgUrl" style="border:3px solid #fc720d" /><br />}
+        else { <img src="@item.ImgUrl" /><br /> }
+        <a class="imgset" data-id="@item.ID"  data-pid="@item.ResourceID">设为封面</a>
+        <a class="imgdel" data-id="@item.ID">删除</a>
+    </div>
+}
+

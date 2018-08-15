@@ -1,0 +1,134 @@
+﻿@{ T_ResourcePrice price = ViewBag.price as T_ResourcePrice;}
+<div class="form-group">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2">计价方式</label>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <label class="checkbox-inline">
+            @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
+            <span>半天预定</span>
+        </label>
+        <label class="checkbox-inline">
+           @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))
+        <span>全天预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("WeekEnable", Convert.ToBoolean(price.WeekEnable))
+            <span>按周预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("MonthEnable", Convert.ToBoolean(price.MonthEnable))
+            <span>按月预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("QuaterEnable", Convert.ToBoolean(price.QuaterEnable))
+            <span>按季度预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("YearEnable", Convert.ToBoolean(price.YearEnable))
+            <span>按年预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("SingleEnable", Convert.ToBoolean(price.SingleEnable))
+            <span>按/个/次</span>
+        </label>
+    </div>    
+</div>
+<div class="form-group">
+    @*<label class="control-label col-md-1">计价方式</label>*@
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))&nbsp;
+        <span>半天预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/半天</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayInPrice" value="@price.HDayInPrice" placeholder="对内价格/半天">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/半天</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayOutPrice" value="@price.HDayOutPrice" placeholder="对外价格/半天">
+    </div>
+
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))&nbsp;
+        <span>全天预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/全天</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DayInPrice" value="@price.DayInPrice" placeholder="对内价格/全天">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/全天</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DayOutPrice" value="@price.DayOutPrice" placeholder="对外价格/全天">
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("WeekEnable", Convert.ToBoolean(price.WeekEnable))&nbsp;
+        <span>按周预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/周</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="WeekInPrice" value="@price.WeekInPrice" placeholder="对内价格/周">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/周</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="WeekOutPrice" value="@price.WeekOutPrice" placeholder="对外价格/周">
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("MonthEnable", Convert.ToBoolean(price.MonthEnable))&nbsp;
+        <span>按月预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/月</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="MonthInPrice" value="@price.MonthInPrice" placeholder="对内价格/月">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/月</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="MonthOutPrice" value="@price.MonthOutPrice" placeholder="对外价格/月">
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("QuaterEnable", Convert.ToBoolean(price.QuaterEnable))&nbsp;
+        <span>按季预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/季</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="QuaterInPrcie" value="@price.QuaterInPrcie" placeholder="对内价格/季">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/季</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="QuaterOutPrice" value="@price.QuaterOutPrice" placeholder="对外价格/季">
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("YearEnable", Convert.ToBoolean(price.YearEnable))&nbsp;
+        <span>按年预定</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/年</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="YearInPrice" value="@price.YearInPrice" placeholder="对内价格/年">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/年</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="YearOutPrice" value="@price.YearOutPrice" placeholder="对外价格/年">
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-lg-2 col-md-2  col-sm-2">
+        @Html.CheckBox("SingleEnable", Convert.ToBoolean(price.SingleEnable))&nbsp;
+        <span>按/个/次&nbsp;</span>
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对内价格/个/次</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="SingleInPrice" value="@price.SingleInPrice" placeholder="对内价格/个/次">
+    </div>
+    <label class="control-label col-lg-2 col-md-2  col-sm-2">对外价格/个/次</label>
+    <div class="col-lg-4 col-md-4  col-sm-4">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="SingleOutPrice" value="@price.SingleOutPrice" placeholder="对外价格/个/次">
+    </div>
+</div>

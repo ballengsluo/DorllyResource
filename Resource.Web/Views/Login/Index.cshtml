@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源系统管理平台登录</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background:url(../../Content/img/loginbg.jpg) no-repeat;
+            background-size:cover;
+        }
+
+        .back {
+            width: 100%;
+            height: 100%;
+            /*background-color: #f14949;*/
+        }
+
+        .main {
+            /*text-align: center;*/
+            background-color: #fff;
+            border-radius: 20px;
+            width: 400px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .form {
+            /*margin-top: 30px;*/
+            background-color: #fff;
+            border-radius: 20px;
+            position: absolute;
+            width: 350px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <div class="main">
+            <div class="form">
+                <h3 style="margin-bottom:30px;text-align:center">欢 迎 登 录 资 源 平 台</h3>
+                @using (Ajax.BeginForm("Login", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "commitResult",
+                OnFailure = "commitResult"
+            }, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-3">登录账户</label>
+                        <div class="col-md-8">
+                            @Html.TextBox("Name","", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">登录密码</label>
+                        <div class="col-md-8">
+                            @Html.Password("PWD", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:30px;">
+                        <label class="control-label col-md-3" style="visibility:hidden;">请登录</label>
+                        <div class="col-md-8">
+                            <input type="submit" class="btn btn-primary" style="font-size:16px;min-width:100%;" value="登录">
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

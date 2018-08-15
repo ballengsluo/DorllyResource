@@ -1,0 +1,64 @@
+.cbbox {
+    text-align: center;
+    width: 195px;
+    height: 110px;
+    float: left;
+    background-color: #fafafa;
+    border-radius: 3px;
+    border: 1px solid #0094ff;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.cb {
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+
+.cb>div {
+    background-image: url(../../../../Content/img/cblog.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background: url(../../../Content/img/cblog.png) no-repeat center; */
+    width: 26px;
+    height: 26px;
+    float: left;
+    margin: 3px;
+}
+
+.cb>div:hover {
+    cursor: pointer;
+    background-color: #8cc8f0;
+}
+
+.cbclick {
+    background-color: #8cc8f0;
+}
+
+.cb>div:last-child {
+    margin-bottom: 10px;
+}
+
+.tds>div {
+    background: url(../../../../Content/img/cblog.png) no-repeat center;
+    width: 26px;
+    height: 26px;
+    float: left;
+    margin: 3px;
+}
+
+.fourcb {
+    width: 70px;
+    left: 3px;
+}
+
+.sixcb {
+    width: 120px;
+    left: 9px;
+}
+
+.eightcb {
+    width: 140px;
+    left: 3px;
+}

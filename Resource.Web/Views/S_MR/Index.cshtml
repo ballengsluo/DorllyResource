@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>会议室销控</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/status/app.scom.css")
+    @Styles.Render("~/Plugins/app/css/status/app.smr.css")
+    <style>
+        .table-row-group {
+            display: table-row-group;
+        }
+
+        .table-row {
+            display: table-row;
+        }
+        .table-cell{display:table-cell;padding:0 5px;border:1px solid #ccc;}  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkArea">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin-left:0px;padding-left:0px;">
+                    <div class="input-group">
+                        <span class="input-group-addon">日期</span>
+                        @Html.TextBox("etime", DateTime.Now.ToString("yyyy-MM-dd"), new { @class="form-control"})
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="resourceContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th colspan="2">9</th>
+                        <th colspan="2">10</th>
+                        <th colspan="2">11</th>
+                        <th colspan="2">12</th>
+                        <th colspan="2">13</th>
+                        <th colspan="2">14</th>
+                        <th colspan="2">15</th>
+                        <th colspan="2">16</th>
+                        <th colspan="2">17</th>
+                        <th colspan="2">18</th>
+                        <th colspan="2">19</th>
+                        <th colspan="2">20</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                    @*@(new HtmlString(Convert.ToString(ViewData["table"])))*@
+                </tbody>
+            </table>
+        </div>
+        <div class="detailContainer" style="display:none;">
+
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/status/app.smr.js")
+</body>
+</html>

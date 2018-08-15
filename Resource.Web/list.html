@@ -1,0 +1,580 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>多丽产业园资源服务平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet"> -->
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="css/flexslider.css">
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .fh5co-nav {
+            position: absolute;
+            z-index: 100;
+            width: 100%;
+            -moz-box-shadow: 0px 5px 5px #dddddd; /* 老的 Firefox */
+            box-shadow: 0px 5px 5px #dddddd;
+            background: #fff;
+        }
+
+            .fh5co-nav #fh5co-logo img {
+                width: 120px;
+                height: 66px;
+            }
+
+        @media screen and (max-width: 768px) {
+            .fh5co-nav #fh5co-logo {
+                font-size: 16px;
+            }
+
+                .fh5co-nav #fh5co-logo img {
+                    width: 60px;
+                    height: 33px;
+                }
+
+            .col-xs-7 {
+                width: 90%;
+            }
+        }
+
+        .fh5co-nav ul li a {
+            font-size: 16px;
+            padding: 30px 15px;
+            color: #333;
+            -webkit-transition: 0.5s;
+            -o-transition: 0.5s;
+            transition: 0.5s;
+        }
+
+        .content {
+            margin-top: 122px;
+        }
+
+        @media screen and (max-width: 992px) {
+            .fh5co-nav a {
+                padding: 5px 5px 5px 0;
+            }
+
+            .fh5co-nav ul li a {
+                font-size: 18px;
+            }
+
+            .content {
+                margin-top: 89px;
+            }
+        }
+    </style>
+</head>
+<body style="background:#f5f5f5;">
+
+    <div class="fh5co-loader"></div>
+
+    <div id="page">
+        <nav class="fh5co-nav" role="navigation" style="">
+            <div class="tel" id="cSPhone"><!--<i class="icon-old-phone"></i>0755-82958888   83318588--> </div>
+            <div class="top-menu">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div id="fh5co-logo"><a href="index.html"><img src="images/logo2.png">产业园资源服务平台</a><span class="icon txtlocation" id="citySpan"><!--<i class="icon-location-pin"></i>深圳--></span><!--<span><a href="#">【切换城市】</a> </span>--></div>
+                        </div>
+
+                        <div class="col-xs-5   text-right menu-1">
+                            <ul>
+                                <li><a href="index.html">首页</a></li>
+                                <li class="active"><a href="#">资源列表</a></li>
+                                <li><a href="#">其他服务</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+        <div class="container content">
+
+            <div class="list-category-nav ">
+                <a class="nav-item" href="index.html">首页</a>> 列表
+            </div>
+            <div class="show-search">
+
+                <div class="search">
+                    <form action="#" class="search-form row ">
+                        <i class="icon-search"></i>
+                        <input type="text" class="search-input j-search-input" placeholder="办公室/工位/会议室/广告位" autocomplete="off" name="key" id="searchName"><div class="search-button j-search-all" onclick="resourceSearch(1)">搜索</div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="pannel-filter">
+                <div class="row">
+                    <div class="row-item">园区</div>
+                    <div class="row-item2">
+                        <ul id="parkIDS">
+                            <!--<li class="active" id="parknull">全部</li>
+                            <li id="park01">福田园区</li>
+                            <li id="park02">龙岗园区</li>
+                            <li id="park03">贵阳园区</li>
+                            <li id="park04">西安园区</li>
+                            <li id="park05">重庆园区</li>
+                            <li id="park06">郑州园区</li>
+                            <li id="park07">内江园区</li>
+                            <li id="park08">绵阳园区</li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-item">资源类型</div>
+                    <div class="row-item2">
+                        <ul id="kindIDS">
+                            <!--<li class="active" id="kindnull">全部</li>
+                            <li id="kind1">办公室</li>
+                            <li id="kind2">工位</li>
+                            <li id="kind3">会议室</li>
+                            <li id="kind4">广告位</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div>
+                <ul class="sort" id="orderstrS">
+                    <li class="active" id="Level">默认排序</li>
+                    <li id="OrderPrice">价格排序</li>
+                    <li id="RentArea">可租面积</li>
+                    <li id="BeginTime">时间排序</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container" id="containerList">
+            <!--<div class="listbox">
+                <div class="listbox-item">
+                    <div class=" prod text-left animate-box">
+                        <div class="product text-center" style="background-image: url(images/1.jpg);">
+                            <a href="detail.html" class="view" target="_blank">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </div>
+                        <a href="detail.html" target="_blank">
+                            <div class="item-row">
+
+                                <h3>科技楼</h3>
+                                <span class="price">￥300</span>
+                            </div>
+                            <div class="item-row">
+                                <div>科技楼-1楼-101</div>
+                                <span>元/㎡</span>
+                            </div>
+                            <div class="div-map"><i class="icon-location-pin"></i><span>深圳</span></div>
+                        </a>
+
+                    </div>
+
+                </div>
+                <div class="listbox-item">
+                    <div class=" prod text-left animate-box">
+                        <div class="product text-center" style="background-image: url(images/1.jpg);">
+                            <a href="detail.html" class="view">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </div>
+                        <a href="detail.html">
+                            <div class="item-row">
+
+                                <h3>科技楼</h3>
+                                <span class="price">￥300</span>
+                            </div>
+                            <div class="item-row">
+                                <div>科技楼-1楼-101</div>
+                                <span>元/㎡</span>
+                            </div>
+                            <div class="div-map"><i class="icon-location-pin"></i><span>深圳</span></div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>-->
+            <!--<div class="listbox">
+                <div class="listbox-item">
+                    <div class=" prod text-left animate-box">
+                        <div class="product text-center" style="background-image: url(images/1.jpg);">
+                            <a href="detail.html" class="view">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </div>
+                        <a href="detail.html">
+                            <div class="item-row">
+
+                                <h3>科技楼</h3>
+                                <span class="price">￥300</span>
+                            </div>
+                            <div class="item-row">
+                                <div>科技楼-1楼-101科技科技科技科技</div>
+                                <span>元/㎡</span>
+                            </div>
+                            <div class="div-map"><i class="icon-location-pin"></i><span>深圳</span></div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="listbox-item">
+                    <div class=" prod text-left animate-box">
+                        <div class="product text-center" style="background-image: url(images/1.jpg);">
+                            <a href="detail.html" class="view">
+                                <i class="icon-plus"></i>
+                            </a>
+                        </div>
+                        <a href="detail.html">
+                            <div class="item-row">
+
+                                <h3>科技楼</h3>
+                                <span class="price">￥300</span>
+                            </div>
+                            <div class="item-row">
+                                <div>科技楼-1楼-101</div>
+                                <span>元/㎡</span>
+                            </div>
+                            <div class="div-map"><i class="icon-location-pin"></i><span>深圳</span></div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>-->
+        </div>
+        <div id="containerFooter">
+            <!--<h3 style="text-align:center;">到底了...</h3>-->
+        </div>
+
+        <footer id="fh5co-footer" role="contentinfo">
+            <div class="container">
+                <div class="row row-pb-md">
+                    <div class="col-md-4 fh5co-widget">
+                        <h4>多丽产业园资源服务平台</h4>
+                        <h4 id="pageFoot">
+                            <!--客服热线：0755-82958888
+                            83318588-->
+                        </h4>
+                    </div>
+                    <div class="col-md-3 col-md-push-1">
+                        <h4></h4>
+                        <ul class="fh5co-footer-links">
+                            <li><a href="#">首页</a></li>
+                            <li><a href="aboutus.html">关于我们</a></li>
+                            <li><a href="aboutdorlly.html">关于多丽</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-5 col-md-push-1">
+                        <ul class="fh5co-footer-links">
+                            <li><img id="qRCode1" src="#">&nbsp;&nbsp;<img id="qRCode2" src="#"></li>
+                            <li></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="row copyright">
+                    <div class="col-md-12">
+                        <p>
+                            <small class="block">&copy; 版权所有Copyright2018 izw.com 版权所有 粤ICP备15117018号-1</small>
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery -->
+    <!--<script src="js/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="js/jquery.flexslider-min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <!-- Main -->
+    <script src="js/main.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script type="text/javascript" src="js/script_common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+
+    <script type="text/javascript">
+        //页面拉到底时自动加载更多
+        var page = 1;
+        var parkID;
+        var kindID;
+        var orderstr;
+        var searchName;
+        jQuery(function () {
+            var cityName = returnCitySN["cname"];	//获取城市
+
+            //获取园区ID
+            parkID = getQueryString("parkID")
+            if (parkID == null)
+            { parkID = "null"; }
+
+            //获取类型ID
+            kindID = getQueryString("kindID")
+            if (kindID == null)
+            { kindID = "null"; }
+
+            //获取类型ID
+            orderstr = getQueryString("orderstr")
+            if (orderstr == null)
+            { orderstr = "Level"; }
+
+            //获取类型ID
+            searchName = getQueryString("searchName")
+            if (searchName == null)
+            { searchName = "null"; }
+            else
+            {
+                $("#searchName").val(searchName)
+            }
+            liOnclick();
+            $.ajax({
+                type: "post",
+                url: "ashx/list.ashx",
+                data: { action: "index", cityName: cityName, kindID: kindID },
+                dataType: "json",
+                success: function (data) {
+                    if (data.retCode == 0) {
+                        $("#citySpan").html("<i class='icon-location-pin'></i>" + data.cityName);
+                        $("#pageFoot").html("客服热线：" + data.cSPhone);
+                        $("#cSPhone").html("<i class='icon-old-phone'></i>" + data.cSPhone);
+                        $("#qRCode1").attr("src", data.qRCode1);
+                        $("#qRCode2").attr("src", data.qRCode2);
+                        parkID = data.parkID;
+                        parkID = parkID.substring(0, parkID.length - 1);
+                        $("#parkIDS").html(data.parkli);
+                        $("#kindIDS").html(data.kindli);
+                        resourceSearch(1);
+                    }
+                },
+                error: function () {
+                }
+            });
+
+            $(window).scroll(function (event) {
+                var wScrollY = window.scrollY; // 当前滚动条位置
+                if (wScrollY == null)
+                { wScrollY = window.pageYOffset }
+                var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）
+                var bScrollH = document.body.scrollHeight; // 滚动条总高度
+                if (wScrollY + wInnerH >= bScrollH) {
+                    page++;
+                    jumpSearch();
+                }
+            })
+        })
+
+        //li点击触发事件
+        function liOnclick() {
+            var parklist = document.getElementById('parkIDS').getElementsByTagName('li');
+            for (var i = 0; i < parklist.length; i++) {
+                parklist[i].onclick = (function (i) {
+                    return function () {
+                        var id = parklist[i].id;
+                        if ($("#" + id).hasClass('active'))
+                        { }
+                        else {
+                            for (var j = 0; j < parklist.length; j++) {
+                                if ($("#" + parklist[j].id).hasClass('active'))
+                                    $("#" + parklist[j].id).removeClass('active');
+                            }
+
+                            $("#" + id).addClass('active')
+                        }
+
+                        parkID = "";
+                        for (var k = 0; k < parklist.length; k++) {
+                            if ($("#" + parklist[k].id).hasClass('active'))
+                                parkID = parklist[k].id;
+                        }
+
+                        resourceSearch(1);
+                    }
+                }(i))
+            }
+
+            var kindlist = document.getElementById('kindIDS').getElementsByTagName('li');
+            for (var i = 0; i < kindlist.length; i++) {
+                kindlist[i].onclick = (function (i) {
+                    return function () {
+                        var id = kindlist[i].id;
+                        if ($("#" + id).hasClass('active'))
+                        { }
+                        else {
+                            for (var j = 0; j < kindlist.length; j++) {
+                                if ($("#" + kindlist[j].id).hasClass('active'))
+                                    $("#" + kindlist[j].id).removeClass('active');
+                            }
+
+                            $("#" + id).addClass('active')
+                        }
+
+                        kindID = "";
+                        for (var k = 0; k < kindlist.length; k++) {
+                            if ($("#" + kindlist[k].id).hasClass('active'))
+                                kindID = kindlist[k].id;
+                        }
+                        resourceSearch(1);
+                    }
+                }(i))
+            }
+
+            var orderstrlist = document.getElementById('orderstrS').getElementsByTagName('li');
+            for (var i = 0; i < orderstrlist.length; i++) {
+                orderstrlist[i].onclick = (function (i) {
+                    return function () {
+                        var id = orderstrlist[i].id;
+                        if ($("#" + id).hasClass('active'))
+                        { }
+                        else {
+                            for (var j = 0; j < orderstrlist.length; j++) {
+                                if ($("#" + orderstrlist[j].id).hasClass('active'))
+                                    $("#" + orderstrlist[j].id).removeClass('active');
+                            }
+
+                            $("#" + id).addClass('active')
+                        }
+
+                        orderstr = "";
+                        for (var k = 0; k < orderstrlist.length; k++) {
+                            if ($("#" + orderstrlist[k].id).hasClass('active'))
+                                orderstr = orderstrlist[k].id;
+                        }
+                        resourceSearch(1);
+                    }
+                }(i))
+            }
+        }
+
+        //搜索
+        function resourceSearch(pageindex) {
+            searchName = $("#searchName").val();
+
+            if (searchName == "") {
+                searchName = "null";
+            }
+
+            if (parkID == "parknull")
+            { parkID = "null"; }
+
+            if (kindID == "kindnull")
+            { kindID = "null"; }
+
+            layer.load(2);
+
+            $.ajax({
+                type: "post",
+                url: "ashx/list.ashx",
+                data: { action: "search", parkID: parkID, kindID: kindID, orderstr: orderstr, searchName: searchName, page: pageindex },
+                dataType: "json",
+                success: function (data) {
+                    layer.closeAll("loading");
+                    if (data.retCode == 0) {
+
+                        $("#containerList").html(data.listHtml);
+                        $("#containerFooter").html("");
+                        if (data.footCode == 0) {
+                            $("#containerFooter").html("<h3 style='text-align:center;'>到底了...</h3>");
+                        }
+                        liOnclick();
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        //向下翻页
+        function jumpSearch() {
+            searchName = $("#searchName").val();
+            if (searchName == "") {
+                searchName = "null";
+            }
+
+            if (parkID == "parknull")
+            { parkID = "null"; }
+
+            if (kindID == "kindnull")
+            { kindID = "null"; }
+
+            layer.load(2);
+
+            $.ajax({
+                type: "post",
+                url: "ashx/list.ashx",
+                data: { action: "search", parkID: parkID, kindID: kindID, orderstr: orderstr, searchName: searchName, page: page },
+                dataType: "json",
+                success: function (data) {
+                    layer.closeAll("loading");
+                    if (data.retCode == 0) {
+                        $("#containerFooter").html("");
+                        if (data.footCode == 1) {
+                            $("#containerList").append(data.listHtml);
+                        }
+                        else {
+                            $("#containerFooter").html("<h3 style='text-align:center;'>到底了...</h3>");
+                        }
+                        liOnclick();
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+    </script>
+</body>
+</html>

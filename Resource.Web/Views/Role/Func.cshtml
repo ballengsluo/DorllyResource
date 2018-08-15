@@ -1,0 +1,124 @@
+﻿@model List<Resource.Model.T_Menu>
+@helper funcList(T_Menu menu)
+{
+    <tr>
+        <td>@ViewBag.order</td>
+        <td>@menu.Name</td>
+        <td>
+            @Html.CheckBox("menu",
+            menu.T_RoleMenu.Where(a => a.RoleID == ViewBag.role.ID && a.MenuID == menu.ID).Count() > 0,
+                     new { id = "", data_id = menu.ID, data_pid = menu.PID, data_rid = ViewBag.role.ID })
+        </td>
+        @if (menu.T_MenuFunc.Count > 0)
+        {
+            <td style="text-align:left;">
+                @foreach (var mf in menu.T_MenuFunc)
+                {
+                    <label class="checkbox-inline">
+                        @Html.CheckBox("func",
+                           mf.T_RoleFunc.Where(a => a.RoleID == ViewBag.role.ID && a.FuncID == mf.ID).Count() > 0,
+                         new { id = "", data_id = mf.ID, data_pid = menu.ID, data_rid = ViewBag.role.ID }) @mf.Name
+                    </label>
+                }
+            </td>
+        }
+        else
+        {
+            <td></td>
+        }
+    </tr>
+    ViewBag.order++;
+    if (Model.Where(a => a.PID == menu.ID).Count() > 0)
+    {
+        foreach (var item in Model.Where(a => a.PID == menu.ID))
+        {
+            @funcList(item)
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑权限</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+</head>
+<body>
+    <div class="container">
+        <h3 style="margin:30px;text-align:center">@ViewBag.role.Name 角色权限编辑</h3>
+        <div class="data-action">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>菜单</th>
+                        <th>菜单权限</th>
+                        <th>菜单功能权限</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(a => a.Level == 1).ToList())
+                    {
+                        @funcList(item)
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="text-align:center;margin:30px 0px;">
+            <input type="button" class="btn btn-primary" style="font-size:16px;" value="保存" id="commit">
+            <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.layer.closeAll();">
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    <script>
+        $(function () {
+            $('#commit').click(function () {
+                var rm = [];
+                var rmf = [];
+                $("input:checkbox[name='menu']:checked").each(function () {
+                    rm.push({ RID: $(this).attr('data-rid'), MID: $(this).attr('data-id') });
+                });
+                console.log($("input:checkbox[name='menu']:checked"));
+                console.log(rm);
+                $("input:checkbox[name='func']:checked").each(function () {
+                    rmf.push({ RID: $(this).attr('data-rid'), MFID: $(this).attr('data-id') });
+                });
+                console.log(rmf);
+                $.post("@Url.Action("RoleMenuFunc")", { id: '@ViewBag.role.ID', rmList: rm, rmfList: rmf }, function (data) {
+                    console.log(data);
+                });
+            });
+            $("input:checkbox[name='menu']").change(function () {
+                console.log($(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    addChecked($(this));
+                } else {
+                    removeChecked($(this));
+                }
+            });
+        });
+        function addChecked(ckbox) {
+            var id = ckbox.attr('data-id');
+            $("input:checkbox").each(function () {
+                if ($(this).attr('data-pid') == id) {
+                    $(this).prop("checked", true);
+                    addChecked($(this));
+                }
+            });
+        };
+        function removeChecked(ckbox) {
+            var id = ckbox.attr('data-id');
+            $("input:checkbox").each(function () {
+                if ($(this).attr('data-pid') == id) {
+                    $(this).prop("checked", false);
+                    removeChecked($(this));
+                }
+            });
+        }
+        
+    </script>
+</body>
+</html>

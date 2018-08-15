@@ -44,9 +44,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,7 +57,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Area.cs" />
+    <Compile Include="DbContextFactory.cs" />
+    <Compile Include="DB\DBHelper.cs" />
+    <Compile Include="DB\SQLFactory.cs" />
+    <Compile Include="DB\SQLHelper.cs" />
     <Compile Include="DorllyResource.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,7 +83,7 @@
     <Compile Include="T_City.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_Cubicle.cs">
+    <Compile Include="T_ExtraInfo.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Floor.cs">
@@ -87,52 +92,103 @@
     <Compile Include="T_HomePage.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_MeetingRoom.cs">
+    <Compile Include="T_LoginInfo.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Menu.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_PageFoot.cs">
+    <Compile Include="T_MenuFunc.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_PagePosition.cs">
+    <Compile Include="T_PageFoot.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Park.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_Permission.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
     <Compile Include="T_Region.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_RentType.cs">
+    <Compile Include="T_Resource.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_RGroup.cs">
+    <Compile Include="T_ResourceGroup.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_RImage.cs">
+    <Compile Include="T_ResourceImg.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ResourceKind.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ResourcePrice.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ResourcePublic.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_ResourceType.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Role.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_Room.cs">
+    <Compile Include="T_RoleFunc.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="T_RPrice.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_RType.cs">
+    <Compile Include="T_RoleMenu.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Stage.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_User.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_UserRole.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_AD.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Building.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_CB.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Floor.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_MR.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Order.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Park.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Public.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Releasing.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_RM.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_SAD.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_SCB.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_SRM.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Stage.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
   </ItemGroup>

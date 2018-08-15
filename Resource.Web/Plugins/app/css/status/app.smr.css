@@ -1,0 +1,41 @@
+table tr td:first-child,
+table tr th:first-child {
+    width: 250px;
+    border-left: 1px solid #ccc;
+}
+
+table tr td:nth-child(odd),
+table tr th {
+    width: 40px;
+    height: 30px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+
+table tr td:nth-child(even) {
+    width: 40px;
+    height: 30px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+
+
+/* 预定 */
+
+td[data-status='1'] {
+    background-color: #f39700;
+}
+
+
+/* 预留 */
+
+td[data-status='2'] {
+    background-color: #00a0e9;
+}
+
+td[data-status='1'],
+td[data-status='2']:hover {
+    cursor: pointer;
+}

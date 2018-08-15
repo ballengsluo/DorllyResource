@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>房屋销控</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+    @Styles.Render("~/Plugins/app/css/status/app.scom.css")
+    @Styles.Render("~/Plugins/app/css/status/app.srm.css")
+    <style>
+        .detail {
+            border: solid 1px red;
+            width: 300px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @*<div class="row rmsearch">*@
+        <div class="checkArea">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                    </div>
+                </div>
+                @*<div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">建设期</span>
+                        @{ Html.RenderAction("StageDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                    </div>
+                </div>*@
+                @*<div>
+                    @{Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                </div>
+                <div>
+                    @{Html.RenderAction("RegionDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    <select class="selectpicker form-control pull-righ" id="stage" title="请选择建设期...">
+                    </select>
+                </div>*@
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">房间号</span>
+                        <input type="text" class="form-control" id="rmno" placeholder="房间号" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">客户</span>
+                        <input type="text" class="form-control" id="cust" placeholder="客户" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="building">
+                </div>
+                <div class="rmstatus" style="margin-left:30px;">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="rent" checked /> 已租
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="free" checked /> 空闲
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" checked /> 预留
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="roomContainer">
+
+            </div>*@
+        <div class="resourceContainer">
+
+        </div>
+        <div class="detailContainer" style="display:none;">
+        </div>
+    </div>
+
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/status/app.srm.js")
+</body>
+</html>

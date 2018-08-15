@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetRefundList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinApplyDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxApplyDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startRow" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRefundListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PackNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinApplyDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxApplyDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetRefundCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundLoad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RowPointer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundLoadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundLoadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund_CR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund_CRResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Refund_CRResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCRDispositList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startRow" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pageSize" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCRDispositListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCRDispositListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCRDispositCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MinDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MaxDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCRDispositCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCRDispositCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRDispositLoad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CRDispositLoadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CRDispositLoadResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund_Disposrit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Refund_DisposritResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Refund_DisposritResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCompRepairFee">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SANo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MaterialAmount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceAmount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCompRepairFeeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetCompRepairFeeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustShortName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Representative" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BusinessScope" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustLicenseNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepIDCard" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustContact" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustTel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustContactMobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustBankTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustBankAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustBank" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsExternal" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetCustomerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_Resourse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_ResourseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatisticsList_ResourseResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_Resourse_List">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_Resourse_ListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatisticsList_Resourse_ListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_Resourse_Charts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KEY" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatisticsList_Resourse_ChartsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatisticsList_Resourse_ChartsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConferenceRoomReserveList_Resource">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParkNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConferenceRoomReserveList_ResourceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConferenceRoomReserveList_ResourceResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRefundListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRefundList" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRefundListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRefundCount" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRefundCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefundLoadSoapIn">
+    <wsdl:part name="parameters" element="tns:RefundLoad" />
+  </wsdl:message>
+  <wsdl:message name="RefundLoadSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundLoadResponse" />
+  </wsdl:message>
+  <wsdl:message name="Refund_CRSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund_CR" />
+  </wsdl:message>
+  <wsdl:message name="Refund_CRSoapOut">
+    <wsdl:part name="parameters" element="tns:Refund_CRResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCRDispositListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCRDispositList" />
+  </wsdl:message>
+  <wsdl:message name="GetCRDispositListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCRDispositListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCRDispositCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCRDispositCount" />
+  </wsdl:message>
+  <wsdl:message name="GetCRDispositCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCRDispositCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="CRDispositLoadSoapIn">
+    <wsdl:part name="parameters" element="tns:CRDispositLoad" />
+  </wsdl:message>
+  <wsdl:message name="CRDispositLoadSoapOut">
+    <wsdl:part name="parameters" element="tns:CRDispositLoadResponse" />
+  </wsdl:message>
+  <wsdl:message name="Refund_DisposritSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund_Disposrit" />
+  </wsdl:message>
+  <wsdl:message name="Refund_DisposritSoapOut">
+    <wsdl:part name="parameters" element="tns:Refund_DisposritResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetCompRepairFeeSoapIn">
+    <wsdl:part name="parameters" element="tns:SetCompRepairFee" />
+  </wsdl:message>
+  <wsdl:message name="SetCompRepairFeeSoapOut">
+    <wsdl:part name="parameters" element="tns:SetCompRepairFeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SetCustomer" />
+  </wsdl:message>
+  <wsdl:message name="SetCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SetCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_ResourseSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_Resourse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_ResourseSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_ResourseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_Resourse_ListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_Resourse_List" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_Resourse_ListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_Resourse_ListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_Resourse_ChartsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_Resourse_Charts" />
+  </wsdl:message>
+  <wsdl:message name="GetStatisticsList_Resourse_ChartsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatisticsList_Resourse_ChartsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConferenceRoomReserveList_ResourceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConferenceRoomReserveList_Resource" />
+  </wsdl:message>
+  <wsdl:message name="GetConferenceRoomReserveList_ResourceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConferenceRoomReserveList_ResourceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AppServiceSoap">
+    <wsdl:operation name="GetRefundList">
+      <wsdl:input message="tns:GetRefundListSoapIn" />
+      <wsdl:output message="tns:GetRefundListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundCount">
+      <wsdl:input message="tns:GetRefundCountSoapIn" />
+      <wsdl:output message="tns:GetRefundCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RefundLoad">
+      <wsdl:input message="tns:RefundLoadSoapIn" />
+      <wsdl:output message="tns:RefundLoadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund_CR">
+      <wsdl:input message="tns:Refund_CRSoapIn" />
+      <wsdl:output message="tns:Refund_CRSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositList">
+      <wsdl:input message="tns:GetCRDispositListSoapIn" />
+      <wsdl:output message="tns:GetCRDispositListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositCount">
+      <wsdl:input message="tns:GetCRDispositCountSoapIn" />
+      <wsdl:output message="tns:GetCRDispositCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CRDispositLoad">
+      <wsdl:input message="tns:CRDispositLoadSoapIn" />
+      <wsdl:output message="tns:CRDispositLoadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund_Disposrit">
+      <wsdl:input message="tns:Refund_DisposritSoapIn" />
+      <wsdl:output message="tns:Refund_DisposritSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCompRepairFee">
+      <wsdl:input message="tns:SetCompRepairFeeSoapIn" />
+      <wsdl:output message="tns:SetCompRepairFeeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomer">
+      <wsdl:input message="tns:SetCustomerSoapIn" />
+      <wsdl:output message="tns:SetCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse">
+      <wsdl:input message="tns:GetStatisticsList_ResourseSoapIn" />
+      <wsdl:output message="tns:GetStatisticsList_ResourseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_List">
+      <wsdl:input message="tns:GetStatisticsList_Resourse_ListSoapIn" />
+      <wsdl:output message="tns:GetStatisticsList_Resourse_ListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_Charts">
+      <wsdl:input message="tns:GetStatisticsList_Resourse_ChartsSoapIn" />
+      <wsdl:output message="tns:GetStatisticsList_Resourse_ChartsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConferenceRoomReserveList_Resource">
+      <wsdl:input message="tns:GetConferenceRoomReserveList_ResourceSoapIn" />
+      <wsdl:output message="tns:GetConferenceRoomReserveList_ResourceSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AppServiceSoap" type="tns:AppServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRefundList">
+      <soap:operation soapAction="http://tempuri.org/GetRefundList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundCount">
+      <soap:operation soapAction="http://tempuri.org/GetRefundCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefundLoad">
+      <soap:operation soapAction="http://tempuri.org/RefundLoad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund_CR">
+      <soap:operation soapAction="http://tempuri.org/Refund_CR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositList">
+      <soap:operation soapAction="http://tempuri.org/GetCRDispositList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositCount">
+      <soap:operation soapAction="http://tempuri.org/GetCRDispositCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRDispositLoad">
+      <soap:operation soapAction="http://tempuri.org/CRDispositLoad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund_Disposrit">
+      <soap:operation soapAction="http://tempuri.org/Refund_Disposrit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCompRepairFee">
+      <soap:operation soapAction="http://tempuri.org/SetCompRepairFee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomer">
+      <soap:operation soapAction="http://tempuri.org/SetCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse">
+      <soap:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_List">
+      <soap:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse_List" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_Charts">
+      <soap:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse_Charts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConferenceRoomReserveList_Resource">
+      <soap:operation soapAction="http://tempuri.org/GetConferenceRoomReserveList_Resource" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AppServiceSoap12" type="tns:AppServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRefundList">
+      <soap12:operation soapAction="http://tempuri.org/GetRefundList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundCount">
+      <soap12:operation soapAction="http://tempuri.org/GetRefundCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefundLoad">
+      <soap12:operation soapAction="http://tempuri.org/RefundLoad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund_CR">
+      <soap12:operation soapAction="http://tempuri.org/Refund_CR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositList">
+      <soap12:operation soapAction="http://tempuri.org/GetCRDispositList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCRDispositCount">
+      <soap12:operation soapAction="http://tempuri.org/GetCRDispositCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CRDispositLoad">
+      <soap12:operation soapAction="http://tempuri.org/CRDispositLoad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund_Disposrit">
+      <soap12:operation soapAction="http://tempuri.org/Refund_Disposrit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCompRepairFee">
+      <soap12:operation soapAction="http://tempuri.org/SetCompRepairFee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SetCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse">
+      <soap12:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_List">
+      <soap12:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse_List" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatisticsList_Resourse_Charts">
+      <soap12:operation soapAction="http://tempuri.org/GetStatisticsList_Resourse_Charts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConferenceRoomReserveList_Resource">
+      <soap12:operation soapAction="http://tempuri.org/GetConferenceRoomReserveList_Resource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AppService">
+    <wsdl:port name="AppServiceSoap" binding="tns:AppServiceSoap">
+      <soap:address location="http://192.168.3.110/ButlerWeb/api/AppService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AppServiceSoap12" binding="tns:AppServiceSoap12">
+      <soap12:address location="http://192.168.3.110/ButlerWeb/api/AppService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

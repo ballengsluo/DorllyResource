@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>工位销控</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/status/app.scom.css")
+    @Styles.Render("~/Plugins/app/css/status/app.scb.css")
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkArea">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="resourceContainer">
+           
+        </div>
+        <div class="detailContainer" style="display:none;">
+
+        </div>
+    </div>
+
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/status/app.scb.js")
+</body>
+</html>

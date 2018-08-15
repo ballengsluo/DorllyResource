@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源状态列表</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @*@Styles.Render("~/Plugins/app/css/app.index.css")*@
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">资源编号</span>
+                    <input type="text" class="form-control pull-right" id="name" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">资源名称</span>
+                    <input type="text" class="form-control pull-right" id="name" />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="border:1px solid red;">
+                <div class="input-group">
+                    <span class="input-group-addon">资源类别分组</span>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <select class="selectpicker form-control">
+                            <option value="value">text</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <select class="selectpicker form-control">
+                            <option value="value">text</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">园区</span>
+                    <input type="text" class="form-control pull-right" id="name" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">状态</span>
+                    <input type="text" class="form-control pull-right" id="name" />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                    <i class="layui-icon layui-icon-search"></i> 查 询
+                </button>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+</body>
+</html>

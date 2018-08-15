@@ -1,0 +1,121 @@
+﻿@model List<Resource.Model.T_RoleFunc>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>广告位管理</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+</head>
+<body>
+    <div class="container">
+        @Html.Partial("_FuncPage", Model)
+        @*<div class="func-action">
+                <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                <button type="button" class="btn btn-danger" id="del" data-url="@Url.Action("Del")"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                <button type="button" class="btn btn-success" id="open" data-url="@Url.Action("Open")"><i class="glyphicon glyphicon-ok"></i> 启用</button>
+                <button type="button" class="btn btn-warning" id="close" data-url="@Url.Action("Close")"><i class="glyphicon glyphicon-remove"></i> 停用</button>
+            </div>*@
+        <div class="select-action">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">广告类型</span>
+                        @{ Html.RenderAction("ResourceTypeDrop", "Drop", new { kind = 4, model = 2 });}
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">编号</span>
+                        <input type="text" class="form-control" id="id">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">名称</span>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="search" style="font-size:15px;" data-url="@Url.Action("Search")">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="data-action">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>园区</th>
+                        <th>广告位编码</th>
+                        <th>广告位名称</th>
+                        <th>广告位类型</th>
+                        <th>规格</th>
+                        <th>状态</th>
+                        <th>是否禁用</th>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+            <div id="page"></div>
+        </div>
+    </div>
+    <script id="tableTpl" type="text/html">
+        {{each data value i}}
+        <tr>
+            <td>{{i+1}}</td>
+            <td>{{value.ParkName}}</td>
+            <td class="key">{{value.ID}}</td>
+            <td>{{value.Name}}</td>
+            <td>{{value.ResourceTypeName}}</td>
+            <td>{{value.Size}}</td>
+            <td class="status" data-status="{{value.Status}}">
+                {{if value.Status==1}}已租
+                {{else if value.Status==2}}空闲
+                {{else if value.Status==3}}预定
+                {{else if value.Status==4}}预留
+                {{/if}}
+            </td>
+            <td class="enable" data-enable="{{value.Enable}}">
+                {{if value.Enable==0}}停用
+                {{else}}启用
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/app.index.js")
+    <script>
+        function paramsSet() {
+            return obj = {
+                ParkID: $("#park").val(),
+                ID: $("#id").val(),
+                Name: $("#name").val(),
+                StrType: $("#resourceType").val(),
+                PageIndex: currentNum,
+                PageSize: limitCount
+            };
+        };
+    </script>
+    <script>
+    </script>
+</body>
+</html>

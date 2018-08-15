@@ -14,9 +14,9 @@ namespace Resource.Model
     
     public partial class T_Stage
     {
-        public int ID { get; set; }
-        public string StageCode { get; set; }
-        public string StageName { get; set; }
-        public string ParkCode { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string ParkID { get; set; }
+        public Nullable<bool> Enable { get; set; }
     }
 }

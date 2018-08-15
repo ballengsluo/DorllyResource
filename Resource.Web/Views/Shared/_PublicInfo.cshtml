@@ -1,0 +1,42 @@
+﻿@model Resource.Model.T_ResourcePublic
+
+
+<fieldset class="layui-elem-field layui-field-title" style="padding:0px;">
+    <legend style="padding:0px; margin:0px;border-bottom:2px solid #0094ff;color:#f6850a;">发布信息</legend>
+</fieldset>
+<div class="form-group">
+    <label class="control-label col-md-2">发布编码</label>
+    <div class="col-md-2">
+        <input type="text" class="form-control" name="PublicID" id="PublicID" value="@Model.ID">
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2">发布开始时间</label>
+    <div class="col-md-2">
+        <input type="text" class="form-control" name="BeginTime" id="BeginTime" value="@Model.BeginTime">
+    </div>
+    <label class="control-label col-md-2">发布结束时间</label>
+    <div class="col-md-2">
+        <input type="text" class="form-control" name="EndTime" id="EndTime" value="@Model.EndTime">
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-2">发布等级</label>
+    <div class="col-md-2">
+        <input type="text" class="form-control" name="Level" id="Level" value="@Model.Level">
+    </div>
+    <label class="control-label col-md-2">发布渠道</label>
+    <div class="col-md-5">
+        <label class="checkbox-inline">
+            @Html.CheckBox("AZWEnable", Model.AZWEnable) 艾众网
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("AZGJEnable", Model.AZGJEnable) 艾众管家
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("ZYPTEnable", Model.ZYPTEnable) 资源平台Web
+        </label>
+    </div>
+</div>
+
+

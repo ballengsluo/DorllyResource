@@ -1,0 +1,24 @@
+﻿@if (ViewBag.model == 1)
+{
+    @Html.DropDownList("CityID", ViewData["dataList"] as SelectList,
+    new
+    {
+        @class = "selectpicker form-control pull-righ",
+        @id = "city",
+        @required = "required",
+        @title="请选择..."
+    })
+}
+else
+{
+    @Html.DropDownList("CityID",
+        ViewData["dataList"] as SelectList,
+        "全部",
+        new
+        {
+            @class = "selectpicker form-control pull-righ",
+            @id = "city"
+        })
+}
+
+

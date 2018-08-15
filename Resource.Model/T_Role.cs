@@ -17,14 +17,25 @@ namespace Resource.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_Role()
         {
-            this.T_User = new HashSet<T_User>();
+            this.T_RoleMenu = new HashSet<T_RoleMenu>();
+            this.T_RoleFunc = new HashSet<T_RoleFunc>();
+            this.T_UserRole = new HashSet<T_UserRole>();
         }
     
         public int ID { get; set; }
-        public string RoleName { get; set; }
-        public string RoleDesc { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public Nullable<bool> Enable { get; set; }
+        public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+        public string UpdateUser { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_User> T_User { get; set; }
+        public virtual ICollection<T_RoleMenu> T_RoleMenu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_RoleFunc> T_RoleFunc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_UserRole> T_UserRole { get; set; }
     }
 }

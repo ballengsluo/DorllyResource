@@ -15,15 +15,17 @@ namespace Resource.Model
     public partial class T_HomePage
     {
         public int ID { get; set; }
-        public string CityCode { get; set; }
-        public int PPID { get; set; }
+        public string CityID { get; set; }
+        public int Position { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public Nullable<int> OrderNum { get; set; }
-        public string ImgURL { get; set; }
-        public string LinkURL { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string ImgUrl { get; set; }
+        public string LinkUrl { get; set; }
+        public Nullable<int> Status { get; set; }
+        public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
         public string UpdateUser { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
     }
 }

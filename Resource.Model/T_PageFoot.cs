@@ -14,19 +14,21 @@ namespace Resource.Model
     
     public partial class T_PageFoot
     {
-        public int ID { get; set; }
-        public string CityCode { get; set; }
-        public int PPID { get; set; }
+        public int Position { get; set; }
+        public string CityID { get; set; }
         public string CSEmail { get; set; }
         public string CSPhone { get; set; }
-        public string QQServcie { get; set; }
-        public string QRCode1 { get; set; }
-        public string QRCode2 { get; set; }
+        public string CSQQ { get; set; }
+        public string CompanyEmail { get; set; }
         public string BusinessPhone { get; set; }
         public string ContactPhone { get; set; }
         public string ContactAddr { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string QRCode1 { get; set; }
+        public string QRCode2 { get; set; }
+        public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
         public string UpdateUser { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
     }
 }

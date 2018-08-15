@@ -1,0 +1,119 @@
+/* 
+    全局样式
+*/
+
+.rmsearch {
+    margin-top: 20px;
+    padding-left: 20px;
+    box-shadow: 0px 0px 2px #ccc;
+}
+
+.rmsearch .form-control {
+    max-width: 130px;
+}
+
+.rmsearch .row>div {
+    float: left;
+    margin: 10px 0px 10px 10px;
+}
+
+
+/* 
+    楼栋选择样式
+*/
+
+.building {
+    float: left;
+}
+
+.building ul {
+    background-color: #ccc;
+    border-radius: 4px;
+    float: left;
+}
+
+.building ul li {
+    float: left;
+    cursor: pointer;
+    height: 34px;
+    border-radius: 4px;
+    line-height: 34px;
+    padding: 0px 8px;
+}
+
+.building ul li:hover {
+    background-color: #30486f;
+    color: #fff;
+}
+
+.building .buildingClick {
+    background-color: #ff6a00;
+    color: #fff;
+}
+
+
+/* 
+    状态复选框样式
+*/
+
+.rmstatus {
+    margin-left: 15px;
+    float: left;
+}
+
+.rmstatus label {
+    line-height: 34px;
+}
+
+.rmstatus input {
+    height: 26px;
+}
+
+
+/* 
+    房屋显示样式
+*/
+
+.rmbox {
+    position: relative;
+    height: 100px;
+    min-width: 100px;
+    background-color: #fafafa;
+    border-radius: 3px;
+    float: left;
+    border: 1px solid #0094ff;
+    margin-right: 10px;
+    /* margin-top: 10px; */
+    margin-bottom: 15px;
+}
+
+.rmbox .rmno {
+    text-align: center;
+    line-height: 35px;
+}
+
+.rmbox .cust {
+    text-align: center;
+    line-height: 38px;
+    padding: 0px 8px;
+}
+
+.rmbox .area {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding-left: 5px;
+    padding-bottom: 3px;
+}
+
+.rmbox .area span {
+    font-size: 16px;
+}
+
+.rmrent {
+    background-color: #f09ca8
+}
+
+.rmfree {
+    background-color: #c3f8d3
+}

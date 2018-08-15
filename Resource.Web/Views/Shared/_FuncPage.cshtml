@@ -1,0 +1,127 @@
+﻿@model List<Resource.Model.T_RoleFunc>
+@if (Model.Count > 0)
+{
+    <div class="func-action">
+
+        @foreach (var item in Model)
+        {
+            switch (item.T_MenuFunc.Code)
+            {
+                case "add":
+                    <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")">
+                        <i class="glyphicon glyphicon-plus"></i> 新增
+                    </button>
+                    break;
+                case "edit":
+                <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")">
+                    <i class="glyphicon glyphicon-edit"></i> 编辑
+                </button>
+                    break;
+                case "del":
+                <button type="button" class="btn btn-danger" id="del" data-url="@Url.Action("Del")">
+                    <i class="glyphicon glyphicon-trash"></i> 删除
+                </button>
+                    break;
+                case "switch":
+                <button type="button" class="btn btn-success" id="open" data-url="@Url.Action("Open")">
+                    <i class="glyphicon glyphicon-ok"></i> 启用
+                </button>
+                <button type="button" class="btn btn-warning" id="close" data-url="@Url.Action("Close")">
+                    <i class="glyphicon glyphicon-remove"></i> 停用
+                </button>
+                    break;
+                case "auth":
+                <button type="button" class="btn btn-success" id="pass" data-url="@Url.Action("Pass")">
+                    <i class="glyphicon glyphicon-ok"></i> 审核通过
+                </button>
+                <button type="button" class="btn btn-warning" id="notpass" data-url="@Url.Action("Notpass")">
+                    <i class="glyphicon glyphicon-remove"></i> 审核不通过
+                </button>
+                    break;
+                case "func":
+                <button type="button" class="btn btn-primary" id="func" data-url="@Url.Action("Func")">
+                    <i class="glyphicon glyphicon-check"></i> 编辑权限
+                </button>
+                    break;
+                case "pub":
+                <button type="button" class="btn btn-success" id="pub" data-url="@Url.Action("Pub")">
+                    <i class="glyphicon glyphicon-send"></i> 上架
+                </button>
+                <button type="button" class="btn btn-warning" id="unpub" data-url="@Url.Action("Unpub")">
+                    <i class="glyphicon glyphicon-send"></i> 下架
+                </button>
+                    break;
+                case "off":
+                <button type="button" class="btn btn-danger" id="off" data-url="@Url.Action("Off")">
+                    <i class="glyphicon glyphicon-off"></i> 作废
+                </button>
+                    break;
+                case "reset":
+                <button type="button" class="btn btn-primary" id="reset" data-url="@Url.Action("Reset")">
+                    <i class="glyphicon glyphicon-refresh"></i> 重置密码
+                </button>
+                    break;
+                default:
+                    break;
+            }
+            @*if (item.T_MenuFunc.Code == "add")
+                {
+                    <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")">
+                        <i class="glyphicon glyphicon-plus"></i> 新增
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "edit")
+                {
+                    <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")">
+                        <i class="glyphicon glyphicon-edit"></i> 编辑
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "del")
+                {
+                    <button type="button" class="btn btn-primary" id="del" data-url="@Url.Action("Del")">
+                        <i class="glyphicon glyphicon-trash"></i> 删除
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "switch")
+                {
+                    <button type="button" class="btn btn-primary" id="open" data-url="@Url.Action("Open")">
+                        <i class="glyphicon glyphicon-ok"></i> 启用
+                    </button>
+                    <button type="button" class="btn btn-primary" id="close" data-url="@Url.Action("Close")">
+                        <i class="glyphicon glyphicon-remove"></i> 停用
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "auth")
+                {
+                    <button type="button" class="btn btn-primary" id="pass" data-url="@Url.Action("Pass")">
+                        <i class="glyphicon glyphicon-ok"></i> 审核通过
+                    </button>
+                    <button type="button" class="btn btn-primary" id="notpass" data-url="@Url.Action("Notpass")">
+                        <i class="glyphicon glyphicon-remove"></i> 审核不通过
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "func")
+                {
+                    <button type="button" class="btn btn-primary" id="func" data-url="@Url.Action("Func")">
+                        <i class="glyphicon glyphicon-check"></i> 编辑权限
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "pub")
+                {
+                    <button type="button" class="btn btn-success" id="pub" data-url="@Url.Action("Pub")">
+                        <i class="glyphicon glyphicon-send"></i> 发布
+                    </button>
+                    <button type="button" class="btn btn-warning" id="unpub" data-url="@Url.Action("Unpub")">
+                        <i class="glyphicon glyphicon-send"></i> 取消发布
+                    </button>
+                }
+                else if (item.T_MenuFunc.Code == "off")
+                {
+                    <button type="button" class="btn btn-danger" id="off" data-url="@Url.Action("Off")">
+                        <i class="glyphicon glyphicon-off"></i> 作废
+                    </button>
+                }*@
+
+        }
+    </div>
+}

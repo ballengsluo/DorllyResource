@@ -1,0 +1,42 @@
+/*
+ *  数据表格样式
+*/
+
+.data-action>table>thead>tr>th {
+    background-color: #E0FFFF;
+}
+.data-action .table{
+    margin-bottom: 0px;
+}
+.data-action .table, .data-action .table tr th, .data-action .table tr td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.data-action table tr td .open {
+    /* color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    border-radius: 5px;
+    padding: 5px 8px; */
+    font-size: 17px;
+    font-weight: 700;
+    color:green;
+    opacity: .7;
+}
+
+.data-action table tr td .close {
+    /* color: #fff;
+    background-color: #fb3d3d;
+    border-color: #fa4747;
+    padding: 6px 8px; */
+    float: none;
+    font-size: 17px;
+    font-weight: 700;
+    color:black;
+    opacity: .4;
+}
+.data-action #page>div{
+    display: block;
+    text-align: center;
+}

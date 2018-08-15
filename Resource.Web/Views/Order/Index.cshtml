@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>服务申请管理</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="select-action">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源类别</span>
+                        @{ Html.RenderAction("ResourceKindDrop", "Drop", new { id = "", model = 2 });}
+                        @*<select class="selectpicker form-control" id="kind" title="请选择...">
+                                <option value="">全部</option>
+                                <option value="1">房屋</option>
+                                <option value="2">工位</option>
+                                <option value="3">会议室</option>
+                                <option value="4">广告位</option>
+                            </select>*@
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源分组</span>
+                        @*@{ Html.RenderAction("GropDrop", "Drop", new { id = "", model = 2 });}*@
+                        <select class="selectpicker form-control  pull-righ" id="group" title="请选择..."></select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">服务号</span>
+                        <input type="text" class="form-control" id="id">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源名称</span>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="col-md-3" style="max-width:300px;">
+                    <div class="input-group">
+                        <span class="input-group-addon">申请日期</span>
+                        <input type="text" class="form-control" id="time">
+                    </div>
+                </div>
+                <div class="col-md-2" style="max-width:100px;">
+                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="data-action">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>服务号</th>
+                        <th>提交时间</th>
+                        <th>园区名称</th>
+                        <th>资源编号</th>
+                        <th>资源名称</th>
+                        <th>资源类别</th>
+                        <th>资源分组</th>
+                        <th>可租面积</th>
+                        <th>起租面积</th>
+                        <th>申请人</th>
+                        <th>联系电话</th>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </div>
+    <script id="tableTpl" type="text/html">
+        {{each data value i}}
+        <tr>
+            <td>{{i+1}}</td>
+            <td>{{value.CityName}}</td>
+            <td class="key">{{value.ID}}</td>
+            <td>{{value.Name}}</td>
+            <td class="enable" data-enable="{{value.Enable}}">
+                {{if value.Enable==0}}停用
+                {{else}}启用
+                {{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @*@Scripts.Render("~/Plugins/app/js/app.index.js")*@
+    <script>
+        $(function () {
+            dropChange(1);
+        })
+        function paramsSet() {
+            return obj = {
+                City: $("#city").val(),
+                Park: $("#park").val(),
+                ID: $("#id").val(),                
+                Name: $("#name").val(),
+                Kind: $("#kind").val(),
+                Group: $("#group").val(),
+                Stime: $("#time").val(),
+                PageIndex: currentNum,
+                PageSize: limitCount
+            };
+        };
+    </script>
+</body>
+</html>

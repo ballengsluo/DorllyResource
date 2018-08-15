@@ -1,0 +1,31 @@
+﻿@*@if (ViewData["dataList"] != null)
+{
+    @Html.DropDownList("ResourceKindID", ViewData["dataList"] as SelectList, "全部", new { @class = "selectpicker form-control pull-righ", @id = "kind" })
+}
+else
+{
+    <select class="selectpicker form-control pull-righ" name="ResourceTypeID" id="kind" title="暂无数据" disabled></select>
+}*@
+@if (ViewBag.model == 1)
+{
+    @Html.DropDownList("ResourceKindID", ViewData["dataList"] as SelectList,
+    new
+    {
+        @class = "selectpicker form-control pull-righ",
+        @id = "kind",
+        @required = "required",
+        @title = "请选择..."
+    })
+}
+else
+{
+    @Html.DropDownList("ResourceKindID",
+        ViewData["dataList"] as SelectList,
+        "全部",
+        new
+        {
+            @class = "selectpicker form-control pull-righ",
+            @id = "kind"
+        })
+}
+

@@ -14,9 +14,9 @@ namespace Resource.Model
     
     public partial class T_Floor
     {
-        public int ID { get; set; }
-        public string FloorCode { get; set; }
-        public string FloorName { get; set; }
-        public string BuildingCode { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string BuildingID { get; set; }
+        public Nullable<bool> Enable { get; set; }
     }
 }

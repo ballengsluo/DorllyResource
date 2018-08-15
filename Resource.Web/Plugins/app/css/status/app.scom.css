@@ -1,0 +1,44 @@
+.st {
+    /* 占用 */
+    background-color: #ff0033;
+    /* 空闲 */
+    background-color: #339933;
+    /* 预定 */
+    background-color: #f39700;
+    /* 预留 */
+    background-color: #00a0e9;
+}
+
+.checkArea,
+.resourceContainer {
+    box-shadow: 0px 0px 4px #ccc;
+    padding: 15px 10px 10px 15px;
+}
+
+.checkArea {
+    margin-top: 20px;
+}
+
+.checkArea>.row,
+.resourceContainer .row {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.checkArea>.row {
+    margin-top: 10px;
+}
+
+.checkArea>.row>div {
+    /* padding: 0px 5px; */
+    margin-left: 5px;
+    padding-left: 0px;
+}
+
+.checkArea>.row>div[class^="col"]:last-of-type {
+    padding-right: 15px;
+}
+
+.resourceContainer {
+    margin-top: 5px;
+}

@@ -1,0 +1,193 @@
+﻿@{
+    Layout = null;
+}
+@helper rm()
+{
+    foreach (var item in ViewBag.rm)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Area</td>
+            <td>@item.Number</td>
+        </tr>
+    }
+
+    <tr>
+        <td>汇总</td>
+        <td>@ViewBag.AreaCount</td>
+        <td>@ViewBag.NumberCount</td>
+    </tr>
+}
+@helper cb()
+{
+    foreach (var item in ViewBag.cb)
+    {
+        <tr>
+            <td>@item.Number</td>
+            <td>@item.Rate</td>
+        </tr>
+    }
+}
+@helper mr()
+{
+    foreach (var item in ViewBag.mr)
+    {
+        <tr>
+            <td>@item.Number</td>
+            <td>@item.Rate</td>
+        </tr>
+    }
+}
+@helper ad()
+{
+    foreach (var item in ViewBag.ad)
+    {
+        <tr>
+            <td>@item.Number</td>
+            <td>@item.Rate</td>
+        </tr>
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>我的工作台</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/font-awesome/css/font-awesome.min.css")
+    <style>
+        body {
+            background-color: #f9f9f9;
+            max-width:1500px;
+        }
+
+        h4 {
+            padding: 10px 0px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        table tr td, table tr th {
+            text-align: center;
+        }
+
+        .res {
+            border: 1px solid #ccc;
+            height: 114px;
+            background-color: #fff;
+        }
+
+        .reskind {
+            padding: 10px 0px;
+            font-weight: 600;
+        }
+
+        .res:first-of-type {
+            height: 342px;
+            border-right: none;
+        }
+
+            .res:first-of-type tr:last-of-type td {
+                font-weight: 600;
+                color:blue;
+            }
+            .res:not(:first-child) tr:last-of-type td{
+                border-top:none;
+            }
+        .res:nth-of-type(2), .res:nth-of-type(3) {
+            border-bottom: none;
+        }
+
+        .msg {
+            border: 1px solid #ccc;
+            height: 342px;
+            background-color: #fff;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>业务概览</h4>
+                <div class="col-md-6 res" id="rm">
+                    <div class="reskind">
+                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 房屋
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>楼栋</td>
+                            <td>空置面积</td>
+                            <td>空置套数</td>
+                        </tr>
+                        @rm()
+                    </table>
+                </div>
+                <div class="col-md-6 res">
+                    <div class="reskind">
+                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 工位
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>空置个数</td>
+                            <td>出租率</td>
+                        </tr>
+                        @cb()
+                    </table>
+                </div>
+
+                <div class="col-md-6 res">
+                    <div class="reskind">
+                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 会议室
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>空置个数</td>
+                            <td>出租率</td>
+                        </tr>
+                        @mr()
+                    </table>
+                </div>
+
+                <div class="col-md-6 res" id="ad">
+                    <div class="reskind">
+                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 广告位
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>空置个数</td>
+                            <td>出租率</td>
+                        </tr>
+                        @ad()
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-5" id="mg" data-toggle="tooltip" data-placement="right" style="display:none;">
+                <h4>代办事项</h4>
+                <div class="col-md-12 msg">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    <script>
+        var layer;
+        
+        $(function () {
+            layui.use('layer', function () {
+                layer = layui.layer;
+
+            });
+            
+        });
+    </script>
+</body>
+</html>

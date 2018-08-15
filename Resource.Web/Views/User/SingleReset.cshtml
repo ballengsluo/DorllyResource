@@ -1,0 +1,57 @@
+﻿@model Resource.Model.T_User
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户密码重置</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:400px;margin:0 auto;">
+            <h3 style="margin:30px;text-align:center">重置密码</h3>
+            @using (Ajax.BeginForm("SingleReset", new { id = Model.Account }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "resetSuccess",
+                OnFailure = "cmtFailed"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-5">请输入新密码</label>
+                    <div class="col-md-7">
+                        @Html.Password("PWD", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5">请再次输入新密码</label>
+                    <div class="col-md-7">
+                        @Html.Password("RePWD", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div style="text-align:center;margin:30px 0px;">
+                    <input type="submit" class="btn btn-primary" style="font-size:16px;" value="保存">
+                    <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.closeTabByPageId('@Url.Action("singlereset").ToLower()')">
+                </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        function resetSuccess(data) {
+            if (data.result == 1) {
+                parent.location.href = "/login/index";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>底部布局管理</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    <style>
+        .imgbox {
+            float: left;
+            width: 150px;
+            margin-right: 20px;
+        }
+
+            .imgbox .img {
+                width: 150px;
+                height: 150px;
+                border: 1px dashed #ccc;
+            }
+
+
+
+                .imgbox .img img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+
+            .imgbox .add {
+                position: relative;
+                margin-top: 10px;
+            }
+
+                .imgbox .add span {
+                    width: 150px;
+                    height: 32px;
+                }
+
+                .imgbox .add input {
+                    width: 150px;
+                    height: 32px;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    cursor: pointer;
+                    opacity: 0;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:1000px; margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">底部布局管理</h3>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">位置类型</label>
+                    <div class="col-md-2">
+                        <select class="selectpicker form-control pull-righ" id="Position" name="Position" title="请选择...">
+                            <option value="1">首页底部</option>
+                            <option value="2">关于我们</option>
+                            <option value="3">关于多丽</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">客服热线</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="CSPhone" id="CSPhone">
+                    </div>
+                    <label class="control-label col-md-2">客服邮箱</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="CSEmail" id="CSEmail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">招商热线</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="BusinessPhone" id="BusinessPhone">
+                    </div>
+                    <label class="control-label col-md-2">联系电话</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="ContactPhone" id="ContactPhone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">服务QQ群</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="CSQQ" id="CSQQ">
+                    </div>
+                    <label class="control-label col-md-2">邮箱</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="CompanyEmail" id="CompanyEmail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">公司地址</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="ContactAddr" id="ContactAddr">
+                    </div>
+                </div>
+                <div class="form-group imgContainer" style="display:none;">
+                    <label class="control-label col-md-2" style="visibility:hidden;">二维码</label>
+                    <div class="col-md-10">
+                        <div class="imgbox">
+                            <div class="img" id="Code1">
+
+                            </div>
+                            <div class="add">
+                                <span class="btn btn-primary"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;上传首页二维码</span>
+                                <input type="file" name="QRCode1" />
+                            </div>
+                        </div>
+                        <div class="imgbox">
+                            <div class="img" id="Code2">
+
+                            </div>
+                            <div class="add">
+                                <span class="btn btn-primary"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;上传首页二维码</span>
+                                <input type="file" name="QRCode2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">描述</label>
+                    <div class="col-md-10">
+                        <script id="Content" name="Content" type="text/plain">
+                        </script>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin:20px 0px;">
+                    <input type="button" class="btn btn-primary" style="font-size:16px;" value="保存" id="commit" disabled>
+                    <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.layer.closeAll();">
+                </div>
+            </form>
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/ueditor/ueditor.config.js")
+    @Scripts.Render("~/Plugins/ueditor/ueditor.all.js")
+    @Scripts.Render("~/Plugins/ueditor/lang/zh-cn/zh-cn.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () {
+            var ue = UE.getEditor('Content', {
+                initialFrameHeight: 200,
+                allowDivTransToP: false,
+                initialFrameWidth: '100%'
+            });
+            $("input[type='file']").change(function () {
+                var $file = $(this);
+                var fileObj = $file[0];
+                var windowURL = window.URL || window.webkitURL;
+                var dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                $(this).parents(".imgbox").find('.img').empty().append("<img src='" + dataURL + "'>")
+            });
+            $("#Position").change(function () {
+                var $this = $(this);
+                if ($this.val() == "" || !$this.val()) {
+                    return false;
+                }
+                $.getJSON("@Url.Action("Edit")", { id: $(this).val() }, function (data) {
+                    $("#CSPhone").val(data.CSPhone);
+                    $("#CSEmail").val(data.CSEmail);
+                    $("#BusinessPhone").val(data.BusinessPhone);
+                    $("#ContactPhone").val(data.ContactPhone);
+                    $("#CSQQ").val(data.CSQQ);
+                    $("#CompanyEmail").val(data.CompanyEmail);
+                    $("#ContactAddr").val(data.ContactAddr);                    
+                    $("#commit").removeAttr("disabled");
+                    $("#Code1").append("<img src='" + data.QRCode1 + "'>")
+                    $("#Code2").append("<img src='" + data.QRCode2 + "'>")
+
+                    ue.setContent(data.Content == null ? "" : data.Content);
+                    if ($this.val() == 1) {
+                        $("#Code1").empty().append("<img src='" + data.QRCode1 + "'>")
+                        $("#Code2").empty().append("<img src='" + data.QRCode2 + "'>")
+                        $(".imgContainer").show();
+                    } else {
+                        $(".imgContainer").hide();
+                    }
+                });
+            });
+            $("#commit").click(function () {
+                var form = new FormData($("form")[0]);
+                var id = $("#Position").val();
+                ajaxForm("post", "/HomePageFoot/Edit/"+id, form, "json", function (data) {
+                    layer.msg(data.msg, { icon: data.result });
+
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -27,24 +27,41 @@ namespace Resource.Model
     
         public virtual DbSet<T_Building> T_Building { get; set; }
         public virtual DbSet<T_City> T_City { get; set; }
-        public virtual DbSet<T_Cubicle> T_Cubicle { get; set; }
+        public virtual DbSet<T_ExtraInfo> T_ExtraInfo { get; set; }
         public virtual DbSet<T_Floor> T_Floor { get; set; }
         public virtual DbSet<T_HomePage> T_HomePage { get; set; }
-        public virtual DbSet<T_MeetingRoom> T_MeetingRoom { get; set; }
+        public virtual DbSet<T_LoginInfo> T_LoginInfo { get; set; }
+        public virtual DbSet<T_Menu> T_Menu { get; set; }
+        public virtual DbSet<T_MenuFunc> T_MenuFunc { get; set; }
         public virtual DbSet<T_PageFoot> T_PageFoot { get; set; }
-        public virtual DbSet<T_PagePosition> T_PagePosition { get; set; }
         public virtual DbSet<T_Park> T_Park { get; set; }
         public virtual DbSet<T_Region> T_Region { get; set; }
-        public virtual DbSet<T_RentType> T_RentType { get; set; }
-        public virtual DbSet<T_RGroup> T_RGroup { get; set; }
-        public virtual DbSet<T_RImage> T_RImage { get; set; }
-        public virtual DbSet<T_Room> T_Room { get; set; }
-        public virtual DbSet<T_RPrice> T_RPrice { get; set; }
-        public virtual DbSet<T_RType> T_RType { get; set; }
-        public virtual DbSet<T_Stage> T_Stage { get; set; }
-        public virtual DbSet<T_Menu> T_Menu { get; set; }
-        public virtual DbSet<T_Permission> T_Permission { get; set; }
+        public virtual DbSet<T_Resource> T_Resource { get; set; }
+        public virtual DbSet<T_ResourceGroup> T_ResourceGroup { get; set; }
+        public virtual DbSet<T_ResourceImg> T_ResourceImg { get; set; }
+        public virtual DbSet<T_ResourceKind> T_ResourceKind { get; set; }
+        public virtual DbSet<T_ResourcePrice> T_ResourcePrice { get; set; }
+        public virtual DbSet<T_ResourcePublic> T_ResourcePublic { get; set; }
+        public virtual DbSet<T_ResourceType> T_ResourceType { get; set; }
         public virtual DbSet<T_Role> T_Role { get; set; }
+        public virtual DbSet<T_RoleFunc> T_RoleFunc { get; set; }
+        public virtual DbSet<T_RoleMenu> T_RoleMenu { get; set; }
+        public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
+        public virtual DbSet<T_UserRole> T_UserRole { get; set; }
+        public virtual DbSet<V_AD> V_AD { get; set; }
+        public virtual DbSet<V_Building> V_Building { get; set; }
+        public virtual DbSet<V_CB> V_CB { get; set; }
+        public virtual DbSet<V_Floor> V_Floor { get; set; }
+        public virtual DbSet<V_MR> V_MR { get; set; }
+        public virtual DbSet<V_Park> V_Park { get; set; }
+        public virtual DbSet<V_Public> V_Public { get; set; }
+        public virtual DbSet<V_Releasing> V_Releasing { get; set; }
+        public virtual DbSet<V_RM> V_RM { get; set; }
+        public virtual DbSet<V_Stage> V_Stage { get; set; }
+        public virtual DbSet<V_Order> V_Order { get; set; }
+        public virtual DbSet<V_SRM> V_SRM { get; set; }
+        public virtual DbSet<V_SCB> V_SCB { get; set; }
+        public virtual DbSet<V_SAD> V_SAD { get; set; }
     }
 }

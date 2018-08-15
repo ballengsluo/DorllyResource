@@ -1,0 +1,220 @@
+﻿@model List<Resource.Model.T_RoleFunc>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>工位统计列表</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+    <style type="text/css">
+        .demo-container {
+            box-sizing: border-box;
+            width: 1000px;
+            height: 500px;
+            padding: 20px 15px 15px 15px;
+            margin: 0px auto 30px auto;
+            border: 1px solid #ddd;
+            background: #fff;
+            background: linear-gradient(#f6f6f6 0, #fff 50px);
+            background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+            background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+            background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+            background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            -o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            -ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .demo-placeholder {
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+            line-height: 1.2em;
+        }
+
+        .demo-container {
+            position: relative;
+            height: 400px;
+        }
+
+        #placeholder {
+            width: 960px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="select-action">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="list" style="color: #333; background-color: #e6e6e6; border-color: #adadad; padding-left: 20px; padding-right: 20px; ">列表</button>
+                        <button type="button" class="btn btn-default" id="charts" style="padding-left: 20px; padding-right: 20px;">图表</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="listdiv">
+        <div class="container">
+            <div class="select-action">
+                <div class="row form-group">
+                    <div class="col-md-1" style="border-right: 1px solid #999; height: 70px; display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; -webkit-box-orient: vertical; text-align: center; ">工位</div>
+                    <div class="col-md-2" style="padding-left: 10px; border-right: 1px solid #999; ">
+                        <div style="color:#999; font-size:13pt;">总工位个数</div>
+                        <div style="float:right; clear:both; font-size:11pt;"><label>100%</label></div>
+                        <div style="clear:both; font-size:16pt; margin-top:2px;"><label id="TotBuildSize"></label>&nbsp;个</div>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 10px; border-right: 1px solid #999; ">
+                        <div style="color:#999; font-size:13pt;">已租个数</div>
+                        <div style="float:right; clear:both; font-size:11pt;"><label id="OccupancyRate"></label>%</div>
+                        <div style="clear:both; font-size:16pt; margin-top:2px;"><label id="OccupancySize"></label>&nbsp;个</div>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 10px; border-right: 1px solid #999; ">
+                        <div style="color:#999; font-size:13pt;">空置个数</div>
+                        <div style="float:right; clear:both; font-size:11pt;"><label id="RemainderRate"></label>%</div>
+                        <div style="clear:both; font-size:16pt; margin-top:2px;"><label id="RemainderSize"></label>&nbsp;个</div>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 10px;">
+                        <div style="color:#999; font-size:13pt;">不可用个数</div>
+                        <div style="float:right; clear:both; font-size:11pt;"><label id="DisableRate"></label>%</div>
+                        <div style="clear:both; font-size:16pt; margin-top:2px;"><label id="DisableSize"></label>&nbsp;个</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="select-action" style="clear:both;">
+                <div class="row form-group">
+                    <div class="col-md-1">
+                        <label class="control-label" style="float: right; padding-top: 8px;">查询时间</label>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group col-md-2" style="float:left;">
+                            <input type="text" class="form-control pull-right" id="BeginTime" />
+                        </div>
+                        <label class="control-label" style="float: left; padding-top: 8px; width:20px; text-align:center;">-</label>
+                        <div class="input-group col-md-2" style="float:left;">
+                            <input type="text" class="form-control pull-right" id="EndTime" />
+                        </div>
+                        <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px; margin-left:10px;">
+                            <i class="layui-icon layui-icon-search"></i> 查 询
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="data-action">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>时间</th>
+                            <th>总数</th>
+                            <th>已租</th>
+                            <th>空置</th>
+                            <th>不可用</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb"></tbody>
+                </table>
+            </div>
+        </div>
+        <script id="tableTpl" type="text/html">
+            {{each data value i}}
+            <tr>
+                <td class="key">{{value.StDate}}</td>
+                <td>{{value.TotRentSize}}</td>
+                <td>{{value.OccupancySize}}</td>
+                <td>{{value.RemainderSize}}</td>
+                <td>{{value.DisableSize}}</td>
+            </tr>
+            {{/each}}
+        </script>
+    </div>
+
+    <div class="container" id="chartsdiv">
+        <div class="demo-container" style="float:left; margin:30px;">
+            <div id="placeholder" class="demo-placeholder"></div>
+        </div>
+        <div class="demo-container" style="float: left; margin: 30px;">
+            <div id="placeholder1" class="demo-placeholder" style="float:left;"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/table/app.statistics_wp.js")
+    @Scripts.Render("~/Plugins/flot/jquery.flot.js")
+    @Scripts.Render("~/Plugins/flot/jquery.flot.categories.js")
+    @Scripts.Render("~/Plugins/flot/jquery.flot.selection.js")
+    <script>
+        function paramsSet() {
+            return obj = {
+                StrParam1: $("#BeginTime").val(),
+                StrParam2: $("#EndTime").val(),
+                StrParam3: $("#park").val()
+            };
+        };
+
+        $(function () {
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#BeginTime' //指定元素
+                });
+                laydate.render({
+                    elem: '#EndTime' //指定元素
+                });
+            });
+        });
+
+        var tab = "list";
+        $(function () {
+            $("#list").click(function () {
+                $("#list").css("color", "#333");
+                $("#list").css("background-color", "#e6e6e6");
+                $("#list").css("border-color", "#adadad;");
+
+                $("#charts").css("color", "#333");
+                $("#charts").css("background-color", "#fff");
+                $("#charts").css("border-color", "#ccc;");
+
+                $("#chartsdiv").hide();
+                $("#listdiv").show();
+                tab = "list";
+            });
+
+            $("#charts").click(function () {
+                $("#charts").css("color", "#333");
+                $("#charts").css("background-color", "#e6e6e6");
+                $("#charts").css("border-color", "#adadad;");
+
+                $("#list").css("color", "#333");
+                $("#list").css("background-color", "#fff");
+                $("#list").css("border-color", "#ccc;");
+
+                $("#listdiv").hide();
+                $("#chartsdiv").show();
+                tab = "charts";
+            });
+        });
+
+    </script>
+</body>
+</html>

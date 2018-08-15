@@ -1,0 +1,170 @@
+﻿@model List<Resource.Model.T_RoleFunc>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>发布信息管理</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+</head>
+<body>
+    <div class="container-fluid">
+        @Html.Partial("_FuncPage", Model)
+        <div class="select-action">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源状态</span>
+                        <select class="selectpicker form-control pull-righ" id="status" title="请选择...">
+                            <option value="">全部</option>
+                            <option value="1">待审核</option>
+                            <option value="2">审核通过</option>
+                            <option value="3">审核不通过</option>
+                            <option value="4">已发布</option>
+                            <option value="5">未发布</option>
+                            <option value="6">已作废</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源类别</span>
+                        <select class="selectpicker form-control pull-righ" id="kind" title="请选择...">
+                            <option value="">全部</option>
+                            <option value="1">房屋</option>
+                            <option value="2">工位</option>
+                            <option value="3">会议室</option>
+                            <option value="4">广告位</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group col-md-2">
+                    <span class="input-group-addon">资源分组</span>
+                    <select class="selectpicker form-control pull-righ" id="group" title="请选择..."></select>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源编号</span>
+                        <input type="text" class="form-control" id="id">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源名称</span>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="data-action">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>发布编号</th>
+                        <th>资源编号</th>
+                        <th>资源名称</th>
+                        <th>资源类别</th>
+                        <th>资源分组</th>
+                        <th>园区</th>
+                        <th>状态</th>
+                        <th>发布渠道</th>
+                        <th>发布开始时间</th>
+                        <th>发布结束时间</th>
+                        <th>修改人</th>
+                        <th>修改时间</th>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+            <div id="page"></div>
+        </div>
+    </div>
+    <script id="tableTpl" type="text/html">
+        {{each data value i}}
+        <tr>
+            <td>{{i+1}}</td>
+            <td class="key">{{value.ID}}</td>
+            <td>{{value.ResourceID}}</td>
+            <td>{{value.ResourceName}}</td>
+            <td>{{value.ResourceKindName}}</td>
+            <td>{{value.GroupName}}</td>
+            <td>{{value.ParkName}}</td>
+            <td class="status" data-status="{{value.Status}}">
+                {{if value.Status==1}}待审核
+                {{else if value.Status==2}}审核通过
+                {{else if value.Status==3}}审核不通过
+                {{else if value.Status==4}}上架
+                {{else if value.Status==5}}下架
+                {{else if value.Status==6}}作废
+                {{/if}}
+            </td>
+            <td>
+                {{if value.AZWEnable}} 艾众网&nbsp;&nbsp;{{/if}}
+                {{if value.AZGJEnable}} 艾众管家&nbsp;&nbsp;{{/if}}
+                {{if value.ZYPTEnable}} 资源Web{{/if}}
+            </td>
+            <td>{{value.BeginTime}}</td>
+            <td>{{value.EndTime}}</td>
+            <td>{{value.UpdateUser}}</td>
+            <td>{{value.UpdateTime}}</td>
+        </tr>
+        {{/each}}
+    </script>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/app.index.js")
+    <script>
+        $(function () {
+            $('#resourceType').change(function () {
+                if (!$(this).val() || $(this).val() == '') {
+                    $('#group').html("<option value=''>全部</option>").selectpicker('refresh');
+                    return false
+                } else {
+                    $.getJSON('/Drop/GroupList', { id: $(this).val() }, function (data) {
+                        var html = "<option value=''>全部</option>"
+                        for (var i = 0; i < data.length; i++) {
+                            html += "<option value='" + data[i].ID + "'>" + data[i].Name + '</option>'
+                        }
+                        $('#Group').html(html).selectpicker('refresh');
+                    });
+                }
+            });
+        });
+
+        function paramsSet() {
+            return obj = {
+                ParkID: $('#park').val(),
+                IntType: $('#kind').val(),
+                GroupID: $('#group').val(),
+                ID: $('#id').val(),
+                Name: $('#name').val(),
+                IntStatus: $('#status').val(),
+                PageIndex: currentNum,
+                PageSize: limitCount
+            }
+        }
+    </script>
+</body>
+</html>

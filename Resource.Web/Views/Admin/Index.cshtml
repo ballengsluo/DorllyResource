@@ -1,0 +1,156 @@
+﻿@model List<Resource.Model.T_RoleMenu>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/font-awesome/css/font-awesome.min.css")
+    @Styles.Render("~/Plugins/adminlte/css/adminlte.css")
+    @Styles.Render("~/Plugins/adminlte/css/skins/_all-skins.css")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo" data-toggle="push-menu" role="button">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">
+                    <b>多丽</b>
+                </span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">
+                    <img src="~/Content/img/logo3.png" />
+                    <b>资源管理系统</b>
+                </span>
+            </a>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="info">
+                        <p class="name">欢迎您&nbsp;@ViewBag.user.Account</p>
+                        <p class="exit"><a href="@Url.Action("LogoOut","Login")"><i class="fa fa-close" style="color:red;"></i> 退出</a></p>
+                    </div>
+                </div>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="treeview">
+                        <a href="#" data-href="@Url.Action("Main","Admin")">
+                            <i class="fa fa-tv"></i> <span>我的工作台</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+                    @{
+
+                        var level1 = Model.Where(a => a.T_Menu.Level == 1).OrderBy(a => a.T_Menu.OrderNum);
+                        foreach (var item1 in level1)
+                        {
+                            var level2 = Model.Where(a => a.T_Menu.PID == item1.T_Menu.ID).OrderBy(a => a.T_Menu.OrderNum);
+                            <li class="treeview">
+                                <a href="#" data-href="@item1.T_Menu.Path" data-title="@item1.T_Menu.Name">
+                                    <i class="@item1.T_Menu.Class"></i> <span>@item1.T_Menu.Name</span>
+                                    <span class="pull-right-container">
+                                        @if (level2.Count() > 0)
+                                        {
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        }
+                                    </span>
+                                </a>
+                                @if (level2.Count() > 0)
+                                {
+                                    <ul class="treeview-menu">
+                                        @foreach (var item2 in level2)
+                                        {
+                                            var level3 = Model.Where(a => a.T_Menu.PID == item2.T_Menu.ID).OrderBy(a => a.T_Menu.OrderNum);
+                                            if (level3.Count() > 0)
+                                            {
+                                                <li class="treeview">
+                                                    <a>
+                                                        <i class="@item2.T_Menu.Class"></i> <span>@item2.T_Menu.Name</span>
+                                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        @foreach (var item3 in level3)
+                                                        {
+                                                            <li><a href="#" data-href="@item3.T_Menu.Path" data-title="@item3.T_Menu.Name"> @item3.T_Menu.Name</a></li>
+                                                        }
+                                                    </ul>
+                                                </li>
+
+                                            }
+                                            else
+                                            {
+                                                <li><a href="#" data-href="@item2.T_Menu.Path" data-title="@item2.T_Menu.Name"> @item2.T_Menu.Name</a></li>
+                                            }
+
+                                        }
+                                    </ul>
+                                }
+
+                            </li>
+                        }
+                    }
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="content-tabs">
+                <button class="roll-nav roll-left tabLeft" onclick="scrollTabLeft()">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs menuTabs tab-ui-menu" id="tab-menu">
+                    <div class="page-tabs-content">
+                        <a href="#" class="menu_tab active" data-href="@Url.Action("Main","Admin")">
+                            <span class="page_tab_title">我的工作台</span>
+                        </a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right tabRight" onclick="scrollTabRight()">
+                    <i class="fa fa-forward" style="margin-left: 3px;"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown tabClose" data-toggle="dropdown">
+                        页签操作<i class="fa fa-caret-down" style="padding-left: 3px;"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" style="min-width: 128px;">
+                        <li><a class="tabReload" href="#">刷新当前</a></li>
+                        <li><a class="tabCloseCurrent" href="#">关闭当前</a></li>
+                        <li><a class="tabCloseAll" href="#">全部关闭</a></li>
+                        <li><a class="tabCloseOther" href="#">除此之外全部关闭</a></li>
+                    </ul>
+                </div>
+                <button class="roll-nav roll-right fullscreen">
+                    <i class="fa fa-arrows-alt"></i>
+                </button>
+            </div>
+            <div class="iframe-box ">
+                <div class="tab-content" id="tab-content">
+                    <div class="tab-pane active" data-href="@Url.Action("Main","Admin")" role="tabpanel">
+                        <iframe src="@Url.Action("Main","Admin")" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+            </div>
+            <strong>Copyright &copy; 2014-2018 <a href="#">轩仑科技</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/adminlte/js/adminlte.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/app.main.js")
+</body>
+</html>

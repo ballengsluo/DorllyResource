@@ -1,0 +1,50 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>新增角色</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:400px;margin:0 auto;">
+            <h3 style="margin:30px;text-align:center">新增角色</h3>
+            @using (Ajax.BeginForm("Create", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "cmtSuccess",
+                OnFailure = "cmtFailed"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-3">角色名称</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("Name", "", new { @class = "form-control", @required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">角色描述</label>
+                    <div class="col-md-8">
+                        @Html.TextBox("Description", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div style="text-align:center;margin:30px 0px;">
+                    <input type="submit" class="btn btn-primary" style="font-size:16px;" value="保存">
+                    <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.layer.closeAll();">
+                </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+</body>
+</html>

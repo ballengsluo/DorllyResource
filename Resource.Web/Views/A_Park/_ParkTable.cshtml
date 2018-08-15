@@ -1,0 +1,49 @@
+﻿
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>序号</th>            
+            <th>城市</th>
+            <th>区域</th>
+            <th>园区编码</th>
+            <th>园区名称</th>
+            <th>园区简称</th>
+            <th>园区地址</th>
+            <th>经度(X)</th>
+            <th>纬度(Y)</th>
+            <th>联系人</th>
+            <th>联系人地址</th>
+            <th>联系人电话</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int id = 1;
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="key" style="display:none">@item.ID</td>
+                        <td>@id</td>                        
+                        <td>@item.CityName</td>
+                        <td>@item.RegionName</td>
+                        <td>@item.ParkCode</td>
+                        <td>@item.ParkName</td>
+                        <td>@item.ParkShortName</td>
+                        <td>@item.Addr</td>
+                        <td>@item.GisX</td>
+                        <td>@item.GisY</td>
+                        <td>@item.ContactName</td>
+                        <td>@item.ContactAddr</td>
+                        <td>@item.ContactPhone</td>
+                    </tr>
+                    id++;
+                }
+            }
+        }
+    </tbody>
+</table>
+
+
