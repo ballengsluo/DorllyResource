@@ -13,9 +13,9 @@
 /Resource.IDAL/obj
 /Resource.Model/bin
 /Resource.Model/obj
-/ResWeb/bin
-/ResWeb/obj
-/ResWeb/Content/image
+/Resource.Web/bin
+/Resource.Web/obj
+/Resource.Web/Content
 /ConsoleApplication1
 /Resource.BLL.Container/bin
 /Resource.BLL.Container/obj

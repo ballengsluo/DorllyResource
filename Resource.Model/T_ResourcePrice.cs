@@ -57,6 +57,7 @@ namespace Resource.Model
         public Nullable<bool> OtherEnable { get; set; }
         public Nullable<decimal> OtherMinPrice { get; set; }
         public Nullable<decimal> OtherMaxPrice { get; set; }
+        public Nullable<bool> DelayEnable { get; set; }
     
         public virtual T_Resource T_Resource { get; set; }
     }

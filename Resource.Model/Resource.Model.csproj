@@ -76,14 +76,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DorllyResource.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Mstr_Customer.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="T_Building.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_City.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T_ExtraInfo.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_Floor.cs">
@@ -99,6 +99,9 @@
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_MenuFunc.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T_Order.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="T_PageFoot.cs">
@@ -174,6 +177,9 @@
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_Releasing.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_Resource.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_RM.cs">

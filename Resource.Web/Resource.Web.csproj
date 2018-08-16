@@ -837,7 +837,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Encrypt.cs" />
-    <Compile Include="Models\ExtraInfo.cs" />
     <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\LoginView.cs" />

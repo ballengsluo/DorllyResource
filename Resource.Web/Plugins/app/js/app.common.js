@@ -2,14 +2,9 @@ $(function() {
     layui.use('layer', function() {
         layer = layui.layer;
     });
-    if ($("#park").length > 0) {
-
-        // $('#park').selectpicker('val', '01'); //默认选中
-        // console.log("park is select");
-        $("#park option:first").attr("selected", true);
-        // alert($("#park option:last").prop('selected'));
-        // $('#park').selectpicker('refresh'); 
-    }
+    // if ($("#park").length > 0) {
+    //     $("#park option:first").attr("selected", true);
+    // }
 });
 
 function ajax(reqtype, requrl, reqdata, datatype, callback) {

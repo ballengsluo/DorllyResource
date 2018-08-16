@@ -7,7 +7,6 @@
       <Diagram DiagramId="63512cdfd2994d72b43e3bced577b779" Name="Diagram1" ZoomLevel="61" ShowGrid="true" DisplayType="true">
         <EntityTypeShape EntityType="DorllyResourceModel.T_Building" Width="1.5" PointX="0.75" PointY="1.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_City" Width="1.5" PointX="12.75" PointY="1.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_ExtraInfo" Width="1.5" PointX="12.75" PointY="4.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_Floor" Width="1.5" PointX="12.75" PointY="7.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_HomePage" Width="1.5" PointX="12.75" PointY="10.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_LoginInfo" Width="1.5" PointX="10" PointY="12.875" />
@@ -57,6 +56,10 @@
         <EntityTypeShape EntityType="DorllyResourceModel.V_SRM" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_SCB" Width="1.5" PointX="21.375" PointY="7.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_SAD" Width="1.5" PointX="21.375" PointY="14.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.Mstr_Customer" Width="1.5" PointX="21.375" PointY="23.125" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Order" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Order_RID" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Resource" Width="1.5" PointX="23.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

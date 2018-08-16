@@ -27,7 +27,6 @@ namespace Resource.Model
     
         public virtual DbSet<T_Building> T_Building { get; set; }
         public virtual DbSet<T_City> T_City { get; set; }
-        public virtual DbSet<T_ExtraInfo> T_ExtraInfo { get; set; }
         public virtual DbSet<T_Floor> T_Floor { get; set; }
         public virtual DbSet<T_HomePage> T_HomePage { get; set; }
         public virtual DbSet<T_LoginInfo> T_LoginInfo { get; set; }
@@ -63,5 +62,8 @@ namespace Resource.Model
         public virtual DbSet<V_SRM> V_SRM { get; set; }
         public virtual DbSet<V_SCB> V_SCB { get; set; }
         public virtual DbSet<V_SAD> V_SAD { get; set; }
+        public virtual DbSet<Mstr_Customer> Mstr_Customer { get; set; }
+        public virtual DbSet<T_Order> T_Order { get; set; }
+        public virtual DbSet<V_Resource> V_Resource { get; set; }
     }
 }

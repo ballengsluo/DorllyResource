@@ -12,12 +12,21 @@ namespace Resource.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class T_ExtraInfo
+    public partial class T_Order
     {
         public string ID { get; set; }
-        public string CreateUser { get; set; }
+        public string ResourceID { get; set; }
+        public string CustID { get; set; }
+        public string City { get; set; }
+        public string CustName { get; set; }
+        public string CustPhone { get; set; }
+        public string CustAddr { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
-        public string UpdateUser { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public Nullable<System.DateTime> BeginTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public Nullable<int> Status { get; set; }
+        public string AuthUser { get; set; }
+    
+        public virtual T_Resource T_Resource { get; set; }
     }
 }

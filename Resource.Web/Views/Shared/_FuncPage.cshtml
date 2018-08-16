@@ -61,6 +61,14 @@
                     <i class="glyphicon glyphicon-refresh"></i> 重置密码
                 </button>
                     break;
+                case "reserve":
+                <button type="button" class="btn btn-primary" id="reserve" data-url="@Url.Action("Reset")">
+                    <i class="glyphicon glyphicon-ok"></i> 预留
+                </button>
+                <button type="button" class="btn btn-danger" id="cancelreserve" data-url="@Url.Action("Reset")">
+                    <i class="glyphicon glyphicon-remove"></i> 取消预留
+                </button>
+                    break;
                 default:
                     break;
             }
