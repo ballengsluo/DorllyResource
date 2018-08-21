@@ -4,21 +4,26 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>房屋管理</title>
-    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
+    <style>
+        .input-group .btn {
+            padding: 6.2px 12px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         @Html.Partial("_FuncPage", Model)
         @*<div class="func-action">
-            <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-            <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
-            <button type="button" class="btn btn-danger" id="del" data-url="@Url.Action("Del")"><i class="glyphicon glyphicon-trash"></i> 删除</button>
-            <button type="button" class="btn btn-success" id="open" data-url="@Url.Action("Open")"><i class="glyphicon glyphicon-ok"></i> 启用</button>
-            <button type="button" class="btn btn-warning" id="close" data-url="@Url.Action("Close")"><i class="glyphicon glyphicon-remove"></i> 停用</button>
-        </div>*@
+                <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+                <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
+                <button type="button" class="btn btn-danger" id="del" data-url="@Url.Action("Del")"><i class="glyphicon glyphicon-trash"></i> 删除</button>
+                <button type="button" class="btn btn-success" id="open" data-url="@Url.Action("Open")"><i class="glyphicon glyphicon-ok"></i> 启用</button>
+                <button type="button" class="btn btn-warning" id="close" data-url="@Url.Action("Close")"><i class="glyphicon glyphicon-remove"></i> 停用</button>
+            </div>*@
         <div class="select-action">
             <div class="row">
                 <div class="col-md-2">
@@ -30,24 +35,24 @@
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">建设期</span>
-                        <select class="selectpicker form-control pull-righ" id="stage" title="请选择..." ></select>
-                    
+                        <select class="selectpicker form-control pull-righ" id="stage" title="请选择..."></select>
+
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">楼栋</span>
                         <select class="selectpicker form-control pull-righ" id="build" title="请选择..."></select>
-                     
+
                     </div>
-                </div>  
+                </div>
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">楼层</span>
                         <select class="selectpicker form-control pull-righ" id="floor" title="请选择..."></select>
-             
+
                     </div>
-                </div>               
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-2">
@@ -114,7 +119,7 @@
         {{/each}}
     </script>
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
-    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @*@Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")*@
     @Scripts.Render("~/Plugins/layui/layui.js")
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")

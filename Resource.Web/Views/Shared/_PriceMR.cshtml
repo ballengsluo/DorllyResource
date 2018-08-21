@@ -1,59 +1,75 @@
 ﻿@{ T_ResourcePrice price = ViewBag.price as T_ResourcePrice;}
 <div class="form-group">
-    <label class="control-label col-md-1">计价方式</label>
+    <label class="control-label col-lg-2 col-lg-2 col-md-2 col-sm-2 col-sm-2">计价方式</label>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <label class="checkbox-inline">
+            @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))
+            <span>全天预定</span>
+        </label>
+        <label class="checkbox-inline">
+           @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
+        <span>半天预定</span>
+        </label>
+        <label class="checkbox-inline">
+            @Html.CheckBox("HourEnable", Convert.ToBoolean(price.HourEnable))
+            <span>小时预定</span>
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    @*<label class="control-label col-md-1">计价方式</label>
     <label class="control-label col-md-1 priceLabel">
         @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))
         <span>全天预定</span>
-    </label>
-    <label class="control-label col-md-2">对内价格/全天</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="DayInPrice" value="@price.DayInPrice">
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/全天</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="DayInPrice" value="@price.DayInPrice" placeholder="对内价格/全天">
     </div>
-    <label class="control-label col-md-2" style="max-width:120px;">对外价格/全天</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="DayOutPrice" value="@price.DayOutPrice">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/全天</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="DayOutPrice" value="@price.DayOutPrice" placeholder="对外价格/全天">
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-md-1 col-md-offset-1 priceLabel">
+    @*<label class="control-label col-md-1 col-md-offset-1 priceLabel">
         @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
         <span>半天预定</span>
-    </label>
-    <label class="control-label col-md-2">对内价格/半天</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="HDayInPrice" value="@price.HDayInPrice">
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/半天</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="HDayInPrice" value="@price.HDayInPrice" placeholder="对内价格/半天">
     </div>
-    <label class="control-label col-md-2" style="max-width:120px;">对外价格/半天</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="HDayOutPrice" value="@price.HDayOutPrice">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/半天</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="HDayOutPrice" value="@price.HDayOutPrice" placeholder="对外价格/半天">
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-md-1 col-md-offset-1 priceLabel">
+    @*<label class="control-label col-md-1 col-md-offset-1 priceLabel">
         @Html.CheckBox("HourEnable", Convert.ToBoolean(price.HourEnable))
         <span>小时预定</span>
-    </label>
-    <label class="control-label col-md-2">对内价格/小时</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="HourInPrice" value="@price.HourInPrice">
+    </label>*@
+    <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/小时</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="HourInPrice" value="@price.HourInPrice" placeholder="对内价格/小时">
     </div>
-    <label class="control-label col-md-2" style="max-width:120px;">对外价格/小时</label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="HourOutPrice" value="@price.HourOutPrice">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/小时</label>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="HourOutPrice" value="@price.HourOutPrice" placeholder="对外价格/小时">
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-md-1 col-md-offset-1 priceLabel" style="visibility:hidden;">延时价格</label>
-    <label class="control-label col-md-2">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2">
         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>对内延时价格
     </label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="DelayInPrice" value="@price.DelayInPrice">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="DelayInPrice" value="@price.DelayInPrice" required placeholder="对内延时价格">
     </div>
-    <label class="control-label col-md-2" style="max-width:120px;">
+    <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">
         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>对外延时价格
     </label>
-    <div class="col-md-3">
-        <input type="text" class="form-control" name="DelayOutPrice" value="@price.DelayOutPrice">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <input type="text" class="form-control" name="DelayOutPrice" value="@price.DelayOutPrice" required placeholder="对外延时价格">
     </div>
 </div>

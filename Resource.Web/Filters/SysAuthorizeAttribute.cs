@@ -56,7 +56,9 @@ namespace Resource.Web.Filters
             }
             else
             {
-                filterContext.HttpContext.Response.Redirect("/Login/Index");
+                filterContext.HttpContext.Response.Write("<script>window.top.location.href='/Login/Index';</script>");
+                filterContext.HttpContext.Response.End();
+                //filterContext.HttpContext.Response.Redirect("/Login/Index");
             }
 
             //base.HandleUnauthorizedRequest(filterContext);

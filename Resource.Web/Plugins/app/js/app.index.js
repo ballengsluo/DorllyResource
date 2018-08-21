@@ -160,12 +160,39 @@ function table() {
 }
 
 function showstatus(value) {
+    if (value == 1) { //待上架
+        $('#pub').prop("disabled", false);
+        $('#unpub').prop("disabled", true);
+        $("#edit").prop("disabled", false);
+        $("#off").prop("disabled", false);
+        $('#del').prop("disabled", false);
+    } else if (value == 4) { //上架
+        $('#pub').prop("disabled", true);
+        $('#unpub').prop("disabled", false);
+        $("#edit").prop("disabled", true);
+        $("#off").prop("disabled", true);
+        $('#del').prop("disabled", true);
+    } else if (value == 5) { //下架
+        $('#pub').prop("disabled", false);
+        $('#unpub').prop("disabled", true);
+        $("#edit").prop("disabled", false);
+        $("#off").prop("disabled", false);
+        $('#del').prop("disabled", false);
+    } else if (value == 6) { //作废
+        $('#del').prop("disabled", false);
+        $('#pub').prop("disabled", true);
+        $('#unpub').prop("disabled", true);
+        $("#edit").prop("disabled", true);
+        $("#off").prop("disabled", true);
+    }
+}
+
+function showstatusbak(value) {
     if (value == 1) { //待审核
-        $('#pub').hide();
+        $('#pub').show();
         $('#unpub').hide();
         $('#pass').show();
         $('#notpass').show();
-        $("#add").show();
         $("#edit").show();
         $("#off").show();
     } else if (value == 2) { //审核通过
@@ -173,7 +200,6 @@ function showstatus(value) {
         $('#unpub').show();
         $('#pass').hide();
         $('#notpass').hide();
-        $("#add").show();
         $("#edit").show();
         $("#off").show();
     } else if (value == 3) { //审核不通过
@@ -181,7 +207,6 @@ function showstatus(value) {
         $('#unpub').hide();
         $('#pass').hide();
         $('#notpass').hide();
-        $("#add").show();
         $("#edit").show();
         $("#off").show();
     } else if (value == 4) { //上架
@@ -189,7 +214,6 @@ function showstatus(value) {
         $('#notpass').hide();
         $('#pub').hide();
         $('#unpub').show();
-        $("#add").show();
         $("#edit").show();
         $("#off").show();
     } else if (value == 5) { //下架
@@ -197,7 +221,6 @@ function showstatus(value) {
         $('#notpass').hide();
         $('#pub').show();
         $('#unpub').hide();
-        $("#add").show();
         $("#edit").show();
         $("#off").show();
     } else if (value == 6) { //下架
@@ -205,7 +228,6 @@ function showstatus(value) {
         $('#notpass').hide();
         $('#pub').hide();
         $('#unpub').hide();
-        $("#add").hide();
         $("#edit").hide();
         $("#off").hide();
     }

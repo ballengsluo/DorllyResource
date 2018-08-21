@@ -22,6 +22,8 @@ $(function() {
     });
     dropChange(2);
     $("input[type='submit']").click(function() {
+        $("form").valid();
+        $(this).prop("disabled", true);
         var form = new FormData($("form")[0]);
         if ($(this).attr("data-url") == '' || !$(this).attr("data-url")) { return false; }
         ajaxForm("post", $(this).attr("data-url"), form, "json", function(data) {
@@ -29,6 +31,8 @@ $(function() {
             if (data.result == 1) {
                 window.parent.refresh = true;
                 setTimeout(function() { window.parent.layer.closeAll() }, 1000);
+            } else {
+                $(this).prop("disabled", false);
             }
         });
     });

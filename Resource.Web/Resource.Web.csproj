@@ -113,7 +113,6 @@
     <Content Include="Content\img\dorllylogo.png" />
     <Content Include="Content\img\loading-spinner-grey.gif" />
     <Content Include="Content\img\loginbg.jpg" />
-    <Content Include="Content\img\cblog1.png" />
     <Content Include="Content\img\cblog.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo2.png" />
@@ -776,6 +775,8 @@
     <Content Include="Views\Shared\_ResourceAD - 复制.cshtml" />
     <Content Include="Views\Shared\_ResourceCB - 复制.cshtml" />
     <Content Include="Views\S_Resource\Index.cshtml" />
+    <Content Include="Views\Shared\_ResourceMR - 复制.cshtml" />
+    <Content Include="Views\Shared\_ResourceRM - 复制.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

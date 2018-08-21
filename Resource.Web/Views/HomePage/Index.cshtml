@@ -46,9 +46,7 @@
                         <span class="input-group-addon">状态：</span>
                         <select class="selectpicker form-control pull-righ" id="status" title="请选择...">
                             <option value="">全部</option>
-                            <option value="1">待审核</option>
-                            <option value="2">审核通过</option>
-                            <option value="3">审核不通过</option>
+                            <option value="1">待上架</option>
                             <option value="4">上架</option>
                             <option value="5">下架</option>
                             <option value="6">作废</option>
@@ -94,9 +92,9 @@
             <td>{{value.Title}}</td>
             <td>{{value.SubTitle}}</td>
             <td class="status" data-status="{{value.Status}}">
-                {{if value.Status==1}}待审核
-                {{else if value.Status==2}}审核通过
-                {{else if value.Status==3}}审核不通过
+                {{if value.Status==1}}待上架
+                @*{{else if value.Status==2}}审核通过
+                {{else if value.Status==3}}审核不通过*@
                 {{else if value.Status==4}}上架
                 {{else if value.Status==5}}下架
                 {{else if value.Status==6}}作废

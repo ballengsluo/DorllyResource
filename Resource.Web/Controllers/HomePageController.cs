@@ -96,7 +96,7 @@ namespace Resource.Web.Controllers
                 if (!string.IsNullOrEmpty(newPath)) hp.ImgUrl = newPath;
                 hp.UpdateTime = DateTime.Now;
                 hp.UpdateUser = user.Account;
-                if (TryUpdateModel(hp, "", form.AllKeys, new string[] { "ImgUrl", "Status", "ExtraInfoID" }))
+                if (TryUpdateModel(hp, "", form.AllKeys, new string[] { "ImgUrl", "Status"}))
                 {
                     if (dc.SaveChanges() > 0)
                     {

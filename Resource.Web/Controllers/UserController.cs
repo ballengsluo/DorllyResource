@@ -35,23 +35,23 @@ namespace Resource.Web.Controllers
             return View(user);
         }
         [HttpPost]
-        public JsonResult Create(T_User user)
+        public JsonResult Create(T_User users)
         {
             try
             {
 
-                if (string.IsNullOrEmpty(user.PWD)) user.PWD = Encrypt.EncryptDES("888888", 1);
-                else user.PWD = Encrypt.EncryptDES(user.PWD, 1);
-                user.Enable = true;
-                user.CreateDate = DateTime.Now;
-                dc.Set<T_User>().Add(user);
 
+                if (string.IsNullOrEmpty(users.PWD)) users.PWD = Encrypt.EncryptDES("888888", 1);
+                else users.PWD = Encrypt.EncryptDES(users.PWD, 1);
+                users.Enable = true;
+                users.CreateDate = DateTime.Now;
+                dc.Set<T_User>().Add(users);
                 if (!string.IsNullOrEmpty(Request.Form["InitRole"]) && Request.Form["InitRole"] == "1")
                 {
 
                     T_UserRole ur = new T_UserRole();
                     ur.RoleID = 1;
-                    ur.UserID = user.Account;
+                    ur.UserID = users.Account;
                     dc.Set<T_UserRole>().Add(ur);
                 }
 
@@ -61,7 +61,7 @@ namespace Resource.Web.Controllers
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(ResponseResult.GetResult(ResultEnum.Exception, ex));
             }
 
         }
@@ -188,6 +188,16 @@ namespace Resource.Web.Controllers
             {
 
                 T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
+                var ur = user.T_UserRole.ToList();
+                foreach (var item in ur)
+                {
+                    dc.Set<T_UserRole>().Remove(item);
+                }
+                var li = user.T_LoginInfo.ToList();
+                foreach (var item in li)
+                {
+                    dc.Set<T_LoginInfo>().Remove(item);
+                }
                 dc.Set<T_User>().Remove(user);
                 if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
                 else return Json(ResponseResult.GetResult(ResultEnum.Fail));

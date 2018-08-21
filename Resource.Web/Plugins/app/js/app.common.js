@@ -61,6 +61,7 @@ var refresh = false;
 function cmtSuccess(data) {
     layer.msg(data.msg, { icon: data.result })
     if (data.result == 1) {
+        console.log(data.ex);
         window.parent.refresh = true;
         setTimeout(function() { window.parent.layer.closeAll() }, 1000);
     }

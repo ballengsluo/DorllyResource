@@ -31,10 +31,13 @@
                     </label>
                     <div class="col-md-3">
                         @*@{ Html.RenderAction("PositionDrop", new { id = Model.Position });}*@
-                        <select class="selectpicker form-control pull-righ" name="Position" title="请选择...">
-                            <option value="1" selected="@{if (Model.Position == 1){ Html.Raw("selected");}}">banner图</option>
+                        <select class="selectpicker form-control pull-righ" name="Position" id="Position" title="请选择...">
+                            @*<option value="1" selected="@{if (Model.Position == 1){ Html.Raw("selected");}}">banner图</option>
                             <option value="2" selected="@{if (Model.Position == 2){ Html.Raw("selected");}}">广告位</option>
-                            <option value="3" selected="@{if (Model.Position == 3){ Html.Raw("selected");}}">菜单</option>
+                            <option value="3" selected="@{if (Model.Position == 3){ Html.Raw("selected");}}">菜单</option>*@
+                            <option value="1">banner图</option>
+                            <option value="2">广告位</option>
+                            <option value="3">菜单</option>
                         </select>
                     </div>
                 </div>
@@ -109,6 +112,7 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     <script>
         $(function () {
+            $("#Position").val("@Model.Position");
             $("input[type='file']").change(function () {
                 var $file = $(this);
                 var fileObj = $file[0];
