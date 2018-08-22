@@ -37,7 +37,7 @@
 </div>
 <div class="form-group">
     <label class="control-label col-md-1">
-        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>房间编码
+        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>房间编号
     </label>
     <div class="col-md-2">
         @{ Html.RenderAction("RMDrop", "Drop", new { pid = Model.FloorID, id = Model.ParentID, model = 1 });}
@@ -46,7 +46,7 @@
             </select>*@
     </div>
     <label class="control-label col-md-1">
-        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>工位编码
+        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>工位编号
     </label>
     <div class="col-md-2">
         @if (string.IsNullOrEmpty(Model.ID))

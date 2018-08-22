@@ -86,7 +86,7 @@ function dropChange(model) {
             $("#floor").html("").selectpicker("refresh");
             $("#room").html("").selectpicker("refresh");
             if ($(this).val()) {
-                $.getJSON("/Drop/CityDropList", {}, function(data) {
+                $.getJSON("/Drop/RegionDropList", { pid: $(this).val() }, function(data) {
                     console.log(data);
                     var html = "";
                     if (model == 1) html += "<option value=''>全部</option>";

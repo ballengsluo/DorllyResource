@@ -191,12 +191,15 @@
                 });
             });
             $("#commit").click(function () {
+                $this = $(this);
+                $this.prop("disabled", true);
                 var form = new FormData($("form")[0]);
                 var id = $("#Position").val();
                 ajaxForm("post", "/HomePageFoot/Edit/"+id, form, "json", function (data) {
                     layer.msg(data.msg, { icon: data.result });
 
                 });
+                $this.prop("disabled", false);
             });
         });
     </script>

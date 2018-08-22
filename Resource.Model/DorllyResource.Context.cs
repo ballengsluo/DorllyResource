@@ -46,7 +46,6 @@ namespace Resource.Model
         public virtual DbSet<T_RoleFunc> T_RoleFunc { get; set; }
         public virtual DbSet<T_RoleMenu> T_RoleMenu { get; set; }
         public virtual DbSet<T_Stage> T_Stage { get; set; }
-        public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
         public virtual DbSet<V_AD> V_AD { get; set; }
         public virtual DbSet<V_Building> V_Building { get; set; }
@@ -65,5 +64,7 @@ namespace Resource.Model
         public virtual DbSet<Mstr_Customer> Mstr_Customer { get; set; }
         public virtual DbSet<T_Order> T_Order { get; set; }
         public virtual DbSet<V_Resource> V_Resource { get; set; }
+        public virtual DbSet<T_Cust> T_Cust { get; set; }
+        public virtual DbSet<T_User> T_User { get; set; }
     }
 }

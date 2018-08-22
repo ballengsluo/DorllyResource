@@ -50,14 +50,17 @@
             dropChange(2);
             layui.use('laydate', function () {
                 var laydate = layui.laydate;
-
+                laydate.render({
+                    elem: '#PubTime',
+                    range: ' ~ '//指定元素
+                });
                 //执行一个laydate实例
-                laydate.render({
-                    elem: '#BeginTime' //指定元素
-                });
-                laydate.render({
-                    elem: '#EndTime' //指定元素
-                });
+                //laydate.render({
+                //    elem: '#BeginTime' //指定元素
+                //});
+                //laydate.render({
+                //    elem: '#EndTime' //指定元素
+                //});
             });
         });
     </script>

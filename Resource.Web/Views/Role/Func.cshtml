@@ -43,6 +43,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>编辑权限</title>
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
 </head>
 <body>
@@ -72,24 +74,26 @@
         </div>
     </div>
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
     @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
     <script>
         $(function () {
             $('#commit').click(function () {
+                var $this = $(this);
+                $this.prop("disabled", true);
                 var rm = [];
                 var rmf = [];
                 $("input:checkbox[name='menu']:checked").each(function () {
-                    rm.push({ RID: $(this).attr('data-rid'), MID: $(this).attr('data-id') });
+                    rm.push({ RoleID: $(this).attr('data-rid'), MenuID: $(this).attr('data-id') });
                 });
-                console.log($("input:checkbox[name='menu']:checked"));
-                console.log(rm);
                 $("input:checkbox[name='func']:checked").each(function () {
-                    rmf.push({ RID: $(this).attr('data-rid'), MFID: $(this).attr('data-id') });
+                    rmf.push({ RoleID: $(this).attr('data-rid'), FuncID: $(this).attr('data-id') });
                 });
-                console.log(rmf);
-                $.post("@Url.Action("RoleMenuFunc")", { id: '@ViewBag.role.ID', rmList: rm, rmfList: rmf }, function (data) {
-                    console.log(data);
+                $.post("@Url.Action("Func")", { id: '@ViewBag.role.ID', rmList: rm, rmfList: rmf }, function (data) {
+                    cmtSuccess(data);
                 });
+                $this.prop("disabled", false);
             });
             $("input:checkbox[name='menu']").change(function () {
                 console.log($(this).is(':checked'));

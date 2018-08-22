@@ -21,7 +21,7 @@ namespace Resource.Web.Controllers
                 DbContext dc = DbContextFactory.Create();
                 var loginObj = dc.Set<T_LoginInfo>();
                 var pwd = Encrypt.EncryptDES(lv.Pwd, 1);
-                var user = dc.Set<T_User>().Where(a => a.Account == lv.Name && a.PWD == pwd).FirstOrDefault();
+                var user = dc.Set<T_User>().Where(a => a.Account == lv.Name && a.PWD == pwd && a.Enable == true).FirstOrDefault();
                 if (user != null)
                 {
                     var cookieName = "resource";

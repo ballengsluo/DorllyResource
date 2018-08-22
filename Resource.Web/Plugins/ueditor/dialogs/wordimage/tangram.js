@@ -253,18 +253,18 @@ baidu.string = baidu.string || {};
 
 
 /**
- * 对目标字符串进行html编码
+ * 对目标字符串进行html编号
  * @name baidu.string.encodeHTML
  * @function
  * @grammar baidu.string.encodeHTML(source)
  * @param {string} source 目标字符串
  * @remark
- * 编码字符有5个：&<>"'
+ * 编号字符有5个：&<>"'
  * @shortcut encodeHTML
  * @meta standard
  * @see baidu.string.decodeHTML
  *             
- * @returns {string} html编码后的字符串
+ * @returns {string} html编号后的字符串
  */
 baidu.string.encodeHTML = function (source) {
     return String(source)
@@ -1053,7 +1053,7 @@ baidu.sio = baidu.sio || {};
  * 
  * @param {HTMLElement} src script节点
  * @param {String} url script节点的地址
- * @param {String} [charset] 编码
+ * @param {String} [charset] 编号
  */
 baidu.sio._createScriptTag = function(scr, url, charset){
     scr.setAttribute('type', 'text/javascript');

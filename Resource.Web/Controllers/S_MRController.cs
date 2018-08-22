@@ -36,7 +36,7 @@ namespace Resource.Web.Controllers
                 for (int i = 0; i < temp.Count(); i++)
                 {
                     detail += string.Format(@"<div class='detail' data-pid='{0}'>
-                                            <p><span>资源编码：</span><span>{1}</span></p>
+                                            <p><span>资源编号：</span><span>{1}</span></p>
                                             <p><span>公司(个人)：</span><span>{2}</span></p>
                                             <p><span>联系电话：</span><span>{3}</span></p>
                                             <p><span>开始时间：</span>{4}<span></span></p>

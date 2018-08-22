@@ -67,7 +67,7 @@
             $('#commit').click(function () {
                 var param = [];
                 $("input:checkbox[name='ur']:checked").each(function () {
-                    param.push({ RID: $(this).attr('data-rid'), UID: $(this).attr('data-uid') });
+                    param.push({ RoleID: $(this).attr('data-rid'), UserID: $(this).attr('data-uid') });
                 });
                 var uid = $("input:checkbox[name='ur']").attr('data-uid');
                 ajax('post', '@Url.Action("Role")', { id: uid, urList: param }, 'json', function (data) {

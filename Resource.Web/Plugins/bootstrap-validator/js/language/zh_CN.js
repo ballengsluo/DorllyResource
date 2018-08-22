@@ -5,7 +5,7 @@
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
-            'default': '请输入有效的Base64编码'
+            'default': '请输入有效的Base64编号'
         },
         between: {
             'default': '请输入在 %s 和 %s 之间的数值',
@@ -45,7 +45,7 @@
             'default': '请输入有效的数字'
         },
         ean: {
-            'default': '请输入有效的EAN商品编码'
+            'default': '请输入有效的EAN商品编号'
         },
         emailAddress: {
             'default': '请输入有效的邮件地址'
@@ -58,7 +58,7 @@
             notInclusive: '请输入大于 %s 的数值'
         },
         grid: {
-            'default': '请输入有效的GRId编码'
+            'default': '请输入有效的GRId编号'
         },
         hex: {
             'default': '请输入有效的16进制数'
@@ -207,10 +207,10 @@
             'default': '请输入有效的ISBN(国际标准书号)'
         },
         isin: {
-            'default': '请输入有效的ISIN(国际证券编码)'
+            'default': '请输入有效的ISIN(国际证券编号)'
         },
         ismn: {
-            'default': '请输入有效的ISMN(印刷音乐作品编码)'
+            'default': '请输入有效的ISMN(印刷音乐作品编号)'
         },
         issn: {
             'default': '请输入有效的ISSN(国际标准杂志书号)'
@@ -340,9 +340,9 @@
             'default': '请输入有效的VIN(美国车辆识别号码)'
         },
         zipCode: {
-            'default': '请输入有效的邮政编码',
+            'default': '请输入有效的邮政编号',
             countryNotSupported: '不支持 %s 国家或地区',
-            country: '请输入有效的 %s 国家或地区的邮政编码',
+            country: '请输入有效的 %s 国家或地区的邮政编号',
             countries: {
                 AT: '奥地利',
                 BR: '巴西',

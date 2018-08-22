@@ -31,6 +31,8 @@ namespace Resource.Web.Controllers
             try
             {
                 DbContext dc = DbContextFactory.Create();
+                city.Enable = true;
+                city.IsDefault = false;
                 dc.Set<T_City>().Add(city);
                 if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
                 else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -56,7 +58,7 @@ namespace Resource.Web.Controllers
             {
                 DbContext dc = DbContextFactory.Create();
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
-                if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable" }))
+                if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable", "IsDefault" }))
                 {
                     if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
                 }

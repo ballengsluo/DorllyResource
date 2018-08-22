@@ -39,29 +39,25 @@ namespace Resource.Web.Controllers
         {
             try
             {
-
-
                 if (string.IsNullOrEmpty(users.PWD)) users.PWD = Encrypt.EncryptDES("888888", 1);
                 else users.PWD = Encrypt.EncryptDES(users.PWD, 1);
                 users.Enable = true;
                 users.CreateDate = DateTime.Now;
                 dc.Set<T_User>().Add(users);
+                T_UserRole ur = new T_UserRole();
+                ur.UserID = users.Account;
                 if (!string.IsNullOrEmpty(Request.Form["InitRole"]) && Request.Form["InitRole"] == "1")
-                {
-
-                    T_UserRole ur = new T_UserRole();
                     ur.RoleID = 1;
-                    ur.UserID = users.Account;
-                    dc.Set<T_UserRole>().Add(ur);
-                }
-
+                else
+                    ur.RoleID = 2;
+                dc.Set<T_UserRole>().Add(ur);
                 if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
                 else return Json(ResponseResult.GetResult(ResultEnum.Fail));
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception, ex));
+                return Json(ResponseResult.GetResult(ResultEnum.Exception));
             }
 
         }
@@ -105,6 +101,7 @@ namespace Resource.Web.Controllers
             T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
             return View(user);
         }
+
         public ActionResult SingleReset()
         {
 
@@ -148,6 +145,7 @@ namespace Resource.Web.Controllers
                 return Json(ResponseResult.GetResult(ResultEnum.Exception));
             }
         }
+
         public ActionResult Role(string id)
         {
 
@@ -247,18 +245,19 @@ namespace Resource.Web.Controllers
         public ContentResult Search(SearchParam param)
         {
 
-            var list = dc.Set<T_User>().Where(a => true);
+            var list = dc.Set<T_User>().Where(a => true).Select(a => new { a.Account, a.UserName, a.CreateDate, a.Addr, a.Enable, a.Email, a.Phone });
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.Account.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.UserName.Contains(param.Name));
             if (param.BeginTime != null) list = list.Where(a => a.CreateDate >= param.BeginTime);
             if (param.EndTime != null) list = list.Where(a => a.CreateDate <= param.EndTime);
             if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
             int count = list.Count();
-            list = list.OrderBy(a => a.Account).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
+            list = list.OrderBy(a => a.Account)
+                .Skip((param.PageIndex - 1) * param.PageSize)
+                .Take(param.PageSize);
             JsonSerializerSettings setting = new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                DateFormatString = "yyyy-MM-dd HH:mm:sss"
+                DateFormatString = "yyyy-MM-dd HH:mm:ss"
             };
             var obj = JsonConvert.SerializeObject(new { count = count, data = list.ToList() }, setting);
             return Content(obj);

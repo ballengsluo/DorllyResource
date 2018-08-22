@@ -108,6 +108,8 @@
                 $("#ImgURL").val("");
             });
             $("#commit").click(function () {
+                $this = $(this);
+                $this.prop("disabled",true);
                 var form = new FormData($("form")[0]);
                 ajaxForm("post", "@Url.Action("Create")", form, "json", function (data) {
                     layer.msg(data.msg, { icon: data.result });
@@ -116,6 +118,7 @@
                         setTimeout(function () { window.parent.layer.closeAll() }, 1000);
                     }
                 });
+                $this.prop("disabled", false);
             });
         });
     </script>

@@ -20,6 +20,12 @@ namespace Resource.Web.Controllers
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
         }
+        public ActionResult Detail(string id)
+        {
+            var pub = dc.Set<V_Public>().Where(a => a.ID==id).FirstOrDefault();
+
+            return View(pub);
+        }
         public ContentResult Search(SearchParam param)
         {
             var list = dc.Set<V_Public>().Where(a => true);
@@ -73,6 +79,8 @@ namespace Resource.Web.Controllers
         public ActionResult Edit(string id)
         {
             var pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 4 || pub.Status == 6)
+                return Content("<script>window.parent.layer.closeAll();window.parent.layer.msg('该数据不允许编辑!');</script>");
             return Redirect(pub.ResourceID, pub);
         }
         public ActionResult Public(string id)
@@ -122,6 +130,8 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 2) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 2;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -130,6 +140,8 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 3) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 3;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -139,6 +151,8 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (pub.Status != 2) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 4;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -147,6 +161,8 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 5) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (pub.Status != 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 5;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -155,6 +171,8 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 6) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (pub.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 6;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -164,6 +182,7 @@ namespace Resource.Web.Controllers
         {
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
+            if (pub.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             dc.Set<T_ResourcePublic>().Remove(pub);
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));

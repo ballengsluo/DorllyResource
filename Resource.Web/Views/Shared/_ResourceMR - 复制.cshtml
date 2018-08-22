@@ -15,7 +15,7 @@
         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = Model.ParkID, model = 1 });}
     </div>
     <label class="control-label col-md-1">
-        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>会议室编码
+        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>会议室编号
     </label>
     <div class="col-md-2">
         @if (string.IsNullOrEmpty(Model.ID))

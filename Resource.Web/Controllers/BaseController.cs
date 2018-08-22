@@ -243,6 +243,7 @@ namespace Resource.Web.Controllers
             {
                 resource.UpdateTime = DateTime.Now;
                 resource.UpdateUser = user.Account;
+                if(resource.ResourceKindID==1) resource.ParentID = form["FloorID"];
                 if (add) obj.Add(resource);
                 success = true;
             }
@@ -291,6 +292,8 @@ namespace Resource.Web.Controllers
             {
                 pub.UpdateTime = DateTime.Now;
                 pub.UpdateUser = user.Account;
+                pub.BeginTime = Convert.ToDateTime(form["PubTime"].Split('~')[0].Trim());
+                pub.EndTime = Convert.ToDateTime(form["PubTime"].Split('~')[1].Trim());
                 if (add) obj.Add(pub);
                 success = true;
             }

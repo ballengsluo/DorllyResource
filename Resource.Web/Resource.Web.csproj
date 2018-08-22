@@ -777,6 +777,7 @@
     <Content Include="Views\S_Resource\Index.cshtml" />
     <Content Include="Views\Shared\_ResourceMR - 复制.cshtml" />
     <Content Include="Views\Shared\_ResourceRM - 复制.cshtml" />
+    <Content Include="Views\Public\Detail.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

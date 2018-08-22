@@ -123,6 +123,8 @@
                 $("#ImgURL").val("");
             });
             $("#commit").click(function () {
+                $this = $(this);
+                $this.prop("disabled", true);
                 var form = new FormData($("form")[0]);
                 ajaxForm("post", "/HomePage/Edit?id=@Model.ID", form, "json", function (data) {
                     layer.msg(data.msg, { icon: data.result });
@@ -131,6 +133,7 @@
                         setTimeout(function () { window.parent.layer.closeAll() }, 1000);
                     }
                 });
+                $this.prop("disabled", false);
             });
         });
     </script>

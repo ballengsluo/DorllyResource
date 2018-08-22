@@ -73,6 +73,8 @@ namespace Resource.Web.Controllers
         {
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+            if (hp.Status == 4 || hp.Status == 6)
+                return Content("<script>window.parent.layer.closeAll();window.parent.layer.msg('该数据不允许编辑!');</script>");
             return View(hp);
         }
 
@@ -96,7 +98,7 @@ namespace Resource.Web.Controllers
                 if (!string.IsNullOrEmpty(newPath)) hp.ImgUrl = newPath;
                 hp.UpdateTime = DateTime.Now;
                 hp.UpdateUser = user.Account;
-                if (TryUpdateModel(hp, "", form.AllKeys, new string[] { "ImgUrl", "Status"}))
+                if (TryUpdateModel(hp, "", form.AllKeys, new string[] { "ImgUrl", "Status" }))
                 {
                     if (dc.SaveChanges() > 0)
                     {
@@ -127,8 +129,8 @@ namespace Resource.Web.Controllers
             try
             {
                 DbContext dc = DbContextFactory.Create();
-
                 T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+                if (hp.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
                 string path = hp.ImgUrl;
                 dc.Set<T_HomePage>().Remove(hp);
                 if (dc.SaveChanges() > 0)
@@ -169,6 +171,8 @@ namespace Resource.Web.Controllers
         {
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+            if (hp.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (hp.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 4;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -177,6 +181,8 @@ namespace Resource.Web.Controllers
         {
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+            if (hp.Status == 5) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (hp.Status != 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 5;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -185,6 +191,8 @@ namespace Resource.Web.Controllers
         {
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+            if (hp.Status == 6) return Json(new { result = 0, msg = "状态一致，无从改变！" });
+            else if (hp.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 6;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));

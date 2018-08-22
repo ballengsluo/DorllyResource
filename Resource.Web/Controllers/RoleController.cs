@@ -139,34 +139,65 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                if (id == 0 || (rmList == null && rmfList != null)) return Json(ResponseResult.GetResult(ResultEnum.Fail));
-                if (rmList == null && rmfList == null) return Json(ResponseResult.GetResult(ResultEnum.Nullable));
 
-
+                if (id == 0) return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                //
+                var menuList = dc.Set<T_RoleMenu>().Where(a => a.RoleID == id);
+                foreach (var item in menuList)
+                {
+                    dc.Set<T_RoleMenu>().Remove(item);
+                }
                 if (rmList != null)
                 {
-                    var menuList = dc.Set<T_RoleMenu>().Where(a => a.RoleID == id);
-                    foreach (var item in menuList)
-                    {
-                        dc.Set<T_RoleMenu>().Remove(item);
-                    }
                     foreach (var item in rmList)
                     {
                         dc.Set<T_RoleMenu>().Add(item);
                     }
                 }
+
+                //
+                var funcList = dc.Set<T_RoleFunc>().Where(a => a.RoleID == id);
+                foreach (var item in funcList)
+                {
+                    dc.Set<T_RoleFunc>().Remove(item);
+                }
                 if (rmfList != null)
                 {
-                    var funcList = dc.Set<T_RoleFunc>().Where(a => a.RoleID == id);
-                    foreach (var item in funcList)
-                    {
-                        dc.Set<T_RoleFunc>().Remove(item);
-                    }
                     foreach (var item in rmfList)
                     {
                         dc.Set<T_RoleFunc>().Add(item);
                     }
                 }
+
+
+                //if (rmList == null && rmfList == null) return Json(ResponseResult.GetResult(ResultEnum.Nullable));
+
+
+                //if (rmList != null)
+                //{
+                //    var menuList = dc.Set<T_RoleMenu>().Where(a => a.RoleID == id);
+                //    foreach (var item in menuList)
+                //    {
+                //        dc.Set<T_RoleMenu>().Remove(item);
+                //    }
+                //    foreach (var item in rmList)
+                //    {
+                //        dc.Set<T_RoleMenu>().Add(item);
+                //    }
+                //}
+                //if (rmfList != null)
+                //{
+                //    var funcList = dc.Set<T_RoleFunc>().Where(a => a.RoleID == id);
+                //    foreach (var item in funcList)
+                //    {
+                //        dc.Set<T_RoleFunc>().Remove(item);
+                //    }
+                //    foreach (var item in rmfList)
+                //    {
+                //        dc.Set<T_RoleFunc>().Add(item);
+                //    }
+                //}
+
                 if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
                 else return Json(ResponseResult.GetResult(ResultEnum.Fail));
             }

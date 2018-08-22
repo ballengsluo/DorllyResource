@@ -12,7 +12,7 @@
     <div class="container">
         <div style="max-width:400px;margin:0 auto;">
             <h3 style="margin:30px 0px;text-align:center">编辑建设期</h3>
-            @using (Ajax.BeginForm("Create", new { id = Model.ID }, new AjaxOptions
+            @using (Ajax.BeginForm("Edit", new { id = Model.ID }, new AjaxOptions
             {
                 HttpMethod = "POST",
                 OnSuccess = "cmtSuccess",

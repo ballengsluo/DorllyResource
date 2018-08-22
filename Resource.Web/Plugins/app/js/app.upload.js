@@ -16,13 +16,13 @@ function imginit() {
 function upload() {
     $("#upbtn").click(function() {
         if (!$("#id").val() || $("#id").val() == "") {
-            layer.msg("资源编码不能为空！");
+            layer.msg("资源编号不能为空！");
             return false;
         }
     });
     $("#upbtn").change(function() {
         if (!$("#id").val() || $("#id").val() == "") {
-            layer.msg("资源编码为空，上传失败！");
+            layer.msg("资源编号为空，上传失败！");
             return false;
         }
         var form = new FormData();

@@ -60,7 +60,11 @@ function operation() {
     $('#notpass').click(function() {
         mission("温馨提示，是否审核不通过？", $(this));
     });
-
+    //绑定角色
+    $('#role').click(function() {
+        var url = $(this).attr('data-url') + "?id=" + id;
+        layerOpen(url);
+    });
     //发布
     $('#pub').click(function() {
         mission("郑重提醒,是否发布此资源？", $(this));
@@ -111,6 +115,7 @@ function layerOpen(url) {
     layer.full(index);
 }
 
+
 function search(params) {
     ajax("get", $('#search').attr('data-url'), params, "json", function(data) {
         id = "";
@@ -159,33 +164,49 @@ function table() {
     });
 }
 
-function showstatus(value) {
-    if (value == 1) { //待上架
-        $('#pub').prop("disabled", false);
-        $('#unpub').prop("disabled", true);
-        $("#edit").prop("disabled", false);
-        $("#off").prop("disabled", false);
-        $('#del').prop("disabled", false);
-    } else if (value == 4) { //上架
-        $('#pub').prop("disabled", true);
-        $('#unpub').prop("disabled", false);
-        $("#edit").prop("disabled", true);
-        $("#off").prop("disabled", true);
-        $('#del').prop("disabled", true);
-    } else if (value == 5) { //下架
-        $('#pub').prop("disabled", false);
-        $('#unpub').prop("disabled", true);
-        $("#edit").prop("disabled", false);
-        $("#off").prop("disabled", false);
-        $('#del').prop("disabled", false);
-    } else if (value == 6) { //作废
-        $('#del').prop("disabled", false);
-        $('#pub').prop("disabled", true);
-        $('#unpub').prop("disabled", true);
-        $("#edit").prop("disabled", true);
-        $("#off").prop("disabled", true);
-    }
-}
+// function showstatus(value) {
+//     if (value == 1) { //待上架 待审核
+//         $('#pass').prop("disabled", false);
+//         $('#notpass').prop("disabled", true);
+//         $('#pub').prop("disabled", false);
+//         $('#unpub').prop("disabled", true);
+//         $("#edit").prop("disabled", false);
+//         $("#off").prop("disabled", false);
+//         $('#del').prop("disabled", false);
+//     } else if (value == 2) { //审核通过
+//         $('#pub').show();
+//         $('#unpub').show();
+//         $('#pass').hide();
+//         $('#notpass').hide();
+//         $("#edit").show();
+//         $("#off").show();
+//     } else if (value == 3) { //审核不通过
+//         $('#pub').hide();
+//         $('#unpub').hide();
+//         $('#pass').prop("disabled", false);
+//         $('#notpass').prop("disabled", false);
+//         $("#edit").show();
+//         $("#off").show();
+//     } else if (value == 4) { //上架
+//         $('#pub').prop("disabled", true);
+//         $('#unpub').prop("disabled", false);
+//         $("#edit").prop("disabled", true);
+//         $("#off").prop("disabled", true);
+//         $('#del').prop("disabled", true);
+//     } else if (value == 5) { //下架
+//         $('#pub').prop("disabled", false);
+//         $('#unpub').prop("disabled", true);
+//         $("#edit").prop("disabled", false);
+//         $("#off").prop("disabled", false);
+//         $('#del').prop("disabled", false);
+//     } else if (value == 6) { //作废
+//         $('#del').prop("disabled", false);
+//         $('#pub').prop("disabled", true);
+//         $('#unpub').prop("disabled", true);
+//         $("#edit").prop("disabled", true);
+//         $("#off").prop("disabled", true);
+//     }
+// }
 
 function showstatusbak(value) {
     if (value == 1) { //待审核

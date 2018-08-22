@@ -86,6 +86,9 @@
     <Compile Include="T_City.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_Cust.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_Floor.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
