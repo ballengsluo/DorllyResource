@@ -13,7 +13,7 @@ namespace Resource.Web.Controllers
     public class R_MRController : ResourceController
     {
         public ActionResult Index()
-        {            
+        {
             string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
@@ -25,7 +25,7 @@ namespace Resource.Web.Controllers
             return View(new V_MR());
         }
         public ActionResult Edit(string id)
-        {            
+        {
             var obj = dc.Set<V_MR>().Where(a => a.ID == id).FirstOrDefault();
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == id).ToList();
@@ -33,11 +33,12 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            
+
             var list = dc.Set<V_MR>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.ParkID)) list = list.Where(a => a.ParkID == param.ParkID);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
+            if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);

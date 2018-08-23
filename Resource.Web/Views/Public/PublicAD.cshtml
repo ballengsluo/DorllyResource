@@ -14,15 +14,15 @@
 <body>
     <div class="container">
         <div style="margin:0 auto;">
-            @if (string.IsNullOrEmpty(Model.ResourceID))
+            @*@if (string.IsNullOrEmpty(Model.ResourceID))
             {
                 <h3 style="margin:30px 0px;text-align:center">新增广告位资源发布信息</h3>
             }
             else
             {
                 <h3 style="margin:30px 0px;text-align:center">编辑广告位资源发布信息</h3>
-            }
-            
+            }*@
+            <h3 style="margin:30px 0px;text-align:center">广告位资源发布信息</h3>
             @using (Ajax.BeginForm("Create", null, new AjaxOptions
             {
                 HttpMethod = "POST",
@@ -51,7 +51,7 @@
                 var laydate = layui.laydate;
                 laydate.render({
                     elem: '#PubTime',
-                    range:' ~ '//指定元素
+                    range:'~'//指定元素
                 });
                 //执行一个laydate实例
                 //laydate.render({

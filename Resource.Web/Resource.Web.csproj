@@ -772,12 +772,10 @@
     </None>
     <Content Include="Views\Drop\RMDrop.cshtml" />
     <Content Include="Views\Drop\ResourceKindDrop.cshtml" />
-    <Content Include="Views\Shared\_ResourceAD - 复制.cshtml" />
-    <Content Include="Views\Shared\_ResourceCB - 复制.cshtml" />
     <Content Include="Views\S_Resource\Index.cshtml" />
-    <Content Include="Views\Shared\_ResourceMR - 复制.cshtml" />
-    <Content Include="Views\Shared\_ResourceRM - 复制.cshtml" />
-    <Content Include="Views\Public\Detail.cshtml" />
+    <Content Include="Views\Public\Detail_AD.cshtml" />
+    <Content Include="Views\Shared\_RSStatus.cshtml" />
+    <Content Include="Views\HomePage\Detail.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -966,7 +964,6 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Func.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\Shared\_DataDropDown.cshtml" />
     <Content Include="Views\Shared\_FuncPage.cshtml" />
     <Content Include="Views\Shared\_PublicInfo.cshtml" />
     <Content Include="Views\Shared\_ResourceAD.cshtml" />

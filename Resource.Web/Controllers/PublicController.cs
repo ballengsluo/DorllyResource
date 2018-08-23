@@ -22,9 +22,9 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Detail(string id)
         {
-            var pub = dc.Set<V_Public>().Where(a => a.ID==id).FirstOrDefault();
-
-            return View(pub);
+            var pub = dc.Set<T_ResourcePublic>().AsNoTracking().Where(a => a.ID == id).FirstOrDefault();
+            ViewBag.check = 1;
+            return Redirect(pub.ResourceID, pub);
         }
         public ContentResult Search(SearchParam param)
         {
@@ -89,6 +89,7 @@ namespace Resource.Web.Controllers
             return Redirect(id, pub);
         }
 
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult AddOrUpdate(string id, FormCollection form)
@@ -141,7 +142,7 @@ namespace Resource.Web.Controllers
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 3) return Json(new { result = 0, msg = "状态一致，无从改变！" });
-            else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
+            else if (pub.Status != 6) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 3;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
@@ -152,7 +153,7 @@ namespace Resource.Web.Controllers
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
-            else if (pub.Status != 2) return Json(new { result = 0, msg = "请选择正确的操作！" });
+            else if (pub.Status != 2 && pub.Status != 5) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 4;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));

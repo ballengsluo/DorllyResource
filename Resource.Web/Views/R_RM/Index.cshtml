@@ -26,27 +26,27 @@
             </div>*@
         <div class="select-action">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">园区</span>
                         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">建设期</span>
                         <select class="selectpicker form-control pull-righ" id="stage" title="请选择..."></select>
 
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">楼栋</span>
                         <select class="selectpicker form-control pull-righ" id="build" title="请选择..."></select>
 
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">楼层</span>
                         <select class="selectpicker form-control pull-righ" id="floor" title="请选择..."></select>
@@ -55,19 +55,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
-                        <span class="input-group-addon">编号</span>
+                        <span class="input-group-addon">房间编号</span>
                         <input type="text" class="form-control" id="id">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">房间号</span>
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">房间状态</span>
+                        @{Html.RenderPartial("_RSStatus");}
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
@@ -104,7 +110,7 @@
             <td>{{value.ResourceTypeName}}</td>
             <td>{{value.RentArea}}</td>
             <td class="status" data-status="{{value.Status}}">
-                {{if value.Status==1}}已租
+                {{if value.Status==1}}占用
                 {{else if value.Status==2}}空闲
                 {{else if value.Status==3}}预定
                 {{else if value.Status==4}}预留
@@ -128,12 +134,13 @@
     <script>
         function paramsSet() {
             return obj = {
-                ParkID: $("#park").val(),
-                StageID: $("#stage").val(),
-                BuildingID: $("#build").val(),
-                FloorID: $("#floor").val(),
+                Park: $("#park").val(),
+                Stage: $("#stage").val(),
+                Build: $("#build").val(),
+                Floor: $("#floor").val(),
                 ID: $("#id").val(),
                 Name: $("#name").val(),
+                Status: $("#status").val(),
                 PageIndex: currentNum,
                 PageSize: limitCount
             };

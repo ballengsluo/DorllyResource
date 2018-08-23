@@ -108,8 +108,14 @@
         </script>
     </div>
 </div>
-
-<div class="cmtdiv col-md-offset-1">
+@if (ViewBag.check == null)
+{
+    <div class="cmtdiv col-md-offset-1">
+        <input type="submit" class="btn btn-primary" data-url="@Url.Action("AddOrUpdate")" value="保存">
+        <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
+    </div>
+}
+@*<div class="cmtdiv col-md-offset-1">
     <input type="submit" class="btn btn-primary" value="保存" data-url="@Url.Action("AddOrUpdate")">
     <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
-</div>
+</div>*@

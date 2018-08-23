@@ -108,7 +108,7 @@ function search(params) {
                 chartsdata1.push(row);
 
                 row = {};
-                row.label = "已租个数";
+                row.label = "占用个数";
                 row.data = value.OccupancySize;
                 chartsdata1.push(row);
 
@@ -133,7 +133,7 @@ function search(params) {
                 chartsdata2.push(row);
 
                 row = {};
-                row.label = "已租次数";
+                row.label = "占用次数";
                 row.data = value.OccupancySize;
                 chartsdata2.push(row);
 
@@ -158,7 +158,7 @@ function search(params) {
                 chartsdata3.push(row);
 
                 row = {};
-                row.label = "已租个数";
+                row.label = "占用个数";
                 row.data = value.OccupancySize;
                 chartsdata3.push(row);
 
@@ -345,7 +345,7 @@ function search2(params) {
                 chartsdata1.push(row);
 
                 row = {};
-                row.label = "已租个数";
+                row.label = "占用个数";
                 row.data = value.OccupancySize;
                 chartsdata1.push(row);
 
@@ -370,7 +370,7 @@ function search2(params) {
                 chartsdata2.push(row);
 
                 row = {};
-                row.label = "已租次数";
+                row.label = "占用次数";
                 row.data = value.OccupancySize;
                 chartsdata2.push(row);
 
@@ -395,7 +395,7 @@ function search2(params) {
                 chartsdata3.push(row);
 
                 row = {};
-                row.label = "已租个数";
+                row.label = "占用个数";
                 row.data = value.OccupancySize;
                 chartsdata3.push(row);
 

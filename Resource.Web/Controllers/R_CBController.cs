@@ -35,12 +35,13 @@ namespace Resource.Web.Controllers
         {
            
             var list = dc.Set<V_CB>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.FloorID)) list = list.Where(a => a.FloorID == param.FloorID);
-            else if (!string.IsNullOrEmpty(param.BuildingID)) list = list.Where(a => a.BuildingID == param.BuildingID);
-            else if (!string.IsNullOrEmpty(param.StageID)) list = list.Where(a => a.StageID == param.StageID);
-            else if (!string.IsNullOrEmpty(param.ParkID)) list = list.Where(a => a.ParkID == param.ParkID);
-            if (!string.IsNullOrEmpty(param.ParentID)) list = list.Where(a => a.ParentID.Contains(param.ParentID));
+            if (!string.IsNullOrEmpty(param.Floor)) list = list.Where(a => a.FloorID == param.Floor);
+            else if (!string.IsNullOrEmpty(param.Build)) list = list.Where(a => a.BuildingID == param.Build);
+            else if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.StageID == param.Stage);
+            else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            if (!string.IsNullOrEmpty(param.Room)) list = list.Where(a => a.ParentID.Contains(param.Room));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
+            if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);

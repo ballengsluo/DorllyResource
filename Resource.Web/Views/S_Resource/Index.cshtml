@@ -56,7 +56,7 @@
                             @{ Html.RenderAction("ResourceKindDrop", "Drop", new { id = "", model = 2 });}
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <select class="selectpicker form-control" id="group" title="资源分组">
+                            <select class="selectpicker form-control" id="group" title="分组">
                             </select>
                         </div>
                     </div>
@@ -85,12 +85,6 @@
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="input-group">
-                        <span class="input-group-addon">资源名称</span>
-                        <input type="text" class="form-control pull-right" id="name" />
-                    </div>
                 </div>
             </div>
         </div>

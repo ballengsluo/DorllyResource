@@ -45,7 +45,7 @@ function search(params) {
             $("#DisableRate").text(value.DisableRate);
 
             var row = {};
-            row.label = "已租个数";
+            row.label = "占用个数";
             row.data = value.OccupancySize;
             chartsdata.push(row);
 

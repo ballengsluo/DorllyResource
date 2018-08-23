@@ -34,6 +34,12 @@ namespace Resource.Web.Controllers
             list = list.OrderBy(a => a.OrderNum).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Detail(int id)
+        {
+            DbContext dc = DbContextFactory.Create();
+            T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
+            return View(hp);
+        }
         #region 增删改
 
         public ActionResult Create()
@@ -78,6 +84,7 @@ namespace Resource.Web.Controllers
             return View(hp);
         }
 
+
         [HttpPost]
         public ActionResult Edit(int id, FormCollection form)
         {
@@ -120,8 +127,11 @@ namespace Resource.Web.Controllers
                 System.Diagnostics.Debug.Print(ex.ToString());
                 return Json(ResponseResult.GetResult(ResultEnum.Exception));
             }
-        }
+        }      
 
+        #endregion
+
+        #region 状态业务
 
         [HttpPost]
         public JsonResult Del(int id)
@@ -147,9 +157,6 @@ namespace Resource.Web.Controllers
             }
         }
 
-        #endregion
-
-        #region 状态业务
         public JsonResult Pass(int id)
         {
             DbContext dc = DbContextFactory.Create();
@@ -158,6 +165,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
         }
+
         public JsonResult Notpass(int id)
         {
             DbContext dc = DbContextFactory.Create();
@@ -167,16 +175,18 @@ namespace Resource.Web.Controllers
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
 
         }
+
         public JsonResult Pub(int id)
         {
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             if (hp.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
-            else if (hp.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
+            else if (hp.Status != 1 && hp.Status != 5) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 4;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
         }
+
         public JsonResult Unpub(int id)
         {
             DbContext dc = DbContextFactory.Create();
@@ -187,6 +197,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
         }
+
         public JsonResult Off(int id)
         {
             DbContext dc = DbContextFactory.Create();
@@ -197,7 +208,6 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
         }
-
 
         #endregion
 

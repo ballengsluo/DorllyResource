@@ -129,8 +129,8 @@ namespace Resource.Web.Controllers
         {
             DbContext dc = DbContextFactory.Create();
             var list = dc.Set<V_Park>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.RegionID)) list = list.Where(a => a.RegionID == param.RegionID);
-            else if (!string.IsNullOrEmpty(param.CityID)) list = list.Where(a => a.CityID == param.CityID);
+            if (!string.IsNullOrEmpty(param.Region)) list = list.Where(a => a.RegionID == param.Region);
+            else if (!string.IsNullOrEmpty(param.City)) list = list.Where(a => a.CityID == param.City);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             int count = list.Count();

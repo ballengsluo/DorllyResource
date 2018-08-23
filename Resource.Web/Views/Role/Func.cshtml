@@ -81,7 +81,7 @@
         $(function () {
             $('#commit').click(function () {
                 var $this = $(this);
-                $this.prop("disabled", true);
+                $this.attr("disabled", "disabled");
                 var rm = [];
                 var rmf = [];
                 $("input:checkbox[name='menu']:checked").each(function () {
@@ -92,8 +92,11 @@
                 });
                 $.post("@Url.Action("Func")", { id: '@ViewBag.role.ID', rmList: rm, rmfList: rmf }, function (data) {
                     cmtSuccess(data);
+                    if (data.result != 1) {
+                        $this.prop("disabled", false);
+                    }
                 });
-                $this.prop("disabled", false);
+                
             });
             $("input:checkbox[name='menu']").change(function () {
                 console.log($(this).is(':checked'));

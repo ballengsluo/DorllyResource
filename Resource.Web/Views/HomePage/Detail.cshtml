@@ -1,0 +1,105 @@
+﻿@model Resource.Model.T_HomePage
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>首页布局数据</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+</head>
+<body>
+    <div class="container">
+        <div style="max-width:800px; margin:0 auto;">
+            <h3 style="margin:30px 0px;text-align:center">首页布局信息</h3>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>城市
+                    </label>
+                    <div class="col-md-3">
+                        @{ Html.RenderAction("CityDrop", "Drop", new { id = Model.CityID, model = 1 });}
+                    </div>
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>位置类型
+                    </label>
+                    <div class="col-md-3">
+                        <select class="selectpicker form-control pull-righ" name="Position" id="Position" title="请选择..." readonly>
+                            <option value="1">banner图</option>
+                            <option value="2">广告位</option>
+                            <option value="3">菜单</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>标题
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control pull-righ" name="Title" id="Title" value="@Model.Title" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>副标题
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control pull-righ" name="SubTitle" id="SubTitle" value="@Model.SubTitle" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>排序数字
+                    </label>
+                    <div class="col-md-3">
+                        <input class="form-control pull-righ" name="OrderNum" id="OrderNum" value="@Model.OrderNum" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2"><font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>访问链接</label>
+                    <div class="col-md-8">
+                        <input class="form-control pull-righ" name="LinkUrl" id="LinkUrl" value="@Model.LinkUrl" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 col-md-2 col-sm-2">上传图片</label>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <div class="adimgbox">
+                            @if (string.IsNullOrEmpty(Model.ImgUrl))
+                            {
+                                <div class="imgbox" style="display:none;">
+                                    <img src="" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="imgbox">
+                                    <img src="@Model.ImgUrl" />
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+            @*  *@
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () {
+            $("#Position").val("@Model.Position");
+        });
+    </script>
+</body>
+</html>

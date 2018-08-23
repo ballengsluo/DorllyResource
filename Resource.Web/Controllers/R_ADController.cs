@@ -38,10 +38,11 @@ namespace Resource.Web.Controllers
         {
 
             var list = dc.Set<V_AD>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.ParkID)) list = list.Where(a => a.ParkID == param.ParkID);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
-            if (!string.IsNullOrEmpty(param.StrType)) list = list.Where(a => a.ResourceTypeID == param.StrType);
+            if (!string.IsNullOrEmpty(param.Type)) list = list.Where(a => a.ResourceTypeID == param.Type);
+            if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);

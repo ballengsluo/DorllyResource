@@ -23,13 +23,19 @@ function operation() {
         var url = $(this).attr('data-url') + '?id=' + id;
         layerOpen(url);
     });
-
+    //编辑
+    $('#check').click(function() {
+        if (!id || id == "") { layer.msg('请选择数据！'); return false; }
+        var url = $(this).attr('data-url') + '?id=' + id;
+        layerOpen(url);
+    });
 
     //重置密码
     $('#reset').click(function() {
+        // mission("是否重置密码？", $(this));
         if (!id || id == "") { layer.msg("请选择数据！"); return false; }
+        var url = $(this).attr('data-url') + "?id=" + id;
         layer.confirm("是否重置密码？", function() {
-            var url = $(this).attr('data-url') + "?id=" + id;
             layerOpen(url);
         });
     });
@@ -94,7 +100,7 @@ function mission(msg, obj) {
         // var url = $(this).attr('data-url');
         var url = obj.attr('data-url');
         ajax("post", url, { id: id }, 'json', function(data) {
-            layer.msg(data.msg, { icon: data.result });
+            layer.msg(data.msg);
             if (data.result == 1) { search(paramsSet()); }
         });
     });
@@ -160,7 +166,7 @@ function table() {
         $(this).addClass("success");
         id = $(this).find(".key").html();
         showenable($(this).find(".enable").attr("data-enable"));
-        showstatus($(this).find(".status").attr("data-status"));
+        // showstatus($(this).find(".status").attr("data-status"));
     });
 }
 
