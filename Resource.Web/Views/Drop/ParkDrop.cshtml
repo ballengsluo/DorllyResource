@@ -14,7 +14,7 @@ else
     @Html.DropDownList("ParkID", ViewData["dataList"] as SelectList,
     new
     {
-        @class = "selectpicker form-control pull-righ",
+        @class = "selectpicker form-control rsnode",
         @id = "park",
         @required = "required",
         @title = "请选择..."
@@ -27,7 +27,7 @@ else
         "全部",
         new
         {
-            @class = "selectpicker form-control pull-righ",
+            @class = "selectpicker form-control rsnode",
             @id = "park"
         })
 }

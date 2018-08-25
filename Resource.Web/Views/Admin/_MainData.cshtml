@@ -1,0 +1,129 @@
+﻿@helper rm()
+{
+    if (ViewBag.rm != null && ViewBag.rm.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <td>楼栋</td>
+                <td>空置面积</td>
+                <td>空置套数</td>
+            </tr>
+            @foreach (var item in ViewBag.rm)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Area</td>
+                    <td>@item.Number</td>
+                </tr>
+            }
+            <tr>
+                <td>汇总</td>
+                <td>@ViewBag.AreaCount</td>
+                <td>@ViewBag.NumberCount</td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <div>暂无数据</div>
+    }
+
+}
+@helper cb()
+{
+    if (ViewBag.cb != null && ViewBag.cb.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <td>空置个数</td>
+                <td>出租率</td>
+            </tr>
+            @foreach (var item in ViewBag.cb)
+            {
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.Rate</td>
+                </tr>
+            }
+        </table>
+    }
+
+}
+@helper mr()
+{
+    if (ViewBag.mr != null && ViewBag.mr.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <td>空置个数</td>
+                <td>出租率</td>
+            </tr>
+            @foreach (var item in ViewBag.mr)
+            {
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.Rate</td>
+                </tr>
+            }
+        </table>
+    }
+
+}
+@helper ad()
+{
+    if (ViewBag.ad != null && ViewBag.ad.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <td>空置个数</td>
+                <td>出租率</td>
+            </tr>
+
+            @foreach (var item in ViewBag.ad)
+            {
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.Rate</td>
+                </tr>
+            }
+        </table>
+    }
+
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12" style="padding-left:0px;background-color: #fff;border:1px solid #ccc;border-bottom:none;">
+    <div class="col-lg-2 col-md-2 col-sm-2" style="padding:10px 10px 10px 5px;">
+        <div class="input-group">
+            <span class="input-group-addon">园区</span>
+            @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 res" id="rm">
+    <div class="reskind">
+        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 房屋
+    </div>
+    @rm()
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 res" id="cb">
+    <div class="reskind">
+        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 工位
+    </div>
+    @cb()
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 res" id="mr">
+    <div class="reskind">
+        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 会议室
+    </div>
+    @mr()
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 res" id="ad">
+    <div class="reskind">
+        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 广告位
+    </div>
+    @ad()
+</div>

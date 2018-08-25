@@ -11,7 +11,7 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>房间编号
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="ID" value="@Model.ID" required readonly maxlength="50">
+        <input type="text" class="form-control" name="ID" id="id" value="@Model.ID" required readonly maxlength="50">
     </div>
 </div>
 <div class="form-group">
@@ -19,7 +19,7 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>房间号
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="Name" placeholder="必填项" value="@Model.Name" required maxlength="50">
+        <input type="text" class="form-control" name="Name" id="name" placeholder="必填项" value="@Model.Name" required maxlength="50">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2">
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>园区
@@ -83,13 +83,13 @@
 <div class="form-group">
     <label class="control-label col-lg-2 col-md-2 col-sm-2">资源分组</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("GroupDrop", "Drop", new { kind = 1, code = Model.GroupID, model = 1 });}
+        @{ Html.RenderAction("GroupDrop", "Drop", new { kind = 1, id = Model.GroupID, model = 1 });}
     </div>
 </div>
 <div class="form-group">
     <label class="control-label col-lg-2 col-md-2 col-sm-2">位置</label>
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <input type="text" class="form-control" name="Location" value="@Model.Location">
+        <input type="text" class="form-control" name="Location" value="@Model.Location" placeholder="请填写位置信息">
     </div>
 </div>
 

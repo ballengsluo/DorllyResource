@@ -41,7 +41,8 @@ namespace Resource.Web.Controllers
                     return RedirectToAction("Index", "Admin");
                 }
             }
-            return View("Index");
+            return Content("<script>alert('用户名或密码错误！');window.location='/login/index';</script>");
+            //return Json(new { result = 0, msg = "用户名或密码错误" });
         }
         public ActionResult LogoOut()
         {

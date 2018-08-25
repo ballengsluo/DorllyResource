@@ -14,7 +14,7 @@
     <div class="container">
         <div style="max-width:400px;margin:0 auto;">
             <h3 style="margin:30px;text-align:center">编辑角色</h3>
-            @using (Ajax.BeginForm("Edit", Model.ID, new AjaxOptions
+            @using (Ajax.BeginForm("Edit", new { id = Model.ID }, new AjaxOptions
             {
                 HttpMethod = "POST",
                 OnSuccess = "cmtSuccess",

@@ -1,53 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@helper rm()
-{
-    foreach (var item in ViewBag.rm)
-    {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Area</td>
-            <td>@item.Number</td>
-        </tr>
-    }
 
-    <tr>
-        <td>汇总</td>
-        <td>@ViewBag.AreaCount</td>
-        <td>@ViewBag.NumberCount</td>
-    </tr>
-}
-@helper cb()
-{
-    foreach (var item in ViewBag.cb)
-    {
-        <tr>
-            <td>@item.Number</td>
-            <td>@item.Rate</td>
-        </tr>
-    }
-}
-@helper mr()
-{
-    foreach (var item in ViewBag.mr)
-    {
-        <tr>
-            <td>@item.Number</td>
-            <td>@item.Rate</td>
-        </tr>
-    }
-}
-@helper ad()
-{
-    foreach (var item in ViewBag.ad)
-    {
-        <tr>
-            <td>@item.Number</td>
-            <td>@item.Rate</td>
-        </tr>
-    }
-}
 <!DOCTYPE html>
 
 <html>
@@ -57,10 +11,11 @@
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/layui/css/layui.css")
     @Styles.Render("~/Plugins/font-awesome/css/font-awesome.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     <style>
         body {
             background-color: #f9f9f9;
-            max-width:1500px;
+            max-width: 1500px;
         }
 
         h4 {
@@ -76,28 +31,29 @@
 
         .res {
             border: 1px solid #ccc;
-            height: 114px;
             background-color: #fff;
         }
 
         .reskind {
             padding: 10px 0px;
             font-weight: 600;
+            border-bottom: 1px solid #ccc;
         }
 
-        .res:first-of-type {
-            height: 342px;
+        #rm {
             border-right: none;
         }
 
-            .res:first-of-type tr:last-of-type td {
+            #rm tr:last-of-type td {
                 font-weight: 600;
-                color:blue;
+                color: blue;
             }
-            .res:not(:first-child) tr:last-of-type td{
-                border-top:none;
-            }
-        .res:nth-of-type(2), .res:nth-of-type(3) {
+
+        .res tr:first-of-type td {
+            border-top: none;
+        }
+
+        #cb, #mr {
             border-bottom: none;
         }
 
@@ -106,72 +62,17 @@
             height: 342px;
             background-color: #fff;
         }
-        
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <h4>业务概览</h4>
-
-                <div class="col-md-6 res" id="rm">
-                    <div class="reskind">
-                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 房屋
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>楼栋</td>
-                            <td>空置面积</td>
-                            <td>空置套数</td>
-                        </tr>
-                        @rm()
-                    </table>
-                </div>
-                <div class="col-md-6 res">
-                    <div class="reskind">
-                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 工位
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>空置个数</td>
-                            <td>出租率</td>
-                        </tr>
-                        @cb()
-                    </table>
+                <div id="countData">
+                    @Html.Partial("_MainData")
                 </div>
 
-                <div class="col-md-6 res">
-                    <div class="reskind">
-                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 会议室
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>空置个数</td>
-                            <td>出租率</td>
-                        </tr>
-                        @mr()
-                    </table>
-                </div>
-
-                <div class="col-md-6 res" id="ad">
-                    <div class="reskind">
-                        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 广告位
-                    </div>
-                    <table class="table">
-                        <tr>
-                            <td>空置个数</td>
-                            <td>出租率</td>
-                        </tr>
-                        @ad()
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-5" id="mg" data-toggle="tooltip" data-placement="right" style="display:none;">
-                <h4>代办事项</h4>
-                <div class="col-md-12 msg">
-
-                </div>
             </div>
         </div>
     </div>
@@ -179,15 +80,20 @@
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
     @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
     @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     <script>
         var layer;
-        
+
         $(function () {
             layui.use('layer', function () {
                 layer = layui.layer;
 
             });
-            
+            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+            $("#park").val("@ViewBag.park");
+            $("#park").change(function () {
+                
+            });
         });
     </script>
 </body>

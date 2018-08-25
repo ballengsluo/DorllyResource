@@ -8,7 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>资源系统管理平台登录</title>
-    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")    
     <style>
         * {
             margin: 0;
@@ -60,8 +61,8 @@
                 @using (Ajax.BeginForm("Login", null, new AjaxOptions
             {
                 HttpMethod = "POST",
-                OnSuccess = "commitResult",
-                OnFailure = "commitResult"
+                OnSuccess = "cmtSuccess",
+                OnFailure = "cmtSuccess"
             }, new { @class = "form-horizontal" }))
                 {
                     <div class="form-group">
@@ -87,5 +88,19 @@
             </div>
         </div>
     </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    <script>
+        $(function () {
+            layui.use('layer', function () {
+                layer = layui.layer;
+            });
+            function cmtSuccess(data) {
+                console.log(data);
+                layer.msg(data.msg);
+            }
+        });
+    </script>
 </body>
 </html>

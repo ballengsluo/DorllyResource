@@ -14,13 +14,13 @@
         @Html.Partial("_FuncPage", Model)
         <div class="select-action">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">园区</span>
                         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源状态</span>
                         <select class="selectpicker form-control pull-righ" id="status" title="请选择...">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源类别</span>
                         <select class="selectpicker form-control pull-righ" id="kind" title="请选择...">
@@ -47,26 +47,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="input-group col-md-2">
+                <div class="input-group col-lg-2 col-md-2 col-sm-2">
                     <span class="input-group-addon">资源分组</span>
                     <select class="selectpicker form-control pull-righ" id="group" title="请选择..."></select>
                 </div>
 
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源编号</span>
                         <input type="text" class="form-control" id="id">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源名称</span>
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>

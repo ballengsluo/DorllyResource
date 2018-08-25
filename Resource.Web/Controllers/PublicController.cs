@@ -79,13 +79,13 @@ namespace Resource.Web.Controllers
         public ActionResult Edit(string id)
         {
             var pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
-            if (pub.Status == 4 || pub.Status == 6)
+            if (pub.Status == 4 || pub.Status == 6 || pub.Status == 2)
                 return Content("<script>window.parent.layer.closeAll();window.parent.layer.msg('该数据不允许编辑!');</script>");
             return Redirect(pub.ResourceID, pub);
         }
         public ActionResult Public(string id)
         {
-            T_ResourcePublic pub = new T_ResourcePublic() { ID = DateTime.Now.ToString("yyyyMMddHHmmsss") };
+            T_ResourcePublic pub = new T_ResourcePublic() { ID = DateTime.Now.ToString("yyyyMMddHHmmsss"), BeginTime = DateTime.Now, EndTime = DateTime.Now.AddDays(1) };
             return Redirect(id, pub);
         }
 
@@ -142,7 +142,7 @@ namespace Resource.Web.Controllers
 
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 3) return Json(new { result = 0, msg = "状态一致，无从改变！" });
-            else if (pub.Status != 6) return Json(new { result = 0, msg = "请选择正确的操作！" });
+            else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 3;
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));

@@ -3,7 +3,7 @@
     @Html.DropDownList("ParentID", ViewData["dataList"] as SelectList,
     new
     {
-        @class = "selectpicker form-control pull-righ",
+        @class = "selectpicker form-control rsnode",
         @id = "room",
         @required = "required",
         @data_live_search="true",
@@ -17,7 +17,7 @@ else
         "全部",
         new
         {
-            @class = "selectpicker form-control pull-righ",
+            @class = "selectpicker form-control rsnode",
             @id = "room"
         })
 }
