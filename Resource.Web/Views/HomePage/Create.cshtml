@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <div style="max-width:800px; margin:0 auto;">
+        <div style="margin:0 auto;">
             <h3 style="margin:30px 0px;text-align:center">新增首页布局数据</h3>
             <form class="form-horizontal">
                 <div class="form-group">
@@ -64,7 +64,7 @@
                     <label class="control-label col-lg-2 col-md-2 col-sm-2">
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>访问链接
                     </label>
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
                         <input class="form-control pull-righ" name="LinkUrl" id="LinkUrl">
                     </div>
                 </div>
@@ -73,11 +73,12 @@
                     <div class="col-lg-8 col-md-8 col-sm-8">
                         <div class="adimgbox">
                             <div class="imgbox" style="display:none;">
-                                <img src="" style="" />
+                                <img src="" style="width:150px;height:150px;" />
                             </div>
                             <div class="addbox">
                                 <span class="btn btn-primary"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;打开文件</span>
                                 <input type="file" name="ImgUrl" multiple />
+                                <span style="text-align:center;display:inline-block;padding-top:5px;color:#f69976;">尺寸：未知</span>
                             </div>
                         </div>
                     </div>
@@ -87,7 +88,6 @@
                     <input type="button" class="btn btn-danger" style="font-size:16px;margin-left:10px;" value="关闭" onclick="javascript: parent.layer.closeAll();">
                 </div>
             </form>
-            @*  *@
         </div>
     </div>
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
@@ -106,6 +106,18 @@
                 $(this).parents(".adimgbox").find('img').attr('src', dataURL);
                 $(this).parents(".adimgbox").find('.imgbox').show();
                 $("#ImgURL").val("");
+            });
+            $("#type").change(function () {
+                var $this = $(this);
+                $(".addbox span:last-of-type").remove();
+                var $addbox = $(".addbox");
+                if ($this.val() == 1) {
+                    $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：1048x * 300px</span>");
+                } else if ($this.val() == 2) {
+                    $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：1200px * 500px</span>");
+                }else if($this.val()==3){
+                    $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：60px * 60px</span>");
+                }
             });
             $("#commit").click(function () {
                 $this = $(this);

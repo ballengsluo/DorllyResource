@@ -80,7 +80,7 @@
                         <th>序号</th>
                         <th>工位编号</th>
                         <th>房间编号</th>
-                        <th>工位人数</th>
+                        <th>资源分组</th>
                         <th>工位单价</th>
                         <th>状态</th>
                         <th>是否禁用</th>
@@ -98,7 +98,7 @@
             <td>{{i+1}}</td>
             <td class="key">{{value.ID}}</td>
             <td>{{value.ParentID}}</td>
-            <td>{{value.Number}}</td>
+            <td>{{value.GroupName}}</td>
             <td>{{value.UnitPrice}}</td>
             <td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用

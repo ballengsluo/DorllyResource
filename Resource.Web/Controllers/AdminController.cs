@@ -38,19 +38,19 @@ namespace Resource.Web.Controllers
             SQLHelper sq = SQLFactory.Create();
             DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure, new List<SqlParameter> { new SqlParameter("Park",park) }.ToArray());
             ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)","true");
-            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Number)", "true");
+            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
             ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
             ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
             ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
             ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
             return View();
         }
-        public ActionResult GetData(string park)
+        public ActionResult GetMainData(string park)
         {
             SQLHelper sq = SQLFactory.Create();
             DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure, new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
             ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
-            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Number)", "true");
+            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
             ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
             ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
             ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));

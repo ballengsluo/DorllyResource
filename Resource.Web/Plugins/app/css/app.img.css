@@ -37,16 +37,37 @@
 }
 
 .imgContainer .imgbox .imgdel {
-    cursor: pointer;
+    width: 16px;
+    height: 18px;
     position: absolute;
     z-index: 100;
     right: 0;
     top: 0;
     background-color: #bcd3ff;
-    /* border: 1px solid #031606; */
 }
 
 .imgContainer .imgbox .imgdel:hover {
+    cursor: pointer;
+}
+
+.imgContainer .imgbox .imgset {
+    width: 16px;
+    height: 16px;
+    /* border: 1px solid red; */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 0;
+    background-color: #bcd3ff;
+}
+
+.imgContainer .imgbox .imgset i {
+    color: green;
+    font-size: 13px;
+    right: -1px;
+}
+
+.imgContainer .imgbox .imgset:hover {
     cursor: pointer;
 }
 

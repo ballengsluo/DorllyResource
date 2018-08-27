@@ -58,6 +58,7 @@ namespace Resource.Web.Filters
             {
                 filterContext.HttpContext.Response.Write("<script>window.top.location.href='/Login/Index';</script>");
                 filterContext.HttpContext.Response.End();
+                filterContext.Result = new EmptyResult();
                 //filterContext.HttpContext.Response.Redirect("/Login/Index");
             }
 

@@ -12,6 +12,9 @@
                     <span class="imgdel" title="删除" data-id="@item.ID">
                         <i class="layui-icon layui-icon-close" style="color:#ff0000;"></i>
                     </span>
+                    <label class="imgset" title="设置封面">
+                        <input type="radio" name="covert" data-id="@item.ID" id="" />
+                    </label>
                 }
             </div>
         }
@@ -21,6 +24,7 @@
         <div class="addbox">
             <span>+</span>
             <input type="file" multiple name="resourceimg" />
+            <label style="color: #ccc;font-size: 13px;position: absolute;bottom: 0;width: 100%;text-align: center;">尺寸: 800px * 580px</label>
         </div>
     }
 

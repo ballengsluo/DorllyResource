@@ -154,13 +154,13 @@
 }
 
 .adimgbox {
-    width: 100px;
+    width: 150px;
     margin-right: 25px;
 }
 
 .adimgbox .imgbox {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin-top: 10px;
     border: 1px dashed #ccc;
 }
@@ -176,7 +176,7 @@
 }
 
 .adimgbox .addbox span {
-    width: 100px;
+    width: 150px;
     height: 32px;
 }
 
