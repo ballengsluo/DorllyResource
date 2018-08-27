@@ -5,6 +5,9 @@ var ue = UE.getEditor('Content', {
 });
 
 $(function() {
+
+    dropChange(2);
+    
     $("input[type='file']").change(function() {
         var $file = $(this);
         console.log($file[0].files.length);
@@ -17,6 +20,7 @@ $(function() {
             $(this).parents(".addbox").before("<div class='imgbox' data-insert='1'> <img src='" + dataURL + "' /></div>");
         }
     });
+
     $("form").submit(function() {
         $(this).prop("disabled", true);
         var form = new FormData($("form")[0]);
@@ -32,7 +36,7 @@ $(function() {
         });
         return false;
     });
-    dropChange(2);
+ 
     // $("input[type='submit']").click(function() {
     //     $("form").valid();
     //     $(this).prop("disabled", true);
@@ -59,4 +63,22 @@ $(function() {
             }
         });
     });
+
+    $(".imgbox[data-covert='True']").css("border","1px solid green").find(".imgset").append("<i class='glyphicon glyphicon-ok'></i>");
+    $("input[name='covert']").change(function() {
+        var $this = $(this);
+        var id = $this.attr("id");
+        var rid=$this.attr("data-rid");
+        if (id == "" || !id) { return false; }
+        ajax("post", "/base/setimgaction", { id: id,rid:rid }, "json", function(data) {
+            layer.msg(data.msg, { icon: data.result })
+            if (data.result == 1) {
+                $(".imgbox").css("border","none");
+                $(".imgset i").remove();
+                $this.parent().append("<i class='glyphicon glyphicon-ok'></i>");
+                $this.parents(".imgbox").css("border","1px solid green");
+            }
+        });
+    });
+
 });

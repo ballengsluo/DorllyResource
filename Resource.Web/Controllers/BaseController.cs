@@ -3,6 +3,7 @@ using Resource.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -201,6 +202,19 @@ namespace Resource.Web.Controllers
             else return Json(ResponseResult.GetResult(ResultEnum.Fail));
 
         }
+        [HttpPost]
+        public JsonResult SetImgAction(string id, string rid)
+        {
+            dc.Database.ExecuteSqlCommand("update T_ResourceImg set iscover=0 where ResourceID=@rid", new SqlParameter("@rid", rid));
+            var img = dc.Set<T_ResourceImg>().Where(a => a.ID == id).FirstOrDefault();
+            img.IsCover = true;
+            if (dc.SaveChanges() > 0)
+                return Json(ResponseResult.GetResult(ResultEnum.Success));
+            else
+                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+
+        }
+
         public bool SavePrice(string resourceID, FormCollection form)
         {
             bool success = false;

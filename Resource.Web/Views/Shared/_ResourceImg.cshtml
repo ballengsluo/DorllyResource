@@ -5,15 +5,15 @@
         var imgList = ViewBag.img as List<T_ResourceImg>;
         foreach (var item in imgList)
         {
-            <div class="imgbox">
+            <div class="imgbox" data-covert="@item.IsCover">
                 <img src="@item.ImgUrl" />
                 @if (ViewBag.check == null)
                 {
                     <span class="imgdel" title="删除" data-id="@item.ID">
                         <i class="layui-icon layui-icon-close" style="color:#ff0000;"></i>
                     </span>
-                    <label class="imgset" title="设置封面">
-                        <input type="radio" name="covert" data-id="@item.ID" id="" />
+                    <label class="imgset" title="设置封面" for="@item.ID">
+                        <input type="radio" name="covert" id="@item.ID" data-rid="@item.ResourceID" />
                     </label>
                 }
             </div>
