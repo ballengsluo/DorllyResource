@@ -44,21 +44,18 @@
     right: 0;
     top: 0;
     background-color: #bcd3ff;
-}
-
-.imgContainer .imgbox .imgdel:hover {
     cursor: pointer;
 }
 
 .imgContainer .imgbox .imgset {
     width: 16px;
     height: 16px;
-    /* border: 1px solid red; */
     position: absolute;
     bottom: 0;
     right: 0;
     margin-bottom: 0;
     background-color: #bcd3ff;
+    cursor: pointer;
 }
 
 .imgContainer .imgbox .imgset i {
@@ -69,6 +66,10 @@
 
 .imgContainer .imgbox .imgset:hover {
     cursor: pointer;
+}
+
+.imgContainer .imgbox .imgset input {
+    display: none;
 }
 
 .priceLabel {

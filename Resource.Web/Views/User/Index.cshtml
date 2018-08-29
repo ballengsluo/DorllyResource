@@ -25,26 +25,26 @@
         </div>*@
         <div class="select-action">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">登录账户</span>
                         <input type="text" class="form-control" id="account">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">用户名称</span>
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-md-3" style="max-width:350px;">
+                <div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="input-group">
                         <span class="input-group-addon">创建时间</span>
                         <input type="text" class="form-control pull-right" id="time">
                     </div>
 
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">状态</span>
                         <select class="selectpicker form-control pull-righ" id="enable">
@@ -54,13 +54,13 @@
                         </select>
                     </div>
                 </div>
-                @*<div class="col-md-2">
+                @*<div class="col-lg-2 col-md-2 col-sm-2">
                         <div class="input-group">
                             <span class="input-group-addon"></span>
                             <input type="text" class="form-control pull-right" id="EndTime">
                         </div>
                     </div>*@
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
@@ -123,8 +123,16 @@
                 PageIndex: currentNum,
                 PageSize: limitCount
             }
-        }
-
+        };
+        $(function () {
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#time',
+                    range: '~'//指定元素
+                });
+            });
+        });
     </script>
 </body>
 </html>

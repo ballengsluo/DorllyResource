@@ -7,7 +7,8 @@ var ue = UE.getEditor('Content', {
 $(function() {
 
     dropChange(2);
-    
+
+
     $("input[type='file']").change(function() {
         var $file = $(this);
         console.log($file[0].files.length);
@@ -21,12 +22,13 @@ $(function() {
         }
     });
 
+
     $("form").submit(function() {
-        $(this).prop("disabled", true);
+        $(this).attr("disabled", "disabled");
         var form = new FormData($("form")[0]);
         if ($('input[type=submit]').attr("data-url") == '' || !$('input[type=submit]').attr("data-url")) { return false; }
         ajaxForm("post", $('input[type=submit]').attr("data-url"), form, "json", function(data) {
-            layer.msg(data.msg, { icon: data.result })
+            layer.msg(data.msg)
             if (data.result == 1) {
                 window.parent.refresh = true;
                 setTimeout(function() { window.parent.layer.closeAll() }, 1000);
@@ -36,7 +38,7 @@ $(function() {
         });
         return false;
     });
- 
+
     // $("input[type='submit']").click(function() {
     //     $("form").valid();
     //     $(this).prop("disabled", true);
@@ -57,28 +59,27 @@ $(function() {
         var id = $this.attr("data-id");
         if (id == "" || !id) { return false; }
         ajax("post", "/public/delimgaction", { id: id }, "json", function(data) {
-            layer.msg(data.msg, { icon: data.result })
+            layer.msg(data.msg)
             if (data.result == 1) {
                 $this.parents(".imgbox").remove();
             }
         });
     });
 
-    $(".imgbox[data-covert='True']").css("border","1px solid green").find(".imgset").append("<i class='glyphicon glyphicon-ok'></i>");
+    $(".imgbox[data-covert='True']").css("border", "1px solid green").find(".imgset").append("<i class='glyphicon glyphicon-ok'></i>");
     $("input[name='covert']").change(function() {
         var $this = $(this);
         var id = $this.attr("id");
-        var rid=$this.attr("data-rid");
+        var rid = $this.attr("data-rid");
         if (id == "" || !id) { return false; }
-        ajax("post", "/base/setimgaction", { id: id,rid:rid }, "json", function(data) {
+        ajax("post", "/base/setimgaction", { id: id, rid: rid }, "json", function(data) {
             layer.msg(data.msg, { icon: data.result })
             if (data.result == 1) {
-                $(".imgbox").css("border","none");
+                $(".imgbox").css("border", "none");
                 $(".imgset i").remove();
                 $this.parent().append("<i class='glyphicon glyphicon-ok'></i>");
-                $this.parents(".imgbox").css("border","1px solid green");
+                $this.parents(".imgbox").css("border", "1px solid green");
             }
         });
     });
-
 });

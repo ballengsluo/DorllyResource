@@ -3,7 +3,7 @@
 {
     <tr>
         <td>@ViewBag.order</td>
-        <td>@menu.Name</td>
+        <td data-level="@menu.Level">@menu.Name</td>
         <td>
             @Html.CheckBox("menu",
             menu.T_RoleMenu.Where(a => a.RoleID == ViewBag.role.ID && a.MenuID == menu.ID).Count() > 0,
