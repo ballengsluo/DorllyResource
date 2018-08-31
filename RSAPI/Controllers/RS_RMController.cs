@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace RSAPI.Controllers
 {
-    public class RoomController : ApiController
+    public class RS_RMController : ApiController
     {
         // GET: api/Room
         public IEnumerable<string> Get()
@@ -24,6 +24,7 @@ namespace RSAPI.Controllers
         // POST: api/Room
         public void Post([FromBody]string value)
         {
+
         }
 
         // PUT: api/Room/5

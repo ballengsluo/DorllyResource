@@ -841,10 +841,15 @@
     <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\Order\OrderAD.cs" />
+    <Compile Include="Models\Order\OrderCB.cs" />
+    <Compile Include="Models\Order\OrderCR.cs" />
+    <Compile Include="Models\Order\OrderRM.cs" />
     <Compile Include="Models\ResponseResult.cs" />
     <Compile Include="Models\ResultEnum.cs" />
     <Compile Include="Models\SearchParam.cs" />
     <Compile Include="Models\SMRView.cs" />
+    <Compile Include="Models\Util\Result.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\CrawlerHandler.cs" />
