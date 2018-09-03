@@ -33,6 +33,13 @@ namespace Resource.Web.Controllers
 
             }
         }
+        public List<string> ParkList
+        {
+            get
+            {
+                return user.Park.Split(',').ToList();
+            }
+        }
         public JsonResult Service(DbContext dc)
         {
             if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));

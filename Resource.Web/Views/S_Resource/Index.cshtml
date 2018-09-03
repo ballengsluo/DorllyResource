@@ -39,6 +39,12 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
                         <span class="input-group-addon">资源编号</span>
                         <input type="text" class="form-control pull-right" id="id" />
                     </div>
@@ -49,6 +55,22 @@
                         <input type="text" class="form-control pull-right" id="name" />
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select class="selectpicker form-control" id="type">
+                            <option value="">全部</option>
+                            @*<option value="1">空闲</option>*@
+                            <option value="2">占用</option>
+                            <option value="3">内部预留</option>
+                            <option value="4">外部预留</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">资源类别分组</span>
@@ -56,29 +78,14 @@
                             @{ Html.RenderAction("ResourceKindDrop", "Drop", new { id = "", model = 2 });}
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <select class="selectpicker form-control" id="group" title="分组">
-                            </select>
+                            <select class="selectpicker form-control" id="group" title="分组"></select>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="input-group">
-                        <span class="input-group-addon">园区</span>
-                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                    <div class="input-group">
-                        <span class="input-group-addon">状态</span>
-                        <select class="selectpicker form-control" id="status">
-                            <option value="">全部</option>
-                            <option value="1">占用</option>
-                            <option value="2">空闲</option>
-                            <option value="3">预定</option>
-                            <option value="4">预留</option>
-                        </select>
+                        <span class="input-group-addon">查询时间</span>
+                        <input class="form-control pull-righ" id="time">
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1">
@@ -87,6 +94,7 @@
                     </button>
                 </div>
             </div>
+
         </div>
         <div class="data-action">
             <table class="table table-bordered table-hover">
@@ -110,21 +118,22 @@
     <script id="tableTpl" type="text/html">
         {{each data value i}}
         <tr>
-            <td class="key">{{value.ID}}</td>
-            <td>{{value.Name}}</td>
+            <td class="key" style="display:none;">{{value.ID}}</td>
+            <td>{{value.RID}}</td>
+            <td>{{value.RName}}</td>
             <td>{{value.ResourceKindName}}</td>
             <td>{{value.GroupName}}</td>
-            <td>{{value.ParkName}}</td>            
-            <td class="status" data-status="{{value.Status}}">
-                {{if value.Status==1}} 占用
-                {{else if value.Status==2}}空闲
-                {{else if value.Status==3}}预定
-                {{else if value.Status==4}}预留
+            <td>{{value.Loc1Name}}</td>
+            <td class="status" data-status="{{value.BSType}}">
+                {{if value.BSType==1}} 空闲
+                {{else if value.BSType==2}}占用
+                {{else if value.BSType==3}}预定
+                {{else if value.BSType==4}}预留
                 {{else}}启用
                 {{/if}}
             </td>
-            <td>{{value.CustName}}</td>
-            <td>{{value.RentBeginTime}} - {{value.RentEndTime}}</td>
+            <td>{{value.CustSName}}</td>
+            <td>{{value.BegTime}} - {{value.EndTime}}</td>
         </tr>
         {{/each}}
     </script>
@@ -136,14 +145,26 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
+        $(function () {
+
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#time',
+                    range: '~',
+                    min: new Date().toLocaleTimeString()
+                });
+            });
+        });
         function paramsSet() {
             return obj = {
                 ID: $("#id").val(),
                 Name: $("#name").val(),
                 Park: $("#park").val(),
-                Status: $("#status").val(),
+                Type: $("#type").val(),
                 Kind: $("#kind").val(),
                 Group: $("#group").val(),
+                Stime: $.trim($("#time").val().split("~")[0]),
                 PageIndex: currentNum,
                 PageSize: limitCount
             };

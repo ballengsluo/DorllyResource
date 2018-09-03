@@ -21,8 +21,12 @@
     box-shadow: 0px 0px 4px #ccc;
 }
 
-.select-action div[class*="col"] {
+.select-action>.row>[class*="col"] {
     padding-right: 0px;
+}
+
+.select-action>.row:not(:first-child) {
+    margin-top: 8px;
 }
 
 

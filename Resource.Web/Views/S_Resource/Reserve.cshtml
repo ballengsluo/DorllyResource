@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+@model Resource.Model.T_ResourceStatus
+@helper type(string value1, string value2)
+{
+    if (value1 == value2)
+    {
+        Html.Raw("selected");
+    }
+    else
+    {
+        Html.Raw("data-value='ccc'");
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源预留</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+</head>
+<body>
+    <div class="container">
+        <div style="margin:0 auto;max-width:900px;">
+            <h3 style="margin:30px 0px;text-align:center">资源预留</h3>
+            @using (Ajax.BeginForm("Reserve", new { id = Model.ID }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "cmtSuccess",
+                OnFailure = "cmtFailed"
+            }, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>资源编号
+                    </label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="text" class="form-control" name="RID" value="@Model.RID" readonly>
+                        <button type="button" class="btn btn-primary" data-url="@Url.Action("Create")" style="position:absolute;top:0;right:15px;">
+                            <i class="glyphicon glyphicon-search"></i> 添加
+                        </button>
+                    </div>
+                    @*<button type="button" class="btn btn-primary col-lg-1 col-md-1 col-sm-1" data-url="@Url.Action("Create")">
+                        <i class="glyphicon glyphicon-search"></i> 添加
+                    </button>*@
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">客户全称</label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="number" class="form-control" name="CustFName" value="@Model.CustFName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>客户简称
+                    </label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="number" class="form-control" name="CustSName" value="@Model.CustSName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">联系电话</label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="tel" class="form-control" name="CustTel" value="@Model.CustTel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>预留时间
+                    </label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="tel" class="form-control" id="time" name="Time" value="@Convert.ToDateTime(Model.BegTime).ToString("yyyy-MM-dd HH:mm:ss") ~ @Convert.ToDateTime(Model.EndTime).ToString("yyyy-MM-dd HH:mm:ss")">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>预留类型
+                    </label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <select class="selectpicker form-control" name="BSType" title="请选择...">
+                            <option value="3">内部预留</option>
+                            <option value="4">外部预留</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-3 col-md-3 col-sm-3">备注</label>
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                        <input type="text" class="form-control" name="Remark" value="@Model.Remark">
+                    </div>
+                </div>
+                <div class="cmtdiv col-md-offset-1">
+                    <input type="submit" class="btn btn-primary" value="保存">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
+                </div>
+            }
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () {
+            
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#time',
+                    range: '~',
+                    type: 'datetime',
+                    min: new Date().toLocaleTimeString()
+                });
+            });
+        });
+    </script>
+</body>
+</html>

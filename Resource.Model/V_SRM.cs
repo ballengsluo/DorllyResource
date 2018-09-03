@@ -28,6 +28,7 @@ namespace Resource.Model
         public string GroupName { get; set; }
         public string CustID { get; set; }
         public string CustName { get; set; }
+        public string CustPhone { get; set; }
         public int ResourceKindID { get; set; }
         public string ResourceKindName { get; set; }
         public string ResourceTypeID { get; set; }
@@ -38,6 +39,5 @@ namespace Resource.Model
         public Nullable<System.DateTime> RentEndTime { get; set; }
         public Nullable<decimal> Area { get; set; }
         public Nullable<decimal> RentArea { get; set; }
-        public string CustPhone { get; set; }
     }
 }

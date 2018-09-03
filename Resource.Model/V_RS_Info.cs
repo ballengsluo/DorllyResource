@@ -12,10 +12,60 @@ namespace Resource.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class T_ResourcePrice
+    public partial class V_RS_Info
     {
-        public int ID { get; set; }
-        public string ResourceID { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Loc1 { get; set; }
+        public string Loc2 { get; set; }
+        public string Loc3 { get; set; }
+        public string Loc4 { get; set; }
+        public string Loc5 { get; set; }
+        public string ParkID { get; set; }
+        public string ParentID { get; set; }
+        public string GroupID { get; set; }
+        public int ResourceKindID { get; set; }
+        public string ResourceTypeID { get; set; }
+        public Nullable<int> RSID { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<bool> Enable { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> MaxPrice { get; set; }
+        public Nullable<decimal> MinPrice { get; set; }
+        public Nullable<decimal> Area { get; set; }
+        public Nullable<decimal> RentArea { get; set; }
+        public Nullable<decimal> StartArea { get; set; }
+        public string RangeArea { get; set; }
+        public Nullable<int> Number { get; set; }
+        public Nullable<int> RentNum { get; set; }
+        public Nullable<int> StartNum { get; set; }
+        public string RangeNum { get; set; }
+        public string Size { get; set; }
+        public string RentSize { get; set; }
+        public string StartSize { get; set; }
+        public string RangeSize { get; set; }
+        public Nullable<decimal> Deposit { get; set; }
+        public string Content { get; set; }
+        public string Remark { get; set; }
+        public string Location { get; set; }
+        public string CreateUser { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+        public string UpdateUser { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string ResourceKindName { get; set; }
+        public string ResourceTypeName { get; set; }
+        public string GroupName { get; set; }
+        public string Loc1Name { get; set; }
+        public string Loc2Name { get; set; }
+        public string Loc3Name { get; set; }
+        public string Loc4Name { get; set; }
+        public string Loc5Name { get; set; }
+        public string LocText { get; set; }
+        public Nullable<System.DateTime> BegTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public string CustFName { get; set; }
+        public string CustSName { get; set; }
+        public string CustTel { get; set; }
         public Nullable<bool> YearEnable { get; set; }
         public Nullable<decimal> YearInPrice { get; set; }
         public Nullable<decimal> YearOutPrice { get; set; }
@@ -58,7 +108,5 @@ namespace Resource.Model
         public Nullable<bool> OtherEnable { get; set; }
         public Nullable<decimal> OtherMinPrice { get; set; }
         public Nullable<decimal> OtherMaxPrice { get; set; }
-    
-        public virtual T_Resource T_Resource { get; set; }
     }
 }

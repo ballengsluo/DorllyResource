@@ -15,6 +15,7 @@ namespace Resource.Model
     public partial class V_SAD
     {
         public string ID { get; set; }
+        public string Name { get; set; }
         public string ParkID { get; set; }
         public string ParkName { get; set; }
         public string GroupID { get; set; }
@@ -31,9 +32,8 @@ namespace Resource.Model
         public string Size { get; set; }
         public string RentSize { get; set; }
         public string RangeSize { get; set; }
+        public string Location { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }
         public Nullable<System.DateTime> RentEndTime { get; set; }
-        public string Location { get; set; }
-        public string Name { get; set; }
     }
 }
