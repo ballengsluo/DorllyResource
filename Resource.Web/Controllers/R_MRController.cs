@@ -34,8 +34,8 @@ namespace Resource.Web.Controllers
         public JsonResult Search(SearchParam param)
         {
 
-            var list = dc.Set<V_MR>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID==3);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);

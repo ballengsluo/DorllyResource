@@ -84,7 +84,6 @@
                         <th>工位单价</th>
                         <th>状态</th>
                         <th>是否禁用</th>
-                        <th>位置</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -97,9 +96,9 @@
         <tr>
             <td>{{i+1}}</td>
             <td class="key">{{value.ID}}</td>
-            <td>{{value.ParentID}}</td>
+            <td>{{value.Loc5}}</td>
             <td>{{value.GroupName}}</td>
-            <td>{{value.UnitPrice}}</td>
+            <td>{{value.Price}}</td>
             <td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用
                 {{else if value.Status==2}}空闲
@@ -112,7 +111,6 @@
                 {{else}}启用
                 {{/if}}
             </td>
-            <td>{{value.Position}}</td>
         </tr>
         {{/each}}
     </script>
