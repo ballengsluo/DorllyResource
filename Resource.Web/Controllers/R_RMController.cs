@@ -51,7 +51,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult GetList(string pid)
         {            
-            var list = dc.Set<T_Resource>().Where(a => a.ParentID == pid && a.ResourceKindID == 1);
+            var list = dc.Set<T_Resource>().Where(a => a.Loc4 == pid && a.ResourceKindID == 1);
             return Json(list.Select(a => new { a.ID }), JsonRequestBehavior.AllowGet);
         }
     }

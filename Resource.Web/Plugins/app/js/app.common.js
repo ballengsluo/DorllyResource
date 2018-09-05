@@ -59,8 +59,8 @@ function ajaxForm(reqtype, requrl, reqdata, datatype, callback) {
 var refresh = false;
 
 function cmtSuccess(data) {
-    layer.msg(data.msg)
-    if (data.result == 1) {
+    layer.msg(data.Msg)
+    if (data.Flag == 1) {
         window.parent.refresh = true;
         setTimeout(function() { window.parent.layer.closeAll() }, 1000);
     }

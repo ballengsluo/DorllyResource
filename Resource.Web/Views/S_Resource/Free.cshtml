@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+@model Resource.Model.T_ResourceStatus
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>设置空闲</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.form.css")
+    <style>
+        .container {
+            padding: 0px;
+            margin: 0px;
+            width: 400px;
+            height: 200px;
+        }
+
+            .container .form-horizontal {
+                margin: 0px;
+                padding: 0px;
+                margin-top:35px;
+            }
+
+                .container .form-horizontal .form-group {
+                    margin: 0px;
+                    padding: 0px;
+                    margin-top: 10px;
+                    width:300px;
+                    position:relative;
+                    right:-50px;
+                }
+
+                    .container .form-horizontal .form-group > * {
+                        float: left;
+                    }
+
+                    .container .form-horizontal .form-group .save input {
+                        margin-left:10px;
+                    }
+
+                .container .form-horizontal .control-label {
+                    padding: 0px;
+                    text-align: right;
+                    padding-right: 10px;
+                    height: 34px;
+                    line-height: 34px;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @using (Ajax.BeginForm("Free", new { id = Model.ID }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "cmtSuccess",
+                OnFailure = "cmtFailed"
+            }, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label class="control-label" style="width:110px;">空闲原因</label>
+                <div style="width:160px;">
+                    <select class="selectpicker form-control" title="请选择...">
+                        <option value="1">到期停用</option>
+                        <option value="2">违约停用</option>
+                        <option value="3">未用取消</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" style="width:110px;">实际空闲时间</label>
+                <div style="width:160px;">
+                    <input type="text" class="form-control" id="time" name="RealEndTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="save" style="padding-left:50px;width:100%;text-align:center;">
+                    <input type="submit" class="btn btn-primary" value="保存">
+                    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
+                </div>
+                
+            </div>
+
+
+        }
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        //$(function () {
+        //    layui.use('laydate', function () {
+        //        var laydate = layui.laydate;
+        //        laydate.render({
+        //            elem: '#time',
+        //            type: 'datetime',
+        //            format:'yyyy-MM-dd HH:mm'
+        //        });
+        //    });
+        //});
+    </script>
+</body>
+</html>

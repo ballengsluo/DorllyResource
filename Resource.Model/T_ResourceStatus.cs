@@ -15,17 +15,21 @@ namespace Resource.Model
     public partial class T_ResourceStatus
     {
         public int ID { get; set; }
+        public Nullable<int> SysID { get; set; }
         public string RID { get; set; }
         public string BSID { get; set; }
-        public Nullable<int> SYSID { get; set; }
+        public Nullable<int> BSType { get; set; }
         public Nullable<System.DateTime> BegTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
-        public string CustFName { get; set; }
-        public string CustSName { get; set; }
-        public string CustTel { get; set; }
-        public string BSType { get; set; }
-        public Nullable<bool> Enable { get; set; }
+        public Nullable<int> EndType { get; set; }
+        public Nullable<System.DateTime> RealEndTime { get; set; }
+        public string Company { get; set; }
+        public string ContactName { get; set; }
+        public string ContactTel { get; set; }
+        public string ReserveDept { get; set; }
+        public string ReserveName { get; set; }
         public string Remark { get; set; }
+        public Nullable<bool> Enable { get; set; }
         public string UpUser { get; set; }
         public Nullable<System.DateTime> UpTime { get; set; }
     }

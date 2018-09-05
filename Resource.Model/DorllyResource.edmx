@@ -194,8 +194,6 @@
           <Property Name="Loc3" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc4" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc5" Type="nvarchar" MaxLength="50" />
-          <Property Name="ParkID" Type="nvarchar" MaxLength="30" />
-          <Property Name="ParentID" Type="nvarchar" MaxLength="30" />
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" Nullable="false" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
@@ -328,17 +326,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SysID" Type="int" />
           <Property Name="RID" Type="nvarchar" MaxLength="50" />
           <Property Name="BSID" Type="nvarchar" MaxLength="100" />
-          <Property Name="SYSID" Type="int" />
+          <Property Name="BSType" Type="int" />
           <Property Name="BegTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
-          <Property Name="CustFName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CustSName" Type="nvarchar" MaxLength="100" />
-          <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
-          <Property Name="BSType" Type="nvarchar" MaxLength="10" />
-          <Property Name="Enable" Type="bit" />
+          <Property Name="EndType" Type="int" />
+          <Property Name="RealEndTime" Type="datetime" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Enable" Type="bit" />
           <Property Name="UpUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpTime" Type="datetime" />
         </EntityType>
@@ -855,8 +857,6 @@
           <Property Name="Loc3" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc4" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc5" Type="nvarchar" MaxLength="50" />
-          <Property Name="ParkID" Type="nvarchar" MaxLength="30" />
-          <Property Name="ParentID" Type="nvarchar" MaxLength="30" />
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" Nullable="false" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
@@ -897,9 +897,9 @@
           <Property Name="LocText" Type="nvarchar" MaxLength="234" />
           <Property Name="BegTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
-          <Property Name="CustFName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CustSName" Type="nvarchar" MaxLength="100" />
-          <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactTel" Type="nvarchar" MaxLength="20" />
           <Property Name="YearEnable" Type="bit" />
           <Property Name="YearInPrice" Type="decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="decimal" Precision="15" Scale="2" />
@@ -950,17 +950,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SysID" Type="int" />
           <Property Name="RID" Type="nvarchar" MaxLength="50" />
           <Property Name="BSID" Type="nvarchar" MaxLength="100" />
-          <Property Name="SYSID" Type="int" />
+          <Property Name="BSType" Type="int" />
           <Property Name="BegTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
-          <Property Name="CustFName" Type="nvarchar" MaxLength="200" />
-          <Property Name="CustSName" Type="nvarchar" MaxLength="100" />
-          <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
-          <Property Name="BSType" Type="nvarchar" MaxLength="10" />
-          <Property Name="Enable" Type="bit" />
+          <Property Name="EndType" Type="int" />
+          <Property Name="RealEndTime" Type="datetime" />
+          <Property Name="Company" Type="nvarchar" MaxLength="200" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Enable" Type="bit" />
           <Property Name="UpUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpTime" Type="datetime" />
           <Property Name="RName" Type="nvarchar" MaxLength="30" />
@@ -1711,8 +1715,6 @@
     [V_RS_Info].[Loc3] AS [Loc3], 
     [V_RS_Info].[Loc4] AS [Loc4], 
     [V_RS_Info].[Loc5] AS [Loc5], 
-    [V_RS_Info].[ParkID] AS [ParkID], 
-    [V_RS_Info].[ParentID] AS [ParentID], 
     [V_RS_Info].[GroupID] AS [GroupID], 
     [V_RS_Info].[ResourceKindID] AS [ResourceKindID], 
     [V_RS_Info].[ResourceTypeID] AS [ResourceTypeID], 
@@ -1753,9 +1755,9 @@
     [V_RS_Info].[LocText] AS [LocText], 
     [V_RS_Info].[BegTime] AS [BegTime], 
     [V_RS_Info].[EndTime] AS [EndTime], 
-    [V_RS_Info].[CustFName] AS [CustFName], 
-    [V_RS_Info].[CustSName] AS [CustSName], 
-    [V_RS_Info].[CustTel] AS [CustTel], 
+    [V_RS_Info].[Company] AS [Company], 
+    [V_RS_Info].[ContactName] AS [ContactName], 
+    [V_RS_Info].[ContactTel] AS [ContactTel], 
     [V_RS_Info].[YearEnable] AS [YearEnable], 
     [V_RS_Info].[YearInPrice] AS [YearInPrice], 
     [V_RS_Info].[YearOutPrice] AS [YearOutPrice], 
@@ -1803,17 +1805,21 @@
           <EntitySet Name="V_RSS_Info" EntityType="Self.V_RSS_Info" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_RSS_Info].[ID] AS [ID], 
+    [V_RSS_Info].[SysID] AS [SysID], 
     [V_RSS_Info].[RID] AS [RID], 
     [V_RSS_Info].[BSID] AS [BSID], 
-    [V_RSS_Info].[SYSID] AS [SYSID], 
+    [V_RSS_Info].[BSType] AS [BSType], 
     [V_RSS_Info].[BegTime] AS [BegTime], 
     [V_RSS_Info].[EndTime] AS [EndTime], 
-    [V_RSS_Info].[CustFName] AS [CustFName], 
-    [V_RSS_Info].[CustSName] AS [CustSName], 
-    [V_RSS_Info].[CustTel] AS [CustTel], 
-    [V_RSS_Info].[BSType] AS [BSType], 
-    [V_RSS_Info].[Enable] AS [Enable], 
+    [V_RSS_Info].[EndType] AS [EndType], 
+    [V_RSS_Info].[RealEndTime] AS [RealEndTime], 
+    [V_RSS_Info].[Company] AS [Company], 
+    [V_RSS_Info].[ContactName] AS [ContactName], 
+    [V_RSS_Info].[ContactTel] AS [ContactTel], 
+    [V_RSS_Info].[ReserveDept] AS [ReserveDept], 
+    [V_RSS_Info].[ReserveName] AS [ReserveName], 
     [V_RSS_Info].[Remark] AS [Remark], 
+    [V_RSS_Info].[Enable] AS [Enable], 
     [V_RSS_Info].[UpUser] AS [UpUser], 
     [V_RSS_Info].[UpTime] AS [UpTime], 
     [V_RSS_Info].[RName] AS [RName], 
@@ -2313,8 +2319,6 @@
           <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ParentID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -2459,17 +2463,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SysID" Type="Int32" />
           <Property Name="RID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BSID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SYSID" Type="Int32" />
+          <Property Name="BSType" Type="Int32" />
           <Property Name="BegTime" Type="DateTime" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="CustFName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustSName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BSType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
+          <Property Name="EndType" Type="Int32" />
+          <Property Name="RealEndTime" Type="DateTime" Precision="3" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
           <Property Name="UpUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -2974,8 +2982,6 @@
           <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ParentID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -3016,9 +3022,9 @@
           <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
           <Property Name="BegTime" Type="DateTime" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="CustFName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustSName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="YearEnable" Type="Boolean" />
           <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -3067,17 +3073,21 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SysID" Type="Int32" />
           <Property Name="RID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BSID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SYSID" Type="Int32" />
+          <Property Name="BSType" Type="Int32" />
           <Property Name="BegTime" Type="DateTime" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="CustFName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustSName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BSType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
+          <Property Name="EndType" Type="Int32" />
+          <Property Name="RealEndTime" Type="DateTime" Precision="3" />
+          <Property Name="Company" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
           <Property Name="UpUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpTime" Type="DateTime" Precision="3" />
           <Property Name="RName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -3626,8 +3636,6 @@
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
                 <ScalarProperty Name="Loc5" ColumnName="Loc5" />
                 <ScalarProperty Name="Loc4" ColumnName="Loc4" />
                 <ScalarProperty Name="Loc3" ColumnName="Loc3" />
@@ -3745,17 +3753,21 @@
               <MappingFragment StoreEntitySet="T_ResourceStatus">
                 <ScalarProperty Name="UpTime" ColumnName="UpTime" />
                 <ScalarProperty Name="UpUser" ColumnName="UpUser" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="BSType" ColumnName="BSType" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustSName" ColumnName="CustSName" />
-                <ScalarProperty Name="CustFName" ColumnName="CustFName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="RealEndTime" ColumnName="RealEndTime" />
+                <ScalarProperty Name="EndType" ColumnName="EndType" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="BegTime" ColumnName="BegTime" />
-                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
+                <ScalarProperty Name="BSType" ColumnName="BSType" />
                 <ScalarProperty Name="BSID" ColumnName="BSID" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4292,9 +4304,9 @@
                 <ScalarProperty Name="YearOutPrice" ColumnName="YearOutPrice" />
                 <ScalarProperty Name="YearInPrice" ColumnName="YearInPrice" />
                 <ScalarProperty Name="YearEnable" ColumnName="YearEnable" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustSName" ColumnName="CustSName" />
-                <ScalarProperty Name="CustFName" ColumnName="CustFName" />
+                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="BegTime" ColumnName="BegTime" />
                 <ScalarProperty Name="LocText" ColumnName="LocText" />
@@ -4335,8 +4347,6 @@
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
                 <ScalarProperty Name="Loc5" ColumnName="Loc5" />
                 <ScalarProperty Name="Loc4" ColumnName="Loc4" />
                 <ScalarProperty Name="Loc3" ColumnName="Loc3" />
@@ -4382,17 +4392,21 @@
                 <ScalarProperty Name="RName" ColumnName="RName" />
                 <ScalarProperty Name="UpTime" ColumnName="UpTime" />
                 <ScalarProperty Name="UpUser" ColumnName="UpUser" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="BSType" ColumnName="BSType" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustSName" ColumnName="CustSName" />
-                <ScalarProperty Name="CustFName" ColumnName="CustFName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="RealEndTime" ColumnName="RealEndTime" />
+                <ScalarProperty Name="EndType" ColumnName="EndType" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="BegTime" ColumnName="BegTime" />
-                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
+                <ScalarProperty Name="BSType" ColumnName="BSType" />
                 <ScalarProperty Name="BSID" ColumnName="BSID" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

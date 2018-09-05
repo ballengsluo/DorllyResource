@@ -103,14 +103,14 @@ namespace Resource.Web.Controllers
         {
             ViewBag.model = model;
             var list = dc.Set<T_Resource>().Where(a => a.ResourceKindID == 1);
-            if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.ParentID == pid);
+            if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.Loc4 == pid);
             else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.Select(a => new { a.ID, a.Name }).ToList(), "ID", "Name", id);
             return PartialView();
         }
         public ActionResult RMDropList(string pid)
         {
-            var list = dc.Set<T_Resource>().Where(a => a.ParentID == pid).Select(a => new { a.ID, a.Name }).ToList();
+            var list = dc.Set<T_Resource>().Where(a => a.Loc4 == pid).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         #endregion

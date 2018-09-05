@@ -79,6 +79,21 @@
                     <i class="glyphicon glyphicon-book"></i> 查看详情
                 </button>
                     break;
+                case "muse":
+                <button type="button" class="btn btn-primary" id="muse" data-url="@Url.Action("IReserve")">
+                    <i class="glyphicon glyphicon-book"></i> 内部占用
+                </button>
+                    break;
+                case "cuse":
+                <button type="button" class="btn btn-primary" id="cuse" data-url="@Url.Action("OReserve")">
+                    <i class="glyphicon glyphicon-book"></i> 客户占用
+                </button>
+                    break;
+                case "free":
+                <button type="button" class="btn btn-primary" id="free" data-url="@Url.Action("Free")">
+                    <i class="glyphicon glyphicon-book"></i> 设置空闲
+                </button>
+                    break;
                 default:
                     break;
             }

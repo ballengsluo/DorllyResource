@@ -21,8 +21,6 @@ namespace Resource.Model
         public string Loc3 { get; set; }
         public string Loc4 { get; set; }
         public string Loc5 { get; set; }
-        public string ParkID { get; set; }
-        public string ParentID { get; set; }
         public string GroupID { get; set; }
         public int ResourceKindID { get; set; }
         public string ResourceTypeID { get; set; }
@@ -63,9 +61,9 @@ namespace Resource.Model
         public string LocText { get; set; }
         public Nullable<System.DateTime> BegTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
-        public string CustFName { get; set; }
-        public string CustSName { get; set; }
-        public string CustTel { get; set; }
+        public string Company { get; set; }
+        public string ContactName { get; set; }
+        public string ContactTel { get; set; }
         public Nullable<bool> YearEnable { get; set; }
         public Nullable<decimal> YearInPrice { get; set; }
         public Nullable<decimal> YearOutPrice { get; set; }

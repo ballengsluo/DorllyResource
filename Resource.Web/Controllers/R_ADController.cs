@@ -38,7 +38,7 @@ namespace Resource.Web.Controllers
         {
 
             var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID == 4);
-            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Type)) list = list.Where(a => a.ResourceTypeID == param.Type);

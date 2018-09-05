@@ -264,7 +264,7 @@ namespace Resource.Web.Controllers
             {
                 resource.UpdateTime = DateTime.Now;
                 resource.UpdateUser = user.Account;
-                if (resource.ResourceKindID == 1) resource.ParentID = form["FloorID"];
+                //if (resource.ResourceKindID == 1) resource.Loc5 = form["FloorID"];
                 if (add) obj.Add(resource);
                 success = true;
             }

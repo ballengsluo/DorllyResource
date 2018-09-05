@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>资源状态列表</title>
+    <title>资源选择</title>
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/layui/css/layui.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
@@ -34,7 +34,6 @@
 </head>
 <body>
     <div class="container">
-        @Html.Partial("_FuncPage", Model)
         <div class="select-action">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -55,22 +54,6 @@
                         <input type="text" class="form-control pull-right" id="name" />
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                    <div class="input-group">
-                        <span class="input-group-addon">状态</span>
-                        <select class="selectpicker form-control" id="type">
-                            <option value="">全部</option>
-                            @*<option value="1">空闲</option>*@
-                            <option value="2">占用</option>
-                            <option value="3">内部预留</option>
-                            <option value="4">外部预留</option>
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">资源类别分组</span>
@@ -82,32 +65,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">查询时间</span>
-                        <input class="form-control pull-righ" id="time">
-                    </div>
-                </div>
                 <div class="col-lg-1 col-md-1 col-sm-1">
-                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("RSSearch")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
                 </div>
             </div>
-
         </div>
         <div class="data-action">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>类别</th>
-                        <th>分组</th>
-                        <th>园区</th>
-                        <th>状态</th>
-                        <th>客户</th>
-                        <th>使用日期</th>
+                        <th>资源编号</th>
+                        <th>资源名称</th>
+                        <th>所属园区</th>
+                        <th>资源类别</th>
+                        <th>资源分组</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -118,22 +91,11 @@
     <script id="tableTpl" type="text/html">
         {{each data value i}}
         <tr>
-            <td class="key" style="display:none;">{{value.ID}}</td>
-            <td>{{value.RID}}</td>
-            <td>{{value.RName}}</td>
+            <td class="key">{{value.ID}}</td>
+            <td>{{value.Name}}</td>
+            <td>{{value.Loc1Name}}</td>
             <td>{{value.ResourceKindName}}</td>
             <td>{{value.GroupName}}</td>
-            <td>{{value.Loc1Name}}</td>
-            <td class="status" data-status="{{value.BSType}}">
-                {{if value.BSType==1}} 空闲
-                {{else if value.BSType==2}}占用
-                {{else if value.BSType==3}}预定
-                {{else if value.BSType==4}}预留
-                {{else}}启用
-                {{/if}}
-            </td>
-            <td>{{value.ContactName}}</td>
-            <td>{{value.BegTime}} - {{value.EndTime}}</td>
         </tr>
         {{/each}}
     </script>
@@ -146,16 +108,13 @@
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
         $(function () {
-
-            layui.use('laydate', function () {
-                var laydate = layui.laydate;
-                laydate.render({
-                    elem: '#time',
-                    range: '~',
-                    min: new Date().toLocaleTimeString()
-                });
-            });
+            
         });
+        function rschoice() {
+            $("table tr").doubleClick(function () {
+                parent.window.document.getElementById("rid").value = $(this).find(".key").html();
+            });
+        }
         function paramsSet() {
             return obj = {
                 ID: $("#id").val(),
@@ -164,7 +123,6 @@
                 Type: $("#type").val(),
                 Kind: $("#kind").val(),
                 Group: $("#group").val(),
-                Stime: $.trim($("#time").val().split("~")[0]),
                 PageIndex: currentNum,
                 PageSize: limitCount
             };

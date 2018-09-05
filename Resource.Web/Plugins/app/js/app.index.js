@@ -83,6 +83,35 @@ function operation() {
     $('#off').click(function() {
         mission("严厉警告,作废将不可使用,是否继续？", $(this));
     });
+    //内部占用
+    $('#muse').click(function() {
+        var url = $(this).attr('data-url');
+        layerOpen(url);
+    });
+    //客户占用
+    $('#cuse').click(function() {
+        var url = $(this).attr('data-url');
+        layerOpen(url);
+    });
+    //设置空闲
+    $('#free').click(function() {
+        if (!id || id == "") { layer.msg('请选择数据！'); return false; }
+        var url = $(this).attr('data-url') + '?id=' + id;
+        var index = layer.open({
+            type: 2,
+            content: url,
+            area: ['410px', '200px'],
+            closeBtn: 2,
+            zIndex: 1000,
+            title: false,
+            end: function() {
+                if (refresh == true) {
+                    refresh = false;
+                    search(paramsSet());
+                }
+            }
+        });
+    });
 };
 
 function pub() {
@@ -133,6 +162,12 @@ function search(params) {
         }
         table();
         page();
+        if ($("[data-url*='RSSearch']").length > 0) {
+            $(".table tr").dblclick(function() {
+                parent.window.document.getElementById("rid").value = $(this).find(".key").html();
+                parent.layer.closeAll();
+            });
+        }
     });
 };
 

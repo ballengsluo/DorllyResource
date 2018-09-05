@@ -30,8 +30,6 @@ namespace Resource.Model
         public string Loc3 { get; set; }
         public string Loc4 { get; set; }
         public string Loc5 { get; set; }
-        public string ParkID { get; set; }
-        public string ParentID { get; set; }
         public string GroupID { get; set; }
         public int ResourceKindID { get; set; }
         public string ResourceTypeID { get; set; }
