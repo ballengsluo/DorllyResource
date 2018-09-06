@@ -11,26 +11,6 @@
     @Styles.Render("~/Plugins/layui/css/layui.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
-    <style>
-        .input-group > div {
-            margin: 0px;
-            padding: 0px;
-        }
-
-            .input-group > div .bootstrap-select .form-control {
-                border: none;
-            }
-
-            .input-group > div .bootstrap-select .btn {
-                border-radius: 0px;
-            }
-
-            .input-group > div:nth-of-type(2) .bootstrap-select .btn {
-                border-left: none;
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-            }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -57,17 +37,24 @@
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
-                        <span class="input-group-addon">状态</span>
-                        <select class="selectpicker form-control" id="type">
+                        <span class="input-group-addon">资源状态</span>
+                        <select class="selectpicker form-control" id="enable">
                             <option value="">全部</option>
-                            @*<option value="1">空闲</option>*@
-                            <option value="2">占用</option>
-                            <option value="3">内部预留</option>
-                            <option value="4">外部预留</option>
+                            <option value="false">空闲</option>
+                            <option value="true">占用</option>
                         </select>
                     </div>
                 </div>
-
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">业务类型</span>
+                        <select class="selectpicker form-control" id="itype">
+                            <option value="">全部</option>
+                            <option value="1">客户占用</option>
+                            <option value="2">内部占用</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -82,10 +69,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">查询时间</span>
-                        <input class="form-control pull-righ" id="time">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <input class="form-control" id="stime">
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1">
+                            <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-control" id="etime">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1">
@@ -100,14 +95,17 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>类别</th>
-                        <th>分组</th>
-                        <th>园区</th>
-                        <th>状态</th>
-                        <th>客户</th>
-                        <th>使用日期</th>
+
+                        <th>资源编号</th>
+                        <th>资源名称</th>
+                        <th>所属园区</th>
+                        <th>资源类别</th>
+                        <th>资源分组</th>
+                        <th>操作来源</th>
+                        <th>业务类型</th>
+                        <th>资源状态</th>
+                        <th>占用客户</th>
+                        <th>占用日期</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -121,15 +119,23 @@
             <td class="key" style="display:none;">{{value.ID}}</td>
             <td>{{value.RID}}</td>
             <td>{{value.RName}}</td>
+            <td>{{value.Loc1Name}}</td>
             <td>{{value.ResourceKindName}}</td>
             <td>{{value.GroupName}}</td>
-            <td>{{value.Loc1Name}}</td>
-            <td class="status" data-status="{{value.BSType}}">
-                {{if value.BSType==1}} 空闲
-                {{else if value.BSType==2}}占用
-                {{else if value.BSType==3}}预定
-                {{else if value.BSType==4}}预留
-                {{else}}启用
+            <td data-type="{{value.SysID}}">
+                {{if value.SysID==1}} 订单系统
+                {{else if value.SysID==2}}多丽管家
+                {{else if value.SysID==3}}资源系统
+                {{/if}}
+            </td>
+            <td data-type="{{value.BSType}}">
+                {{if value.BSType==1}} 客户占用
+                {{else if value.BSType==2}}内部占用
+                {{/if}}
+            </td>
+            <td data-enable="{{value.Enable}}">
+                {{if value.Enable==0}}空闲
+                {{else if value.Enable==1}}占用
                 {{/if}}
             </td>
             <td>{{value.ContactName}}</td>
@@ -146,29 +152,16 @@
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
         $(function () {
-
             layui.use('laydate', function () {
                 var laydate = layui.laydate;
                 laydate.render({
-                    elem: '#time',
-                    range: '~',
-                    min: new Date().toLocaleTimeString()
+                    elem: '#stime'
+                });
+                laydate.render({
+                    elem: '#etime'
                 });
             });
         });
-        function paramsSet() {
-            return obj = {
-                ID: $("#id").val(),
-                Name: $("#name").val(),
-                Park: $("#park").val(),
-                Type: $("#type").val(),
-                Kind: $("#kind").val(),
-                Group: $("#group").val(),
-                Stime: $.trim($("#time").val().split("~")[0]),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
-        };
     </script>
 </body>
 </html>

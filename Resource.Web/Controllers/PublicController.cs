@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class PublicController : BaseController
+    public class PublicController : RSBaseController
     {
         // GET: Public
         #region 首页
@@ -29,12 +29,12 @@ namespace Resource.Web.Controllers
         public ContentResult Search(SearchParam param)
         {
             var list = dc.Set<V_Public>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.ParkID)) list = list.Where(a => a.ParkID == param.ParkID);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ResourceID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.ResourceName.Contains(param.Name));
-            if (param.IntType != null) list = list.Where(a => a.ResourceKindID == param.IntType);
-            if (!string.IsNullOrEmpty(param.GroupID)) list = list.Where(a => a.GroupID == param.GroupID);
-            if (param.IntStatus != null) list = list.Where(a => a.Status == param.IntStatus);
+            if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
+            if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
+            if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.Level).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             JsonSerializerSettings setting = new JsonSerializerSettings
@@ -57,19 +57,13 @@ namespace Resource.Web.Controllers
         {
 
             var list = dc.Set<V_Releasing>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.ParkID)) list = list.Where(a => a.ParkID == param.ParkID);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (param.IntType != null) list = list.Where(a => a.ResourceKindID == param.IntType);
-            if (!string.IsNullOrEmpty(param.GroupID)) list = list.Where(a => a.GroupID == param.GroupID);
+            if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
             int count = list.Count();
             list = list.OrderBy(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            //JsonSerializerSettings setting = new JsonSerializerSettings
-            //{
-            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            //    DateFormatString = "yyyy-MM-dd HH:mm:ss"
-            //};
-            //var obj = JsonConvert.SerializeObject(new { count = count, data = list.ToList() }, setting);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Create()
@@ -103,22 +97,23 @@ namespace Resource.Web.Controllers
             var kind = dc.Set<T_Resource>().Where(a => a.ID == resourceID).FirstOrDefault().ResourceKindID;
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == resourceID).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == resourceID).ToList();
+            ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
             switch (kind)
             {
                 case 1:
-                    ViewBag.resource = dc.Set<V_RM>().Where(a => a.ID == resourceID).FirstOrDefault();
+                    //ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
                     return View("PublicRM", pub);
 
                 case 2:
-                    ViewBag.resource = dc.Set<V_CB>().Where(a => a.ID == resourceID).FirstOrDefault();
+                    //ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
                     return View("PublicCB", pub);
 
                 case 3:
-                    ViewBag.resource = dc.Set<V_MR>().Where(a => a.ID == resourceID).FirstOrDefault();
+                    //ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
                     return View("PublicMR", pub);
 
                 case 4:
-                    ViewBag.resource = dc.Set<V_AD>().Where(a => a.ID == resourceID).FirstOrDefault();
+                    //ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
                     return View("PublicAD", pub);
             }
             return View("error");
@@ -134,8 +129,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 2) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 2;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "审核成功！" });
+            else return Json(new Result { Flag = 2, Msg = "审核失败！" });
         }
         public JsonResult Notpass(string id)
         {
@@ -144,8 +139,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 3) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (pub.Status != 1) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 3;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "审核成功！" });
+            else return Json(new Result { Flag = 2, Msg = "审核失败！" });
 
         }
         public JsonResult Pub(string id)
@@ -155,8 +150,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (pub.Status != 2 && pub.Status != 5) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 4;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "上架成功！" });
+            else return Json(new Result { Flag = 2, Msg = "上架失败！" });
         }
         public JsonResult Unpub(string id)
         {
@@ -165,8 +160,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 5) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (pub.Status != 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 5;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "下架成功！" });
+            else return Json(new Result { Flag = 2, Msg = "下架失败！" });
         }
         public JsonResult Off(string id)
         {
@@ -175,8 +170,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 6) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (pub.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             pub.Status = 6;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "作废成功！" });
+            else return Json(new Result { Flag = 2, Msg = "作废失败！" });
         }
 
         public JsonResult Del(string id)
@@ -185,8 +180,8 @@ namespace Resource.Web.Controllers
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             dc.Set<T_ResourcePublic>().Remove(pub);
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
+            else return Json(new Result { Flag = 2, Msg = "删除失败！" });
         }
 
         #endregion

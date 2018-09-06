@@ -12,32 +12,6 @@
     @Styles.Render("~/Plugins/layui/css/layui.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
-    <style>
-        .input-group > div {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        .input-group > .form-control {
-            z-index:auto;
-        }
-
-        .input-group > div .bootstrap-select .form-control {
-            border: none;
-            z-index: 100;
-        }
-
-        .input-group > div .bootstrap-select .btn {
-            border-radius: 0px;
-        }
-
-        .input-group > div:nth-of-type(2) .bootstrap-select .btn {
-            border-left: none;
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
-    </style>
-
 </head>
 <body>
     <div class="container-fluid">
@@ -73,10 +47,18 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3" style="max-width:310px;">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">申请日期</span>
-                        <input type="text" class="form-control" id="time">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <input class="form-control" id="stime">
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1">
+                            <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-control" id="etime">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1">
@@ -142,26 +124,26 @@
             layui.use('laydate', function () {
                 var laydate = layui.laydate;
                 laydate.render({
-                    elem: '#time',
-                    type: 'date',
-                    range:' ~ '
+                    elem: '#stime'
+                });
+                laydate.render({
+                    elem: '#etime'
                 });
             });
-            dropChange(1);
         })
-        function paramsSet() {
-            return obj = {
-                Park: $("#park").val(),
-                ID: $("#id").val(),
-                Name: $("#name").val(),
-                Kind: $("#kind").val(),
-                Group: $("#group").val(),
-                Stime: $.trim($("#time").val().split("~")[0]),
-                Etime: $.trim($("#time").val().split("~")[1]),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
-        };
+        //function paramsSet() {
+        //    return obj = {
+        //        Park: $("#park").val(),
+        //        ID: $("#id").val(),
+        //        Name: $("#name").val(),
+        //        Kind: $("#kind").val(),
+        //        Group: $("#group").val(),
+        //        Stime: $.trim($("#time").val().split("~")[0]),
+        //        Etime: $.trim($("#time").val().split("~")[1]),
+        //        PageIndex: currentNum,
+        //        PageSize: limitCount
+        //    };
+        //};
     </script>
 </body>
 </html>

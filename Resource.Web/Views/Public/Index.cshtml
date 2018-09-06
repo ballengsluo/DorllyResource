@@ -34,8 +34,18 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">资源类别分组</span>
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            @{ Html.RenderAction("ResourceKindDrop", "Drop", new { id = "", model = 2 });}
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <select class="selectpicker form-control" id="group" title="分组"></select>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源类别</span>
                         <select class="selectpicker form-control pull-righ" id="kind" title="请选择...">
@@ -50,7 +60,7 @@
                 <div class="input-group col-lg-2 col-md-2 col-sm-2">
                     <span class="input-group-addon">资源分组</span>
                     <select class="selectpicker form-control pull-righ" id="group" title="请选择..."></select>
-                </div>
+                </div>*@
 
             </div>
             <div class="row">
@@ -136,35 +146,35 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
-        $(function () {
-            $('#resourceType').change(function () {
-                if (!$(this).val() || $(this).val() == '') {
-                    $('#group').html("<option value=''>全部</option>").selectpicker('refresh');
-                    return false
-                } else {
-                    $.getJSON('/Drop/GroupList', { id: $(this).val() }, function (data) {
-                        var html = "<option value=''>全部</option>"
-                        for (var i = 0; i < data.length; i++) {
-                            html += "<option value='" + data[i].ID + "'>" + data[i].Name + '</option>'
-                        }
-                        $('#Group').html(html).selectpicker('refresh');
-                    });
-                }
-            });
-        });
+        //$(function () {
+        //    $('#resourceType').change(function () {
+        //        if (!$(this).val() || $(this).val() == '') {
+        //            $('#group').html("<option value=''>全部</option>").selectpicker('refresh');
+        //            return false
+        //        } else {
+        //            $.getJSON('/Drop/GroupList', { id: $(this).val() }, function (data) {
+        //                var html = "<option value=''>全部</option>"
+        //                for (var i = 0; i < data.length; i++) {
+        //                    html += "<option value='" + data[i].ID + "'>" + data[i].Name + '</option>'
+        //                }
+        //                $('#Group').html(html).selectpicker('refresh');
+        //            });
+        //        }
+        //    });
+        //});
 
-        function paramsSet() {
-            return obj = {
-                ParkID: $('#park').val(),
-                IntType: $('#kind').val(),
-                GroupID: $('#group').val(),
-                ID: $('#id').val(),
-                Name: $('#name').val(),
-                IntStatus: $('#status').val(),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            }
-        }
+        //function paramsSet() {
+        //    return obj = {
+        //        ParkID: $('#park').val(),
+        //        IntType: $('#kind').val(),
+        //        GroupID: $('#group').val(),
+        //        ID: $('#id').val(),
+        //        Name: $('#name').val(),
+        //        IntStatus: $('#status').val(),
+        //        PageIndex: currentNum,
+        //        PageSize: limitCount
+        //    }
+        //}
     </script>
 </body>
 </html>

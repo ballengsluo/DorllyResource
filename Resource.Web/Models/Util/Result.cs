@@ -7,17 +7,13 @@ namespace Resource.Web.Models
 {
     public class Result
     {
-        public Result() { }
-        public Result(int model)
+        public Result()
         {
-            if (model == 1)
-            {
-                Flag = 1;
-                Msg = "保存成功！";
-            }
+            this.Flag = 1;
+            this.Msg = "保存成功！";
         }
         public int Flag { get; set; }
         public string Msg { get; set; }
-        public string ExInfo { get; set; }
+        public string ExMsg { get; set; }
     }
 }

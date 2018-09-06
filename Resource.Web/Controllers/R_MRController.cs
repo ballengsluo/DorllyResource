@@ -22,11 +22,11 @@ namespace Resource.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.price = new T_ResourcePrice();
-            return View(new V_MR());
+            return View(new V_RS_Info());
         }
         public ActionResult Edit(string id)
         {
-            var obj = dc.Set<V_MR>().Where(a => a.ID == id).FirstOrDefault();
+            var obj = dc.Set<V_RS_Info>().Where(a => a.ID == id).FirstOrDefault();
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == id).ToList();
             return View(obj);

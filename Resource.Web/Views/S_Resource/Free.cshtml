@@ -54,7 +54,7 @@
 </head>
 <body>
     <div class="container">
-        @using (Ajax.BeginForm("Free", new { id = Model.ID }, new AjaxOptions
+        @using (Ajax.BeginForm("Free", new { id = ViewBag.id }, new AjaxOptions
             {
                 HttpMethod = "POST",
                 OnSuccess = "cmtSuccess",

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Resource.Web.Controllers
 {
-    public class S_ResourceController : BaseController
+    public class S_ResourceController : RSBaseController
     {
         // GET: S_Resource
         public ActionResult Index()
@@ -20,22 +20,19 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Search(SearchParam param)
         {
-            var list = dc.Set<V_RSS_Info>().Where(a => a.REnable == true && a.Enable == true);
+            var list = dc.Set<V_RSS_Info>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
-            else
-                list = list.Where(a => ParkList.Contains(a.Loc1));
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.RID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.RName.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
-            if (param.IntType != null) list = list.Where(a => a.BSType == param.IntType);
-            if (param.Stime != null)
-                list = list.Where(a => param.Stime >= a.BegTime && param.Stime <= a.EndTime);
-            else
-                list = list.Where(a => DateTime.Now >= a.BegTime && DateTime.Now <= a.EndTime);
+            if (param.IType != null) list = list.Where(a => a.BSType == param.IType);
+            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
+            if (param.Stime != null) list = list.Where(a => param.Stime<=a.EndTime && param.Etime>=a.BegTime);
             int count = list.Count();
             list = list.OrderByDescending(a => a.BegTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            var result = list.Select(a => new { a.ID, a.RID, a.RName, a.ResourceKindName, a.GroupName, a.Loc1Name, a.BSType, a.ContactName, a.BegTime, a.EndTime, a.UpUser, a.UpTime });
+            var result = list.Select(a => new { a.ID,a.Enable,a.SysID, a.RID, a.RName, a.ResourceKindName, a.GroupName, a.Loc1Name, a.BSType, a.ContactName, a.BegTime, a.EndTime, a.UpUser, a.UpTime });
             JsonSerializerSettings setting = new JsonSerializerSettings
             {
                 DateFormatString = "yyyy-MM-dd HH:mm"
@@ -85,7 +82,7 @@ namespace Resource.Web.Controllers
             {
                 DateTime begTime = Convert.ToDateTime(form["Time"].Split('~')[0].Trim());
                 DateTime endTime = Convert.ToDateTime(form["Time"].Split('~')[1].Trim());
-                string rid=form["RID"];
+                string rid = form["RID"];
                 bool add = false;
                 var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
                 if (obj == null)
@@ -104,23 +101,24 @@ namespace Resource.Web.Controllers
                     if (count > 0) return Json(new Result { Flag = 2, Msg = "存在使用时间冲突,请选择有效时间段!" });
                 }
                 if (!TryUpdateModel(obj, "", form.AllKeys, new string[] { "ID", "BSID", "SysID" }))
-                    return Json(new Result { Flag = 2, Msg = "数据错误！", ExInfo = "来自TryUpdateModel返回false" });
+                    return Json(new Result { Flag = 2, Msg = "数据错误！", ExMsg = "来自TryUpdateModel返回false" });
                 obj.BegTime = begTime;
                 obj.EndTime = endTime;
                 obj.UpTime = DateTime.Now;
                 obj.UpUser = user.Account;
                 if (add) dc.Set<T_ResourceStatus>().Add(obj);
                 if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-                return Json(new Result { Flag = 2, Msg = "保存失败！", ExInfo = "来自SaveChanges返回false" });
+                return Json(new Result { Flag = 2, Msg = "保存失败！", ExMsg = "来自SaveChanges返回false" });
 
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "数据异常！", ExInfo = ex.StackTrace });
+                return Json(new Result { Flag = 3, Msg = "数据异常！", ExMsg = ex.StackTrace });
             }
         }
         public ActionResult Free(int id)
         {
+            ViewBag.id = id;
             return View();
         }
         [HttpPost]
@@ -140,7 +138,7 @@ namespace Resource.Web.Controllers
             obj.EndType = Convert.ToInt32(form["EndType"]);
             obj.RealEndTime = endTime;
             if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-            return Json(new Result { Flag = 2, Msg = "保存失败！", ExInfo = "来自SaveChanges返回false" });
+            return Json(new Result { Flag = 2, Msg = "保存失败！", ExMsg = "来自SaveChanges返回false" });
         }
 
 

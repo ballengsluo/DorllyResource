@@ -126,11 +126,11 @@ function pub() {
 function mission(msg, obj) {
     if (!id || id == "") { layer.msg("请选择数据！"); return false; }
     layer.confirm(msg, function() {
-        // var url = $(this).attr('data-url');
         var url = obj.attr('data-url');
         ajax("post", url, { id: id }, 'json', function(data) {
-            layer.msg(data.msg);
-            if (data.result == 1) { search(paramsSet()); }
+            layer.msg(data.Msg);
+            console.log(data.ExInfo);
+            if (data.Flag == 1) { search(paramsSet()); }
         });
     });
 }
@@ -150,6 +150,29 @@ function layerOpen(url) {
     layer.full(index);
 }
 
+function paramsSet() {
+    return obj = {
+        city: $("#city").val(),
+        region: $("#region").val(),
+        park: $("#park").val(),
+        stage: $("#stage").val(),
+        build: $("#build").val(),
+        floor: $("#floor").val(),
+        room: $("#room").val(),
+        id: $("#id").val(),
+        name: $("#name").val(),
+        kind: $("#kind").val(),
+        group: $("#group").val(),
+        enable: $("#enable").val(),
+        status: $("#status").val(),
+        type: $("#type").val(),
+        itype: $("#itype").val(),
+        stime: $("#stime").val(),
+        etime: $("#etime").val(),
+        pageindex: currentNum,
+        pagesize: limitCount
+    };
+};
 
 function search(params) {
     ajax("get", $('#search').attr('data-url'), params, "json", function(data) {

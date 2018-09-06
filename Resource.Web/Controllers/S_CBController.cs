@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Resource.Web.Controllers
 {
-    public class S_CBController : BaseController
+    public class S_CBController : RSBaseController
     {
         // GET: S_CB
         public ActionResult Index()

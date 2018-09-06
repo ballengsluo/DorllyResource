@@ -27,9 +27,9 @@ namespace Resource.Web.Controllers
                        join b in dc.Set<T_City>() on a.CityID equals b.ID into t1
                        from c in t1.DefaultIfEmpty()
                        select new { a.CityID, a.OrderNum, a.ID, a.Position, a.ImgUrl, a.LinkUrl, a.Title, a.SubTitle, a.Status, CityName = c.Name };
-            if (!string.IsNullOrEmpty(param.CityID)) list = list.Where(a => a.CityID == param.CityID);
-            if (param.IntType > 0) list = list.Where(a => a.Position == param.IntType);
-            if (param.IntStatus > 0) list = list.Where(a => a.Status == param.IntStatus);
+            if (!string.IsNullOrEmpty(param.City)) list = list.Where(a => a.CityID == param.City);
+            if (param.IType > 0) list = list.Where(a => a.Position == param.IType);
+            if (param.Status > 0) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.OrderNum).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
@@ -63,14 +63,13 @@ namespace Resource.Web.Controllers
                 hp.UpdateTime = DateTime.Now;
                 hp.UpdateUser = user.Account;
                 dc.Set<T_HomePage>().Add(hp);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
+                else return Json(new Result { Flag = 2, Msg = "保存失败！" });
             }
             catch (Exception ex)
             {
                 if (!string.IsNullOrEmpty(newPath)) DelImg(newPath);
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
             }
         }
 
@@ -116,18 +115,17 @@ namespace Resource.Web.Controllers
                         catch (Exception)
                         {
                         }
-                        return Json(ResponseResult.GetResult(ResultEnum.Success));
+                        return Json(new Result { Flag = 1, Msg = "保存成功！" });
                     }
                 }
-                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                return Json(new Result { Flag = 2, Msg = "保存失败！" });
             }
             catch (Exception ex)
             {
                 if (!string.IsNullOrEmpty(newPath)) DelImg(newPath);
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
             }
-        }      
+        }
 
         #endregion
 
@@ -162,8 +160,8 @@ namespace Resource.Web.Controllers
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             hp.Status = 2;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "审核成功！" });
+            else return Json(new Result { Flag = 2, Msg = "审核失败！" });
         }
 
         public JsonResult Notpass(int id)
@@ -171,8 +169,8 @@ namespace Resource.Web.Controllers
             DbContext dc = DbContextFactory.Create();
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             hp.Status = 3;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "审核成功！" });
+            else return Json(new Result { Flag = 2, Msg = "审核失败！" });
 
         }
 
@@ -183,8 +181,8 @@ namespace Resource.Web.Controllers
             if (hp.Status == 4) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (hp.Status != 1 && hp.Status != 5) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 4;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "上架成功！" });
+            else return Json(new Result { Flag = 2, Msg = "上架失败！" });
         }
 
         public JsonResult Unpub(int id)
@@ -194,8 +192,8 @@ namespace Resource.Web.Controllers
             if (hp.Status == 5) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (hp.Status != 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 5;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "下架成功！" });
+            else return Json(new Result { Flag = 2, Msg = "下架失败！" });
         }
 
         public JsonResult Off(int id)
@@ -205,8 +203,8 @@ namespace Resource.Web.Controllers
             if (hp.Status == 6) return Json(new { result = 0, msg = "状态一致，无从改变！" });
             else if (hp.Status == 4) return Json(new { result = 0, msg = "请选择正确的操作！" });
             hp.Status = 6;
-            if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-            else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "作废成功！" });
+            else return Json(new Result { Flag = 2, Msg = "作废失败！" });
         }
 
         #endregion

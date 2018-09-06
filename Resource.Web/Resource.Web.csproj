@@ -813,6 +813,7 @@
     <Compile Include="Controllers\A_RegionController.cs" />
     <Compile Include="Controllers\A_StageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\RSBaseController.cs" />
     <Compile Include="Controllers\DropController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
@@ -842,7 +843,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Encrypt.cs" />
+    <Compile Include="Models\Util\Encrypt.cs" />
     <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\LoginView.cs" />
@@ -852,7 +853,7 @@
     <Compile Include="Models\Order\OrderRM.cs" />
     <Compile Include="Models\ResponseResult.cs" />
     <Compile Include="Models\ResultEnum.cs" />
-    <Compile Include="Models\SearchParam.cs" />
+    <Compile Include="Models\Util\SearchParam.cs" />
     <Compile Include="Models\SMRView.cs" />
     <Compile Include="Models\Util\Result.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\Config.cs" />

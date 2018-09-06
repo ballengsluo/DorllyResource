@@ -34,7 +34,8 @@ namespace Resource.Web.Models
         public string Group { get; set; }
         public string Room { get; set; }
         public string Cust { get; set; }
-        public string Type { get; set; }
+        public string SType { get; set; }
+        public int? IType { get; set; }
         public int? Kind { get; set; }
         public int? Status { get; set; }
         public bool? Enable { get; set; }

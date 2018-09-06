@@ -33,7 +33,7 @@
                 <div class="col-lg-2">
                     <div class="input-group">
                         <span class="input-group-addon">类别</span>
-                        <select class="selectpicker form-control pull-righ" id="type" title="请选择...">
+                        <select class="selectpicker form-control pull-righ" id="itype" title="请选择...">
                             <option value="">全部</option>
                             <option value="1">banner图</option>
                             <option value="2">广告位</option>
@@ -111,15 +111,15 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
-        function paramsSet() {
-            return obj = {
-                CityID: $("#city").val(),
-                IntType: $("#type").val(),
-                IntStatus: $("#status").val(),
-                PageSize: limitCount,
-                pageIndex: currentNum
-            };
-        };
+        //function paramsSet() {
+        //    return obj = {
+        //        CityID: $("#city").val(),
+        //        IntType: $("#type").val(),
+        //        IntStatus: $("#status").val(),
+        //        PageSize: limitCount,
+        //        pageIndex: currentNum
+        //    };
+        //};
     </script>
 </body>
 </html>

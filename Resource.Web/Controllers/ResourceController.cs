@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Resource.Web.Controllers
 {
-    public class ResourceController : BaseController
+    public class ResourceController : RSBaseController
     {
 
 
@@ -32,13 +32,12 @@ namespace Resource.Web.Controllers
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
                 rs.Enable = true;
                 dc.Set<T_Resource>().AddOrUpdate(rs);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
+                return Json(new Result { Flag = 2, Msg = "启用失败！", ExMsg = "SaveChanges错误！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
             }
 
         }
@@ -51,13 +50,12 @@ namespace Resource.Web.Controllers
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
                 rs.Enable = false;
                 dc.Set<T_Resource>().AddOrUpdate(rs);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
+                return Json(new Result { Flag = 2, Msg = "停用失败！", ExMsg = "SaveChanges错误！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
             }
         }
         [HttpPost]
@@ -67,20 +65,22 @@ namespace Resource.Web.Controllers
             {
 
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
+                //删除价格
                 List<T_ResourcePrice> priceList = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).ToList();
                 foreach (var item in priceList)
                 {
                     dc.Set<T_ResourcePrice>().Remove(item);
                 }
+                //删除图片
                 DelImg(rs.ID);
+
                 dc.Set<T_Resource>().Remove(rs);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
+                return Json(new Result { Flag = 2, Msg = "删除失败！", ExMsg = "SaveChanges错误！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
             }
         }
 

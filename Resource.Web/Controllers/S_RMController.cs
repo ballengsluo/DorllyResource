@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Resource.Web.Controllers
 {
-    public class S_RMController : BaseController
+    public class S_RMController : RSBaseController
     {
         // GET: S_RM
         public ActionResult Index()

@@ -24,12 +24,12 @@ namespace Resource.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.price = new T_ResourcePrice();
-            return View(new V_AD());
+            return View(new V_RS_Info());
         }
         public ActionResult Edit(string id)
         {
 
-            var obj = dc.Set<V_AD>().Where(a => a.ID == id).FirstOrDefault();
+            var obj = dc.Set<V_RS_Info>().Where(a => a.ID == id).FirstOrDefault();
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == id).ToList();
             return View(obj);
@@ -41,7 +41,7 @@ namespace Resource.Web.Controllers
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
-            if (!string.IsNullOrEmpty(param.Type)) list = list.Where(a => a.ResourceTypeID == param.Type);
+            if (!string.IsNullOrEmpty(param.SType)) list = list.Where(a => a.ResourceTypeID == param.SType);
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Resource.Web.Controllers
 {
-    public class OrderController : BaseController
+    public class OrderController : RSBaseController
     {
         // GET: Order
         public ActionResult Index()

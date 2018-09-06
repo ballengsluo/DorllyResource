@@ -103,8 +103,8 @@
             <td class="status" data-enable="{{value.Status}}">
                 {{if value.Status==1}}占用
                 {{else if value.Status==2}}空闲
-                {{else if value.Status==3}}预定
-                {{else}}预留
+                @*{{else if value.Status==3}}预定
+                {{else}}预留*@
                 {{/if}}
             </td>
         </tr>
@@ -119,16 +119,16 @@
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
         function paramsSet() {
-            return obj = {
-                Park: $("#park").val(),
-                ID: $("#id").val(),
-                Name: $("#name").val(),
-                Group: $("#group").val(),
-                Cust: $("#cust").val(),
-                Status: $("#status").val(),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
+            //return obj = {
+            //    Park: $("#park").val(),
+            //    ID: $("#id").val(),
+            //    Name: $("#name").val(),
+            //    Group: $("#group").val(),
+            //    Cust: $("#cust").val(),
+            //    Status: $("#status").val(),
+            //    PageIndex: currentNum,
+            //    PageSize: limitCount
+            //};
         };
     </script>
 </body>

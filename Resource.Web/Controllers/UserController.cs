@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Resource.Web.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : RSBaseController
     {
 
         // GET: user

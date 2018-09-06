@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace Resource.Web.Controllers
 {
-    public class AdminController : BaseController
+    public class AdminController : RSBaseController
     {
         // GET: Admin
         public ActionResult Index()

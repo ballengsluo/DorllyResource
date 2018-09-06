@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Resource.Web.Controllers
 {
-    public class DropController : BaseController
+    public class DropController : RSBaseController
     {
 
         #region 节点下拉

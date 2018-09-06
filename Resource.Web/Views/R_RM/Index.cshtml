@@ -67,12 +67,12 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                @*<div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">房间状态</span>
                         @{Html.RenderPartial("_RSStatus");}
                     </div>
-                </div>
+                </div>*@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
@@ -86,12 +86,12 @@
                 <thead>
                     <tr>
                         <th>序号</th>
-                        <th>编号</th>
+                        <th>房间编号</th>
                         <th>房间号</th>
-                        <th>位置</th>
-                        <th>类型</th>
+                        <th>房间坐标</th>
+                        <th>房间类型</th>
                         <th>出租面积</th>
-                        <th>状态</th>
+                        @*<th>状态</th>*@
                         <th>是否禁用</th>
                     </tr>
                 </thead>
@@ -106,16 +106,16 @@
             <td>{{i+1}}</td>
             <td class="key">{{value.ID}}</td>
             <td>{{value.Name}}</td>
-            <td>{{value.Position}}</td>
+            <td>{{value.LocText}}</td>
             <td>{{value.ResourceTypeName}}</td>
             <td>{{value.RentArea}}</td>
-            <td class="status" data-status="{{value.Status}}">
+            @*<td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用
                 {{else if value.Status==2}}空闲
                 {{else if value.Status==3}}预定
                 {{else if value.Status==4}}预留
                 {{/if}}
-            </td>
+            </td>*@
             <td class="enable" data-enable="{{value.Enable}}">
                 {{if value.Enable==0}}停用
                 {{else}}启用
@@ -132,19 +132,19 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
-        function paramsSet() {
-            return obj = {
-                Park: $("#park").val(),
-                Stage: $("#stage").val(),
-                Build: $("#build").val(),
-                Floor: $("#floor").val(),
-                ID: $("#id").val(),
-                Name: $("#name").val(),
-                Status: $("#status").val(),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
-        };
+        //function paramsSet() {
+        //    return obj = {
+        //        loc1: $("#park").val(),
+        //        loc2: $("#stage").val(),
+        //        Build: $("#build").val(),
+        //        Floor: $("#floor").val(),
+        //        ID: $("#id").val(),
+        //        Name: $("#name").val(),
+        //        Status: $("#status").val(),
+        //        PageIndex: currentNum,
+        //        PageSize: limitCount
+        //    };
+        //};
     </script>
 </body>
 </html>

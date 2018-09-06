@@ -50,7 +50,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">房间编号</span>
-                        <input type="text" class="form-control" id="rmid">
+                        <input type="text" class="form-control" id="room">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -59,12 +59,12 @@
                         <input type="text" class="form-control" id="id">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                @*<div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">工位状态</span>
                         @{Html.RenderPartial("_RSStatus");}
                     </div>
-                </div>
+                </div>*@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
@@ -78,11 +78,12 @@
                 <thead>
                     <tr>
                         <th>序号</th>
-                        <th>工位编号</th>
                         <th>房间编号</th>
+                        <th>工位编号</th>
+                        <th>工位坐标</th>              
                         <th>资源分组</th>
                         <th>工位单价</th>
-                        <th>状态</th>
+                        @*<th>状态</th>*@
                         <th>是否禁用</th>
                     </tr>
                 </thead>
@@ -95,17 +96,18 @@
         {{each data value i}}
         <tr>
             <td>{{i+1}}</td>
-            <td class="key">{{value.ID}}</td>
             <td>{{value.Loc5}}</td>
+            <td class="key">{{value.ID}}</td>  
+            <td>{{value.LocText}}</td>          
             <td>{{value.GroupName}}</td>
             <td>{{value.Price}}</td>
-            <td class="status" data-status="{{value.Status}}">
+            @*<td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用
                 {{else if value.Status==2}}空闲
                 {{else if value.Status==3}}预定
                 {{else if value.Status==4}}预留
                 {{/if}}
-            </td>
+            </td>*@
             <td class="enable" data-enable="{{value.Enable}}">
                 {{if value.Enable==0}}停用
                 {{else}}启用
@@ -122,19 +124,19 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
     <script>
-        function paramsSet() {
-            return obj = {
-                Park: $("#park").val(),
-                Stage: $("#stage").val(),
-                Build: $("#build").val(),
-                Floor: $("#floor").val(),
-                Room: $("#rmid").val(),
-                ID: $("#id").val(),
-                Status: $("#status").val(),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
-        };
+        //function paramsSet() {
+        //    return obj = {
+        //        loc1: $("#park").val(),
+        //        loc2: $("#stage").val(),
+        //        loc3: $("#build").val(),
+        //        loc4: $("#floor").val(),
+        //        loc5: $("#rmid").val(),
+        //        id: $("#id").val(),
+        //        //Status: $("#status").val(),
+        //        PageIndex: currentNum,
+        //        PageSize: limitCount
+        //    };
+        //};
     </script>
 </body>
 </html>

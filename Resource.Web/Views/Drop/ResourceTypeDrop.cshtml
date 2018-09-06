@@ -11,8 +11,8 @@ else
     @Html.DropDownList("ResourceTypeID", ViewData["dataList"] as SelectList,
     new
     {
-        @class = "selectpicker form-control pull-righ",
-        @id = "type",
+        @class = "selectpicker form-control",
+        @id = "stype",
         @required = "required",
         @title = "请选择..."
     })
@@ -24,7 +24,7 @@ else
         "全部",
         new
         {
-            @class = "selectpicker form-control pull-righ",
-            @id = "type"
+            @class = "selectpicker form-control",
+            @id = "stype"
         })
 }

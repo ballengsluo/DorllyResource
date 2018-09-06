@@ -21,7 +21,19 @@ namespace Resource.Web.Controllers
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
         }
-        
+        public JsonResult Search(SearchParam param)
+        {
+            DbContext dc = DbContextFactory.Create();
+            var list = dc.Set<V_Park>().Where(a => true);
+            if (!string.IsNullOrEmpty(param.Region)) list = list.Where(a => a.RegionID == param.Region);
+            else if (!string.IsNullOrEmpty(param.City)) list = list.Where(a => a.CityID == param.City);
+            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
+            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
+            int count = list.Count();
+            list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
+            return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -34,13 +46,12 @@ namespace Resource.Web.Controllers
             {
                 DbContext dc = DbContextFactory.Create();
                 dc.Set<T_Park>().Add(park);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
+                else return Json(new Result { Flag = 2, Msg = "保存失败！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
             }
 
         }
@@ -61,14 +72,13 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(park, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
+                    if (dc.SaveChanges() > 0) Json(new Result { Flag = 1, Msg = "保存成功！" });
                 }
-                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                return Json(new Result { Flag = 2, Msg = "保存失败！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
             }
 
         }
@@ -81,15 +91,15 @@ namespace Resource.Web.Controllers
                 DbContext dc = DbContextFactory.Create();
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Park>().Remove(park);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
+                else return Json(new Result { Flag = 2, Msg = "删除失败！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
             }
         }
+        [HttpPost]
         public JsonResult Open(string id)
         {
             try
@@ -98,16 +108,15 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = true;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
+                else return Json(new Result { Flag = 2, Msg = "启用失败！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
             }
         }
-
+        [HttpPost]
         public JsonResult Close(string id)
         {
             try
@@ -116,28 +125,15 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = false;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
+                else return Json(new Result { Flag = 2, Msg = "停用失败！" });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
             }
         }
-        public JsonResult Search(SearchParam param)
-        {
-            DbContext dc = DbContextFactory.Create();
-            var list = dc.Set<V_Park>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.Region)) list = list.Where(a => a.RegionID == param.Region);
-            else if (!string.IsNullOrEmpty(param.City)) list = list.Where(a => a.CityID == param.City);
-            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
-            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
-            int count = list.Count();
-            list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
-        }
-
+       
         public JsonResult GetList(string pcode)
         {
             DbContext dc = DbContextFactory.Create();
