@@ -52,22 +52,13 @@ namespace Resource.Model
         public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
-        public virtual DbSet<V_AD> V_AD { get; set; }
         public virtual DbSet<V_Building> V_Building { get; set; }
-        public virtual DbSet<V_CB> V_CB { get; set; }
         public virtual DbSet<V_Floor> V_Floor { get; set; }
-        public virtual DbSet<V_MR> V_MR { get; set; }
         public virtual DbSet<V_Order> V_Order { get; set; }
         public virtual DbSet<V_Park> V_Park { get; set; }
         public virtual DbSet<V_Public> V_Public { get; set; }
-        public virtual DbSet<V_Releasing> V_Releasing { get; set; }
-        public virtual DbSet<V_Resource> V_Resource { get; set; }
-        public virtual DbSet<V_RM> V_RM { get; set; }
         public virtual DbSet<V_RS_Info> V_RS_Info { get; set; }
-        public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
-        public virtual DbSet<V_SAD> V_SAD { get; set; }
-        public virtual DbSet<V_SCB> V_SCB { get; set; }
-        public virtual DbSet<V_SRM> V_SRM { get; set; }
         public virtual DbSet<V_Stage> V_Stage { get; set; }
+        public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
     }
 }

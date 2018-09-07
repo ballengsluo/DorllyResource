@@ -59,11 +59,11 @@ namespace Resource.Model
         public string Loc4Name { get; set; }
         public string Loc5Name { get; set; }
         public string LocText { get; set; }
-        public Nullable<System.DateTime> BegTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
-        public string Company { get; set; }
-        public string ContactName { get; set; }
-        public string ContactTel { get; set; }
+        public Nullable<System.DateTime> RentBeginTime { get; set; }
+        public Nullable<System.DateTime> RentEndTime { get; set; }
+        public string CustLongName { get; set; }
+        public string CustShortName { get; set; }
+        public string CustTel { get; set; }
         public Nullable<bool> YearEnable { get; set; }
         public Nullable<decimal> YearInPrice { get; set; }
         public Nullable<decimal> YearOutPrice { get; set; }

@@ -117,8 +117,8 @@
         {{each data value i}}
         <tr>
             <td class="key" style="display:none;">{{value.ID}}</td>
-            <td>{{value.RID}}</td>
-            <td>{{value.RName}}</td>
+            <td>{{value.ResourceID}}</td>
+            <td>{{value.ResourceName}}</td>
             <td>{{value.Loc1Name}}</td>
             <td>{{value.ResourceKindName}}</td>
             <td>{{value.GroupName}}</td>
@@ -128,9 +128,9 @@
                 {{else if value.SysID==3}}资源系统
                 {{/if}}
             </td>
-            <td data-type="{{value.BSType}}">
-                {{if value.BSType==1}} 客户占用
-                {{else if value.BSType==2}}内部占用
+            <td data-type="{{value.BusinessType}}">
+                {{if value.BusinessType==1}} 客户占用
+                {{else if value.BusinessType==2}}内部占用
                 {{/if}}
             </td>
             <td data-enable="{{value.Enable}}">
@@ -138,8 +138,8 @@
                 {{else if value.Enable==1}}占用
                 {{/if}}
             </td>
-            <td>{{value.ContactName}}</td>
-            <td>{{value.BegTime}} - {{value.EndTime}}</td>
+            <td>{{value.CustShortName}}</td>
+            <td>{{value.RentBeginTime}} - {{value.RentEndTime}}</td>
         </tr>
         {{/each}}
     </script>
@@ -150,18 +150,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        $(function () {
-            layui.use('laydate', function () {
-                var laydate = layui.laydate;
-                laydate.render({
-                    elem: '#stime'
-                });
-                laydate.render({
-                    elem: '#etime'
-                });
-            });
-        });
-    </script>
 </body>
 </html>

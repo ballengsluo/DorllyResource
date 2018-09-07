@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
     public class HomePageFootController : Controller
@@ -18,28 +17,20 @@ namespace Resource.Web.Controllers
         {
             return View();
         }
-
-
         public ContentResult Edit(int id)
         {
             DbContext dc = DbContextFactory.Create();
             T_PageFoot pf = dc.Set<T_PageFoot>().Where(a => a.Position == id).FirstOrDefault();
             if (pf == null) pf = new T_PageFoot();
-            JsonSerializerSettings setting = new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            };
-            var obj = JsonConvert.SerializeObject(pf, setting);
+            var obj = JsonConvert.SerializeObject(pf);
             return Content(obj);
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Edit(int id, FormCollection form)
         {
             string code1 = string.Empty;
             string code2 = string.Empty;
-
             try
             {
                 DbContext dc = DbContextFactory.Create();
@@ -59,19 +50,17 @@ namespace Resource.Web.Controllers
                 }
                 catch (Exception)
                 {
-
                 }
                 if (TryUpdateModel(pf, "", form.AllKeys))
                 {
                     dc.Set<T_PageFoot>().AddOrUpdate(pf);
-                    if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
-                return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         public ActionResult PositionDrop(int? id)
@@ -86,7 +75,6 @@ namespace Resource.Web.Controllers
             else ViewData["dataList"] = new SelectList(type, "Value", "Text", id);
             return PartialView();
         }
-
         public string SaveImg(HttpPostedFileBase hpImg)
         {
             string path = string.Empty;
@@ -102,11 +90,10 @@ namespace Resource.Web.Controllers
                     hpImg.SaveAs(Server.MapPath(filePath));
                     path = filePath.Replace("~", "..");
                 }
-
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
+
             }
             return path;
         }

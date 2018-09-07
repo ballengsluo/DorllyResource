@@ -813,7 +813,7 @@
     <Compile Include="Controllers\A_RegionController.cs" />
     <Compile Include="Controllers\A_StageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\RSBaseController.cs" />
+    <Compile Include="Controllers\ResourceBusinessController.cs" />
     <Compile Include="Controllers\DropController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
@@ -843,6 +843,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusinessModel.cs" />
     <Compile Include="Models\Util\Encrypt.cs" />
     <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />

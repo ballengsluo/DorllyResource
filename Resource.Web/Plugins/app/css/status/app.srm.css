@@ -110,10 +110,10 @@
     font-size: 16px;
 }
 
-.rmrent {
-    background-color: #f09ca8
+[data-status='1'] {
+    background-color: #c3f8d3
 }
 
-.rmfree {
-    background-color: #c3f8d3
+[data-status='2'] {
+    background-color: #f09ca8
 }

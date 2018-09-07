@@ -28,11 +28,11 @@ namespace Resource.Model
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public string ResourceName { get; set; }
-        public string ParkID { get; set; }
-        public string ParkName { get; set; }
-        public string GroupID { get; set; }
-        public string GroupName { get; set; }
+        public string Loc1 { get; set; }
+        public string Loc1Name { get; set; }
         public Nullable<int> ResourceKindID { get; set; }
         public string ResourceKindName { get; set; }
+        public string GroupID { get; set; }
+        public string GroupName { get; set; }
     }
 }

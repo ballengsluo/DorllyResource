@@ -89,7 +89,7 @@
         {{each data value i}}
         <tr>
             <td>{{i+1}}</td>
-            <td>{{value.ParkName}}</td>
+            <td>{{value.Loc1Name}}</td>
             <td class="key">{{value.ID}}</td>
             <td>{{value.Name}}</td>
             <td>{{value.ResourceKindName}}</td>
@@ -105,35 +105,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //$(function () {
-        //    $('#kind').change(function () {
-        //        if (!$(this).val() || $(this).val() == '') {
-        //            $('#group').html("<option value=''>全部</option>").selectpicker('refresh');
-        //            return false
-        //        } else {
-        //            $.getJSON('/Drop/GroupList', { kind: $(this).val() }, function (data) {
-        //                var html = "<option value=''>全部</option>"
-        //                for (var i = 0; i < data.length; i++) {
-        //                    html += "<option value='" + data[i].ID + "'>" + data[i].Name + '</option>'
-        //                }
-        //                $('#group').html(html).selectpicker('refresh');
-        //            });
-        //        }
-        //    });
-        //});
-
-        //function paramsSet() {
-        //    return obj = {
-        //        ParkID: $('#park').val(),
-        //        IntType: $('#kind').val(),
-        //        GroupID: $('#group').val(),
-        //        ID: $('#id').val(),
-        //        Name: $('#name').val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    }
-        //}
-    </script>
 </body>
 </html>

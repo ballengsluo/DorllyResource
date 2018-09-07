@@ -8,10 +8,9 @@ using Resource.Model.DB;
 using System.Data;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
-
 namespace Resource.Web.Controllers
 {
-    public class AdminController : RSBaseController
+    public class AdminController : ResourceBusinessController
     {
         // GET: Admin
         public ActionResult Index()
@@ -30,7 +29,6 @@ namespace Resource.Web.Controllers
             }
             return View(rmList);
         }
-
         public ActionResult Main()
         {
             string park = user.Park.Split(',')[0].Trim();

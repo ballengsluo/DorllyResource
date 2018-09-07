@@ -10,39 +10,11 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
 namespace Resource.Web.Controllers
 {
-    public class RSBaseController : Controller
+    public class ResourceBusinessController : BaseController
     {
-        public DbContext dc
-        {
-            get
-            {
-                return DbContextFactory.Create();
-            }
-        }
-        public T_User user
-        {
-            get
-            {
-
-                T_User user = RouteData.Values["user"] as T_User;
-                ViewBag.user = user;
-                return user;
-
-            }
-        }
-        public List<string> ParkList
-        {
-            get
-            {
-                return user.Park.Split(',').ToList();
-            }
-        }
-
         #region 资源业务
-
         public List<string> SaveImg(string resourceID)
         {
             List<string> imgList = new List<string>();
@@ -79,7 +51,6 @@ namespace Resource.Web.Controllers
             }
             return imgList;
         }
-
         /// <summary>
         /// 缩放图像
         /// </summary>
@@ -91,16 +62,12 @@ namespace Resource.Web.Controllers
         public static void MakeThumNail(string originalImagePath, string thumNailPath, int width, int height, string model)
         {
             System.Drawing.Image originalImage = System.Drawing.Image.FromFile(originalImagePath);
-
             int thumWidth = width;      //缩略图的宽度
             int thumHeight = height;    //缩略图的高度
-
             int x = 0;
             int y = 0;
-
             int originalWidth = originalImage.Width;    //原始图片的宽度
             int originalHeight = originalImage.Height;  //原始图片的高度
-
             switch (model)
             {
                 case "HW":      //指定高宽缩放,可能变形
@@ -130,25 +97,18 @@ namespace Resource.Web.Controllers
                 default:
                     break;
             }
-
             //新建一个bmp图片
             System.Drawing.Image bitmap = new System.Drawing.Bitmap(thumWidth, thumHeight);
-
             //新建一个画板
             System.Drawing.Graphics graphic = System.Drawing.Graphics.FromImage(bitmap);
-
             //设置高质量查值法
             graphic.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-
             //设置高质量，低速度呈现平滑程度
             graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-
             //清空画布并以透明背景色填充
             graphic.Clear(System.Drawing.Color.Transparent);
-
             //在指定位置并且按指定大小绘制原图片的指定部分
             graphic.DrawImage(originalImage, new System.Drawing.Rectangle(0, 0, thumWidth, thumHeight), new System.Drawing.Rectangle(x, y, originalWidth, originalHeight), System.Drawing.GraphicsUnit.Pixel);
-
             try
             {
                 bitmap.Save(thumNailPath, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -164,7 +124,6 @@ namespace Resource.Web.Controllers
                 graphic.Dispose();
             }
         }
-
         public void DelImg(string resourceID)
         {
             var obj = dc.Set<T_ResourceImg>();
@@ -176,13 +135,11 @@ namespace Resource.Web.Controllers
                 obj.Remove(item);
             }
         }
-
         public void DelImg(T_ResourceImg img)
         {
             string path = Server.MapPath(img.ImgUrl.Replace("..", "~"));
             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
         }
-
         public void DelImg(List<string> imgList)
         {
             foreach (var item in imgList)
@@ -191,6 +148,11 @@ namespace Resource.Web.Controllers
                 if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
             }
         }
+        /// <summary>
+        /// 单张图片删除
+        /// </summary>
+        /// <param name="id">图片编号</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult DelImgAction(string id)
         {
@@ -199,11 +161,16 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0)
             {
                 DelImg(img);
-                return Json(new Result { Flag = 1, Msg = "图片删除成功！" });
+                return Json(Result.Success());
             }
-            else return Json(new Result { Flag = 2, Msg = "图片删除失败！" });
-
+            else return Json(Result.Fail());
         }
+        /// <summary>
+        /// 图片设置封面
+        /// </summary>
+        /// <param name="id">图片编号</param>
+        /// <param name="rid">资源编号</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult SetImgAction(string id, string rid)
         {
@@ -211,12 +178,10 @@ namespace Resource.Web.Controllers
             var img = dc.Set<T_ResourceImg>().Where(a => a.ID == id).FirstOrDefault();
             img.IsCover = true;
             if (dc.SaveChanges() > 0)
-                return Json(new Result { Flag = 1, Msg = "设置封面成功！" });
+                return Json(Result.Success());
             else
-                return Json(new Result { Flag = 2, Msg = "设置封面失败！" });
-
+                return Json(Result.Fail());
         }
-
         public bool SavePrice(string resourceID, FormCollection form)
         {
             bool success = false;
@@ -239,13 +204,12 @@ namespace Resource.Web.Controllers
             }
             return success;
         }
-
-        public bool SaveResource(string id, FormCollection form)
+        public bool SaveResource(string resourceID, FormCollection form)
         {
             bool success = false;
             bool add = false;
             var obj = dc.Set<T_Resource>();
-            var resource = obj.Where(a => a.ID == id).FirstOrDefault();
+            var resource = obj.Where(a => a.ID == resourceID).FirstOrDefault();
             if (resource == null)
             {
                 resource = new T_Resource();
@@ -264,38 +228,35 @@ namespace Resource.Web.Controllers
             }
             return success;
         }
-
-        public JsonResult SaveResourceInfo(string id, FormCollection form)
+        public JsonResult SaveResourceInfo(string resourceID, FormCollection form)
         {
             List<string> imgList = new List<string>();
             try
             {
-                imgList = SaveImg(id);
-                if (SaveResource(id, form) && SavePrice(id, form) && dc.SaveChanges() > 0)
-                    return Json(new Result());
+                imgList = SaveImg(resourceID);
+                if (SaveResource(resourceID, form) && SavePrice(resourceID, form) && dc.SaveChanges() > 0)
+                    return Json(Result.Success());
                 DelImg(imgList);
-                return Json(new Result { Flag = 2, Msg = "保存失败！", ExMsg = "来自SaveResource，SavePrice" });
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
                 DelImg(imgList);
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         #endregion
-
-        public bool SavePublic(string id, string resourcID, FormCollection form)
+        #region 发布业务
+        public bool SavePublic(string publicID, string resourcID, FormCollection form)
         {
             bool success = false;
             bool add = false;
             var obj = dc.Set<T_ResourcePublic>();
-            var pub = obj.Where(a => a.ID == id).FirstOrDefault();
+            var pub = obj.Where(a => a.ID == publicID).FirstOrDefault();
             if (pub == null)
             {
-
                 pub = new T_ResourcePublic();
-                pub.ID = id;
+                pub.ID = publicID;
                 pub.CreateTime = DateTime.Now;
                 pub.CreateUser = user.Account;
                 pub.ResourceID = resourcID;
@@ -314,8 +275,7 @@ namespace Resource.Web.Controllers
             }
             return success;
         }
-
-        public JsonResult SavePubInfo(string id, string resourceID, FormCollection form)
+        public JsonResult SavePubInfo(string publicID, string resourceID, FormCollection form)
         {
             List<string> imgList = new List<string>();
             try
@@ -323,18 +283,19 @@ namespace Resource.Web.Controllers
                 imgList = SaveImg(resourceID);
                 if (SaveResource(resourceID, form)
                     && SavePrice(resourceID, form)
-                    && SavePublic(id, resourceID, form)
+                    && SavePublic(publicID, resourceID, form)
                     && dc.SaveChanges() > 0)
-                    Json(new Result { Flag = 1, Msg = "发布成功！" });
+                    Json(Result.Success());
                 DelImg(imgList);
-                return Json(new Result { Flag = 2, Msg = "发布失败！", ExMsg = "来自SaveResource，SavePrice，SavePublic" });
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
                 DelImg(imgList);
                 System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(new Result { Flag = 3, Msg = "发布异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
+        #endregion
     }
 }

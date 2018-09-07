@@ -6,13 +6,10 @@ using System.Web.Mvc;
 using Resource.Web.Models;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-
 namespace Resource.Web.Controllers
 {
-
     public class A_CityController : Controller
     {
-
         public ActionResult Index()
         {
             T_User user = RouteData.Values["user"] as T_User;
@@ -33,7 +30,6 @@ namespace Resource.Web.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public JsonResult Create(T_City city)
         {
@@ -43,22 +39,20 @@ namespace Resource.Web.Controllers
                 city.Enable = true;
                 city.IsDefault = false;
                 dc.Set<T_City>().Add(city);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-                else return Json(new Result { Flag = 2, Msg = "保存失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public ActionResult Edit(string id)
         {
             DbContext dc = DbContextFactory.Create();
             var entity = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
             return View(entity);
         }
-
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
         {
@@ -68,16 +62,15 @@ namespace Resource.Web.Controllers
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable", "IsDefault" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(new Result { Flag = 1, Msg = "保存成功！" });
+                    if (dc.SaveChanges() > 0) Json(Result.Success());
                 }
-                return Json(new Result { Flag = 2, Msg = "保存失败！" });
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         [HttpPost]
         public JsonResult Del(string id)
         {
@@ -86,12 +79,12 @@ namespace Resource.Web.Controllers
                 DbContext dc = DbContextFactory.Create();
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_City>().Remove(city);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
-                else return Json(new Result { Flag = 2, Msg = "删除失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
@@ -103,12 +96,12 @@ namespace Resource.Web.Controllers
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = true;
                 dc.Set<T_City>().AddOrUpdate(city);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "启用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
@@ -120,21 +113,13 @@ namespace Resource.Web.Controllers
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = false;
                 dc.Set<T_City>().AddOrUpdate(city);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "停用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
-        }
-        
-
-        public JsonResult GetCityList()
-        {
-            DbContext dc = DbContextFactory.Create();
-            var list = dc.Set<T_City>().ToList();
-            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -10,12 +10,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
-    public class UserController : RSBaseController
+    public class UserController : ResourceBusinessController
     {
-
         // GET: user
         public ActionResult Index()
         {
@@ -23,8 +21,28 @@ namespace Resource.Web.Controllers
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
         }
-
-
+        public ContentResult Search(SearchParam param)
+        {
+            var list = dc.Set<T_User>()
+                .AsNoTracking()
+                .Where(a => true)
+                .Select(a => new { a.Account, a.UserName, a.CreateDate, a.Addr, a.Enable, a.Email, a.Phone });
+            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.Account.Contains(param.ID));
+            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.UserName.Contains(param.Name));
+            if (param.Stime != null) list = list.Where(a => a.CreateDate >= param.Stime);
+            if (param.Etime != null) list = list.Where(a => a.CreateDate <= param.Etime);
+            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
+            int count = list.Count();
+            list = list.OrderBy(a => a.Account)
+                .Skip((param.PageIndex - 1) * param.PageSize)
+                .Take(param.PageSize);
+            JsonSerializerSettings setting = new JsonSerializerSettings
+            {
+                DateFormatString = "yyyy-MM-dd HH:mm:ss"
+            };
+            var obj = JsonConvert.SerializeObject(new { count = count, data = list.ToList() }, setting);
+            return Content(obj);
+        }
         public ActionResult Create()
         {
             var parklist = user.Park.Split(',');
@@ -51,20 +69,16 @@ namespace Resource.Web.Controllers
                 else
                     ur.RoleID = 2;
                 dc.Set<T_UserRole>().Add(ur);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
-
         }
         public ActionResult Edit(string id)
         {
-
-            //ViewBag.park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(dc.Set<T_Park>().Select(a => new { a.ID, a.Name }).ToList()));
             var parklist = user.Park.Split(',');
             var obj = user.Account == "admin" ?
                 dc.Set<T_Park>().Select(a => new { a.ID, a.Name }).ToList() :
@@ -76,41 +90,32 @@ namespace Resource.Web.Controllers
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
         {
-
             try
             {
-
                 T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
                 if (TryUpdateModel(user, "", form.AllKeys, new string[] { "Enable", "PWD", "CreateDate" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                    else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public ActionResult Reset(string id)
         {
-
             T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
             return View(user);
         }
-
         public ActionResult SingleReset()
         {
-
             return View(user);
         }
         [HttpPost]
         public ActionResult SingleReset(string id, FormCollection form)
         {
-
             try
             {
                 T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
@@ -120,35 +125,31 @@ namespace Resource.Web.Controllers
                 {
                     dc.Set<T_LoginInfo>().Remove(item);
                 }
-                return Service(dc);
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
         public JsonResult Reset(string id, FormCollection form)
         {
-
             try
             {
                 T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
                 user.PWD = Encrypt.EncryptDES(form["PWD"], 1);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public ActionResult Role(string id)
         {
-
             ViewBag.Role = dc.Set<T_Role>().ToList();
             T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
             return View(user);
@@ -156,10 +157,8 @@ namespace Resource.Web.Controllers
         [HttpPost]
         public JsonResult Role(string id, List<T_UserRole> urList)
         {
-
             try
             {
-
                 var _urList = dc.Set<T_UserRole>().Where(a => a.UserID.Equals(id));
                 foreach (var item in _urList)
                 {
@@ -169,22 +168,19 @@ namespace Resource.Web.Controllers
                 {
                     dc.Set<T_UserRole>().Add(item);
                 }
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         [HttpPost]
         public JsonResult Del(string id)
         {
             try
             {
-
                 T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
                 var ur = user.T_UserRole.ToList();
                 foreach (var item in ur)
@@ -197,71 +193,43 @@ namespace Resource.Web.Controllers
                     dc.Set<T_LoginInfo>().Remove(item);
                 }
                 dc.Set<T_User>().Remove(user);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         public JsonResult Open(string id)
         {
             try
             {
-
                 T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
                 user.Enable = true;
                 dc.Set<T_User>().AddOrUpdate(user);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public JsonResult Close(string id)
         {
             try
             {
-
                 T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
                 user.Enable = false;
                 dc.Set<T_User>().AddOrUpdate(user);
-                if (dc.SaveChanges() > 0) return Json(ResponseResult.GetResult(ResultEnum.Success));
-                else return Json(ResponseResult.GetResult(ResultEnum.Fail));
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
-                return Json(ResponseResult.GetResult(ResultEnum.Exception));
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
-        public ContentResult Search(SearchParam param)
-        {
-
-            var list = dc.Set<T_User>().Where(a => true).Select(a => new { a.Account, a.UserName, a.CreateDate, a.Addr, a.Enable, a.Email, a.Phone });
-            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.Account.Contains(param.ID));
-            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.UserName.Contains(param.Name));
-            if (param.BeginTime != null) list = list.Where(a => a.CreateDate >= param.BeginTime);
-            if (param.EndTime != null) list = list.Where(a => a.CreateDate <= param.EndTime);
-            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
-            int count = list.Count();
-            list = list.OrderBy(a => a.Account)
-                .Skip((param.PageIndex - 1) * param.PageSize)
-                .Take(param.PageSize);
-            JsonSerializerSettings setting = new JsonSerializerSettings
-            {
-                DateFormatString = "yyyy-MM-dd HH:mm:ss"
-            };
-            var obj = JsonConvert.SerializeObject(new { count = count, data = list.ToList() }, setting);
-            return Content(obj);
-        }
-
     }
 }

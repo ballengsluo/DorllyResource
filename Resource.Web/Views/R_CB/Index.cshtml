@@ -80,7 +80,8 @@
                         <th>序号</th>
                         <th>房间编号</th>
                         <th>工位编号</th>
-                        <th>工位坐标</th>              
+                        <th>工位坐标</th>   
+                        <th>工位类型</th>           
                         <th>资源分组</th>
                         <th>工位单价</th>
                         @*<th>状态</th>*@
@@ -99,6 +100,7 @@
             <td>{{value.Loc5}}</td>
             <td class="key">{{value.ID}}</td>  
             <td>{{value.LocText}}</td>          
+            <td>{{value.ResourceTypeName}}</td>
             <td>{{value.GroupName}}</td>
             <td>{{value.Price}}</td>
             @*<td class="status" data-status="{{value.Status}}">
@@ -123,20 +125,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //function paramsSet() {
-        //    return obj = {
-        //        loc1: $("#park").val(),
-        //        loc2: $("#stage").val(),
-        //        loc3: $("#build").val(),
-        //        loc4: $("#floor").val(),
-        //        loc5: $("#rmid").val(),
-        //        id: $("#id").val(),
-        //        //Status: $("#status").val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 </html>

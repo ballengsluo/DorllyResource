@@ -27,19 +27,20 @@ namespace Resource.Model
         public Nullable<int> Status { get; set; }
         public string AuthUser { get; set; }
         public string Name { get; set; }
-        public string ParkID { get; set; }
-        public string ParkName { get; set; }
-        public string ParentID { get; set; }
+        public string Loc1 { get; set; }
+        public string Loc2 { get; set; }
+        public string Loc3 { get; set; }
+        public string Loc4 { get; set; }
+        public string Loc5 { get; set; }
         public string GroupID { get; set; }
         public Nullable<int> ResourceKindID { get; set; }
-        public string ResourceKindName { get; set; }
         public string ResourceTypeID { get; set; }
-        public string ResourceTypeName { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<decimal> OrderPrice { get; set; }
-        public Nullable<decimal> Deposit { get; set; }
-        public Nullable<System.DateTime> RentBeginTime { get; set; }
-        public Nullable<System.DateTime> RentEndTime { get; set; }
+        public Nullable<int> RSID { get; set; }
+        public Nullable<int> RStatus { get; set; }
+        public Nullable<bool> REnable { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> MaxPrice { get; set; }
+        public Nullable<decimal> MinPrice { get; set; }
         public Nullable<decimal> Area { get; set; }
         public Nullable<decimal> RentArea { get; set; }
         public Nullable<decimal> StartArea { get; set; }
@@ -52,8 +53,18 @@ namespace Resource.Model
         public string RentSize { get; set; }
         public string StartSize { get; set; }
         public string RangeSize { get; set; }
+        public Nullable<decimal> Deposit { get; set; }
         public string Content { get; set; }
         public string Remark { get; set; }
         public string Location { get; set; }
+        public string ResourceKindName { get; set; }
+        public string ResourceTypeName { get; set; }
+        public string GroupName { get; set; }
+        public string Loc1Name { get; set; }
+        public string Loc2Name { get; set; }
+        public string Loc3Name { get; set; }
+        public string Loc4Name { get; set; }
+        public string Loc5Name { get; set; }
+        public string LocText { get; set; }
     }
 }

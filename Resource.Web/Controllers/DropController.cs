@@ -6,14 +6,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
-    public class DropController : RSBaseController
+    public class DropController : ResourceBusinessController
     {
-
         #region 节点下拉
-
         public ActionResult CityDrop(string id, int model)
         {
             ViewBag.model = model;
@@ -40,7 +37,6 @@ namespace Resource.Web.Controllers
         public ActionResult RegionDropList(string pid)
         {
             var list = dc.Set<T_Region>().Where(a => a.CityID == pid).ToList();
-
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult ParkDrop(string pid, string id, int model)
@@ -114,7 +110,6 @@ namespace Resource.Web.Controllers
             return Content(JsonConvert.SerializeObject(list));
         }
         #endregion
-
         public ActionResult GroupDrop(int kind, string id, int model)
         {
             ViewBag.model = model;
@@ -127,7 +122,6 @@ namespace Resource.Web.Controllers
             var list = dc.Set<T_ResourceGroup>().Where(a => a.Enable == true && a.ResourceKindID == kind).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
-
         public ActionResult ResourceKindDrop(int? id, int model)
         {
             ViewBag.model = model;
@@ -152,6 +146,5 @@ namespace Resource.Web.Controllers
             var list = dc.Set<T_ResourceType>().Where(a => a.ResourceKindID == kind).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
-
     }
 }

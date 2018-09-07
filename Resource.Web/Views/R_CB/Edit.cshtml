@@ -1,4 +1,4 @@
-﻿@model Resource.Model.V_CB
+﻿@model Resource.Model.V_RS_Info
 <!DOCTYPE html>
 
 <html>
@@ -36,25 +36,5 @@
     @Scripts.Render("~/Plugins/ueditor/lang/zh-cn/zh-cn.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.res.js")
-    @*<script>
-        $(function () {
-            dropChange(2);
-            $("input[type='submit']").click(function () {
-                var form = new FormData($("form")[0]);
-                ajaxForm("post", "@Url.Action("edit")", form, "json", function (data) {
-                    layer.msg(data.msg, { icon: data.result })
-                    if (data.result == 1) {
-                        window.parent.refresh = true;
-                        setTimeout(function () { window.parent.layer.closeAll() }, 1000);
-                    }
-                });
-            });
-        });
-        var ue = UE.getEditor('Content', {
-            initialFrameHeight: 300,
-            allowDivTransToP: false,
-            initialFrameWidth: '100%'
-        });
-    </script>*@
 </body>
 </html>

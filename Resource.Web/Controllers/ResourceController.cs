@@ -9,13 +9,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
-    public class ResourceController : RSBaseController
+    public class ResourceController : ResourceBusinessController
     {
-
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult AddOrUpdate(string id, FormCollection form)
@@ -23,7 +20,6 @@ namespace Resource.Web.Controllers
             if (!string.IsNullOrEmpty(form["ID"])) id = form["ID"];
             return SaveResourceInfo(id, form);
         }
-
         [HttpPost]
         public ActionResult Open(string id)
         {
@@ -32,30 +28,28 @@ namespace Resource.Web.Controllers
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
                 rs.Enable = true;
                 dc.Set<T_Resource>().AddOrUpdate(rs);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
-                return Json(new Result { Flag = 2, Msg = "启用失败！", ExMsg = "SaveChanges错误！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
-
         }
         [HttpPost]
         public ActionResult Close(string id)
         {
             try
             {
-
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
                 rs.Enable = false;
                 dc.Set<T_Resource>().AddOrUpdate(rs);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
-                return Json(new Result { Flag = 2, Msg = "停用失败！", ExMsg = "SaveChanges错误！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
@@ -63,7 +57,6 @@ namespace Resource.Web.Controllers
         {
             try
             {
-
                 var rs = dc.Set<T_Resource>().Where(a => a.ID == id).FirstOrDefault();
                 //删除价格
                 List<T_ResourcePrice> priceList = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).ToList();
@@ -73,17 +66,15 @@ namespace Resource.Web.Controllers
                 }
                 //删除图片
                 DelImg(rs.ID);
-
                 dc.Set<T_Resource>().Remove(rs);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
-                return Json(new Result { Flag = 2, Msg = "删除失败！", ExMsg = "SaveChanges错误！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         #region oooo
         //[HttpPost]
         //[ValidateInput(false)]
@@ -118,12 +109,10 @@ namespace Resource.Web.Controllers
         //    //            dc.Set<T_ResourcePrice>().Add(price);
         //    //            if (dc.SaveChanges() > 0) success = true;
         //    //        }
-
         //    //    }
         //    //    if (success) return Json(ResponseResult.GetResult(ResultEnum.Success));
         //    //    DelImg(imgStr);
         //    //    return Json(ResponseResult.GetResult(ResultEnum.Fail));
-
         //    //}
         //    //catch (Exception ex)
         //    //{
@@ -140,6 +129,5 @@ namespace Resource.Web.Controllers
         //    return SaveResourceInfo(id, form);
         //} 
         #endregion
-
     }
 }

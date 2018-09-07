@@ -47,6 +47,9 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
+                
+            </div>
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">申请日期</span>
@@ -119,31 +122,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        $(function () {
-            layui.use('laydate', function () {
-                var laydate = layui.laydate;
-                laydate.render({
-                    elem: '#stime'
-                });
-                laydate.render({
-                    elem: '#etime'
-                });
-            });
-        })
-        //function paramsSet() {
-        //    return obj = {
-        //        Park: $("#park").val(),
-        //        ID: $("#id").val(),
-        //        Name: $("#name").val(),
-        //        Kind: $("#kind").val(),
-        //        Group: $("#group").val(),
-        //        Stime: $.trim($("#time").val().split("~")[0]),
-        //        Etime: $.trim($("#time").val().split("~")[1]),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 </html>

@@ -158,19 +158,10 @@
     <Compile Include="T_UserRole.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="V_AD.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
     <Compile Include="V_Building.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="V_CB.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
     <Compile Include="V_Floor.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_MR.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_Order.cs">
@@ -182,28 +173,10 @@
     <Compile Include="V_Public.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="V_Releasing.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_Resource.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_RM.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
     <Compile Include="V_RSS_Info.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_RS_Info.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_SAD.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_SCB.cs">
-      <DependentUpon>DorllyResource.tt</DependentUpon>
-    </Compile>
-    <Compile Include="V_SRM.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_Stage.cs">

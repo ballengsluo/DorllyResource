@@ -28,7 +28,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">登录账户</span>
-                        <input type="text" class="form-control" id="account">
+                        <input type="text" class="form-control" id="id">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -37,13 +37,26 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">创建时间</span>
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <input class="form-control" id="stime">
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1">
+                            <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-control" id="etime">
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="input-group">
                         <span class="input-group-addon">创建时间</span>
                         <input type="text" class="form-control pull-right" id="time">
                     </div>
-
-                </div>
+                </div>*@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">状态</span>
@@ -112,27 +125,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        function paramsSet() {
-            return obj = {
-                Code: $('#account').val(),
-                Name: $('#name').val(),
-                Enable: $('#enable').val(),
-                BeginTime: $.trim($('#time').val().split('~')[0]),
-                EndTime: $.trim($('#time').val().split('~')[1]),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            }
-        };
-        $(function () {
-            layui.use('laydate', function () {
-                var laydate = layui.laydate;
-                laydate.render({
-                    elem: '#time',
-                    range: '~'//指定元素
-                });
-            });
-        });
-    </script>
 </body>
 </html>

@@ -16,23 +16,23 @@ namespace Resource.Model
     {
         public int ID { get; set; }
         public Nullable<int> SysID { get; set; }
-        public string RID { get; set; }
-        public string BSID { get; set; }
-        public Nullable<int> BSType { get; set; }
-        public Nullable<System.DateTime> BegTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
+        public string ResourceID { get; set; }
+        public string BusinessID { get; set; }
+        public Nullable<int> BusinessType { get; set; }
+        public Nullable<System.DateTime> RentBeginTime { get; set; }
+        public Nullable<System.DateTime> RentEndTime { get; set; }
         public Nullable<int> EndType { get; set; }
-        public Nullable<System.DateTime> RealEndTime { get; set; }
-        public string Company { get; set; }
-        public string ContactName { get; set; }
-        public string ContactTel { get; set; }
+        public Nullable<System.DateTime> RentEndRealTime { get; set; }
+        public string CustLongName { get; set; }
+        public string CustShortName { get; set; }
+        public string CustTel { get; set; }
         public string ReserveDept { get; set; }
         public string ReserveName { get; set; }
         public string Remark { get; set; }
         public Nullable<bool> Enable { get; set; }
-        public string UpUser { get; set; }
-        public Nullable<System.DateTime> UpTime { get; set; }
-        public string RName { get; set; }
+        public string UpdateUser { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public string ResourceName { get; set; }
         public string Loc1 { get; set; }
         public string Loc1Name { get; set; }
         public string GroupID { get; set; }

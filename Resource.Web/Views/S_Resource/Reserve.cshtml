@@ -30,7 +30,7 @@
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>资源编号
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" id="rid" name="RID" value="@Model.RID" readonly>
+                        <input type="text" class="form-control" id="rid" name="ResourceID" value="@Model.ResourceID" readonly>
                         <button type="button" class="btn btn-primary" data-url="@Url.Action("Create")" style="position:absolute;top:0;right:15px;">
                             <i class="glyphicon glyphicon-search"></i> 添加
                         </button>
@@ -41,7 +41,7 @@
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>公司名称
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="number" class="form-control" name="Company" value="@Model.Company">
+                        <input type="number" class="form-control" name="CustLongName" value="@Model.CustLongName">
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,13 +49,13 @@
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>联系人
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="number" class="form-control" name="ContactName" value="@Model.ContactName">
+                        <input type="number" class="form-control" name="CustShortName" value="@Model.CustShortName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">联系电话</label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="tel" class="form-control" name="ContactTel" value="@Model.ContactTel">
+                        <input type="tel" class="form-control" name="CustTel" value="@Model.CustTel">
                     </div>
                 </div>
                 <div class="form-group">
@@ -63,7 +63,7 @@
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>占用时间
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="tel" class="form-control" id="time" name="Time" value="@Convert.ToDateTime(Model.BegTime).ToString("yyyy-MM-dd HH:mm:ss") ~ @Convert.ToDateTime(Model.EndTime).ToString("yyyy-MM-dd HH:mm:ss")">
+                        <input type="tel" class="form-control" id="time" name="Time" value="@Convert.ToDateTime(Model.RentBeginTime).ToString("yyyy-MM-dd HH:mm:ss") ~ @Convert.ToDateTime(Model.RentEndTime).ToString("yyyy-MM-dd HH:mm:ss")">
                     </div>
                 </div>
                 <div class="form-group">

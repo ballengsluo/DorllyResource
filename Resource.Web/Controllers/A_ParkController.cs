@@ -7,12 +7,10 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
     public class A_ParkController : Controller
     {
-
         // GET: Park
         public ActionResult Index()
         {
@@ -33,12 +31,10 @@ namespace Resource.Web.Controllers
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         public JsonResult Create(T_Park park)
         {
@@ -46,23 +42,20 @@ namespace Resource.Web.Controllers
             {
                 DbContext dc = DbContextFactory.Create();
                 dc.Set<T_Park>().Add(park);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-                else return Json(new Result { Flag = 2, Msg = "保存失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
-
         }
-
         public ActionResult Edit(string id)
         {
             DbContext dc = DbContextFactory.Create();
             var obj = dc.Set<V_Park>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
-
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
         {
@@ -72,17 +65,15 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(park, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(new Result { Flag = 1, Msg = "保存成功！" });
+                    if (dc.SaveChanges() > 0) Json(Result.Success());
                 }
-                return Json(new Result { Flag = 2, Msg = "保存失败！" });
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
-
         }
-
         [HttpPost]
         public JsonResult Del(string id)
         {
@@ -91,12 +82,12 @@ namespace Resource.Web.Controllers
                 DbContext dc = DbContextFactory.Create();
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Park>().Remove(park);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
-                else return Json(new Result { Flag = 2, Msg = "删除失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                else return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
@@ -108,12 +99,12 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = true;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "启用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         [HttpPost]
@@ -125,22 +116,13 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = false;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "停用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-       
-        public JsonResult GetList(string pcode)
-        {
-            DbContext dc = DbContextFactory.Create();
-            var list = dc.Set<T_Park>().Where(a => true);
-            if (!string.IsNullOrEmpty(pcode)) list = list.Where(a => a.RegionID == pcode);
-            return Json(list.Select(a => new { a.ID, a.Name }).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

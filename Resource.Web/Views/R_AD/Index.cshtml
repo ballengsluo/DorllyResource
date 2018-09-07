@@ -67,6 +67,7 @@
                         <th>广告位编号</th>
                         <th>广告位名称</th>
                         <th>广告位类型</th>
+                        <th>资源分组</th>
                         <th>广告位规格</th>
                         <th>是否禁用</th>
                     </tr>
@@ -84,6 +85,7 @@
             <td class="key">{{value.ID}}</td>
             <td>{{value.Name}}</td>
             <td>{{value.ResourceTypeName}}</td>
+            <td>{{value.GroupName}}</td>
             <td>{{value.Size}}</td>
             @*<td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用
@@ -107,20 +109,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        function paramsSet() {
-            return obj = {
-                loc1: $("#park").val(),
-                id: $("#id").val(),
-                name: $("#name").val(),
-                Type: $("#type").val(),
-                Status: $("#status").val(),
-                PageIndex: currentNum,
-                PageSize: limitCount
-            };
-        };
-    </script>
-    <script>
-    </script>
 </body>
 </html>

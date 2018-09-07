@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label class="control-label" style="width:110px;">空闲原因</label>
                 <div style="width:160px;">
-                    <select class="selectpicker form-control" title="请选择...">
+                    <select class="selectpicker form-control" title="请选择..." name="EndType">
                         <option value="1">到期停用</option>
                         <option value="2">违约停用</option>
                         <option value="3">未用取消</option>
@@ -74,7 +74,7 @@
             <div class="form-group">
                 <label class="control-label" style="width:110px;">实际空闲时间</label>
                 <div style="width:160px;">
-                    <input type="text" class="form-control" id="time" name="RealEndTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
+                    <input type="text" class="form-control" id="time" name="RentEndRealTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
                 </div>
 
             </div>

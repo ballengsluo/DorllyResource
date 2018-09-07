@@ -24,14 +24,15 @@ function execrm(data) {
                 cbbox = $("<div class='cb eightcb'></div>");
             }
             $.each(rm.CB, function(idx, cb) {
-                park = cb.ParkID;
+                park = cb.Loc1;
                 cbbox.append("<div data-status='" + cb.Status +
                     "' data-id='" + cb.ID + "'></div>");
                 var dtbox = $("<div class='detail' data-pid='" + cb.ID + "'>" +
                     "<p><span>资源编号：</span><span>" + cb.ID + "</span></p>" +
-                    "<p><span>公司(个人)：</span><span>" + cb.CustName + "</span></p>" +
-                    "<p><span>联系电话：</span><span>" + cb.CustPhone + "</span></p>" +
-                    "<p><span>租赁日期：</span><span>" + cb.RentBeginTime + " - " + cb.RentEndTime + "</span></p>" +
+                    "<p><span>公司(个人)：</span><span>" + cb.CustShortName + "</span></p>" +
+                    "<p><span>联系电话：</span><span>" + cb.CustTel + "</span></p>" +
+                    "<p><span>开始日期：</span><span>" + cb.RentBeginTime + "</span></p>" +
+                    "<p><span>结束日期：</span><span>" + cb.RentEndTime + "</span></p>" +
                     "</div>");
                 $(".detailContainer").append(dtbox);
 

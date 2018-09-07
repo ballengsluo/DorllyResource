@@ -1,9 +1,9 @@
 $(function() {
-    $.post("/s_rm/search", { park: $("#park").val() }, function(data) {
+    $.post("/s_rm/search", { park: 'FTYQ' }, function(data) {
         console.log(data);
         execrm(data);
     }, 'json');
-    dropChange(2);
+
     $("#rent").click(function() {
         search()
     });
@@ -30,7 +30,9 @@ function execrm(data) {
     // $("#park").html(parkSelect).selectpicker("refresh");
 
     // 房间数据处理
+    console.log(data);
     $.each(data, function(idx, build) {
+
         var rmc = $("<div data-build='" + build.BID + "'></div>");
         buildul.append("<li data-id='" + build.BID + "'>" + build.BName + "</li>");
         $.each(build.Floor, function(idx, floor) {
@@ -41,18 +43,19 @@ function execrm(data) {
                     "' data-id='" + rm.ID +
                     "' data-rmbuild='" + build.BID +
                     "' data-rmname='" + rm.Name +
-                    "' data-rmcust='" + rm.CustName +
+                    "' data-rmcust='" + rm.CustShortName +
                     "'>" +
                     "<div class='rmno'>" + rm.Name + "</div>" +
-                    "<div class='cust'>" + rm.CustName + "</div>" +
+                    "<div class='cust'>" + rm.CustShortName + "</div>" +
                     "<div class='area'>" + rm.RentArea + "<span>㎡</span></div>" +
                     "</div>");
                 var dtbox = $("<div class='detail' data-rid='" + rm.ID + "'>" +
                     "<p><span>资源编号：</span><span>" + rm.ID + "</span></p>" +
                     "<p><span>资源面积：</span><span>" + rm.RentArea + "㎡</span></p>" +
-                    "<p><span>公司(个人)：</span><span>" + rm.CustName + "</span></p>" +
-                    "<p><span>联系电话：</span><span>" + rm.CustPhone + "</span></p>" +
-                    "<p><span>租赁日期：</span><span>" + rm.RentBeginTime + " - " + rm.RentEndTime + "</span></p>" +
+                    "<p><span>公司(个人)：</span><span>" + rm.CustShortName + "</span></p>" +
+                    "<p><span>联系电话：</span><span>" + rm.CustTel + "</span></p>" +
+                    "<p><span>开始日期：</span><span>" + rm.RentBeginTime + "</span></p>" +
+                    "<p><span>结束日期：</span><span>" + rm.RentEndTime + "</span></p>" +
                     "</div>");
                 $(".detailContainer").append(dtbox);
 
@@ -64,8 +67,8 @@ function execrm(data) {
     $(".building").html(buildul);
     changeBuild();
     $(".building li:first-of-type").click();
-    $("div[data-status='1']").addClass("rmrent");
-    $("div[data-status='2']").addClass("rmfree");
+    // $("div[data-status='1']").addClass("rmfree");
+    // $("div[data-status='2']").addClass("rmrent");
     hoverShow();
 }
 

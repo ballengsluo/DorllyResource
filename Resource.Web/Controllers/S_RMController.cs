@@ -6,52 +6,61 @@ using System.Web.Mvc;
 using Resource.Web.Models;
 using Resource.Model;
 using Newtonsoft.Json;
-
 namespace Resource.Web.Controllers
 {
-    public class S_RMController : RSBaseController
+    public class S_RMController : ResourceBusinessController
     {
         // GET: S_RM
         public ActionResult Index()
         {
-
             return View();
         }
         public ContentResult Search(string park)
         {
             var parkDefalut = user.Park.Split(',')[0];
-            //var parkList = dc.Set<T_Park>().Where(a => park.Contains(a.ID)).Select(a => new { a.ID, a.Name }).ToList();
-            //var stageObj = dc.Set<T_Stage>().Where(a => a.ParkID == parkList[0].ID).FirstOrDefault();
-            var list = dc.Set<V_SRM>().Where(a => true);
-            if (!string.IsNullOrEmpty(park)) list = list.Where(a => a.ParkID == park);
+            var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID == 1);
+            if (!string.IsNullOrEmpty(park)) list = list.Where(a => a.Loc1 == park);
             else
             {
-                list = list.Where(a => a.ParkID == parkDefalut);
+                list = list.Where(a => a.Loc1 == parkDefalut);
             }
             var buildList = list
-                .GroupBy(a => new { a.BuildingID, a.BuildingName })
-                .Select(a => new { a.Key.BuildingID, a.Key.BuildingName })
+                .GroupBy(a => new { a.Loc3, a.Loc3Name })
+                .Select(a => new { a.Key.Loc3, a.Key.Loc3Name })
                 .ToList();
-            List<object> resObjcet = new List<object>();
+            List<object> result = new List<object>();
             foreach (var item in buildList)
             {
                 var floorList = list
-                    .Where(a => a.BuildingID == item.BuildingID)
-                    .GroupBy(a => new { a.FloorID, a.FloorName })
-                    .Select(a => new { a.Key.FloorID, a.Key.FloorName })
+                    .Where(a => a.Loc3 == item.Loc3)
+                    .GroupBy(a => new { a.Loc4, a.Loc4Name })
+                    .Select(a => new { a.Key.Loc4, a.Key.Loc4Name })
                     .ToList();
                 List<object> floorObjList = new List<object>();
                 foreach (var it in floorList)
                 {
-                    var rm = list.Where(a => a.FloorID == it.FloorID).ToList();
-                    floorObjList.Add(new { FID = it.FloorID, FName = it.FloorName, RM = rm });
+                    var rm = list.Where(a => a.Loc4 == it.Loc4)
+                        .Select(a => new
+                        {
+                            a.ID,
+                            a.Name,
+                            a.Status,
+                            a.RentBeginTime,
+                            a.RentEndTime,
+                            a.CustShortName,
+                            a.CustTel,
+                            a.RentArea
+                        }).ToList();
+                    floorObjList.Add(new { FID = it.Loc4, FName = it.Loc4Name, RM = rm });
                 }
-                resObjcet.Add(new { BID = item.BuildingID, BName = item.BuildingName, Floor = floorObjList });
+                result.Add(new { BID = item.Loc3, BName = item.Loc3Name, Floor = floorObjList });
             }
-
-            var obj = JsonConvert.SerializeObject(resObjcet).Replace("null", "\"\"");
+            JsonSerializerSettings setting = new JsonSerializerSettings
+            {
+                DateFormatString = "yyyy-MM-dd"
+            };
+            var obj = JsonConvert.SerializeObject(result,setting).Replace("null", "\"\"");
             return Content(obj);
         }
-
     }
 }

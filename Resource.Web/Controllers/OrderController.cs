@@ -6,10 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
-    public class OrderController : RSBaseController
+    public class OrderController : ResourceBusinessController
     {
         // GET: Order
         public ActionResult Index()
@@ -19,12 +18,13 @@ namespace Resource.Web.Controllers
         public ActionResult Search(SearchParam param)
         {
             var list = dc.Set<V_Order>().Where(a => true);
-            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
-            if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
-            if (param.Stime != null) list = list.Where(a => a.CreateTime > param.Stime && a.CreateTime < param.Etime);
+            if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
+            if (param.Stime != null) list = list.Where(a => a.CreateTime >= param.Stime);
+            if (param.Etime != null) list = list.Where(a => a.CreateTime <= param.Etime);
             int count = list.Count();
             list = list.OrderBy(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             JsonSerializerSettings setting = new JsonSerializerSettings

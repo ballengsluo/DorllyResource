@@ -6,10 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Resource.Model;
 using Newtonsoft.Json;
-
 namespace Resource.Web.Controllers
 {
-    public class S_ResourceController : RSBaseController
+    public class S_ResourceController : ResourceBusinessController
     {
         // GET: S_Resource
         public ActionResult Index()
@@ -23,16 +22,33 @@ namespace Resource.Web.Controllers
             var list = dc.Set<V_RSS_Info>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             else list = list.Where(a => ParkList.Contains(a.Loc1));
-            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.RID.Contains(param.ID));
-            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.RName.Contains(param.Name));
+            if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ResourceID.Contains(param.ID));
+            if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.ResourceName.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
-            if (param.IType != null) list = list.Where(a => a.BSType == param.IType);
+            if (param.IType != null) list = list.Where(a => a.BusinessType == param.IType);
             if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
-            if (param.Stime != null) list = list.Where(a => param.Stime<=a.EndTime && param.Etime>=a.BegTime);
+            if (param.Stime != null) list = list.Where(a => param.Stime <= a.RentEndTime && param.Etime >= a.RentBeginTime);
             int count = list.Count();
-            list = list.OrderByDescending(a => a.BegTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            var result = list.Select(a => new { a.ID,a.Enable,a.SysID, a.RID, a.RName, a.ResourceKindName, a.GroupName, a.Loc1Name, a.BSType, a.ContactName, a.BegTime, a.EndTime, a.UpUser, a.UpTime });
+            list = list.OrderByDescending(a => a.RentBeginTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
+            var result = list.Select(a => new
+            {
+                a.ID,
+                a.Enable,
+                a.SysID,
+                a.ResourceID,
+                a.ResourceName,
+                a.ResourceKindName,
+                a.GroupName,
+                a.Loc1Name,
+                a.BusinessType,
+                a.CustLongName,
+                a.CustShortName,
+                a.RentBeginTime,
+                a.RentEndTime,
+                a.UpdateTime,
+                a.UpdateUser
+            });
             JsonSerializerSettings setting = new JsonSerializerSettings
             {
                 DateFormatString = "yyyy-MM-dd HH:mm"
@@ -48,8 +64,7 @@ namespace Resource.Web.Controllers
         {
             var list = dc.Set<V_RS_Info>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
-            else
-                list = list.Where(a => ParkList.Contains(a.Loc1));
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
@@ -57,22 +72,21 @@ namespace Resource.Web.Controllers
             int count = list.Count();
             list = list.OrderByDescending(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             var result = list.Select(a => new { a.ID, a.Name, a.Loc1Name, a.GroupName });
-
             var obj = JsonConvert.SerializeObject(new { count = count, data = result.ToList() });
             return Content(obj);
         }
         public ActionResult IReserve()
         {
             var obj = new T_ResourceStatus();
-            obj.BegTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
-            obj.EndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
+            obj.RentBeginTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
+            obj.RentEndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
             return View(obj);
         }
         public ActionResult OReserve()
         {
             var obj = new T_ResourceStatus();
-            obj.BegTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
-            obj.EndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
+            obj.RentBeginTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
+            obj.RentEndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
             return View(obj);
         }
         [HttpPost]
@@ -82,38 +96,41 @@ namespace Resource.Web.Controllers
             {
                 DateTime begTime = Convert.ToDateTime(form["Time"].Split('~')[0].Trim());
                 DateTime endTime = Convert.ToDateTime(form["Time"].Split('~')[1].Trim());
-                string rid = form["RID"];
+                string rid = form["ResourceID"];
                 bool add = false;
                 var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
                 if (obj == null)
                 {
-                    int count = dc.Set<T_ResourceStatus>().Where(a => a.BegTime <= begTime && a.EndTime >= begTime && a.Enable == true && a.RID == rid).Count();
-                    if (count > 0) return Json(new Result { Flag = 2, Msg = "存在使用时间冲突,请选择有效时间段!" });
+                    int count = dc.Set<T_ResourceStatus>().Where(a => a.RentBeginTime <= begTime
+                        && a.RentEndTime >= begTime
+                        && a.Enable == true
+                        && a.ResourceID == rid).Count();
+                    if (count > 0) return Json(Result.Fail(msg: "存在使用时间冲突,请选择有效时间段!"));
                     obj = new T_ResourceStatus();
-                    obj.BSID = Guid.NewGuid().ToString();
+                    obj.BusinessID = Guid.NewGuid().ToString();
                     obj.SysID = 3;
                     obj.Enable = true;
                     add = true;
                 }
                 else
                 {
-                    int count = dc.Set<T_ResourceStatus>().Where(a => a.BegTime <= begTime && a.EndTime >= begTime && a.ID != id).Count();
-                    if (count > 0) return Json(new Result { Flag = 2, Msg = "存在使用时间冲突,请选择有效时间段!" });
+                    int count = dc.Set<T_ResourceStatus>().Where(a => a.RentBeginTime <= begTime
+                        && a.RentEndTime >= begTime && a.ID != id).Count();
+                    if (count > 0) return Json(Result.Fail(msg: "存在使用时间冲突,请选择有效时间段!"));
                 }
-                if (!TryUpdateModel(obj, "", form.AllKeys, new string[] { "ID", "BSID", "SysID" }))
-                    return Json(new Result { Flag = 2, Msg = "数据错误！", ExMsg = "来自TryUpdateModel返回false" });
-                obj.BegTime = begTime;
-                obj.EndTime = endTime;
-                obj.UpTime = DateTime.Now;
-                obj.UpUser = user.Account;
+                if (!TryUpdateModel(obj, "", form.AllKeys, new string[] { "ID", "BusinessID", "SysID" }))
+                    return Json(Result.Fail());
+                obj.RentBeginTime = begTime;
+                obj.RentEndTime = endTime;
+                obj.UpdateTime = DateTime.Now;
+                obj.UpdateUser = user.Account;
                 if (add) dc.Set<T_ResourceStatus>().Add(obj);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-                return Json(new Result { Flag = 2, Msg = "保存失败！", ExMsg = "来自SaveChanges返回false" });
-
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "数据异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         public ActionResult Free(int id)
@@ -131,16 +148,16 @@ namespace Resource.Web.Controllers
             }
             catch (Exception)
             {
-                return Json(new Result { Flag = 2, Msg = "时间格式有误！" });
+                return Json(Result.Fail(msg:"时间格式有误！"));
             }
             var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
             obj.Enable = false;
             obj.EndType = Convert.ToInt32(form["EndType"]);
-            obj.RealEndTime = endTime;
-            if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-            return Json(new Result { Flag = 2, Msg = "保存失败！", ExMsg = "来自SaveChanges返回false" });
+            obj.RentEndRealTime = endTime;
+            obj.UpdateTime = DateTime.Now;
+            obj.UpdateUser = user.Account;
+            if (dc.SaveChanges() > 0) return Json(Result.Success());
+            return Json(Result.Fail());
         }
-
-
     }
 }

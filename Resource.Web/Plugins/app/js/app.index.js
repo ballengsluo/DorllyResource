@@ -1,10 +1,23 @@
 $(function() {
-    // layui.use('layer', function() {
-    //     layer = layui.layer;
-    // });
     search({ pageIndex: currentNum, pageSize: limitCount });
     operation();
     dropChange(1);
+    if ($("#stime").length > 0) {
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#stime'
+            });
+        });
+    }
+    if ($("#etime").length > 0) {
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#etime'
+            });
+        });
+    }
 });
 
 function operation() {
@@ -169,6 +182,7 @@ function paramsSet() {
         itype: $("#itype").val(),
         stime: $("#stime").val(),
         etime: $("#etime").val(),
+        cust: $("#cust").val(),
         pageindex: currentNum,
         pagesize: limitCount
     };

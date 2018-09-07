@@ -1,4 +1,4 @@
-﻿@model Resource.Model.V_CB
+﻿@model Resource.Model.V_RS_Info
 
 @if (ViewBag.resource != null)
 {
@@ -33,7 +33,7 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>工位单价
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="number" class="form-control" name="UnitPrice" value="@Model.UnitPrice" required>
+        <input type="number" class="form-control" name="UnitPrice" value="@Model.Price" required>
     </div>
 </div>
 <div class="form-group">
@@ -41,13 +41,13 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>园区
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = Model.ParkID, model = 1 });}
+        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = Model.Loc1, model = 1 });}
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2">
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>建设期
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("StageDrop", "Drop", new { pid = Model.ParkID, id = Model.StageID, model = 1 });}
+        @{ Html.RenderAction("StageDrop", "Drop", new { pid = Model.Loc1, id = Model.Loc2, model = 1 });}
     </div>
 </div>
 <div class="form-group">
@@ -55,13 +55,13 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>楼栋
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("BuildingDrop", "Drop", new { pid = Model.StageID, id = Model.BuildingID, model = 1 });}
+        @{ Html.RenderAction("BuildingDrop", "Drop", new { pid = Model.Loc2, id = Model.Loc3, model = 1 });}
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2">
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>楼层
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("FloorDrop", "Drop", new { pid = Model.BuildingID, id = Model.FloorID, model = 1 });}
+        @{ Html.RenderAction("FloorDrop", "Drop", new { pid = Model.Loc3, id = Model.Loc4, model = 1 });}
     </div>
 </div>
 <div class="form-group">
@@ -69,7 +69,7 @@
         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>房间编号
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        @{ Html.RenderAction("RMDrop", "Drop", new { pid = Model.FloorID, id = Model.ParentID, model = 1 });}
+        @{ Html.RenderAction("RMDrop", "Drop", new { pid = Model.Loc4, id = Model.Loc5, model = 1 });}
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2">资源分组</label>
     <div class="col-lg-4 col-md-4 col-sm-4">

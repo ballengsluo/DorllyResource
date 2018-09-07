@@ -90,6 +90,7 @@
                         <th>房间号</th>
                         <th>房间坐标</th>
                         <th>房间类型</th>
+                        <th>资源分组</th>
                         <th>出租面积</th>
                         @*<th>状态</th>*@
                         <th>是否禁用</th>
@@ -108,6 +109,7 @@
             <td>{{value.Name}}</td>
             <td>{{value.LocText}}</td>
             <td>{{value.ResourceTypeName}}</td>
+            <td>{{value.GroupName}}</td>
             <td>{{value.RentArea}}</td>
             @*<td class="status" data-status="{{value.Status}}">
                 {{if value.Status==1}}占用
@@ -131,20 +133,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //function paramsSet() {
-        //    return obj = {
-        //        loc1: $("#park").val(),
-        //        loc2: $("#stage").val(),
-        //        Build: $("#build").val(),
-        //        Floor: $("#floor").val(),
-        //        ID: $("#id").val(),
-        //        Name: $("#name").val(),
-        //        Status: $("#status").val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 </html>

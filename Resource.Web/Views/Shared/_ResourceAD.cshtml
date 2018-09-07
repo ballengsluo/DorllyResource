@@ -1,4 +1,4 @@
-﻿@model Resource.Model.V_AD
+﻿@model Resource.Model.V_RS_Info
 
 
 @if (ViewBag.resource != null)
@@ -42,7 +42,7 @@
         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>园区
     </label>
     <div class="col-lg-4 col-md-4  col-sm-4">
-        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = Model.ParkID, model = 1 });}
+        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = Model.Loc1, model = 1 });}
     </div>
 </div>
 <div class="form-group">

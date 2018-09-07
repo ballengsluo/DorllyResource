@@ -7,12 +7,10 @@ using Newtonsoft.Json;
 using System.Data.Entity;
 using Resource.Web.Models;
 using System.Data.Entity.Migrations;
-
 namespace Resource.Web.Controllers
 {
     public class A_BuildingController : Controller
     {
-
         // GET: Building
         public ActionResult Index()
         {
@@ -44,22 +42,20 @@ namespace Resource.Web.Controllers
             {
                 DbContext dc = DbContextFactory.Create();
                 dc.Set<T_Building>().Add(building);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "保存成功！" });
-                else return Json(new Result { Flag = 2, Msg = "保存失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                else return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public ActionResult Edit(string id)
         {
             DbContext dc = DbContextFactory.Create();
             var obj = dc.Set<V_Building>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
-
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
         {
@@ -69,16 +65,15 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(building, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(new Result { Flag = 1, Msg = "保存成功！" });
+                    if (dc.SaveChanges() > 0) Json(Result.Success());
                 }
-                return  Json(new Result { Flag = 2, Msg = "保存失败！" });
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "保存异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         [HttpPost]
         public JsonResult Del(string id)
         {
@@ -87,12 +82,12 @@ namespace Resource.Web.Controllers
                 DbContext dc = DbContextFactory.Create();
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Building>().Remove(building);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "删除成功！" });
-                else return Json(new Result { Flag = 2, Msg = "删除失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                else return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "删除异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
         public JsonResult Open(string id)
@@ -103,15 +98,14 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = true;
                 dc.Set<T_Building>().AddOrUpdate(building);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "启用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "启用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                else return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "启用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
         public JsonResult Close(string id)
         {
             try
@@ -120,24 +114,13 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = false;
                 dc.Set<T_Building>().AddOrUpdate(building);
-                if (dc.SaveChanges() > 0) return Json(new Result { Flag = 1, Msg = "停用成功！" });
-                else return Json(new Result { Flag = 2, Msg = "停用失败！" });
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                else return Json(Result.Fail());
             }
             catch (Exception ex)
             {
-                return Json(new Result { Flag = 3, Msg = "停用异常！", ExMsg = ex.StackTrace });
+                return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-
-        
-
-        public JsonResult GetList(string pID)
-        {
-            DbContext dc = DbContextFactory.Create();
-            var list = dc.Set<T_Building>().Where(a => true);
-            if (!string.IsNullOrEmpty(pID)) list = list.Where(a => a.StageID == pID);
-            return Json(list.Select(a => new { a.ID, a.Name }).ToList(), JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

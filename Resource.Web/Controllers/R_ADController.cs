@@ -7,12 +7,10 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
     public class R_ADController : ResourceController
     {
-
         public ActionResult Index()
         {
             T_User user = RouteData.Values["user"] as T_User;
@@ -20,7 +18,6 @@ namespace Resource.Web.Controllers
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
         }
-
         public ActionResult Create()
         {
             ViewBag.price = new T_ResourcePrice();
@@ -28,7 +25,6 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-
             var obj = dc.Set<V_RS_Info>().Where(a => a.ID == id).FirstOrDefault();
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == id).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == id).ToList();
@@ -36,7 +32,6 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-
             var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID == 4);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
@@ -45,7 +40,17 @@ namespace Resource.Web.Controllers
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
+            var obj = list.Select(a => new
+            {
+                a.ID,
+                a.Name,
+                a.Loc1Name,
+                a.ResourceTypeName,
+                a.GroupName,
+                a.Enable,
+                a.Size
+            }).ToList();
+            return Json(new { count = count, data = obj }, JsonRequestBehavior.AllowGet);
         }
     }
 }

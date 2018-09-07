@@ -7,7 +7,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace Resource.Web.Controllers
 {
     public class R_MRController : ResourceController
@@ -18,7 +17,6 @@ namespace Resource.Web.Controllers
             List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
             return View(rmfList);
         }
-
         public ActionResult Create()
         {
             ViewBag.price = new T_ResourcePrice();
@@ -33,15 +31,24 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-
-            var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID==3);
+            var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID == 3);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
+            var obj = list.Select(a => new
+            {
+                a.ID,
+                a.Name,
+                a.Loc1Name,
+                a.ResourceTypeName,
+                a.GroupName,
+                a.Enable,
+                a.RangeNum
+            }).ToList();
+            return Json(new { count = count, data = obj }, JsonRequestBehavior.AllowGet);
         }
     }
 }

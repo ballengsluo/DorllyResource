@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using Newtonsoft.Json;
-
 namespace Resource.Web.Controllers
 {
     public class S_MRController : Controller
@@ -73,7 +72,6 @@ namespace Resource.Web.Controllers
                 //空格处理
                 if (end > begin)
                 {
-
                     TimeSpan tempts = end - begin;
                     int num = (int)tempts.TotalMinutes / 30;
                     for (int i = 0; i < num; i++)
@@ -83,7 +81,6 @@ namespace Resource.Web.Controllers
                 }
                 tableStr += "</tr>";
             }
-
             return Json(new { table = tableStr, detail = detail }, JsonRequestBehavior.AllowGet);
         }
     }
