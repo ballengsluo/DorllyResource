@@ -7,7 +7,7 @@ var ue = UE.getEditor('Content', {
 $(function() {
 
     dropChange(2);
-
+    changeNodeName();
 
     $("input[type='file']").change(function() {
         var $file = $(this);
@@ -28,8 +28,9 @@ $(function() {
         var form = new FormData($("form")[0]);
         if ($('input[type=submit]').attr("data-url") == '' || !$('input[type=submit]').attr("data-url")) { return false; }
         ajaxForm("post", $('input[type=submit]').attr("data-url"), form, "json", function(data) {
-            layer.msg(data.msg)
-            if (data.result == 1) {
+            layer.msg(data.Msg)
+            console.log(data.ExMsg);
+            if (data.Flag == 1) {
                 window.parent.refresh = true;
                 setTimeout(function() { window.parent.layer.closeAll() }, 1000);
             } else {
@@ -59,8 +60,9 @@ $(function() {
         var id = $this.attr("data-id");
         if (id == "" || !id) { return false; }
         ajax("post", "/public/delimgaction", { id: id }, "json", function(data) {
-            layer.msg(data.msg)
-            if (data.result == 1) {
+            layer.msg(data.Msg);
+            Console.log(data.ExMsg);
+            if (data.Flag == 1) {
                 $this.parents(".imgbox").remove();
             }
         });
@@ -73,8 +75,9 @@ $(function() {
         var rid = $this.attr("data-rid");
         if (id == "" || !id) { return false; }
         ajax("post", "/base/setimgaction", { id: id, rid: rid }, "json", function(data) {
-            layer.msg(data.msg, { icon: data.result })
-            if (data.result == 1) {
+            layer.msg(data.Msg);
+            console.log(data.ExMsg);
+            if (data.Flag == 1) {
                 $(".imgbox").css("border", "none");
                 $(".imgset i").remove();
                 $this.parent().append("<i class='glyphicon glyphicon-ok'></i>");
@@ -83,3 +86,21 @@ $(function() {
         });
     });
 });
+
+function changeNodeName() {
+    if ($("#park").length > 0) {
+        $("#park").attr("name", "Loc1");
+    }
+    if ($("#stage").length > 0) {
+        $("#stage").attr("name", "Loc2");
+    }
+    if ($("#build").length > 0) {
+        $("#build").attr("name", "Loc3");
+    }
+    if ($("#floor").length > 0) {
+        $("#floor").attr("name", "Loc4");
+    }
+    if ($("#room").length > 0) {
+        $("#room").attr("name", "Loc5");
+    }
+}

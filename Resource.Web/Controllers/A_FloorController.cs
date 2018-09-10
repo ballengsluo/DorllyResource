@@ -66,7 +66,7 @@ namespace Resource.Web.Controllers
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(floor, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -84,7 +84,7 @@ namespace Resource.Web.Controllers
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Floor>().Remove(floor);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -125,6 +125,6 @@ namespace Resource.Web.Controllers
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-       
+
     }
 }

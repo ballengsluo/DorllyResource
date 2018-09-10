@@ -30,27 +30,6 @@
 }
 
 
-/* .select-action>.row {
-    padding-left: 0px;
-    margin-left: 0px;
-} */
-
-
-/* 查询单元块 */
-
-
-/* .select-action>.row>div {
-    padding-left: 0px;
-    float: left;
-    margin: 8px 0px;
-} */
-
-
-/* .select-action>.row>.col-md-2 {
-    max-width: 210px;
-} */
-
-
 /*
  *  数据表格样式
 */
@@ -69,36 +48,6 @@
     text-align: center;
     vertical-align: middle;
 }
-
-.data-action table tr td .open {
-    /* color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    border-radius: 5px;
-    padding: 5px 8px; */
-    font-size: 17px;
-    font-weight: 700;
-    color: green;
-    opacity: .7;
-}
-
-.data-action table tr td .close {
-    /* color: #fff;
-    background-color: #fb3d3d;
-    border-color: #fa4747;
-    padding: 6px 8px; */
-    float: none;
-    font-size: 17px;
-    font-weight: 700;
-    color: black;
-    opacity: .4;
-}
-
-
-/* .data-action #page>div {
-    display: block;
-    text-align: center;
-} */
 
 
 /* 权限菜单特有样式 */

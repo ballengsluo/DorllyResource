@@ -115,7 +115,7 @@
                     $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：1048x * 300px</span>");
                 } else if ($this.val() == 2) {
                     $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：1200px * 500px</span>");
-                }else if($this.val()==3){
+                } else if ($this.val() == 3) {
                     $addbox.append("<span style='text-align:center;display:inline-block;padding-top:5px;color:#f69976;'>尺寸：60px * 60px</span>");
                 }
             });
@@ -124,15 +124,15 @@
                 $this.attr("disabled", "disabled");
                 var form = new FormData($("form")[0]);
                 ajaxForm("post", "@Url.Action("Create")", form, "json", function (data) {
-                    layer.msg(data.msg, { icon: data.result });
-                    if (data.result == 1) {
+                    layer.msg(data.Msg);
+                    if (data.Flag == 1) {
                         window.parent.refresh = true;
                         setTimeout(function () { window.parent.layer.closeAll() }, 1000);
                     } else {
                         $this.prop("disabled", false);
                     }
                 });
-                
+
             });
         });
     </script>

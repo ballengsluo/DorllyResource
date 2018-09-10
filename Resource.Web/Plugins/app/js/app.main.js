@@ -1157,18 +1157,18 @@ var App = function() {
 
 jQuery(document).ready(function() {
     App.init(); // init metronic core componets
-    App.blockUI({
-        target: '#tab-content',
-        boxed: true,
-        message: '加载中......'
-            // animate: true
-    });
-    var $iframe = $("iframe").addClass("tab_iframe");;
-    //iframe 加载完成事件
-    $iframe.load(function() {
-        App.unblockUI('#tab-content'); //解锁界面
-        App.fixIframeCotent(); //修正高度
-    });
+    // App.blockUI({
+    //     target: '#tab-content',
+    //     boxed: true,
+    //     message: '加载中......'
+    //         // animate: true
+    // });
+    // var $iframe = $("iframe").addClass("tab_iframe");;
+    // //iframe 加载完成事件
+    // $iframe.load(function() {
+    //     App.unblockUI('#tab-content'); //解锁界面
+    //     App.fixIframeCotent(); //修正高度
+    // });
 });
 
 var pageIdField = "data-href";
@@ -1431,6 +1431,9 @@ var closeCurrentTab = function() {
 };
 
 function closeTabByPageId(pageId) {
+    if ($('#tab-content').length > 0) {
+        App.unblockUI('#tab-content');
+    }
     var $title = findTabTitle(pageId); //有tab的标题
     var $tabPanel = findTabPanel(pageId); //装有iframe
     if ($title.hasClass("active")) {

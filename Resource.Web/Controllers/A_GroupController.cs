@@ -89,7 +89,7 @@ namespace Resource.Web.Controllers
                 group.UpdateUser = user.Account;
                 if (TryUpdateModel(group, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }

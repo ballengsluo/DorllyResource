@@ -74,7 +74,7 @@ namespace Resource.Web.Controllers
                 T_Region region = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(region, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }

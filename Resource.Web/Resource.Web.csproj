@@ -240,6 +240,8 @@
     <Content Include="Plugins\app\js\table\app.statistics_cr.js" />
     <Content Include="Plugins\app\js\table\app.statistics_rm.js" />
     <Content Include="Plugins\app\js\table\app.statistics_wp.js" />
+    <Content Include="Plugins\echarts\echarts.common.min.js" />
+    <Content Include="Plugins\echarts\echarts.simple.min.js" />
     <Content Include="Plugins\flot\jquery.flot.categories.js" />
     <Content Include="Plugins\flot\jquery.flot.js" />
     <Content Include="Plugins\flot\jquery.flot.pie.js" />
@@ -776,7 +778,7 @@
     <Content Include="Views\Public\Detail_AD.cshtml" />
     <Content Include="Views\Shared\_RSStatus.cshtml" />
     <Content Include="Views\HomePage\Detail.cshtml" />
-    <Content Include="Views\Admin\_MainData.cshtml" />
+    <Content Include="Views\Admin\_BusinessData.cshtml" />
     <Content Include="Views\S_Resource\Reserve.cshtml" />
     <Content Include="Views\S_Resource\IReserve.cshtml" />
     <Content Include="Views\S_Resource\OReserve.cshtml" />

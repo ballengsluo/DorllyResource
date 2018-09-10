@@ -62,7 +62,7 @@ namespace Resource.Web.Controllers
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable", "IsDefault" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }

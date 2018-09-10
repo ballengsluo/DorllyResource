@@ -65,7 +65,7 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(park, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -83,7 +83,7 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Park>().Remove(park);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {

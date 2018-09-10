@@ -39,16 +39,14 @@
                 </div>
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview">
-                        <a href="#" data-href="@Url.Action("Main","Admin")">
-                            <i class="fa fa-tv"></i> <span>我的工作台</span>
-                            <span class="pull-right-container"></span>
-                        </a>
-                    </li>
+                    @*<li class="treeview">
+                            <a href="#" data-href="@Url.Action("Main","Admin")">
+                                <i class="fa fa-tv"></i> <span>我的工作台</span>
+                                <span class="pull-right-container"></span>
+                            </a>
+                        </li>*@
                     @{
-
-                        var level1 = Model.Where(a => a.T_Menu.Level == 1).OrderBy(a => a.T_Menu.OrderNum);
-                        foreach (var item1 in level1)
+                        foreach (var item1 in Model.Where(a => a.T_Menu.Level == 1).OrderBy(a => a.T_Menu.OrderNum))
                         {
                             var level2 = Model.Where(a => a.T_Menu.PID == item1.T_Menu.ID).OrderBy(a => a.T_Menu.OrderNum);
                             <li class="treeview">
@@ -87,11 +85,9 @@
                                             {
                                                 <li><a href="#" data-href="@item2.T_Menu.Path" data-title="@item2.T_Menu.Name"> @item2.T_Menu.Name</a></li>
                                             }
-
                                         }
                                     </ul>
                                 }
-
                             </li>
                         }
                     }
@@ -107,9 +103,9 @@
                 </button>
                 <nav class="page-tabs menuTabs tab-ui-menu" id="tab-menu">
                     <div class="page-tabs-content">
-                        <a href="#" class="menu_tab active" data-href="@Url.Action("Main","Admin")">
+                        @*<a href="#" class="menu_tab active" data-href="@Url.Action("Main","Admin")">
                             <span class="page_tab_title">我的工作台</span>
-                        </a>
+                        </a>*@
                     </div>
                 </nav>
                 <button class="roll-nav roll-right tabRight" onclick="scrollTabRight()">
@@ -132,9 +128,9 @@
             </div>
             <div class="iframe-box ">
                 <div class="tab-content" id="tab-content">
-                    <div class="tab-pane active" data-href="@Url.Action("Main","Admin")" role="tabpanel">
-                        <iframe src="@Url.Action("Main","Admin")" frameborder="0"></iframe>
-                    </div>
+                    @*<div class="tab-pane active" data-href="@Url.Action("Main","Admin")" role="tabpanel">
+                            <iframe src="@Url.Action("Main","Admin")" frameborder="0"></iframe>
+                        </div>*@
                 </div>
             </div>
         </div>

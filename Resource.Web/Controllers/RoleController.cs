@@ -31,7 +31,7 @@ namespace Resource.Web.Controllers
                 role.Enable = true;
                 dc.Set<T_Role>().Add(role);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace Resource.Web.Controllers
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Role>().Remove(role);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace Resource.Web.Controllers
                 role.Enable = true;
                 dc.Set<T_Role>().AddOrUpdate(role);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -146,7 +146,7 @@ namespace Resource.Web.Controllers
                     }
                 }
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -155,7 +155,13 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            var list = dc.Set<T_Role>().AsNoTracking().Where(a => true).Select(a => new { a.ID, a.Name, a.Description, a.Enable });
+            var list = dc.Set<T_Role>().AsNoTracking().Where(a => true).Select(a => new
+            {
+                a.ID,
+                a.Name,
+                a.Description,
+                a.Enable
+            });
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);

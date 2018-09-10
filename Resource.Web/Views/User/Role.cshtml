@@ -71,8 +71,9 @@
                 });
                 var uid = $("input:checkbox[name='ur']").attr('data-uid');
                 ajax('post', '@Url.Action("Role")', { id: uid, urList: param }, 'json', function (data) {
-                    layer.msg(data.msg, { icon: data.result })
-                    if (data.result == 1) {
+                    layer.msg(data.Msg);
+                    console.log(data.ExMsg);
+                    if (data.Flag == 1) {
                         setTimeout(function () { window.parent.layer.closeAll(); }, 1000);
                     }
                 });

@@ -20,7 +20,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-           
+
             var list = dc.Set<V_Stage>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
@@ -38,10 +38,10 @@ namespace Resource.Web.Controllers
         {
             try
             {
-               
+
                 dc.Set<T_Stage>().Add(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                 return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-           
+
             var obj = dc.Set<V_Stage>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -59,11 +59,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-               
+
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(stage, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) Json(Result.Success());
+                    if (dc.SaveChanges() > 0) return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -77,11 +77,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-               
+
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Stage>().Remove(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                 return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -93,12 +93,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-               
+
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 stage.Enable = true;
                 dc.Set<T_Stage>().AddOrUpdate(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -110,22 +110,22 @@ namespace Resource.Web.Controllers
         {
             try
             {
-               
+
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 stage.Enable = false;
                 dc.Set<T_Stage>().AddOrUpdate(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-       
+
         public JsonResult GetList(string pid)
         {
-           
+
             var list = dc.Set<T_Stage>().Where(a => true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.ParkID == pid);
             return Json(list.Select(a => new { a.ID, a.Name }).ToList(), JsonRequestBehavior.AllowGet);

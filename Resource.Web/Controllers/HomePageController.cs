@@ -72,7 +72,7 @@ namespace Resource.Web.Controllers
                 hp.UpdateUser = user.Account;
                 dc.Set<T_HomePage>().Add(hp);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                return Json(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -149,7 +149,6 @@ namespace Resource.Web.Controllers
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print(ex.ToString());
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
@@ -159,7 +158,7 @@ namespace Resource.Web.Controllers
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             hp.Status = 2;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
-            else return Json(Result.Fail());
+            return Json(Result.Fail());
         }
         public JsonResult Notpass(int id)
         {
@@ -167,7 +166,7 @@ namespace Resource.Web.Controllers
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             hp.Status = 3;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
-            else return Json(Result.Fail());
+            return Json(Result.Fail());
         }
         public JsonResult Pub(int id)
         {
@@ -177,7 +176,7 @@ namespace Resource.Web.Controllers
             else if (hp.Status != 1 && hp.Status != 5) return Json(Result.Fail(msg: "请选择正确的操作！"));
             hp.Status = 4;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
-            else return Json(Result.Fail());
+            return Json(Result.Fail());
         }
         public JsonResult Unpub(int id)
         {
@@ -187,7 +186,7 @@ namespace Resource.Web.Controllers
             else if (hp.Status != 4) return Json(Result.Fail(msg: "请选择正确的操作！"));
             hp.Status = 5;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
-            else return Json(Result.Fail());
+            return Json(Result.Fail());
         }
         public JsonResult Off(int id)
         {
@@ -197,7 +196,7 @@ namespace Resource.Web.Controllers
             else if (hp.Status == 4) return Json(Result.Fail(msg: "请选择正确的操作！"));
             hp.Status = 6;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
-            else return Json(Result.Fail());
+            return Json(Result.Fail());
         }
         #endregion
         #region 图片处理
