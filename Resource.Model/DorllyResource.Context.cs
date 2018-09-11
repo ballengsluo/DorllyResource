@@ -58,7 +58,7 @@ namespace Resource.Model
         public virtual DbSet<V_Park> V_Park { get; set; }
         public virtual DbSet<V_Public> V_Public { get; set; }
         public virtual DbSet<V_RS_Info> V_RS_Info { get; set; }
-        public virtual DbSet<V_Stage> V_Stage { get; set; }
         public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
+        public virtual DbSet<V_Stage> V_Stage { get; set; }
     }
 }

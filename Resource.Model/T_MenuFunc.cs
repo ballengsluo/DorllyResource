@@ -24,6 +24,8 @@ namespace Resource.Model
         public string MenuID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string Class { get; set; }
+        public string Color { get; set; }
     
         public virtual T_Menu T_Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

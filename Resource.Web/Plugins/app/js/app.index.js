@@ -142,7 +142,7 @@ function mission(msg, obj) {
         var url = obj.attr('data-url');
         ajax("post", url, { id: id }, 'json', function(data) {
             layer.msg(data.Msg);
-            console.log(data.ExInfo);
+            console.log(data.ExMsg);
             if (data.Flag == 1) { search(paramsSet()); }
         });
     });

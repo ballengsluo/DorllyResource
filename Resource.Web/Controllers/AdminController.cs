@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 namespace Resource.Web.Controllers
 {
-    public class AdminController : ResourceBusinessController
+    public class AdminController : BaseController
     {
         // GET: Admin
         public ActionResult Index()
@@ -31,29 +31,37 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Main()
         {
-            string park = user.Park.Split(',')[0].Trim();
-            ViewBag.park = park;
-            SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure, new List<SqlParameter> { new SqlParameter("Park",park) }.ToArray());
-            ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)","true");
-            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
-            ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
-            ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
-            ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
-            ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
+            //var fd = user.T_UserRole.Where(a=>a.T_Role.T_RoleFunc.Where(b=>b.me))
+            //var roleList = dc.Set<T_UserRole>().Where(a=>a.UserID==user.Account).ToList();
+            //ViewBag.Identity=dc.Set<T_RoleFunc>().Where(a=>a.)
             return View();
         }
-        public ActionResult GetMainData(string park)
+        public ActionResult GetBusinessData(string park)
         {
             SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure, new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
+            DataSet ds = sq.GetDataSet("Pro_MainResourceCount",
+                CommandType.StoredProcedure,
+                new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
             ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
             ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
             ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
             ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
             ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
             ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
-            return PartialView("_MainData");
+            return PartialView("_BusinessData");
+        }
+        public ActionResult GetOrderData(string stime, string etime)
+        {
+            List<SqlParameter> spList = new List<SqlParameter> { 
+                new SqlParameter("BeginTime", stime), 
+                new SqlParameter("EndTime", etime) 
+            };
+            SQLHelper sq = SQLFactory.Create();
+            DataSet ds = sq.GetDataSet("Pro_OrderStatistics", CommandType.StoredProcedure, spList.ToArray());
+            var obj = JsonConvert.SerializeObject(ds.Tables[0]);
+            return Content(obj);
+            //ViewBag.OrderData = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
+            //return PartialView("_OrderData");
         }
     }
 }

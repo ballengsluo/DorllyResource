@@ -8,8 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>我的工作台</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
-    @*@Styles.Render("~/Plugins/layui/css/layui.css")*@
     @Styles.Render("~/Plugins/font-awesome/css/font-awesome.min.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     <style>
@@ -62,30 +62,130 @@
             height: 342px;
             background-color: #fff;
         }
+
+        /* 趋势分析图样式*/
+
+        /*头部*/
+        .orderdata {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+            .orderdata .header {
+                position: relative;
+                height: 54px;
+            }
+
+                .orderdata .header > div {
+                    margin: 10px;
+                    font-size: 16px;
+                    height: 34px;
+                    line-height: 34px;
+                }
+
+                .orderdata .header .header-title {
+                    float: left;
+                }
+
+                .orderdata .header .header-search {
+                    float: right;
+                }
+
+            .orderdata .header-search > div {
+                float: left;
+            }
+            /*
+                平面样式
+            */
+            .orderdata .content > div {
+                width: 50%;
+                float: left;
+            }
+
+            .orderdata .content .content-panel > div {
+                width: 40%;
+                float: left;
+                height: 130px;
+                text-align: center;
+                margin: 1%;
+            }
+
+                .orderdata .content .content-panel > div:last-of-type {
+                    width: 82%;
+                }
+
+            .orderdata .content .content-panel div > div:first-of-type {
+                height: 60%;
+                line-height: 90px;
+                font-size: 35px;
+                color: blue;
+            }
+
+            .orderdata .content .content-panel div > div:last-of-type {
+                height: 40%;
+                font-size: 16px;
+            }
+
+
+            /*图表样式*/
+            .orderdata .content .content-graph {
+                /*height: 425px;*/
+                height:460px;
+            }
+
+        #search {
+            font-size: 15px;
+            margin-left: 10px;
+            height: 34px;
+            vertical-align: inherit;
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
-        @Html.Partial("_BusinessData")
-        @*<div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <h4>业务概览</h4>
-                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-left:0px;background-color: #fff;border:1px solid #ccc;border-bottom:none;">
-                        <div class="col-lg-2 col-md-2 col-sm-2" style="padding:10px 10px 10px 5px;">
-                            <div class="input-group">
-                                <span class="input-group-addon">园区</span>
-                                @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
-                            </div>
-                        </div>
+        @*@Html.Partial("_BusinessData")*@
+        <div class="orderdata">
+            <div class="header">
+                <div class="header-title"><i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  趋势图分析</div>
+                <div class="header-search">
+                    <div>统计时间：</div>
+                    <div><input type="text" class="form-control" id="stime"></div>
+                    <div style="padding:0px 5px;font-size:22px;">-</div>
+                    <div><input type="text" class="form-control" id="etime"></div>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="search" style="">
+                            <i class="layui-icon layui-icon-search"></i> 查 询
+                        </button>
                     </div>
-                    <div id="mainData">
-                        @Html.Partial("_MainData")
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-panel">
+                    <div style="background-color:#f8cb6a;">
+                        <div data-kind="1">0</div>
+                        <div>房屋预定数量</div>
                     </div>
+                    <div style="background-color:#89c6fa;">
+                        <div data-kind="2">0</div>
+                        <div>工位预定数量</div>
+                    </div>
+                    <div style="background-color:#f7a769;">
+                        <div data-kind="3">0</div>
+                        <div>会议室预定数量</div>
+                    </div>
+                    <div style="background-color:#96a4fe;">
+                        <div data-kind="4">0</div>
+                        <div>广告位预定数量</div>
+                    </div>
+                    <div style="background-color:#f5c2e5;">
+                        <div data-kind="5">0</div>
+                        <div>资源预定订单总数</div>
+                    </div>
+                </div>
+                <div class="content-graph" id="content-graph">
 
                 </div>
-            </div>*@
-        <div class="" id="mydata" style="height:400px;width:600px;">
-
+            </div>
         </div>
     </div>
 
@@ -97,28 +197,65 @@
     <script>
         var layer;
         $(function () {
-            layui.use('layer', function () {
+            if ($("#content-graph").length > 0) {
+                graph();
+                if ($("#stime").length > 0) {
+                    layui.use('laydate', function () {
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#stime'
+                        });
+                    });
+                }
+                if ($("#etime").length > 0) {
+                    layui.use('laydate', function () {
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#etime'
+                        });
+                    });
+                }
+            }
+            $("#search").click(function () {
+                graph();
+            });
+            @*layui.use('layer', function () {
                 layer = layui.layer;
             });
             $("#mydata").width($(window).width() * 0.5);
             $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
             $("#park").val("@ViewBag.park");
             $("#park").change(function () {
-                $.get("/admin/getmaindata", { park: $(this).val() }, function (data) {
+                $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
                     $("#mainData").html(data);
                     $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
                 });
             });
-            initData();
+            initData();*@
         });
 
-        function initData() {
+        function graph() {
+            $.getJSON("/Admin/GetOrderData", { stime: $("#stime").val(), etime: $("#etime").val() }, function (data) {
+                console.log(data);
+                var title = new Array();
+                var count = new Array();
+                $.each(data, function (idx, item) {
+                    $("[data-kind='" + item.RID + "']").html(item.RCount);
+                    title.push(item.RName);
+                    count.push(item.RCount);
+                });
+                initData(title, count);
+            });
+        }
+
+
+        function initData(title, count) {
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('mydata'));
+            var myChart = echarts.init(document.getElementById('content-graph'));
 
             // 指定图表的配置项和数据
             var option = {
-                color:['blue'],
+                color: ['blue'],
                 title: {
                     text: ''
                 },
@@ -127,16 +264,17 @@
                     data: ['销量']
                 },
                 xAxis: {
-                    data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                    //data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+                    data: title
                 },
                 yAxis: {},
                 series: [{
                     //name: '销量',
                     type: 'bar',
-                    data: [5, 20, 36, 10, 10, 20]
+                    //data: [5, 20, 36, 10, 10, 20]
+                    data: count
                 }]
             };
-
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
         }

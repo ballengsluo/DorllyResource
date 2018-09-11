@@ -784,6 +784,7 @@
     <Content Include="Views\S_Resource\OReserve.cshtml" />
     <Content Include="Views\S_Resource\RSIndex.cshtml" />
     <Content Include="Views\S_Resource\Free.cshtml" />
+    <Content Include="Views\Admin\_OrderData.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -859,6 +860,7 @@
     <Compile Include="Models\Util\SearchParam.cs" />
     <Compile Include="Models\SMRView.cs" />
     <Compile Include="Models\Util\Result.cs" />
+    <Compile Include="Models\View\OrderStatistics.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\CrawlerHandler.cs" />
