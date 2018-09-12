@@ -125,7 +125,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
-        public JsonResult Notpass(string id)
+        public JsonResult NPass(string id)
         {
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 3) return Json(Result.Fail(msg: "状态一致，无从改变！"));
@@ -143,7 +143,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
-        public JsonResult Unpub(string id)
+        public JsonResult NPub(string id)
         {
             T_ResourcePublic pub = dc.Set<T_ResourcePublic>().Where(a => a.ID == id).FirstOrDefault();
             if (pub.Status == 5) return Json(Result.Fail(msg: "状态一致，无从改变！"));

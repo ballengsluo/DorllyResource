@@ -1,7 +1,24 @@
 ﻿@{
     Layout = null;
 }
-
+@helper res()
+{
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <h4>业务概览</h4>
+        <div class="col-lg-12 col-md-12 col-sm-12" style="padding-left:0px;background-color: #fff;border:1px solid #ccc;border-bottom:none;">
+            <div class="col-lg-2 col-md-2 col-sm-2" style="padding:10px 10px 10px 5px;">
+                <div class="input-group">
+                    <span class="input-group-addon">园区</span>
+                    @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                </div>
+            </div>
+        </div>
+        <div id="resource">
+            @Html.Partial("_Resource")
+        </div>
+       
+    </div>
+}
 <!DOCTYPE html>
 
 <html>
@@ -15,9 +32,10 @@
     <style>
         body {
             background-color: #f9f9f9;
-            max-width: 1500px;
         }
-
+       .container-fluid{
+           width:90%;
+       }
         h4 {
             padding: 10px 0px;
             text-align: center;
@@ -67,8 +85,12 @@
 
         /*头部*/
         .orderdata {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
+        }
+        .orderdata>div{
+            width:100%;
+            float:left;
         }
 
             .orderdata .header {
@@ -95,8 +117,8 @@
                 float: left;
             }
             /*
-                平面样式
-            */
+                    平面样式
+                */
             .orderdata .content > div {
                 width: 50%;
                 float: left;
@@ -149,7 +171,7 @@
             var func = ViewBag.func as List<T_MenuFunc>;
             if (func.Where(a => a.Code == "resource").Count() > 0)
             {
-                Html.RenderPartial("_Resource");
+                @res()
             }
             if (func.Where(a => a.Code == "transaction").Count() > 0)
             {
@@ -171,31 +193,20 @@
     <script>
         var layer;
         $(function () {
-
-            @*layui.use('layer', function () {
-                layer = layui.layer;
-            });
-            $("#mydata").width($(window).width() * 0.5);
-            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-            $("#park").val("@ViewBag.park");
-            $("#park").change(function () {
-                $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
-                    $("#mainData").html(data);
-                    $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-                });
-            });
-            initData();*@
+            initResourceData();
+            initOrderData();
         });
 
-        function initRSData() {
+        function initResourceData() {
             $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-            $("#park").val("@ViewBag.park");
+            //$("#park").val("@ViewBag.park");
             $("#park").change(function () {
                 $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
-                    $("#mainData").html(data);
+                    $("#resource").html(data);
                     $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
                 });
             });
+            $("#park option:first").attr("selected", true).trigger("change");
         }
 
         function initOrderData() {

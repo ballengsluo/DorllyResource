@@ -37,7 +37,7 @@ namespace Resource.Web.Controllers
             ViewBag.func = Func.GetFunc(user.Account, MenuPath);
             return View();
         }
-        public ActionResult GetBusinessData(string park)
+        public ActionResult GetResourceData(string park)
         {
             SQLHelper sq = SQLFactory.Create();
             DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure,
@@ -48,7 +48,7 @@ namespace Resource.Web.Controllers
             ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
             ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
             ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
-            return PartialView("_BusinessData");
+            return PartialView("_Resource");
         }
         public ActionResult GetOrderData(string stime, string etime)
         {
@@ -56,12 +56,11 @@ namespace Resource.Web.Controllers
                 new SqlParameter("BeginTime", stime), 
                 new SqlParameter("EndTime", etime) 
             };
-            SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_OrderStatistics", CommandType.StoredProcedure, spList.ToArray());
+            DataSet ds = SQLFactory.Create().GetDataSet("Pro_OrderStatistics", CommandType.StoredProcedure, spList.ToArray());
             var obj = JsonConvert.SerializeObject(ds.Tables[0]);
             return Content(obj);
-            //ViewBag.OrderData = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
-            //return PartialView("_OrderData");
         }
+
+        
     }
 }

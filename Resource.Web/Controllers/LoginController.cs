@@ -8,7 +8,7 @@ using Resource.Web.Models;
 using System.Data.Entity;
 namespace Resource.Web.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         public ActionResult Index()
         {
@@ -18,7 +18,7 @@ namespace Resource.Web.Controllers
         {
             if (!string.IsNullOrEmpty(lv.Name) && !string.IsNullOrEmpty(lv.Pwd))
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 var loginObj = dc.Set<T_LoginInfo>();
                 var pwd = Encrypt.EncryptDES(lv.Pwd, 1);
                 var user = dc.Set<T_User>().Where(a => a.Account == lv.Name && a.PWD == pwd && a.Enable == true).FirstOrDefault();
@@ -45,7 +45,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult LogoOut()
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var cookieName = "resource";
             if (Response.Cookies.AllKeys.Contains(cookieName))
             {

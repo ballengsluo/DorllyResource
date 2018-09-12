@@ -11,7 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class HomePageFootController : Controller
+    public class HomePageFootController : BaseController
     {
         public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
         }
         public ContentResult Edit(int id)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             T_PageFoot pf = dc.Set<T_PageFoot>().Where(a => a.Position == id).FirstOrDefault();
             if (pf == null) pf = new T_PageFoot();
             var obj = JsonConvert.SerializeObject(pf);
@@ -33,7 +33,7 @@ namespace Resource.Web.Controllers
             string code2 = string.Empty;
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_User user = RouteData.Values["user"] as T_User;
                 var pf = dc.Set<T_PageFoot>().Where(a => a.Position == id).FirstOrDefault();
                 pf.UpdateTime = DateTime.Now;

@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var list = dc.Set<V_Floor>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Build)) list = list.Where(a => a.BuildingID == param.Build);
             else if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.StageID == param.Stage);
@@ -39,7 +39,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 dc.Set<T_Floor>().Add(floor);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
@@ -51,7 +51,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var obj = dc.Set<V_Floor>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -60,7 +60,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(floor, "", form.AllKeys, new string[] { "Enable" }))
                 {
@@ -78,7 +78,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Floor>().Remove(floor);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -94,7 +94,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 floor.Enable = true;
                 dc.Set<T_Floor>().AddOrUpdate(floor);
@@ -111,7 +111,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 floor.Enable = false;
                 dc.Set<T_Floor>().AddOrUpdate(floor);

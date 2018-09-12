@@ -13,14 +13,14 @@ using System.Data.SqlClient;
 
 namespace Resource.Web.Controllers
 {
-    public class ImageController : Controller
+    public class ImageController : BaseController
     {
 
         #region 资源图片处理
 
         public ActionResult ResourceImgList(string resourceID)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var list = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == resourceID).ToList();
             return PartialView("_ImgBox", list);
         }
@@ -33,7 +33,7 @@ namespace Resource.Web.Controllers
                 if (Request.Files.Count <= 0 || string.IsNullOrEmpty(resourceID))
                     return Json(ResponseResult.GetResult(ResultEnum.Errorr));
                 T_ResourceImg img = new T_ResourceImg();
-                DbContext dc = DbContextFactory.Create();
+                
                 img.ID = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 img.ResourceID = resourceID;
                 img.IsCover = false;
@@ -66,7 +66,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_ResourceImg img = dc.Set<T_ResourceImg>().Where(a => a.ID == imgID).FirstOrDefault();
                 dc.Database.ExecuteSqlCommand("update T_ResourceImg set iscover=0 where ResourceID=@rid", new SqlParameter("@rid", resourceID));
                 img.IsCover = true;
@@ -84,7 +84,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_ResourceImg img = dc.Set<T_ResourceImg>().Where(a => a.ID == imgID).FirstOrDefault();
                 string filepath = Server.MapPath(img.ImgUrl.Replace("..", "~"));
                 if (System.IO.File.Exists(filepath)) System.IO.File.Delete(filepath);

@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var list = dc.Set<V_Park>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Region)) list = list.Where(a => a.RegionID == param.Region);
             else if (!string.IsNullOrEmpty(param.City)) list = list.Where(a => a.CityID == param.City);
@@ -38,7 +38,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 dc.Set<T_Park>().Add(park);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
@@ -50,7 +50,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var obj = dc.Set<V_Park>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -59,7 +59,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(park, "", form.AllKeys, new string[] { "Enable" }))
                 {
@@ -77,7 +77,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Park>().Remove(park);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -93,7 +93,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = true;
                 dc.Set<T_Park>().AddOrUpdate(park);
@@ -110,7 +110,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = false;
                 dc.Set<T_Park>().AddOrUpdate(park);

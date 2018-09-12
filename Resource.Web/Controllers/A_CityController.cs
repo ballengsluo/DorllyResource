@@ -17,7 +17,6 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            DbContext dc = DbContextFactory.Create();
             var list = dc.Set<T_City>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             int count = list.Count();
@@ -33,7 +32,6 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
                 city.Enable = true;
                 city.IsDefault = false;
                 dc.Set<T_City>().Add(city);
@@ -47,7 +45,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            DbContext dc = DbContextFactory.Create();
+            
             var entity = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
             return View(entity);
         }
@@ -56,7 +54,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable", "IsDefault" }))
                 {
@@ -74,7 +72,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_City>().Remove(city);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -90,7 +88,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = true;
                 dc.Set<T_City>().AddOrUpdate(city);
@@ -107,7 +105,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                DbContext dc = DbContextFactory.Create();
+                
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = false;
                 dc.Set<T_City>().AddOrUpdate(city);

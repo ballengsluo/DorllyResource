@@ -159,7 +159,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
-        public JsonResult Notpass(int id)
+        public JsonResult NPass(int id)
         {
 
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
@@ -177,7 +177,7 @@ namespace Resource.Web.Controllers
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
-        public JsonResult Unpub(int id)
+        public JsonResult NPub(int id)
         {
 
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
