@@ -1,0 +1,13 @@
+﻿@if (ViewBag.func != null && ViewBag.func.Count > 0)
+{
+    var func = ViewBag.func as List<T_MenuFunc>;
+
+    <div class="func-action">
+        @foreach (var item in func)
+        {
+            <button type="button" class="@item.Color" id="@item.Code" data-url="@Url.Action(item.Code)">
+                <i class="@item.Class"></i> @item.Name
+            </button>
+        }
+    </div>
+}

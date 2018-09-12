@@ -459,8 +459,12 @@
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6013: 表/视图“DorllyResource.dbo.V_FuncView”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
-        <EntityType Name="V_FuncView">
+警告 6002: 表/视图“DorllyResource.dbo.V_Func”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_Func">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
           <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
@@ -469,7 +473,7 @@
           <Property Name="FuncName" Type="nvarchar" MaxLength="50" />
           <Property Name="FuncClass" Type="nvarchar" MaxLength="50" />
           <Property Name="FuncColor" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
+        </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Order”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_Order">
@@ -935,6 +939,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Pro_GetFunc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Account" Type="nvarchar" Mode="In" />
+          <Parameter Name="MenuPath" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DorllyResourceModelStoreContainer">
           <EntitySet Name="Mstr_Customer" EntityType="Self.Mstr_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Building" EntityType="Self.T_Building" Schema="dbo" store:Type="Tables" />
@@ -996,6 +1004,19 @@
     [V_Floor].[CityID] AS [CityID], 
     [V_Floor].[CityName] AS [CityName]
     FROM [dbo].[V_Floor] AS [V_Floor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_Func" EntityType="Self.V_Func" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_Func].[ID] AS [ID], 
+    [V_Func].[RoleID] AS [RoleID], 
+    [V_Func].[RoleName] AS [RoleName], 
+    [V_Func].[MenuName] AS [MenuName], 
+    [V_Func].[MenuPath] AS [MenuPath], 
+    [V_Func].[FuncCode] AS [FuncCode], 
+    [V_Func].[FuncName] AS [FuncName], 
+    [V_Func].[FuncClass] AS [FuncClass], 
+    [V_Func].[FuncColor] AS [FuncColor]
+    FROM [dbo].[V_Func] AS [V_Func]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Order" EntityType="Self.V_Order" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1422,6 +1443,11 @@
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserRole" EntitySet="T_UserRole" />
           </AssociationSet>
+          <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
+          <FunctionImport Name="Pro_GetFunc" ReturnType="Collection(DorllyResourceModel.Pro_GetFunc_Result)">
+            <Parameter Name="Account" Mode="In" Type="String" />
+            <Parameter Name="MenuPath" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Mstr_Customer">
           <Key>
@@ -2355,6 +2381,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_Func">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FuncCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FuncName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Pro_GetFunc_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Class" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3115,6 +3162,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_Func">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Func">
+              <MappingFragment StoreEntitySet="V_Func">
+                <ScalarProperty Name="FuncColor" ColumnName="FuncColor" />
+                <ScalarProperty Name="FuncClass" ColumnName="FuncClass" />
+                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
+                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
+                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Pro_GetFunc" FunctionName="DorllyResourceModel.Store.Pro_GetFunc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DorllyResourceModel.Pro_GetFunc_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

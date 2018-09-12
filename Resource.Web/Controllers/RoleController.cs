@@ -10,14 +10,13 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class RoleController : ResourceBusinessController
+    public class RoleController : BaseController
     {
         // GET: Role
         public ActionResult Index()
         {
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Resource.Web.Models.Func.GetFunc(user.Account, MenuPath);
+            return View();
         }
         public ActionResult Create()
         {

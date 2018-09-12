@@ -1,13 +1,16 @@
-﻿using Resource.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
+using Resource.Web.Models;
+using Resource.Model;
 using Resource.Model.DB;
 using System.Data;
-using Newtonsoft.Json;
 using System.Data.SqlClient;
+using Newtonsoft.Json;
+
 namespace Resource.Web.Controllers
 {
     public class AdminController : BaseController
@@ -31,16 +34,13 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Main()
         {
-            //var fd = user.T_UserRole.Where(a=>a.T_Role.T_RoleFunc.Where(b=>b.me))
-            //var roleList = dc.Set<T_UserRole>().Where(a=>a.UserID==user.Account).ToList();
-            //ViewBag.Identity=dc.Set<T_RoleFunc>().Where(a=>a.)
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
             return View();
         }
         public ActionResult GetBusinessData(string park)
         {
             SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_MainResourceCount",
-                CommandType.StoredProcedure,
+            DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure,
                 new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
             ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
             ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
@@ -52,7 +52,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult GetOrderData(string stime, string etime)
         {
-            List<SqlParameter> spList = new List<SqlParameter> { 
+            var spList = new List<SqlParameter> { 
                 new SqlParameter("BeginTime", stime), 
                 new SqlParameter("EndTime", etime) 
             };

@@ -130,7 +130,7 @@
             /*图表样式*/
             .orderdata .content .content-graph {
                 /*height: 425px;*/
-                height:460px;
+                height: 460px;
             }
 
         #search {
@@ -144,49 +144,23 @@
 <body>
     <div class="container-fluid">
         @*@Html.Partial("_BusinessData")*@
-        <div class="orderdata">
-            <div class="header">
-                <div class="header-title"><i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  趋势图分析</div>
-                <div class="header-search">
-                    <div>统计时间：</div>
-                    <div><input type="text" class="form-control" id="stime"></div>
-                    <div style="padding:0px 5px;font-size:22px;">-</div>
-                    <div><input type="text" class="form-control" id="etime"></div>
-                    <div>
-                        <button type="button" class="btn btn-primary" id="search" style="">
-                            <i class="layui-icon layui-icon-search"></i> 查 询
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="content-panel">
-                    <div style="background-color:#f8cb6a;">
-                        <div data-kind="1">0</div>
-                        <div>房屋预定数量</div>
-                    </div>
-                    <div style="background-color:#89c6fa;">
-                        <div data-kind="2">0</div>
-                        <div>工位预定数量</div>
-                    </div>
-                    <div style="background-color:#f7a769;">
-                        <div data-kind="3">0</div>
-                        <div>会议室预定数量</div>
-                    </div>
-                    <div style="background-color:#96a4fe;">
-                        <div data-kind="4">0</div>
-                        <div>广告位预定数量</div>
-                    </div>
-                    <div style="background-color:#f5c2e5;">
-                        <div data-kind="5">0</div>
-                        <div>资源预定订单总数</div>
-                    </div>
-                </div>
-                <div class="content-graph" id="content-graph">
+        @if (ViewBag.func != null && ViewBag.func.Count > 0)
+        {
+            var func = ViewBag.func as List<T_MenuFunc>;
+            if (func.Where(a => a.Code == "resource").Count() > 0)
+            {
+                Html.RenderPartial("_Resource");
+            }
+            if (func.Where(a => a.Code == "transaction").Count() > 0)
+            {
+                Html.RenderPartial("_Transaction");
+            }
+            if (func.Where(a => a.Code == "order").Count() > 0)
+            {
+                Html.RenderPartial("_Order");
+            }
+        }
 
-                </div>
-            </div>
-        </div>
     </div>
 
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
@@ -197,6 +171,34 @@
     <script>
         var layer;
         $(function () {
+
+            @*layui.use('layer', function () {
+                layer = layui.layer;
+            });
+            $("#mydata").width($(window).width() * 0.5);
+            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+            $("#park").val("@ViewBag.park");
+            $("#park").change(function () {
+                $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
+                    $("#mainData").html(data);
+                    $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+                });
+            });
+            initData();*@
+        });
+
+        function initRSData() {
+            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+            $("#park").val("@ViewBag.park");
+            $("#park").change(function () {
+                $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
+                    $("#mainData").html(data);
+                    $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+                });
+            });
+        }
+
+        function initOrderData() {
             if ($("#content-graph").length > 0) {
                 graph();
                 if ($("#stime").length > 0) {
@@ -215,25 +217,11 @@
                         });
                     });
                 }
-            }
-            $("#search").click(function () {
-                graph();
-            });
-            @*layui.use('layer', function () {
-                layer = layui.layer;
-            });
-            $("#mydata").width($(window).width() * 0.5);
-            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-            $("#park").val("@ViewBag.park");
-            $("#park").change(function () {
-                $.get("/Admin/GetResourceData", { park: $(this).val() }, function (data) {
-                    $("#mainData").html(data);
-                    $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+                $("#search").click(function () {
+                    graph();
                 });
-            });
-            initData();*@
-        });
-
+            }
+        }
         function graph() {
             $.getJSON("/Admin/GetOrderData", { stime: $("#stime").val(), etime: $("#etime").val() }, function (data) {
                 console.log(data);
@@ -244,12 +232,10 @@
                     title.push(item.RName);
                     count.push(item.RCount);
                 });
-                initData(title, count);
+                graphData(title, count);
             });
         }
-
-
-        function initData(title, count) {
+        function graphData(title, count) {
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('content-graph'));
 

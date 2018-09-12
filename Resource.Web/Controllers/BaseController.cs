@@ -37,6 +37,14 @@ namespace Resource.Web.Controllers
                 return user.Park.Split(',').ToList();
             }
         }
+        public string MenuPath
+        {
+            get
+            {
+                return string.Format("/{0}/{1}", ControllerContext.RouteData.GetRequiredString("Controller"), ControllerContext.RouteData.GetRequiredString("Action")).ToLower();
+            }
+        }
+
 
     }
 }

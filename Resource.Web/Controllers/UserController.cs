@@ -12,14 +12,13 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class UserController : ResourceBusinessController
+    public class UserController : BaseController
     {
         // GET: user
         public ActionResult Index()
         {
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
+            return View();
         }
         public ContentResult Search(SearchParam param)
         {

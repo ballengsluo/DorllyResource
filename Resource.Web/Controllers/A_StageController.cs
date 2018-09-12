@@ -14,9 +14,8 @@ namespace Resource.Web.Controllers
         // GET: Stage
         public ActionResult Index()
         {
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
+            return View();
         }
         public JsonResult Search(SearchParam param)
         {
@@ -38,7 +37,6 @@ namespace Resource.Web.Controllers
         {
             try
             {
-
                 dc.Set<T_Stage>().Add(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
@@ -59,7 +57,6 @@ namespace Resource.Web.Controllers
         {
             try
             {
-
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(stage, "", form.AllKeys, new string[] { "Enable" }))
                 {

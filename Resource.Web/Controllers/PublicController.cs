@@ -15,9 +15,8 @@ namespace Resource.Web.Controllers
         #region 首页
         public ActionResult Index()
         {
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
+            return View();
         }
         public ActionResult Detail(string id)
         {

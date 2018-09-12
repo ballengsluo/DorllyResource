@@ -13,9 +13,11 @@ namespace Resource.Web.Controllers
         // GET: S_Resource
         public ActionResult Index()
         {
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
+            return View();
+            //string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
+            //List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
+            //return View(rmfList);
         }
         public ActionResult Search(SearchParam param)
         {

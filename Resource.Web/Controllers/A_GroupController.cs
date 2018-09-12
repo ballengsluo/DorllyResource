@@ -10,14 +10,12 @@ using System.Data.Entity.Migrations;
 using Resource.Web.Models;
 namespace Resource.Web.Controllers
 {
-    public class A_GroupController : Controller
+    public class A_GroupController : BaseController
     {
         public ActionResult Index()
         {
-            T_User user = RouteData.Values["user"] as T_User;
-            string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            return View(rmfList);
+            ViewBag.func = Func.GetFunc(user.Account, MenuPath);
+            return View();
         }
         public JsonResult Search(SearchParam param)
         {

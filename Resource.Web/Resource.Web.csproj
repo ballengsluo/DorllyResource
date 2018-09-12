@@ -778,13 +778,15 @@
     <Content Include="Views\Public\Detail_AD.cshtml" />
     <Content Include="Views\Shared\_RSStatus.cshtml" />
     <Content Include="Views\HomePage\Detail.cshtml" />
-    <Content Include="Views\Admin\_BusinessData.cshtml" />
+    <Content Include="Views\Admin\_Resource.cshtml" />
     <Content Include="Views\S_Resource\Reserve.cshtml" />
     <Content Include="Views\S_Resource\IReserve.cshtml" />
     <Content Include="Views\S_Resource\OReserve.cshtml" />
     <Content Include="Views\S_Resource\RSIndex.cshtml" />
     <Content Include="Views\S_Resource\Free.cshtml" />
-    <Content Include="Views\Admin\_OrderData.cshtml" />
+    <Content Include="Views\Admin\_Order.cshtml" />
+    <Content Include="Views\Admin\_Transaction.cshtml" />
+    <Content Include="Views\Shared\_Func.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -850,7 +852,8 @@
     <Compile Include="Models\Util\Encrypt.cs" />
     <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />
-    <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\Util\Func.cs" />
+    <Compile Include="Models\View\LoginView.cs" />
     <Compile Include="Models\Order\OrderAD.cs" />
     <Compile Include="Models\Order\OrderCB.cs" />
     <Compile Include="Models\Order\OrderCR.cs" />

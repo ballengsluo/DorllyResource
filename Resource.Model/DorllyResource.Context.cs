@@ -12,6 +12,8 @@ namespace Resource.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DorllyResourceEntities : DbContext
     {
@@ -60,5 +62,19 @@ namespace Resource.Model
         public virtual DbSet<V_RS_Info> V_RS_Info { get; set; }
         public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
         public virtual DbSet<V_Stage> V_Stage { get; set; }
+        public virtual DbSet<V_Func> V_Func { get; set; }
+    
+        public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
+        {
+            var accountParameter = account != null ?
+                new ObjectParameter("Account", account) :
+                new ObjectParameter("Account", typeof(string));
+    
+            var menuPathParameter = menuPath != null ?
+                new ObjectParameter("MenuPath", menuPath) :
+                new ObjectParameter("MenuPath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pro_GetFunc_Result>("Pro_GetFunc", accountParameter, menuPathParameter);
+        }
     }
 }
