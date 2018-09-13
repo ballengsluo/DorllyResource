@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Resource.Web.Models
 {
-    public class OrderRM
+    public class Room
     {
         
         private string _RMID;
@@ -33,7 +33,7 @@ namespace Resource.Web.Models
         private bool _HaveAirCondition;
         
         /// <summary>缺省构造函数</summary>
-        public OrderRM() { }
+        public Room() { }
 
         /// <summary>房间编号【主键】</summary>
         public string RMID

@@ -768,6 +768,7 @@
     <Content Include="css\style.css.map" />
     <Content Include="js\.DS_Store" />
     <Content Include="images\.DS_Store" />
+    <Content Include="WebApi\ResourceService.asmx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -854,10 +855,10 @@
     <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\Util\Func.cs" />
     <Compile Include="Models\View\LoginView.cs" />
-    <Compile Include="Models\Order\OrderAD.cs" />
-    <Compile Include="Models\Order\OrderCB.cs" />
-    <Compile Include="Models\Order\OrderCR.cs" />
-    <Compile Include="Models\Order\OrderRM.cs" />
+    <Compile Include="Models\Order\Billboard.cs" />
+    <Compile Include="Models\Order\WorkPlace.cs" />
+    <Compile Include="Models\Order\ConferenceRoom.cs" />
+    <Compile Include="Models\Order\Room.cs" />
     <Compile Include="Models\ResponseResult.cs" />
     <Compile Include="Models\ResultEnum.cs" />
     <Compile Include="Models\Util\SearchParam.cs" />
@@ -887,6 +888,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebApi\ResourceService.asmx.cs">
+      <DependentUpon>ResourceService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

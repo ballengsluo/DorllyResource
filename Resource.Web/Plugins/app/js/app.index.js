@@ -26,7 +26,7 @@ function operation() {
         search(paramsSet());
     });
     //添加
-    $('#add').click(function() {
+    $('#create').click(function() {
         var url = $(this).attr('data-url');
         layerOpen(url);
     });

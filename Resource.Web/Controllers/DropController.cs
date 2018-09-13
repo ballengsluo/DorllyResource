@@ -28,7 +28,7 @@ namespace Resource.Web.Controllers
         public ActionResult RegionDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Region>().Where(a => true);
+            var list = dc.Set<T_Region>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.CityID == pid);
             else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
@@ -36,7 +36,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult RegionDropList(string pid)
         {
-            var list = dc.Set<T_Region>().Where(a => a.CityID == pid).ToList();
+            var list = dc.Set<T_Region>().Where(a => a.CityID == pid && a.Enable == true).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult ParkDrop(string pid, string id, int model)
@@ -50,13 +50,13 @@ namespace Resource.Web.Controllers
         }
         public ActionResult ParkDropList(string pid)
         {
-            var list = dc.Set<T_Park>().Where(a => a.RegionID == pid).Select(a => new { a.ID, a.Name }).ToList();
+            var list = dc.Set<T_Park>().Where(a => a.RegionID == pid && a.Enable == true).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult StageDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Stage>().Where(a => true);
+            var list = dc.Set<T_Stage>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.ParkID == pid);
             else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
@@ -64,13 +64,13 @@ namespace Resource.Web.Controllers
         }
         public ActionResult StageDropList(string pid)
         {
-            var list = dc.Set<T_Stage>().Where(a => a.ParkID == pid).ToList();
+            var list = dc.Set<T_Stage>().Where(a => a.ParkID == pid && a.Enable == true).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult BuildingDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Building>().Where(a => true);
+            var list = dc.Set<T_Building>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.StageID == pid);
             else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
@@ -78,13 +78,13 @@ namespace Resource.Web.Controllers
         }
         public ActionResult BuildingDropList(string pid)
         {
-            var list = dc.Set<T_Building>().Where(a => a.StageID == pid).ToList();
+            var list = dc.Set<T_Building>().Where(a => a.StageID == pid && a.Enable == true).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult FloorDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Floor>().Where(a => true);
+            var list = dc.Set<T_Floor>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.BuildingID == pid);
             else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
@@ -92,28 +92,27 @@ namespace Resource.Web.Controllers
         }
         public ActionResult FloorDropList(string pid)
         {
-            var list = dc.Set<T_Floor>().Where(a => a.BuildingID == pid).ToList();
+            var list = dc.Set<T_Floor>().Where(a => a.BuildingID == pid && a.Enable == true).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         public ActionResult RMDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Resource>().Where(a => a.ResourceKindID == 1);
+            var list = dc.Set<T_Resource>().Where(a => a.ResourceKindID == 1 && a.Enable == true);
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.Loc4 == pid);
-            else list = list.Where(a => a.ID == "1");
             ViewData["dataList"] = new SelectList(list.Select(a => new { a.ID, a.Name }).ToList(), "ID", "Name", id);
             return PartialView();
         }
         public ActionResult RMDropList(string pid)
         {
-            var list = dc.Set<T_Resource>().Where(a => a.Loc4 == pid).Select(a => new { a.ID, a.Name }).ToList();
+            var list = dc.Set<T_Resource>().Where(a => a.ResourceKindID == 1 && a.Loc4 == pid && a.Enable == true).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
         #endregion
         public ActionResult GroupDrop(int kind, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_ResourceGroup>().Where(a => a.ResourceKindID == kind).Select(a => new { a.ID, a.Name });
+            var list = dc.Set<T_ResourceGroup>().Where(a => a.ResourceKindID == kind && a.Enable == true).Select(a => new { a.ID, a.Name });
             ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
             return PartialView();
         }

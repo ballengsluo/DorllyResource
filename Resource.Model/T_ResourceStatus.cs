@@ -21,7 +21,6 @@ namespace Resource.Model
         public Nullable<int> BusinessType { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }
         public Nullable<System.DateTime> RentEndTime { get; set; }
-        public Nullable<int> EndType { get; set; }
         public Nullable<System.DateTime> RentEndRealTime { get; set; }
         public string CustLongName { get; set; }
         public string CustShortName { get; set; }
@@ -29,6 +28,7 @@ namespace Resource.Model
         public string ReserveDept { get; set; }
         public string ReserveName { get; set; }
         public string Remark { get; set; }
+        public Nullable<int> Status { get; set; }
         public Nullable<bool> Enable { get; set; }
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }

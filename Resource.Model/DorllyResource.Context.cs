@@ -56,13 +56,13 @@ namespace Resource.Model
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
         public virtual DbSet<V_Building> V_Building { get; set; }
         public virtual DbSet<V_Floor> V_Floor { get; set; }
+        public virtual DbSet<V_Func> V_Func { get; set; }
         public virtual DbSet<V_Order> V_Order { get; set; }
         public virtual DbSet<V_Park> V_Park { get; set; }
         public virtual DbSet<V_Public> V_Public { get; set; }
         public virtual DbSet<V_RS_Info> V_RS_Info { get; set; }
         public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
         public virtual DbSet<V_Stage> V_Stage { get; set; }
-        public virtual DbSet<V_Func> V_Func { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
         {

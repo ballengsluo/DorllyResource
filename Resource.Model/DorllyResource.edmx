@@ -334,7 +334,6 @@
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
           <Property Name="RentEndTime" Type="datetime" />
-          <Property Name="EndType" Type="int" />
           <Property Name="RentEndRealTime" Type="datetime" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
@@ -342,6 +341,7 @@
           <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
           <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" />
           <Property Name="Enable" Type="bit" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
@@ -418,6 +418,15 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“DorllyResource.dbo.tem”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="tem">
+          <Property Name="id" Type="int" />
+          <Property Name="num" Type="int" />
+          <Property Name="lnum" Type="int" />
+          <Property Name="cust" Type="nvarchar" MaxLength="100" />
+          <Property Name="custd" Type="nvarchar" MaxLength="100" />
+        </EntityType>-->
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Building”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_Building">
@@ -1348,6 +1357,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DorllyResourceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DorllyResourceEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="Pro_GetFunc" ReturnType="Collection(DorllyResourceModel.Pro_GetFunc_Result)">
+            <Parameter Name="Account" Mode="In" Type="String" />
+            <Parameter Name="MenuPath" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Mstr_Customer" EntityType="DorllyResourceModel.Mstr_Customer" />
           <EntitySet Name="T_Building" EntityType="DorllyResourceModel.T_Building" />
           <EntitySet Name="T_City" EntityType="DorllyResourceModel.T_City" />
@@ -1377,6 +1390,7 @@
           <EntitySet Name="T_UserRole" EntityType="DorllyResourceModel.T_UserRole" />
           <EntitySet Name="V_Building" EntityType="DorllyResourceModel.V_Building" />
           <EntitySet Name="V_Floor" EntityType="DorllyResourceModel.V_Floor" />
+          <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
           <EntitySet Name="V_Order" EntityType="DorllyResourceModel.V_Order" />
           <EntitySet Name="V_Park" EntityType="DorllyResourceModel.V_Park" />
           <EntitySet Name="V_Public" EntityType="DorllyResourceModel.V_Public" />
@@ -1443,12 +1457,14 @@
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserRole" EntitySet="T_UserRole" />
           </AssociationSet>
-          <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
-          <FunctionImport Name="Pro_GetFunc" ReturnType="Collection(DorllyResourceModel.Pro_GetFunc_Result)">
-            <Parameter Name="Account" Mode="In" Type="String" />
-            <Parameter Name="MenuPath" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Pro_GetFunc_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Class" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <EntityType Name="Mstr_Customer">
           <Key>
             <PropertyRef Name="CustNo" />
@@ -1796,7 +1812,6 @@
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
           <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="EndType" Type="Int32" />
           <Property Name="RentEndRealTime" Type="DateTime" Precision="3" />
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1804,6 +1819,7 @@
           <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
@@ -1927,6 +1943,20 @@
           <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Func">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FuncCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FuncName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_Order">
           <Key>
@@ -2381,33 +2411,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="V_Func">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FuncCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="FuncName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FuncClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FuncColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <ComplexType Name="Pro_GetFunc_Result">
-          <Property Type="Int32" Name="ID" Nullable="true" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Class" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DorllyResourceModelStoreContainer" CdmEntityContainer="DorllyResourceEntities">
+          <FunctionImportMapping FunctionImportName="Pro_GetFunc" FunctionName="DorllyResourceModel.Store.Pro_GetFunc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DorllyResourceModel.Pro_GetFunc_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Mstr_Customer">
             <EntityTypeMapping TypeName="DorllyResourceModel.Mstr_Customer">
               <MappingFragment StoreEntitySet="Mstr_Customer">
@@ -2751,6 +2771,7 @@
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
                 <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
@@ -2758,7 +2779,6 @@
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
                 <ScalarProperty Name="RentEndRealTime" ColumnName="RentEndRealTime" />
-                <ScalarProperty Name="EndType" ColumnName="EndType" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
@@ -2882,6 +2902,21 @@
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Func">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Func">
+              <MappingFragment StoreEntitySet="V_Func">
+                <ScalarProperty Name="FuncColor" ColumnName="FuncColor" />
+                <ScalarProperty Name="FuncClass" ColumnName="FuncClass" />
+                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
+                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
+                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3162,32 +3197,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_Func">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Func">
-              <MappingFragment StoreEntitySet="V_Func">
-                <ScalarProperty Name="FuncColor" ColumnName="FuncColor" />
-                <ScalarProperty Name="FuncClass" ColumnName="FuncClass" />
-                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
-                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
-                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Pro_GetFunc" FunctionName="DorllyResourceModel.Store.Pro_GetFunc">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DorllyResourceModel.Pro_GetFunc_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

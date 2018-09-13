@@ -103,6 +103,7 @@ namespace Resource.Web.Controllers
                 var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
                 if (obj == null)
                 {
+                    //开始时间处于区间
                     int count = dc.Set<T_ResourceStatus>().Where(a => a.RentBeginTime <= begTime
                         && a.RentEndTime >= begTime
                         && a.Enable == true

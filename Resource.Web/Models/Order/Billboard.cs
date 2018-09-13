@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Resource.Web.Models
 {
-    public class OrderAD
+    public class Billboard
     {
         
         private string _BBNo;
@@ -37,7 +37,7 @@ namespace Resource.Web.Models
                 
         
         /// <summary>缺省构造函数</summary>
-        public OrderAD() { }
+        public Billboard() { }
 
         /// <summary>广告位编号【主键】</summary>
         public string BBNo

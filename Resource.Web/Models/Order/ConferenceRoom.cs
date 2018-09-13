@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Resource.Web.Models
 {
-    public class OrderCR
+    public class ConferenceRoom
     {
         
         private string _CRNo;
@@ -36,7 +36,7 @@ namespace Resource.Web.Models
         
         
         /// <summary>缺省构造函数</summary>
-        public OrderCR() { }
+        public ConferenceRoom() { }
 
         /// <summary>会议室编号【主键】</summary>
         public string CRNo

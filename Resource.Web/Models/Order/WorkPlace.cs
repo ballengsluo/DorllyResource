@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Resource.Web.Models
 {
-    public class OrderCB
+    public class WorkPlace
     {
         
         private string _WPNo;
@@ -30,7 +30,7 @@ namespace Resource.Web.Models
         private string _WPCreator;
         
         /// <summary>缺省构造函数</summary>
-        public OrderCB() { }
+        public WorkPlace() { }
 
         /// <summary>工位编号【主键】</summary>
         public string WPNo
