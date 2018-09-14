@@ -1,9 +1,0 @@
-﻿@if (ViewData["dataList"] != null)
-{
-    @Html.DropDownList("BuildingCode", ViewData["dataList"] as SelectList,"全部", new { @class = "selectpicker form-control pull-righ"})
-}
-else
-{
-    <select class="selectpicker form-control pull-righ" name="BuildingCode" id="BuildingCode" title="全部" disabled></select>
-}
-

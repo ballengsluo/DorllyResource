@@ -21,7 +21,6 @@ namespace Resource.Model
         public Nullable<int> BusinessType { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }
         public Nullable<System.DateTime> RentEndTime { get; set; }
-        public Nullable<System.DateTime> RentEndRealTime { get; set; }
         public string CustLongName { get; set; }
         public string CustShortName { get; set; }
         public string CustTel { get; set; }

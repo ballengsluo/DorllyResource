@@ -24,16 +24,16 @@ namespace Resource.Web.WebApi
     {
         #region 房屋基本信息操作
 
-        [WebMethod]
-        public string AddRoom(string rmJsonObject)
-        {
-            return AddOrUpdateRoom(rmJsonObject);
-        }
-        [WebMethod]
-        public string UpdateRoom(string rmJsonObject)
-        {
-            return AddOrUpdateRoom(rmJsonObject);
-        }
+        //[WebMethod]
+        //public string AddRoom(string rmJsonObject)
+        //{
+        //    return AddOrUpdateRoom(rmJsonObject);
+        //}
+        //[WebMethod]
+        //public string UpdateRoom(string rmJsonObject)
+        //{
+        //    return AddOrUpdateRoom(rmJsonObject);
+        //}
         [WebMethod]
         public string AddOrUpdateRoom(string rmJsonObject)
         {
@@ -76,6 +76,7 @@ namespace Resource.Web.WebApi
                 resource.Enable = room.RMISEnable;
                 resource.CreateUser = room.RMCreator;
                 resource.CreateTime = room.RMCreateDate;
+                resource.Location = room.RMAddr;
                 if (add)
                 {
                     dc.Set<T_Resource>().Add(resource);
@@ -84,16 +85,19 @@ namespace Resource.Web.WebApi
                 {
                     dc.Set<T_Resource>().AddOrUpdate(resource);
                 }
-                if (dc.SaveChanges() > 0)
-                {
-                    result.Msg += "操作成功！";
-                    result.Flag = 1;
-                }
-                else
-                {
-                    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                    result.Flag = 2;
-                }
+                dc.SaveChanges();
+                result.Msg += "操作成功！";
+                result.Flag = 1;
+                //if (dc.SaveChanges() > 0)
+                //{
+                //    result.Msg += "操作成功！";
+                //    result.Flag = 1;
+                //}
+                //else
+                //{
+                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
+                //    result.Flag = 2;
+                //}
             }
             catch (Exception ex)
             {
@@ -105,16 +109,17 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 工位基本信息操作
+        //[WebMethod]
+        //public string AddWorkPlace(string wpJsonObject)
+        //{
+        //    return AddOrUpdateWorkPlace(wpJsonObject);
+        //}
+        //[WebMethod]
+        //public string UpdateWorkPlace(string wpJsonObject)
+        //{
+        //    return AddOrUpdateWorkPlace(wpJsonObject);
+        //}
         [WebMethod]
-        public string AddWorkPlace(string wpJsonObject)
-        {
-            return AddOrUpdateWorkPlace(wpJsonObject);
-        }
-        [WebMethod]
-        public string UpdateWorkPlace(string wpJsonObject)
-        {
-            return AddOrUpdateWorkPlace(wpJsonObject);
-        }
         public string AddOrUpdateWorkPlace(string wpJsonObject)
         {
             Result result = new Result();
@@ -154,6 +159,7 @@ namespace Resource.Web.WebApi
                 resource.Number = workplace.WPSeat;
                 resource.Price = workplace.WPSeatPrice;
                 resource.Enable = workplace.WPISEnable;
+                resource.Location = workplace.WPAddr;
                 resource.CreateUser = workplace.WPCreator;
                 resource.CreateTime = workplace.WPCreateDate;
                 if (add)
@@ -164,16 +170,19 @@ namespace Resource.Web.WebApi
                 {
                     dc.Set<T_Resource>().AddOrUpdate(resource);
                 }
-                if (dc.SaveChanges() > 0)
-                {
-                    result.Msg += "操作成功！";
-                    result.Flag = 1;
-                }
-                else
-                {
-                    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                    result.Flag = 2;
-                }
+                dc.SaveChanges();
+                result.Msg += "操作成功！";
+                result.Flag = 1;
+                //if (dc.SaveChanges() > 0)
+                //{
+                //    result.Msg += "操作成功！";
+                //    result.Flag = 1;
+                //}
+                //else
+                //{
+                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
+                //    result.Flag = 2;
+                //}
             }
             catch (Exception ex)
             {
@@ -184,16 +193,17 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 会议室基本信息操作
+        //[WebMethod]
+        //public string AddConferenceRoom(string crJsonObject)
+        //{
+        //    return AddOrUpdateConferenceRoom(crJsonObject);
+        //}
+        //[WebMethod]
+        //public string UpdateConferenceRoom(string crJsonObject)
+        //{
+        //    return AddOrUpdateConferenceRoom(crJsonObject);
+        //}
         [WebMethod]
-        public string AddConferenceRoom(string crJsonObject)
-        {
-            return AddOrUpdateConferenceRoom(crJsonObject);
-        }
-        [WebMethod]
-        public string UpdateConferenceRoom(string crJsonObject)
-        {
-            return AddOrUpdateConferenceRoom(crJsonObject);
-        }
         public string AddOrUpdateConferenceRoom(string crJsonObject)
         {
             Result result = new Result();
@@ -235,7 +245,9 @@ namespace Resource.Web.WebApi
                 resource.CreateTime = conferenceRoom.CRCreateDate;
                 resource.UpdateTime = conferenceRoom.CRUpdateDate;
                 resource.UpdateUser = conferenceRoom.CRUpdateUser;
+                resource.Location = conferenceRoom.CRAddr;
 
+                price.ResourceID = conferenceRoom.CRNo;
                 price.HourEnable = conferenceRoom.CRIsHour;
                 price.HourInPrice = conferenceRoom.CRINPriceHour;
                 price.HourOutPrice = conferenceRoom.CROUTPriceHour;
@@ -252,16 +264,19 @@ namespace Resource.Web.WebApi
                 else dc.Set<T_Resource>().AddOrUpdate(resource);
                 if (priceAdd) dc.Set<T_ResourcePrice>().Add(price);
                 else dc.Set<T_ResourcePrice>().AddOrUpdate(price);
-                if (dc.SaveChanges() > 0)
-                {
-                    result.Msg += "操作成功！";
-                    result.Flag = 1;
-                }
-                else
-                {
-                    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                    result.Flag = 2;
-                }
+                dc.SaveChanges();
+                result.Msg += "操作成功！";
+                result.Flag = 1;
+                //if (dc.SaveChanges() > 0)
+                //{
+                //    result.Msg += "操作成功！";
+                //    result.Flag = 1;
+                //}
+                //else
+                //{
+                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
+                //    result.Flag = 2;
+                //}
             }
             catch (Exception ex)
             {
@@ -272,16 +287,17 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 广告位基本信息操作
+        //[WebMethod]
+        //public string AddBillboard(string bbJsonObject)
+        //{
+        //    return AddOrUpdateBillboard(bbJsonObject);
+        //}
+        //[WebMethod]
+        //public string UpdateBillboard(string bbJsonObject)
+        //{
+        //    return AddOrUpdateBillboard(bbJsonObject);
+        //}
         [WebMethod]
-        public string AddBillboard(string bbJsonObject)
-        {
-            return AddOrUpdateBillboard(bbJsonObject);
-        }
-        [WebMethod]
-        public string UpdateBillboard(string bbJsonObject)
-        {
-            return AddOrUpdateBillboard(bbJsonObject);
-        }
         public string AddOrUpdateBillboard(string bbJsonObject)
         {
             Result result = new Result();
@@ -319,12 +335,13 @@ namespace Resource.Web.WebApi
                 resource.ResourceKindID = 4;
                 resource.Size = billboard.BBSize;
                 resource.ResourceTypeID = billboard.BBType;
-                resource.Location = billboard.BBAddr;
                 resource.Deposit = billboard.BBDeposit;
                 resource.Enable = billboard.BBISEnable;
                 resource.CreateUser = billboard.BBCreator;
                 resource.CreateTime = billboard.BBCreateDate;
+                resource.Location = billboard.BBAddr;
 
+                price.ResourceID = billboard.BBNo;
                 price.DayInPrice = billboard.BBINPriceDay;
                 price.DayOutPrice = billboard.BBOUTPriceDay;
                 price.MonthInPrice = billboard.BBINPriceMonth;
@@ -338,16 +355,19 @@ namespace Resource.Web.WebApi
                 else dc.Set<T_Resource>().AddOrUpdate(resource);
                 if (priceAdd) dc.Set<T_ResourcePrice>().Add(price);
                 else dc.Set<T_ResourcePrice>().AddOrUpdate(price);
-                if (dc.SaveChanges() > 0)
-                {
-                    result.Msg += "操作成功！";
-                    result.Flag = 1;
-                }
-                else
-                {
-                    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                    result.Flag = 2;
-                }
+                dc.SaveChanges();
+                result.Msg += "操作成功！";
+                result.Flag = 1;
+                //if (dc.SaveChanges() > 0)
+                //{
+                //    result.Msg += "操作成功！";
+                //    result.Flag = 1;
+                //}
+                //else
+                //{
+                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
+                //    result.Flag = 2;
+                //}
             }
             catch (Exception ex)
             {
@@ -373,14 +393,16 @@ namespace Resource.Web.WebApi
                 var price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == resourceId).FirstOrDefault();
                 if (price != null) { dc.Set<T_ResourcePrice>().Remove(price); }
                 dc.Set<T_Resource>().Remove(resource);
-                if (dc.SaveChanges() > 0)
-                {
-                    return JsonConvert.SerializeObject(Result.Success(msg: "删除成功"));
-                }
-                else
-                {
-                    return JsonConvert.SerializeObject(Result.Fail(msg: "删除失败，有坑！"));
-                }
+                dc.SaveChanges();
+                return JsonConvert.SerializeObject(Result.Success(msg: "删除成功"));
+                //if (dc.SaveChanges() > 0)
+                //{
+                //    return JsonConvert.SerializeObject(Result.Success(msg: "删除成功"));
+                //}
+                //else
+                //{
+                //    return JsonConvert.SerializeObject(Result.Fail(msg: "删除失败，有坑！"));
+                //}
             }
             catch (Exception ex)
             {
@@ -396,8 +418,54 @@ namespace Resource.Web.WebApi
         /// </summary>
         /// <param name="jsonList"></param>
         /// <returns></returns>
+        [WebMethod]
         public string LeaseIn(string jsonList)
         {
+            DbContext dc = DbContextFactory.Create();
+            List<T_ResourceStatus> rsList = new List<T_ResourceStatus>();
+            try
+            {
+                rsList = JsonConvert.DeserializeObject<List<T_ResourceStatus>>(jsonList);
+                if (rsList.Count() <= 0) return JsonConvert.SerializeObject(Result.Fail(msg: "对象数组个数为0！"));
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(msg: "json转换对象异常，请查阅异常信息并检查字段！",
+                       exmsg: ex.StackTrace));
+            }
+            try
+            {
+                var status = dc.Set<T_ResourceStatus>();
+                foreach (var item in rsList)
+                {
+                    //存在此数据，删除
+                    var obj = status.Where(a => a.BusinessID == item.BusinessID && a.ResourceID == item.ResourceID).FirstOrDefault();
+                    if (obj != null) status.Remove(obj);
+                    //合同是租赁合同
+                    if (item.BusinessType == 1)
+                    {
+                        //删除物业合同
+                        var property = status.Where(a => a.ResourceID == item.ResourceID && a.BusinessType == 2).ToList();
+                        foreach (var pro in property)
+                        {
+                            status.Remove(pro);
+                        }
+                    }
+                    //合同是物业合同,存在租赁合同，跳过
+                    if (item.BusinessType == 2 &&
+                        status.Where(a => a.ResourceID == item.ResourceID && a.BusinessType == 1).Count() > 0) continue;
+                    status.Add(item);
+                }
+                dc.SaveChanges();
+                return JsonConvert.SerializeObject(Result.Success());
+                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
+                //return JsonConvert.SerializeObject(Result.Fail());
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace));
+            }
+
 
         }
         /// <summary>
@@ -405,27 +473,83 @@ namespace Resource.Web.WebApi
         /// </summary>
         /// <param name="jsonList"></param>
         /// <returns></returns>
+        [WebMethod]
         public string LeaseOut(string jsonList)
         {
+            DbContext dc = DbContextFactory.Create();
+            List<T_ResourceStatus> rsList = new List<T_ResourceStatus>();
+            try
+            {
+                rsList = JsonConvert.DeserializeObject<List<T_ResourceStatus>>(jsonList);
+                if (rsList.Count() <= 0) return JsonConvert.SerializeObject(Result.Fail(msg: "对象数组个数为0！"));
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(msg: "json转换对象异常，请查阅异常信息并检查字段！",
+                       exmsg: ex.StackTrace));
+            }
+            try
+            {
+                var status = dc.Set<T_ResourceStatus>();
+                foreach (var item in rsList)
+                {
+                    var obj = status.Where(a => a.BusinessID == item.BusinessID && a.ResourceID == item.ResourceID).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        obj.RentEndTime = item.RentEndTime;
+                        obj.Enable = false;
+                        status.AddOrUpdate(obj);
+                    }
 
-        }
-        /// <summary>
-        /// 资源租赁作废
-        /// </summary>
-        /// <param name="jsonList"></param>
-        /// <returns></returns>
-        public string LeaseOff(string jsonList)
-        {
-            
+                }
+                dc.SaveChanges();
+                return JsonConvert.SerializeObject(Result.Success());
+                //JsonConvert.SerializeObject();
+                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
+                //return JsonConvert.SerializeObject(Result.Fail());
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace));
+            }
         }
         /// <summary>
         /// 资源租赁删除
         /// </summary>
         /// <param name="jsonList"></param>
         /// <returns></returns>
+        [WebMethod]
         public string LeaseDel(string jsonList)
         {
-
+            DbContext dc = DbContextFactory.Create();
+            List<T_ResourceStatus> rsList = new List<T_ResourceStatus>();
+            try
+            {
+                rsList = JsonConvert.DeserializeObject<List<T_ResourceStatus>>(jsonList);
+                if (rsList.Count() <= 0) return JsonConvert.SerializeObject(Result.Fail(msg: "对象数组个数为0！"));
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(msg: "json转换对象异常，请查阅异常信息并检查字段！",
+                       exmsg: ex.StackTrace));
+            }
+            try
+            {
+                var status = dc.Set<T_ResourceStatus>();
+                foreach (var item in rsList)
+                {
+                    var obj = status.Where(a => a.BusinessID == item.BusinessID && a.ResourceID == item.ResourceID).FirstOrDefault();
+                    if (obj != null) status.Remove(obj);
+                }
+                dc.SaveChanges();
+                return JsonConvert.SerializeObject(Result.Success());
+                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
+                //return JsonConvert.SerializeObject(Result.Fail());
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace));
+            }
         }
         #endregion
 

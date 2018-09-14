@@ -104,24 +104,27 @@ namespace Resource.Web.Controllers
                 if (obj == null)
                 {
                     //开始时间处于区间
-                    int count = dc.Set<T_ResourceStatus>().Where(a => a.RentBeginTime <= begTime
-                        && a.RentEndTime >= begTime
-                        && a.Enable == true
-                        && a.ResourceID == rid).Count();
+                    int count = dc.Set<T_ResourceStatus>().Where(a =>
+                        (begTime > a.RentBeginTime && begTime < a.RentEndTime) ||
+                        (endTime > a.RentBeginTime && endTime < a.RentEndTime) &&
+                        a.ResourceID == rid).Count();
                     if (count > 0) return Json(Result.Fail(msg: "存在使用时间冲突,请选择有效时间段!"));
                     obj = new T_ResourceStatus();
-                    obj.BusinessID = Guid.NewGuid().ToString();
                     obj.SysID = 3;
+                    obj.BusinessID = Guid.NewGuid().ToString();
+                    obj.BusinessType = 5;
                     obj.Enable = true;
                     add = true;
                 }
                 else
                 {
-                    int count = dc.Set<T_ResourceStatus>().Where(a => a.RentBeginTime <= begTime
-                        && a.RentEndTime >= begTime && a.ID != id).Count();
+                    int count = dc.Set<T_ResourceStatus>().Where(a =>
+                        (begTime > a.RentBeginTime && begTime < a.RentEndTime) ||
+                        (endTime > a.RentBeginTime && endTime < a.RentEndTime) &&
+                        a.ResourceID == rid && a.ID != id).Count();
                     if (count > 0) return Json(Result.Fail(msg: "存在使用时间冲突,请选择有效时间段!"));
                 }
-                if (!TryUpdateModel(obj, "", form.AllKeys, new string[] { "ID", "BusinessID", "SysID" }))
+                if (!TryUpdateModel(obj, "", form.AllKeys, new string[] { "ID", "BusinessID", "SysID", "BusinessType", "Enable" }))
                     return Json(Result.Fail());
                 obj.RentBeginTime = begTime;
                 obj.RentEndTime = endTime;
@@ -145,22 +148,46 @@ namespace Resource.Web.Controllers
         public ActionResult Free(int id, FormCollection form)
         {
             DateTime endTime = DateTime.Now;
+            var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
+            if (obj.SysID != 3) return Json(Result.Fail(msg: "业务系统数据不允许更改！"));
             try
             {
                 endTime = Convert.ToDateTime(form["RealEndTime"]);
             }
             catch (Exception)
             {
-                return Json(Result.Fail(msg:"时间格式有误！"));
+                return Json(Result.Fail(msg: "时间格式有误！"));
             }
-            var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
-            obj.Enable = false;
-            obj.EndType = Convert.ToInt32(form["EndType"]);
-            obj.RentEndRealTime = endTime;
-            obj.UpdateTime = DateTime.Now;
-            obj.UpdateUser = user.Account;
-            if (dc.SaveChanges() > 0) return Json(Result.Success());
-            return Json(Result.Fail());
+            try
+            {
+                int endType = Convert.ToInt32(form["EndType"]);
+                if (endType == 1)
+                {
+                    obj.Enable = false;
+                    obj.UpdateTime = DateTime.Now;
+                    obj.UpdateUser = user.Account;
+                }
+                else if (endType == 2)
+                {
+                    if (endTime <= obj.RentBeginTime || endTime >= obj.RentEndTime)
+                        return Json(Result.Fail(msg: "违约停用时间必须处于占用时间内！"));
+                    obj.RentEndTime = endTime;
+                    obj.Enable = false;
+                    obj.UpdateTime = DateTime.Now;
+                    obj.UpdateUser = user.Account;
+                }
+                else if (endType == 3)
+                {
+                    dc.Set<T_ResourceStatus>().Remove(obj);
+                }
+                if (dc.SaveChanges() > 0) return Json(Result.Success());
+                return Json(Result.Fail());
+            }
+            catch (Exception ex)
+            {
+                return Json(Result.Exception(exmsg: ex.StackTrace));
+            }
+
         }
     }
 }

@@ -334,7 +334,6 @@
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
           <Property Name="RentEndTime" Type="datetime" />
-          <Property Name="RentEndRealTime" Type="datetime" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
@@ -709,14 +708,13 @@
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
           <Property Name="RentEndTime" Type="datetime" />
-          <Property Name="EndType" Type="int" />
-          <Property Name="RentEndRealTime" Type="datetime" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
           <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
           <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Status" Type="int" />
           <Property Name="Enable" Type="bit" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
@@ -1234,14 +1232,13 @@
     [V_RSS_Info].[BusinessType] AS [BusinessType], 
     [V_RSS_Info].[RentBeginTime] AS [RentBeginTime], 
     [V_RSS_Info].[RentEndTime] AS [RentEndTime], 
-    [V_RSS_Info].[EndType] AS [EndType], 
-    [V_RSS_Info].[RentEndRealTime] AS [RentEndRealTime], 
     [V_RSS_Info].[CustLongName] AS [CustLongName], 
     [V_RSS_Info].[CustShortName] AS [CustShortName], 
     [V_RSS_Info].[CustTel] AS [CustTel], 
     [V_RSS_Info].[ReserveDept] AS [ReserveDept], 
     [V_RSS_Info].[ReserveName] AS [ReserveName], 
     [V_RSS_Info].[Remark] AS [Remark], 
+    [V_RSS_Info].[Status] AS [Status], 
     [V_RSS_Info].[Enable] AS [Enable], 
     [V_RSS_Info].[UpdateUser] AS [UpdateUser], 
     [V_RSS_Info].[UpdateTime] AS [UpdateTime], 
@@ -1457,7 +1454,7 @@
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserRole" EntitySet="T_UserRole" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="Pro_GetFunc_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
           <Property Type="String" Name="Code" Nullable="true" MaxLength="30" />
@@ -1812,7 +1809,6 @@
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
           <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndRealTime" Type="DateTime" Precision="3" />
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -2174,14 +2170,13 @@
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
           <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="EndType" Type="Int32" />
-          <Property Name="RentEndRealTime" Type="DateTime" Precision="3" />
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
@@ -2778,7 +2773,6 @@
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentEndRealTime" ColumnName="RentEndRealTime" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
@@ -3163,14 +3157,13 @@
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
                 <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentEndRealTime" ColumnName="RentEndRealTime" />
-                <ScalarProperty Name="EndType" ColumnName="EndType" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
@@ -3197,7 +3190,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
