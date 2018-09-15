@@ -216,7 +216,6 @@ namespace Resource.Web.Controllers
                 resource.CreateTime = DateTime.Now;
                 resource.CreateUser = user.Account;
                 resource.Enable = true;
-                resource.Status = 2;
                 add = true;
             }
             if (TryUpdateModel(resource, "", form.AllKeys, new string[] { "Enable", "Status" }))

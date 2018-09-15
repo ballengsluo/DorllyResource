@@ -15,13 +15,10 @@ namespace Resource.Web.Controllers
         {
             ViewBag.func = Func.GetFunc(user.Account, MenuPath);
             return View();
-            //string menuName = "/" + RouteData.Values["controller"] + "/" + RouteData.Values["action"];
-            //List<T_RoleFunc> rmfList = new FuncView().GetFunc(user, menuName);
-            //return View(rmfList);
         }
         public ActionResult Search(SearchParam param)
         {
-            var list = dc.Set<V_RSS_Info>().Where(a => true);
+            var list = dc.Set<V_ResourceStatus>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ResourceID.Contains(param.ID));
@@ -64,7 +61,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult RSSearch(SearchParam param)
         {
-            var list = dc.Set<V_RS_Info>().Where(a => a.Enable == true);
+            var list = dc.Set<V_Resource>().Where(a => a.Enable == true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));

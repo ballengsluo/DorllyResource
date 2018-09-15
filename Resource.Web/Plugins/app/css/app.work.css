@@ -1,0 +1,143 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.container-fluid {
+    width: 90%;
+}
+
+h4 {
+    padding: 10px 0px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+table tr td,
+table tr th {
+    text-align: center;
+}
+
+.res {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.reskind {
+    padding: 10px 0px;
+    font-weight: 600;
+    border-bottom: 1px solid #ccc;
+}
+
+#rm {
+    border-right: none;
+}
+
+.rmcount>td {
+    font-weight: 600;
+    color: blue;
+}
+
+.res tr:first-of-type td {
+    border-top: none;
+}
+
+#cb,
+#mr {
+    border-bottom: none;
+}
+
+.msg {
+    border: 1px solid #ccc;
+    height: 342px;
+    background-color: #fff;
+}
+
+
+/* 趋势分析图样式*/
+
+
+/*头部*/
+
+.order {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.order>div {
+    width: 100%;
+    float: left;
+}
+
+.order .header {
+    position: relative;
+    height: 54px;
+}
+
+.order .header>div {
+    margin: 10px;
+    font-size: 16px;
+    height: 34px;
+    line-height: 34px;
+}
+
+.order .header .header-title {
+    float: left;
+}
+
+.order .header .header-search {
+    float: right;
+}
+
+.order .header-search>div {
+    float: left;
+}
+
+
+/*
+            平面样式
+        */
+
+.order .content>div {
+    width: 50%;
+    float: left;
+}
+
+.order .content .content-panel>div {
+    width: 40%;
+    float: left;
+    height: 130px;
+    text-align: center;
+    margin: 1%;
+}
+
+.order .content .content-panel>div:last-of-type {
+    width: 82%;
+}
+
+.order .content .content-panel div>div:first-of-type {
+    height: 60%;
+    line-height: 90px;
+    font-size: 35px;
+    color: blue;
+}
+
+.order .content .content-panel div>div:last-of-type {
+    height: 40%;
+    font-size: 16px;
+}
+
+
+/*图表样式*/
+
+.order .content .content-graph {
+    /*height: 425px;*/
+    height: 460px;
+}
+
+#search {
+    font-size: 15px;
+    margin-left: 10px;
+    height: 34px;
+    vertical-align: inherit;
+}

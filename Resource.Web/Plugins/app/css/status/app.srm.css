@@ -110,10 +110,11 @@
     font-size: 16px;
 }
 
-[data-status='1'] {
+[data-status='3'] {
     background-color: #c3f8d3
 }
 
+[data-status='1'],
 [data-status='2'] {
     background-color: #f09ca8
 }

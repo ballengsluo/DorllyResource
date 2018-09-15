@@ -39,7 +39,7 @@ function execrm(data) {
             rmc.append("<div class='row'><h3>" + floor.FName + "</h3><hr /></div>");
             var rmbox = $("<div class='row'></div>")
             $.each(floor.RM, function(idx, rm) {
-                rmbox.append("<div class='rmbox' style='' data-status='" + rm.Status +
+                rmbox.append("<div class='rmbox' style='' data-status='" + rm.RentStatus +
                     "' data-id='" + rm.ID +
                     "' data-rmbuild='" + build.BID +
                     "' data-rmname='" + rm.Name +
@@ -103,9 +103,9 @@ function search() {
         $("[data-status='1']").hide();
     }
     if ($("#free").prop("checked")) {
-        $("[data-status='2']").show();
+        $("[data-status='3']").show();
     } else {
-        $("[data-status='2']").hide();
+        $("[data-status='3']").hide();
     }
     if ($("#rmno").val() != "" || !!$("#rmno").val()) {
         // console.log($("#rmno").val());

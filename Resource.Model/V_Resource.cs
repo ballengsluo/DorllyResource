@@ -12,7 +12,7 @@ namespace Resource.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class V_RS_Info
+    public partial class V_Resource
     {
         public string ID { get; set; }
         public string Name { get; set; }
@@ -24,8 +24,6 @@ namespace Resource.Model
         public string GroupID { get; set; }
         public int ResourceKindID { get; set; }
         public string ResourceTypeID { get; set; }
-        public Nullable<int> RSID { get; set; }
-        public Nullable<int> Status { get; set; }
         public Nullable<bool> Enable { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> MaxPrice { get; set; }
@@ -64,6 +62,7 @@ namespace Resource.Model
         public string CustLongName { get; set; }
         public string CustShortName { get; set; }
         public string CustTel { get; set; }
+        public Nullable<int> RentStatus { get; set; }
         public Nullable<bool> YearEnable { get; set; }
         public Nullable<decimal> YearInPrice { get; set; }
         public Nullable<decimal> YearOutPrice { get; set; }

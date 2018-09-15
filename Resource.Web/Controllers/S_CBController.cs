@@ -17,7 +17,7 @@ namespace Resource.Web.Controllers
         public ContentResult Search(string parkID)
         {
             var park = user.Park.Split(',')[0];
-            var list = dc.Set<V_RS_Info>().Where(a => a.ResourceKindID == 2);
+            var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 2);
             if (!string.IsNullOrEmpty(parkID)) list = list.Where(a => a.Loc1 == parkID);
             else
             {
@@ -44,7 +44,7 @@ namespace Resource.Web.Controllers
                         {
                             a.ID,
                             a.Name,
-                            a.Status,
+                            a.RentStatus,
                             a.Loc1,
                             a.RentBeginTime,
                             a.RentEndTime,

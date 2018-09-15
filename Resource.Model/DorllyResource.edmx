@@ -199,8 +199,6 @@
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" Nullable="false" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
-          <Property Name="RSID" Type="int" />
-          <Property Name="Status" Type="int" />
           <Property Name="Enable" Type="bit" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="2" />
@@ -590,14 +588,45 @@
           <Property Name="ResourceName" Type="nvarchar" MaxLength="30" />
           <Property Name="Loc1" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc1Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="ResourceKindID" Type="int" />
-          <Property Name="ResourceKindName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Loc2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc2Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc3Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc4Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc5Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="LocText" Type="nvarchar" MaxLength="234" />
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceKindID" Type="int" />
+          <Property Name="ResourceKindName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceTypeName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResourceEnable" Type="bit" />
+          <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MinPrice" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Area" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="StartArea" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="RangeArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="int" />
+          <Property Name="RentNum" Type="int" />
+          <Property Name="StartNum" Type="int" />
+          <Property Name="RangeNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Size" Type="nvarchar" MaxLength="90" />
+          <Property Name="RentSize" Type="nvarchar" MaxLength="90" />
+          <Property Name="StartSize" Type="nvarchar" MaxLength="90" />
+          <Property Name="RangeSize" Type="nvarchar" MaxLength="90" />
+          <Property Name="Deposit" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ResourceRemark" Type="nvarchar" MaxLength="500" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“DorllyResource.dbo.V_RS_Info”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="V_RS_Info">
+警告 6002: 表/视图“DorllyResource.dbo.V_Resource”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_Resource">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="ResourceKindID" />
@@ -612,8 +641,6 @@
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" Nullable="false" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
-          <Property Name="RSID" Type="int" />
-          <Property Name="Status" Type="int" />
           <Property Name="Enable" Type="bit" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="2" />
@@ -652,6 +679,7 @@
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
+          <Property Name="RentStatus" Type="int" />
           <Property Name="YearEnable" Type="bit" />
           <Property Name="YearInPrice" Type="decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="decimal" Precision="15" Scale="2" />
@@ -696,8 +724,8 @@
           <Property Name="OtherMaxPrice" Type="decimal" Precision="15" Scale="2" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“DorllyResource.dbo.V_RSS_Info”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="V_RSS_Info">
+警告 6002: 表/视图“DorllyResource.dbo.V_ResourceStatus”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_ResourceStatus">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -721,13 +749,22 @@
           <Property Name="ResourceName" Type="nvarchar" MaxLength="30" />
           <Property Name="Loc1" Type="nvarchar" MaxLength="50" />
           <Property Name="Loc1Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc2Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc3Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc4Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc5" Type="nvarchar" MaxLength="50" />
+          <Property Name="Loc5Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="LocText" Type="nvarchar" MaxLength="234" />
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="GroupName" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" />
           <Property Name="ResourceKindName" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceTypeName" Type="nvarchar" MaxLength="30" />
-          <Property Name="REnable" Type="bit" />
+          <Property Name="ResourceEnable" Type="bit" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="2" />
           <Property Name="MinPrice" Type="decimal" Precision="15" Scale="2" />
@@ -745,9 +782,8 @@
           <Property Name="RangeSize" Type="nvarchar" MaxLength="90" />
           <Property Name="Deposit" Type="decimal" Precision="15" Scale="2" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="ResourceRemark" Type="nvarchar" MaxLength="500" />
           <Property Name="Location" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Stage”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1121,158 +1157,196 @@
     [V_Public].[ResourceName] AS [ResourceName], 
     [V_Public].[Loc1] AS [Loc1], 
     [V_Public].[Loc1Name] AS [Loc1Name], 
+    [V_Public].[Loc2] AS [Loc2], 
+    [V_Public].[Loc2Name] AS [Loc2Name], 
+    [V_Public].[Loc3] AS [Loc3], 
+    [V_Public].[Loc3Name] AS [Loc3Name], 
+    [V_Public].[Loc4] AS [Loc4], 
+    [V_Public].[Loc4Name] AS [Loc4Name], 
+    [V_Public].[Loc5] AS [Loc5], 
+    [V_Public].[Loc5Name] AS [Loc5Name], 
+    [V_Public].[LocText] AS [LocText], 
+    [V_Public].[GroupID] AS [GroupID], 
+    [V_Public].[GroupName] AS [GroupName], 
     [V_Public].[ResourceKindID] AS [ResourceKindID], 
     [V_Public].[ResourceKindName] AS [ResourceKindName], 
-    [V_Public].[GroupID] AS [GroupID], 
-    [V_Public].[GroupName] AS [GroupName]
+    [V_Public].[ResourceTypeID] AS [ResourceTypeID], 
+    [V_Public].[ResourceTypeName] AS [ResourceTypeName], 
+    [V_Public].[ResourceEnable] AS [ResourceEnable], 
+    [V_Public].[Price] AS [Price], 
+    [V_Public].[MaxPrice] AS [MaxPrice], 
+    [V_Public].[MinPrice] AS [MinPrice], 
+    [V_Public].[Area] AS [Area], 
+    [V_Public].[RentArea] AS [RentArea], 
+    [V_Public].[StartArea] AS [StartArea], 
+    [V_Public].[RangeArea] AS [RangeArea], 
+    [V_Public].[Number] AS [Number], 
+    [V_Public].[RentNum] AS [RentNum], 
+    [V_Public].[StartNum] AS [StartNum], 
+    [V_Public].[RangeNum] AS [RangeNum], 
+    [V_Public].[Size] AS [Size], 
+    [V_Public].[RentSize] AS [RentSize], 
+    [V_Public].[StartSize] AS [StartSize], 
+    [V_Public].[RangeSize] AS [RangeSize], 
+    [V_Public].[Deposit] AS [Deposit], 
+    [V_Public].[Content] AS [Content], 
+    [V_Public].[ResourceRemark] AS [ResourceRemark], 
+    [V_Public].[Location] AS [Location]
     FROM [dbo].[V_Public] AS [V_Public]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_RS_Info" EntityType="Self.V_RS_Info" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="V_Resource" EntityType="Self.V_Resource" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [V_RS_Info].[ID] AS [ID], 
-    [V_RS_Info].[Name] AS [Name], 
-    [V_RS_Info].[Loc1] AS [Loc1], 
-    [V_RS_Info].[Loc2] AS [Loc2], 
-    [V_RS_Info].[Loc3] AS [Loc3], 
-    [V_RS_Info].[Loc4] AS [Loc4], 
-    [V_RS_Info].[Loc5] AS [Loc5], 
-    [V_RS_Info].[GroupID] AS [GroupID], 
-    [V_RS_Info].[ResourceKindID] AS [ResourceKindID], 
-    [V_RS_Info].[ResourceTypeID] AS [ResourceTypeID], 
-    [V_RS_Info].[RSID] AS [RSID], 
-    [V_RS_Info].[Status] AS [Status], 
-    [V_RS_Info].[Enable] AS [Enable], 
-    [V_RS_Info].[Price] AS [Price], 
-    [V_RS_Info].[MaxPrice] AS [MaxPrice], 
-    [V_RS_Info].[MinPrice] AS [MinPrice], 
-    [V_RS_Info].[Area] AS [Area], 
-    [V_RS_Info].[RentArea] AS [RentArea], 
-    [V_RS_Info].[StartArea] AS [StartArea], 
-    [V_RS_Info].[RangeArea] AS [RangeArea], 
-    [V_RS_Info].[Number] AS [Number], 
-    [V_RS_Info].[RentNum] AS [RentNum], 
-    [V_RS_Info].[StartNum] AS [StartNum], 
-    [V_RS_Info].[RangeNum] AS [RangeNum], 
-    [V_RS_Info].[Size] AS [Size], 
-    [V_RS_Info].[RentSize] AS [RentSize], 
-    [V_RS_Info].[StartSize] AS [StartSize], 
-    [V_RS_Info].[RangeSize] AS [RangeSize], 
-    [V_RS_Info].[Deposit] AS [Deposit], 
-    [V_RS_Info].[Content] AS [Content], 
-    [V_RS_Info].[Remark] AS [Remark], 
-    [V_RS_Info].[Location] AS [Location], 
-    [V_RS_Info].[CreateUser] AS [CreateUser], 
-    [V_RS_Info].[CreateTime] AS [CreateTime], 
-    [V_RS_Info].[UpdateUser] AS [UpdateUser], 
-    [V_RS_Info].[UpdateTime] AS [UpdateTime], 
-    [V_RS_Info].[ResourceKindName] AS [ResourceKindName], 
-    [V_RS_Info].[ResourceTypeName] AS [ResourceTypeName], 
-    [V_RS_Info].[GroupName] AS [GroupName], 
-    [V_RS_Info].[Loc1Name] AS [Loc1Name], 
-    [V_RS_Info].[Loc2Name] AS [Loc2Name], 
-    [V_RS_Info].[Loc3Name] AS [Loc3Name], 
-    [V_RS_Info].[Loc4Name] AS [Loc4Name], 
-    [V_RS_Info].[Loc5Name] AS [Loc5Name], 
-    [V_RS_Info].[LocText] AS [LocText], 
-    [V_RS_Info].[RentBeginTime] AS [RentBeginTime], 
-    [V_RS_Info].[RentEndTime] AS [RentEndTime], 
-    [V_RS_Info].[CustLongName] AS [CustLongName], 
-    [V_RS_Info].[CustShortName] AS [CustShortName], 
-    [V_RS_Info].[CustTel] AS [CustTel], 
-    [V_RS_Info].[YearEnable] AS [YearEnable], 
-    [V_RS_Info].[YearInPrice] AS [YearInPrice], 
-    [V_RS_Info].[YearOutPrice] AS [YearOutPrice], 
-    [V_RS_Info].[QuaterEnable] AS [QuaterEnable], 
-    [V_RS_Info].[QuaterInPrcie] AS [QuaterInPrcie], 
-    [V_RS_Info].[QuaterOutPrice] AS [QuaterOutPrice], 
-    [V_RS_Info].[MonthEnable] AS [MonthEnable], 
-    [V_RS_Info].[MonthInPrice] AS [MonthInPrice], 
-    [V_RS_Info].[MonthOutPrice] AS [MonthOutPrice], 
-    [V_RS_Info].[WeekEnable] AS [WeekEnable], 
-    [V_RS_Info].[WeekInPrice] AS [WeekInPrice], 
-    [V_RS_Info].[WeekOutPrice] AS [WeekOutPrice], 
-    [V_RS_Info].[DayEnable] AS [DayEnable], 
-    [V_RS_Info].[DayInPrice] AS [DayInPrice], 
-    [V_RS_Info].[DayOutPrice] AS [DayOutPrice], 
-    [V_RS_Info].[HDayEnable] AS [HDayEnable], 
-    [V_RS_Info].[HDayInPrice] AS [HDayInPrice], 
-    [V_RS_Info].[HDayOutPrice] AS [HDayOutPrice], 
-    [V_RS_Info].[HourEnable] AS [HourEnable], 
-    [V_RS_Info].[HourInPrice] AS [HourInPrice], 
-    [V_RS_Info].[HourOutPrice] AS [HourOutPrice], 
-    [V_RS_Info].[SingleEnable] AS [SingleEnable], 
-    [V_RS_Info].[SingleInPrice] AS [SingleInPrice], 
-    [V_RS_Info].[SingleOutPrice] AS [SingleOutPrice], 
-    [V_RS_Info].[DelayEnable] AS [DelayEnable], 
-    [V_RS_Info].[DelayInPrice] AS [DelayInPrice], 
-    [V_RS_Info].[DelayOutPrice] AS [DelayOutPrice], 
-    [V_RS_Info].[MeterEnable] AS [MeterEnable], 
-    [V_RS_Info].[MeterMinPrice] AS [MeterMinPrice], 
-    [V_RS_Info].[MeterMaxPrice] AS [MeterMaxPrice], 
-    [V_RS_Info].[IMonthEnable] AS [IMonthEnable], 
-    [V_RS_Info].[IMonthMinPrice] AS [IMonthMinPrice], 
-    [V_RS_Info].[IMonthMaxPrice] AS [IMonthMaxPrice], 
-    [V_RS_Info].[ISingleEnable] AS [ISingleEnable], 
-    [V_RS_Info].[ISingleMinPrice] AS [ISingleMinPrice], 
-    [V_RS_Info].[ISingleMaxPrice] AS [ISingleMaxPrice], 
-    [V_RS_Info].[OnceEnable] AS [OnceEnable], 
-    [V_RS_Info].[OnceMinPrice] AS [OnceMinPrice], 
-    [V_RS_Info].[OnceMaxPrice] AS [OnceMaxPrice], 
-    [V_RS_Info].[OtherEnable] AS [OtherEnable], 
-    [V_RS_Info].[OtherMinPrice] AS [OtherMinPrice], 
-    [V_RS_Info].[OtherMaxPrice] AS [OtherMaxPrice]
-    FROM [dbo].[V_RS_Info] AS [V_RS_Info]</DefiningQuery>
+    [V_Resource].[ID] AS [ID], 
+    [V_Resource].[Name] AS [Name], 
+    [V_Resource].[Loc1] AS [Loc1], 
+    [V_Resource].[Loc2] AS [Loc2], 
+    [V_Resource].[Loc3] AS [Loc3], 
+    [V_Resource].[Loc4] AS [Loc4], 
+    [V_Resource].[Loc5] AS [Loc5], 
+    [V_Resource].[GroupID] AS [GroupID], 
+    [V_Resource].[ResourceKindID] AS [ResourceKindID], 
+    [V_Resource].[ResourceTypeID] AS [ResourceTypeID], 
+    [V_Resource].[Enable] AS [Enable], 
+    [V_Resource].[Price] AS [Price], 
+    [V_Resource].[MaxPrice] AS [MaxPrice], 
+    [V_Resource].[MinPrice] AS [MinPrice], 
+    [V_Resource].[Area] AS [Area], 
+    [V_Resource].[RentArea] AS [RentArea], 
+    [V_Resource].[StartArea] AS [StartArea], 
+    [V_Resource].[RangeArea] AS [RangeArea], 
+    [V_Resource].[Number] AS [Number], 
+    [V_Resource].[RentNum] AS [RentNum], 
+    [V_Resource].[StartNum] AS [StartNum], 
+    [V_Resource].[RangeNum] AS [RangeNum], 
+    [V_Resource].[Size] AS [Size], 
+    [V_Resource].[RentSize] AS [RentSize], 
+    [V_Resource].[StartSize] AS [StartSize], 
+    [V_Resource].[RangeSize] AS [RangeSize], 
+    [V_Resource].[Deposit] AS [Deposit], 
+    [V_Resource].[Content] AS [Content], 
+    [V_Resource].[Remark] AS [Remark], 
+    [V_Resource].[Location] AS [Location], 
+    [V_Resource].[CreateUser] AS [CreateUser], 
+    [V_Resource].[CreateTime] AS [CreateTime], 
+    [V_Resource].[UpdateUser] AS [UpdateUser], 
+    [V_Resource].[UpdateTime] AS [UpdateTime], 
+    [V_Resource].[ResourceKindName] AS [ResourceKindName], 
+    [V_Resource].[ResourceTypeName] AS [ResourceTypeName], 
+    [V_Resource].[GroupName] AS [GroupName], 
+    [V_Resource].[Loc1Name] AS [Loc1Name], 
+    [V_Resource].[Loc2Name] AS [Loc2Name], 
+    [V_Resource].[Loc3Name] AS [Loc3Name], 
+    [V_Resource].[Loc4Name] AS [Loc4Name], 
+    [V_Resource].[Loc5Name] AS [Loc5Name], 
+    [V_Resource].[LocText] AS [LocText], 
+    [V_Resource].[RentBeginTime] AS [RentBeginTime], 
+    [V_Resource].[RentEndTime] AS [RentEndTime], 
+    [V_Resource].[CustLongName] AS [CustLongName], 
+    [V_Resource].[CustShortName] AS [CustShortName], 
+    [V_Resource].[CustTel] AS [CustTel], 
+    [V_Resource].[RentStatus] AS [RentStatus], 
+    [V_Resource].[YearEnable] AS [YearEnable], 
+    [V_Resource].[YearInPrice] AS [YearInPrice], 
+    [V_Resource].[YearOutPrice] AS [YearOutPrice], 
+    [V_Resource].[QuaterEnable] AS [QuaterEnable], 
+    [V_Resource].[QuaterInPrcie] AS [QuaterInPrcie], 
+    [V_Resource].[QuaterOutPrice] AS [QuaterOutPrice], 
+    [V_Resource].[MonthEnable] AS [MonthEnable], 
+    [V_Resource].[MonthInPrice] AS [MonthInPrice], 
+    [V_Resource].[MonthOutPrice] AS [MonthOutPrice], 
+    [V_Resource].[WeekEnable] AS [WeekEnable], 
+    [V_Resource].[WeekInPrice] AS [WeekInPrice], 
+    [V_Resource].[WeekOutPrice] AS [WeekOutPrice], 
+    [V_Resource].[DayEnable] AS [DayEnable], 
+    [V_Resource].[DayInPrice] AS [DayInPrice], 
+    [V_Resource].[DayOutPrice] AS [DayOutPrice], 
+    [V_Resource].[HDayEnable] AS [HDayEnable], 
+    [V_Resource].[HDayInPrice] AS [HDayInPrice], 
+    [V_Resource].[HDayOutPrice] AS [HDayOutPrice], 
+    [V_Resource].[HourEnable] AS [HourEnable], 
+    [V_Resource].[HourInPrice] AS [HourInPrice], 
+    [V_Resource].[HourOutPrice] AS [HourOutPrice], 
+    [V_Resource].[SingleEnable] AS [SingleEnable], 
+    [V_Resource].[SingleInPrice] AS [SingleInPrice], 
+    [V_Resource].[SingleOutPrice] AS [SingleOutPrice], 
+    [V_Resource].[DelayEnable] AS [DelayEnable], 
+    [V_Resource].[DelayInPrice] AS [DelayInPrice], 
+    [V_Resource].[DelayOutPrice] AS [DelayOutPrice], 
+    [V_Resource].[MeterEnable] AS [MeterEnable], 
+    [V_Resource].[MeterMinPrice] AS [MeterMinPrice], 
+    [V_Resource].[MeterMaxPrice] AS [MeterMaxPrice], 
+    [V_Resource].[IMonthEnable] AS [IMonthEnable], 
+    [V_Resource].[IMonthMinPrice] AS [IMonthMinPrice], 
+    [V_Resource].[IMonthMaxPrice] AS [IMonthMaxPrice], 
+    [V_Resource].[ISingleEnable] AS [ISingleEnable], 
+    [V_Resource].[ISingleMinPrice] AS [ISingleMinPrice], 
+    [V_Resource].[ISingleMaxPrice] AS [ISingleMaxPrice], 
+    [V_Resource].[OnceEnable] AS [OnceEnable], 
+    [V_Resource].[OnceMinPrice] AS [OnceMinPrice], 
+    [V_Resource].[OnceMaxPrice] AS [OnceMaxPrice], 
+    [V_Resource].[OtherEnable] AS [OtherEnable], 
+    [V_Resource].[OtherMinPrice] AS [OtherMinPrice], 
+    [V_Resource].[OtherMaxPrice] AS [OtherMaxPrice]
+    FROM [dbo].[V_Resource] AS [V_Resource]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_RSS_Info" EntityType="Self.V_RSS_Info" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="V_ResourceStatus" EntityType="Self.V_ResourceStatus" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [V_RSS_Info].[ID] AS [ID], 
-    [V_RSS_Info].[SysID] AS [SysID], 
-    [V_RSS_Info].[ResourceID] AS [ResourceID], 
-    [V_RSS_Info].[BusinessID] AS [BusinessID], 
-    [V_RSS_Info].[BusinessType] AS [BusinessType], 
-    [V_RSS_Info].[RentBeginTime] AS [RentBeginTime], 
-    [V_RSS_Info].[RentEndTime] AS [RentEndTime], 
-    [V_RSS_Info].[CustLongName] AS [CustLongName], 
-    [V_RSS_Info].[CustShortName] AS [CustShortName], 
-    [V_RSS_Info].[CustTel] AS [CustTel], 
-    [V_RSS_Info].[ReserveDept] AS [ReserveDept], 
-    [V_RSS_Info].[ReserveName] AS [ReserveName], 
-    [V_RSS_Info].[Remark] AS [Remark], 
-    [V_RSS_Info].[Status] AS [Status], 
-    [V_RSS_Info].[Enable] AS [Enable], 
-    [V_RSS_Info].[UpdateUser] AS [UpdateUser], 
-    [V_RSS_Info].[UpdateTime] AS [UpdateTime], 
-    [V_RSS_Info].[ResourceName] AS [ResourceName], 
-    [V_RSS_Info].[Loc1] AS [Loc1], 
-    [V_RSS_Info].[Loc1Name] AS [Loc1Name], 
-    [V_RSS_Info].[GroupID] AS [GroupID], 
-    [V_RSS_Info].[GroupName] AS [GroupName], 
-    [V_RSS_Info].[ResourceKindID] AS [ResourceKindID], 
-    [V_RSS_Info].[ResourceKindName] AS [ResourceKindName], 
-    [V_RSS_Info].[ResourceTypeID] AS [ResourceTypeID], 
-    [V_RSS_Info].[ResourceTypeName] AS [ResourceTypeName], 
-    [V_RSS_Info].[REnable] AS [REnable], 
-    [V_RSS_Info].[Price] AS [Price], 
-    [V_RSS_Info].[MaxPrice] AS [MaxPrice], 
-    [V_RSS_Info].[MinPrice] AS [MinPrice], 
-    [V_RSS_Info].[Area] AS [Area], 
-    [V_RSS_Info].[RentArea] AS [RentArea], 
-    [V_RSS_Info].[StartArea] AS [StartArea], 
-    [V_RSS_Info].[RangeArea] AS [RangeArea], 
-    [V_RSS_Info].[Number] AS [Number], 
-    [V_RSS_Info].[RentNum] AS [RentNum], 
-    [V_RSS_Info].[StartNum] AS [StartNum], 
-    [V_RSS_Info].[RangeNum] AS [RangeNum], 
-    [V_RSS_Info].[Size] AS [Size], 
-    [V_RSS_Info].[RentSize] AS [RentSize], 
-    [V_RSS_Info].[StartSize] AS [StartSize], 
-    [V_RSS_Info].[RangeSize] AS [RangeSize], 
-    [V_RSS_Info].[Deposit] AS [Deposit], 
-    [V_RSS_Info].[Content] AS [Content], 
-    [V_RSS_Info].[Location] AS [Location], 
-    [V_RSS_Info].[CreateUser] AS [CreateUser], 
-    [V_RSS_Info].[CreateTime] AS [CreateTime]
-    FROM [dbo].[V_RSS_Info] AS [V_RSS_Info]</DefiningQuery>
+    [V_ResourceStatus].[ID] AS [ID], 
+    [V_ResourceStatus].[SysID] AS [SysID], 
+    [V_ResourceStatus].[ResourceID] AS [ResourceID], 
+    [V_ResourceStatus].[BusinessID] AS [BusinessID], 
+    [V_ResourceStatus].[BusinessType] AS [BusinessType], 
+    [V_ResourceStatus].[RentBeginTime] AS [RentBeginTime], 
+    [V_ResourceStatus].[RentEndTime] AS [RentEndTime], 
+    [V_ResourceStatus].[CustLongName] AS [CustLongName], 
+    [V_ResourceStatus].[CustShortName] AS [CustShortName], 
+    [V_ResourceStatus].[CustTel] AS [CustTel], 
+    [V_ResourceStatus].[ReserveDept] AS [ReserveDept], 
+    [V_ResourceStatus].[ReserveName] AS [ReserveName], 
+    [V_ResourceStatus].[Remark] AS [Remark], 
+    [V_ResourceStatus].[Status] AS [Status], 
+    [V_ResourceStatus].[Enable] AS [Enable], 
+    [V_ResourceStatus].[UpdateUser] AS [UpdateUser], 
+    [V_ResourceStatus].[UpdateTime] AS [UpdateTime], 
+    [V_ResourceStatus].[ResourceName] AS [ResourceName], 
+    [V_ResourceStatus].[Loc1] AS [Loc1], 
+    [V_ResourceStatus].[Loc1Name] AS [Loc1Name], 
+    [V_ResourceStatus].[Loc2] AS [Loc2], 
+    [V_ResourceStatus].[Loc2Name] AS [Loc2Name], 
+    [V_ResourceStatus].[Loc3] AS [Loc3], 
+    [V_ResourceStatus].[Loc3Name] AS [Loc3Name], 
+    [V_ResourceStatus].[Loc4] AS [Loc4], 
+    [V_ResourceStatus].[Loc4Name] AS [Loc4Name], 
+    [V_ResourceStatus].[Loc5] AS [Loc5], 
+    [V_ResourceStatus].[Loc5Name] AS [Loc5Name], 
+    [V_ResourceStatus].[LocText] AS [LocText], 
+    [V_ResourceStatus].[GroupID] AS [GroupID], 
+    [V_ResourceStatus].[GroupName] AS [GroupName], 
+    [V_ResourceStatus].[ResourceKindID] AS [ResourceKindID], 
+    [V_ResourceStatus].[ResourceKindName] AS [ResourceKindName], 
+    [V_ResourceStatus].[ResourceTypeID] AS [ResourceTypeID], 
+    [V_ResourceStatus].[ResourceTypeName] AS [ResourceTypeName], 
+    [V_ResourceStatus].[ResourceEnable] AS [ResourceEnable], 
+    [V_ResourceStatus].[Price] AS [Price], 
+    [V_ResourceStatus].[MaxPrice] AS [MaxPrice], 
+    [V_ResourceStatus].[MinPrice] AS [MinPrice], 
+    [V_ResourceStatus].[Area] AS [Area], 
+    [V_ResourceStatus].[RentArea] AS [RentArea], 
+    [V_ResourceStatus].[StartArea] AS [StartArea], 
+    [V_ResourceStatus].[RangeArea] AS [RangeArea], 
+    [V_ResourceStatus].[Number] AS [Number], 
+    [V_ResourceStatus].[RentNum] AS [RentNum], 
+    [V_ResourceStatus].[StartNum] AS [StartNum], 
+    [V_ResourceStatus].[RangeNum] AS [RangeNum], 
+    [V_ResourceStatus].[Size] AS [Size], 
+    [V_ResourceStatus].[RentSize] AS [RentSize], 
+    [V_ResourceStatus].[StartSize] AS [StartSize], 
+    [V_ResourceStatus].[RangeSize] AS [RangeSize], 
+    [V_ResourceStatus].[Deposit] AS [Deposit], 
+    [V_ResourceStatus].[Content] AS [Content], 
+    [V_ResourceStatus].[ResourceRemark] AS [ResourceRemark], 
+    [V_ResourceStatus].[Location] AS [Location]
+    FROM [dbo].[V_ResourceStatus] AS [V_ResourceStatus]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Stage" EntityType="Self.V_Stage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1391,8 +1465,8 @@
           <EntitySet Name="V_Order" EntityType="DorllyResourceModel.V_Order" />
           <EntitySet Name="V_Park" EntityType="DorllyResourceModel.V_Park" />
           <EntitySet Name="V_Public" EntityType="DorllyResourceModel.V_Public" />
-          <EntitySet Name="V_RS_Info" EntityType="DorllyResourceModel.V_RS_Info" />
-          <EntitySet Name="V_RSS_Info" EntityType="DorllyResourceModel.V_RSS_Info" />
+          <EntitySet Name="V_Resource" EntityType="DorllyResourceModel.V_Resource" />
+          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
           <EntitySet Name="V_Stage" EntityType="DorllyResourceModel.V_Stage" />
           <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
             <End Role="T_User" EntitySet="T_User" />
@@ -1662,8 +1736,6 @@
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RSID" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
           <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -2056,12 +2128,43 @@
           <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceEnable" Type="Boolean" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="RentNum" Type="Int32" />
+          <Property Name="StartNum" Type="Int32" />
+          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="V_RS_Info">
+        <EntityType Name="V_Resource">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="ResourceKindID" />
@@ -2076,8 +2179,6 @@
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RSID" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
           <Property Name="Enable" Type="Boolean" />
           <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -2116,6 +2217,7 @@
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RentStatus" Type="Int32" />
           <Property Name="YearEnable" Type="Boolean" />
           <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -2159,7 +2261,7 @@
           <Property Name="OtherMinPrice" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="OtherMaxPrice" Type="Decimal" Precision="15" Scale="2" />
         </EntityType>
-        <EntityType Name="V_RSS_Info">
+        <EntityType Name="V_ResourceStatus">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -2183,13 +2285,22 @@
           <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" />
           <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="REnable" Type="Boolean" />
+          <Property Name="ResourceEnable" Type="Boolean" />
           <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -2207,9 +2318,8 @@
           <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
           <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="V_Stage">
           <Key>
@@ -2643,8 +2753,6 @@
                 <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="RSID" ColumnName="RSID" />
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
@@ -3000,10 +3108,41 @@
           <EntitySetMapping Name="V_Public">
             <EntityTypeMapping TypeName="DorllyResourceModel.V_Public">
               <MappingFragment StoreEntitySet="V_Public">
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ResourceRemark" ColumnName="ResourceRemark" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
+                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
+                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
+                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
+                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
+                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
                 <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
                 <ScalarProperty Name="Loc1" ColumnName="Loc1" />
                 <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
@@ -3023,9 +3162,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RS_Info">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_RS_Info">
-              <MappingFragment StoreEntitySet="V_RS_Info">
+          <EntitySetMapping Name="V_Resource">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Resource">
+              <MappingFragment StoreEntitySet="V_Resource">
                 <ScalarProperty Name="OtherMaxPrice" ColumnName="OtherMaxPrice" />
                 <ScalarProperty Name="OtherMinPrice" ColumnName="OtherMinPrice" />
                 <ScalarProperty Name="OtherEnable" ColumnName="OtherEnable" />
@@ -3068,6 +3207,7 @@
                 <ScalarProperty Name="YearOutPrice" ColumnName="YearOutPrice" />
                 <ScalarProperty Name="YearInPrice" ColumnName="YearInPrice" />
                 <ScalarProperty Name="YearEnable" ColumnName="YearEnable" />
+                <ScalarProperty Name="RentStatus" ColumnName="RentStatus" />
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
@@ -3106,8 +3246,6 @@
                 <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="RSID" ColumnName="RSID" />
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
@@ -3121,12 +3259,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_RSS_Info">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_RSS_Info">
-              <MappingFragment StoreEntitySet="V_RSS_Info">
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <EntitySetMapping Name="V_ResourceStatus">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_ResourceStatus">
+              <MappingFragment StoreEntitySet="V_ResourceStatus">
                 <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ResourceRemark" ColumnName="ResourceRemark" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Deposit" ColumnName="Deposit" />
                 <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
@@ -3144,13 +3281,22 @@
                 <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
                 <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="REnable" ColumnName="REnable" />
+                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
                 <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
                 <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
                 <ScalarProperty Name="Loc1" ColumnName="Loc1" />
                 <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />

@@ -60,8 +60,8 @@ namespace Resource.Model
         public virtual DbSet<V_Order> V_Order { get; set; }
         public virtual DbSet<V_Park> V_Park { get; set; }
         public virtual DbSet<V_Public> V_Public { get; set; }
-        public virtual DbSet<V_RS_Info> V_RS_Info { get; set; }
-        public virtual DbSet<V_RSS_Info> V_RSS_Info { get; set; }
+        public virtual DbSet<V_Resource> V_Resource { get; set; }
+        public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
         public virtual DbSet<V_Stage> V_Stage { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)

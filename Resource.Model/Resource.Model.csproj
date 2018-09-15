@@ -179,10 +179,10 @@
     <Compile Include="V_Public.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="V_RSS_Info.cs">
+    <Compile Include="V_Resource.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
-    <Compile Include="V_RS_Info.cs">
+    <Compile Include="V_ResourceStatus.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
     <Compile Include="V_Stage.cs">

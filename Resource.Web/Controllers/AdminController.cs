@@ -60,7 +60,16 @@ namespace Resource.Web.Controllers
             var obj = JsonConvert.SerializeObject(ds.Tables[0]);
             return Content(obj);
         }
+        public ActionResult GetTransactionData()
+        {
+            var list = dc.Set<V_Public>().Where(a => a.Status == 1).Select(a => new
+            {
+                Title = "[资源发布待审核]",
+                Msg = a.LocText + "/" + a.ResourceID + "资源发布待审核",
+                Url = "/public/index/" + a.ResourceID
+            }).Take(20).ToList();
+            return Json(list);
+        }
 
-        
     }
 }

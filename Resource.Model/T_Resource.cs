@@ -33,8 +33,6 @@ namespace Resource.Model
         public string GroupID { get; set; }
         public int ResourceKindID { get; set; }
         public string ResourceTypeID { get; set; }
-        public Nullable<int> RSID { get; set; }
-        public Nullable<int> Status { get; set; }
         public Nullable<bool> Enable { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> MaxPrice { get; set; }

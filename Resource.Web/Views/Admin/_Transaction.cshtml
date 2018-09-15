@@ -1,1 +1,15 @@
-﻿
+﻿<div class="col-lg-6 col-md-6 col-sm-6" id="transaction">
+    <h4>待办事项</h4>
+    <div class="row">
+        <table id="transdata"></table>
+    </div>
+    <script id="transTpl" type="text/html">
+        {{each data value i}}
+        <tr>
+            <td>{{value.Title}}</td>
+            <td>{{value.Msg}}</td>
+            <td style="display:none" data-url="{{value.Url}}"></td>
+        </tr>
+        {{/each}}
+    </script>
+</div>

@@ -52,7 +52,7 @@ namespace Resource.Web.Controllers
         public JsonResult PublicSearch(SearchParam param)
         {
             string[] pubList = dc.Set<T_ResourcePublic>().Where(a => a.Status != 6).Select(a => a.ResourceID).ToArray();
-            var list = dc.Set<V_RS_Info>().Where(a => !pubList.Contains(a.ID));
+            var list = dc.Set<V_Resource>().Where(a => !pubList.Contains(a.ID));
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
@@ -95,7 +95,7 @@ namespace Resource.Web.Controllers
             var kind = dc.Set<T_Resource>().Where(a => a.ID == resourceID).FirstOrDefault().ResourceKindID;
             ViewBag.price = dc.Set<T_ResourcePrice>().Where(a => a.ResourceID == resourceID).FirstOrDefault() ?? new T_ResourcePrice();
             ViewBag.img = dc.Set<T_ResourceImg>().Where(a => a.ResourceID == resourceID).ToList();
-            ViewBag.resource = dc.Set<V_RS_Info>().Where(a => a.ID == resourceID).FirstOrDefault();
+            ViewBag.resource = dc.Set<V_Resource>().Where(a => a.ID == resourceID).FirstOrDefault();
             switch (kind)
             {
                 case 1:

@@ -12,7 +12,7 @@ namespace Resource.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class V_RSS_Info
+    public partial class V_ResourceStatus
     {
         public int ID { get; set; }
         public Nullable<int> SysID { get; set; }
@@ -34,13 +34,22 @@ namespace Resource.Model
         public string ResourceName { get; set; }
         public string Loc1 { get; set; }
         public string Loc1Name { get; set; }
+        public string Loc2 { get; set; }
+        public string Loc2Name { get; set; }
+        public string Loc3 { get; set; }
+        public string Loc3Name { get; set; }
+        public string Loc4 { get; set; }
+        public string Loc4Name { get; set; }
+        public string Loc5 { get; set; }
+        public string Loc5Name { get; set; }
+        public string LocText { get; set; }
         public string GroupID { get; set; }
         public string GroupName { get; set; }
         public Nullable<int> ResourceKindID { get; set; }
         public string ResourceKindName { get; set; }
         public string ResourceTypeID { get; set; }
         public string ResourceTypeName { get; set; }
-        public Nullable<bool> REnable { get; set; }
+        public Nullable<bool> ResourceEnable { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> MaxPrice { get; set; }
         public Nullable<decimal> MinPrice { get; set; }
@@ -58,8 +67,7 @@ namespace Resource.Model
         public string RangeSize { get; set; }
         public Nullable<decimal> Deposit { get; set; }
         public string Content { get; set; }
+        public string ResourceRemark { get; set; }
         public string Location { get; set; }
-        public string CreateUser { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
     }
 }
