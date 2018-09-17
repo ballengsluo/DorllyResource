@@ -1,42 +1,61 @@
 ﻿<div class="row" id="order">
-    <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2 pull-left"><i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  趋势图分析</div>
-        <div class="col-lg-4 col-md-4 col-sm-4 pull-right">
-            <div>统计时间：</div>
-            <div><input type="text" class="form-control" id="stime"></div>
-            <div style="padding:0px 5px;font-size:22px;">-</div>
-            <div><input type="text" class="form-control" id="etime"></div>
-            <div>
-                <button type="button" class="btn btn-primary" id="search" style="">
-                    <i class="layui-icon layui-icon-search"></i> 查 询
-                </button>
+    <div class="row wt-title" id="order-search">
+        <div class="col-lg-2 col-md-2 pull-left" style="line-height:34px;font-size:16px;">
+            <i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  趋势图分析
+        </div>
+        <div class="col-lg-6 col-md-6 pull-right">
+            <div class="col-lg-offset-2 col-md-offset-1 col-sm-offset-1" style="line-height:34px;float:left;">统计时间：</div>
+            <div class="col-lg-3 col-md-3" style="padding-right:3px;padding-left:8px;">
+                <input type="text" class="form-control" id="stime">
             </div>
+            <div style="float:left;font-size:22px;">-</div>
+            <div class="col-lg-3 col-md-3" style="padding-left:3px;padding-right:5px;">
+                <input type="text" class="form-control" id="etime">
+            </div>
+
+            <button type="button" class="btn btn-primary" id="search" style="">
+                <i class="layui-icon layui-icon-search"></i> 查 询
+            </button>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div style="background-color:#f8cb6a;">
-                <div data-kind="1">0</div>
-                <div>房屋预定数量</div>
+    <div class="row" id="order-data">
+        <div class="col-lg-5 col-md-5" id="order-flat">
+            <div class="col-lg-6 col-md-6">
+                <div style="background-color:#f8cb6a;">
+                    <div data-kind="1">0</div>
+                    <div>房屋预定数量</div>
+                </div>
             </div>
-            <div style="background-color:#89c6fa;">
-                <div data-kind="2">0</div>
-                <div>工位预定数量</div>
+            <div class="col-lg-6 col-md-6">
+                <div style="background-color:#89c6fa;">
+                    <div data-kind="2">0</div>
+                    <div>工位预定数量</div>
+                </div>
+
             </div>
-            <div style="background-color:#f7a769;">
-                <div data-kind="3">0</div>
-                <div>会议室预定数量</div>
+            <div class="col-lg-6 col-md-6">
+                <div style="background-color:#f7a769;">
+                    <div data-kind="3">0</div>
+                    <div>会议室预定数量</div>
+                </div>
+
             </div>
-            <div style="background-color:#96a4fe;">
-                <div data-kind="4">0</div>
-                <div>广告位预定数量</div>
+            <div class="col-lg-6 col-md-6">
+                <div style="background-color:#96a4fe;">
+                    <div data-kind="4">0</div>
+                    <div>广告位预定数量</div>
+                </div>
+
             </div>
-            <div style="background-color:#f5c2e5;">
-                <div data-kind="5">0</div>
-                <div>资源预定订单总数</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div style="background-color:#f5c2e5;">
+                    <div data-kind="5">0</div>
+                    <div>资源预定订单总数</div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6" id="content-graph">
+        <div class="col-lg-7 col-md-7" id="order-graph">
 
         </div>
     </div>

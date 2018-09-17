@@ -29,26 +29,30 @@
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/font-awesome/css/font-awesome.min.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Styles.Render("~/Plugins/app/css/app.work.css")
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         @*@Html.Partial("_BusinessData")*@
         @if (ViewBag.func != null && ViewBag.func.Count > 0)
         {
             var func = ViewBag.func as List<T_MenuFunc>;
-            if (func.Where(a => a.Code == "resource").Count() > 0)
-            {
-                @res()
-            }
-            if (func.Where(a => a.Code == "transaction").Count() > 0)
-            {
-                Html.RenderPartial("_Transaction");
-            }
-            if (func.Where(a => a.Code == "order").Count() > 0)
-            {
-                Html.RenderPartial("_Order");
-            }
+            <div class="row">
+                @if (func.Where(a => a.Code == "resource").Count() > 0)
+                {
+                    Html.RenderPartial("_Resource");
+                }
+                @if (func.Where(a => a.Code == "transaction").Count() > 0)
+                {
+                    Html.RenderPartial("_Transaction");
+                }
+            </div>
+
+                if (func.Where(a => a.Code == "order").Count() > 0)
+                {
+                    Html.RenderPartial("_Order");
+                }
         }
 
     </div>

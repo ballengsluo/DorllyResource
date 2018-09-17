@@ -40,14 +40,15 @@ namespace Resource.Web.Controllers
         public ActionResult GetResourceData(string park)
         {
             SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_MainResourceCount", CommandType.StoredProcedure,
+            DataSet ds = sq.GetDataSet("Pro_MainResourceReport", CommandType.StoredProcedure,
                 new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
-            ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
-            ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
+            //ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
+            //ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
             ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
             ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
             ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
             ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
+           
             return PartialView("_Resource");
         }
         public ActionResult GetOrderData(string stime, string etime)
@@ -60,15 +61,15 @@ namespace Resource.Web.Controllers
             var obj = JsonConvert.SerializeObject(ds.Tables[0]);
             return Content(obj);
         }
-        public ActionResult GetTransactionData()
+        public JsonResult GetTransactionData()
         {
             var list = dc.Set<V_Public>().Where(a => a.Status == 1).Select(a => new
             {
                 Title = "[资源发布待审核]",
-                Msg = a.LocText + "/" + a.ResourceID + "资源发布待审核",
-                Url = "/public/index/" + a.ResourceID
+                Msg = "[" + a.LocText + a.ResourceID + "]发布待审核",
+                Url = "/public/index/?rid=" + a.ResourceID
             }).Take(20).ToList();
-            return Json(list);
+            return Json(new { data = list }, JsonRequestBehavior.AllowGet);
         }
 
     }

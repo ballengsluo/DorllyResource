@@ -508,7 +508,6 @@
           <Property Name="GroupID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceKindID" Type="int" />
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
-          <Property Name="RSID" Type="int" />
           <Property Name="RStatus" Type="int" />
           <Property Name="REnable" Type="bit" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
@@ -630,6 +629,7 @@
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="ResourceKindID" />
+            <PropertyRef Name="RentStatus" />
           </Key>
           <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" />
@@ -679,7 +679,8 @@
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
-          <Property Name="RentStatus" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="RentStatus" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="YearEnable" Type="bit" />
           <Property Name="YearInPrice" Type="decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="decimal" Precision="15" Scale="2" />
@@ -1084,7 +1085,6 @@
     [V_Order].[GroupID] AS [GroupID], 
     [V_Order].[ResourceKindID] AS [ResourceKindID], 
     [V_Order].[ResourceTypeID] AS [ResourceTypeID], 
-    [V_Order].[RSID] AS [RSID], 
     [V_Order].[RStatus] AS [RStatus], 
     [V_Order].[REnable] AS [REnable], 
     [V_Order].[Price] AS [Price], 
@@ -1244,6 +1244,7 @@
     [V_Resource].[CustLongName] AS [CustLongName], 
     [V_Resource].[CustShortName] AS [CustShortName], 
     [V_Resource].[CustTel] AS [CustTel], 
+    [V_Resource].[Status] AS [Status], 
     [V_Resource].[RentStatus] AS [RentStatus], 
     [V_Resource].[YearEnable] AS [YearEnable], 
     [V_Resource].[YearInPrice] AS [YearInPrice], 
@@ -2052,7 +2053,6 @@
           <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceKindID" Type="Int32" />
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RSID" Type="Int32" />
           <Property Name="RStatus" Type="Int32" />
           <Property Name="REnable" Type="Boolean" />
           <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
@@ -2168,6 +2168,7 @@
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="ResourceKindID" />
+            <PropertyRef Name="RentStatus" />
           </Key>
           <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -2217,7 +2218,8 @@
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RentStatus" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="RentStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="YearEnable" Type="Boolean" />
           <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="YearOutPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -3056,7 +3058,6 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="REnable" ColumnName="REnable" />
                 <ScalarProperty Name="RStatus" ColumnName="RStatus" />
-                <ScalarProperty Name="RSID" ColumnName="RSID" />
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
                 <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
@@ -3208,6 +3209,7 @@
                 <ScalarProperty Name="YearInPrice" ColumnName="YearInPrice" />
                 <ScalarProperty Name="YearEnable" ColumnName="YearEnable" />
                 <ScalarProperty Name="RentStatus" ColumnName="RentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />

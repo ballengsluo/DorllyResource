@@ -2,142 +2,147 @@ body {
     background-color: #f9f9f9;
 }
 
-.container-fluid {
-    width: 90%;
+
+/* 
+**************  共有样式 *******************
+*/
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-h4 {
-    padding: 10px 0px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 18px;
+.wt-title {
+    padding: 8px 0px;
+    border-bottom: 2px solid #ccc;
 }
 
-table tr td,
-table tr th {
-    text-align: center;
-}
 
-.res {
-    border: 1px solid #ccc;
+/* 
+**************  业务概览界面样式 *******************
+*/
+
+#resource {
     background-color: #fff;
+    box-shadow: 0px 0px 4px #ccc;
+    margin: 10px 0px;
 }
 
-.reskind {
-    padding: 10px 0px;
-    font-weight: 600;
-    border-bottom: 1px solid #ccc;
+#resource #res-search {
+    padding: 8px 0px;
+    border-bottom: 2px solid #ccc;
 }
 
-#rm {
-    border-right: none;
+#resource #res-data {
+    padding: 8px 15px;
 }
 
-.rmcount>td {
-    font-weight: 600;
-    color: blue;
-}
-
-.res tr:first-of-type td {
-    border-top: none;
-}
-
-#cb,
-#mr {
-    border-bottom: none;
-}
-
-.msg {
+#res-data>.row {
+    margin-top: 5px;
     border: 1px solid #ccc;
-    height: 342px;
-    background-color: #fff;
 }
 
-
-/* 趋势分析图样式*/
-
-
-/*头部*/
-
-.order {
-    width: 90%;
-    margin: 0 auto;
+#res-data>.row>div {
+    border-right: 3px solid #ccc;
+    padding-left: 0px;
+    margin: 5px 0px;
+    height: 65px;
 }
 
-.order>div {
-    width: 100%;
-    float: left;
-}
-
-.order .header {
-    position: relative;
-    height: 54px;
-}
-
-.order .header>div {
-    margin: 10px;
+#res-data>.row>div:first-of-type {
+    text-align: center;
     font-size: 16px;
-    height: 34px;
-    line-height: 34px;
+    font-weight: bold;
+    line-height: 65px;
 }
 
-.order .header .header-title {
-    float: left;
-}
-
-.order .header .header-search {
-    float: right;
-}
-
-.order .header-search>div {
-    float: left;
-}
-
-
-/*
-            平面样式
-        */
-
-.order .content>div {
-    width: 50%;
-    float: left;
-}
-
-.order .content .content-panel>div {
-    width: 40%;
-    float: left;
-    height: 130px;
-    text-align: center;
-    margin: 1%;
-}
-
-.order .content .content-panel>div:last-of-type {
-    width: 82%;
-}
-
-.order .content .content-panel div>div:first-of-type {
-    height: 60%;
-    line-height: 90px;
-    font-size: 35px;
-    color: blue;
-}
-
-.order .content .content-panel div>div:last-of-type {
-    height: 40%;
+#res-data>.row>div:nth-of-type(2)>div:first-of-type {
     font-size: 16px;
 }
 
-
-/*图表样式*/
-
-.order .content .content-graph {
-    /*height: 425px;*/
-    height: 460px;
+#res-data>.row>div:not(:first-of-type)>div:first-of-type {
+    color: #ccc;
 }
 
-#search {
+#res-data .res-num {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+}
+
+#res-data .res-num>span:first-of-type {
+    font-size: 22px;
+    padding-right: 5px;
+}
+
+#res-data .res-num>span:last-of-type {
+    padding-top: 5px;
+}
+
+#res-data .res-rate {
+    text-align: right;
+}
+
+#res-data .res-rate>span:first-of-type {
     font-size: 15px;
-    margin-left: 10px;
-    height: 34px;
-    vertical-align: inherit;
+    font-weight: bold;
+}
+
+
+/* 
+**************  待办事项界面样式 *******************
+*/
+
+#transaction {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px #ccc;
+    margin-bottom: 10px;
+}
+
+#transaction table tr td {
+    border: none;
+    border-bottom: 1px dashed #ddd;
+}
+
+
+/* 
+**************  订单界面样式 *******************
+*/
+
+#order {
+    background-color: #fff;
+    box-shadow: 0px 0px 4px #ccc;
+    margin-bottom: 10px;
+}
+
+#order-data {
+    padding: 10px 0px;
+}
+
+#order-data #order-flat>div {
+    padding-left: 0px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+}
+
+#order-data #order-flat>div>div {
+    height: 100px;
+    padding: -15px;
+}
+
+#order-data #order-flat>div>div>div:first-of-type {
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 30px;
+}
+
+#order-data #order-flat>div>div>div:nth-of-type(2) {
+    height: 35px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#order-data #order-graph {
+    height: 360px;
 }

@@ -1,14 +1,19 @@
-﻿<div class="col-lg-6 col-md-6 col-sm-6" id="transaction">
-    <h4>待办事项</h4>
+﻿<div class="row" id="transaction">
+    <div class="row wt-title">
+        <div class="col-lg-2 col-md-2 pull-left" style="line-height:34px;font-size:16px;">
+            <i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  待办事项
+        </div>
+    </div>
     <div class="row">
-        <table id="transdata"></table>
+        <table class="table table-striped">
+            <tbody id="trans-table"></tbody>
+        </table>
     </div>
     <script id="transTpl" type="text/html">
         {{each data value i}}
         <tr>
-            <td>{{value.Title}}</td>
-            <td>{{value.Msg}}</td>
-            <td style="display:none" data-url="{{value.Url}}"></td>
+            <td style="text-align:center;">{{value.Title}}</td>
+            <td><a href="#" data-url="{{value.Url}}">{{value.Msg}}</a></td>
         </tr>
         {{/each}}
     </script>

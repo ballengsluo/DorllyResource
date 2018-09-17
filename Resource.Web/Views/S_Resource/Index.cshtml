@@ -128,10 +128,10 @@
                 {{else if value.SysID==3}}资源系统
                 {{/if}}
             </td>
-            <td data-type="{{value.BusinessType}}">
+            <td data-type="{{value.Status}}">
                 {{if value.BusinessType==1}} 客户占用
                 {{else if value.BusinessType==2}}内部占用
-                {{/if}}
+                {{/if}} 
             </td>
             <td data-enable="{{value.Enable}}">
                 {{if value.Enable==0}}空闲

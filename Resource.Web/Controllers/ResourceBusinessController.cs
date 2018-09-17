@@ -284,7 +284,7 @@ namespace Resource.Web.Controllers
                     && SavePrice(resourceID, form)
                     && SavePublic(publicID, resourceID, form)
                     && dc.SaveChanges() > 0)
-                    Json(Result.Success());
+                    return Json(Result.Success());
                 DelImg(imgList);
                 return Json(Result.Fail());
             }

@@ -5,13 +5,13 @@ $(function() {
 });
 
 function initResourceData() {
-    $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-    $("#park").change(function() {
-        $.get("/Admin/GetResourceData", { park: $(this).val() }, function(data) {
-            $("#resourceData").html(data);
-            $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-        });
-    });
+    // $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+    // $("#park").change(function() {
+    //     $.get("/Admin/GetResourceData", { park: $(this).val() }, function(data) {
+    //         $("#resourceData").html(data);
+    //         $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
+    //     });
+    // });
     $("#park option:first").attr("selected", true).trigger("change");
 }
 
@@ -19,15 +19,25 @@ function initTransaction() {
     if ($("#transaction").length > 0) {
         ajax("get", "/Admin/GetTransactionData", {}, "json", function(data) {
             var html = template('transTpl', data);
-            $("#transdata").html(html);
+            $("#trans-table").html(html);
+            $("#trans-table a").click(function() {
+                var url = $(this).attr("data-url")
+                var index = layer.open({
+                    type: 2,
+                    content: url,
+                    title: ' ',
+                    end: function() {
+                        initTransaction();
+                    }
+                });
+                layer.full(index);
+            });
         });
     }
 }
 
-
 function initOrderData() {
-    if ($("#content-graph").length > 0) {
-        graph();
+    if ($("#order-graph").length > 0) {
         if ($("#stime").length > 0) {
             layui.use('laydate', function() {
                 var laydate = layui.laydate;
@@ -44,6 +54,7 @@ function initOrderData() {
                 });
             });
         }
+        graph();
         $("#search").click(function() {
             graph();
         });
@@ -69,7 +80,7 @@ function graph() {
 
 function graphData(title, count) {
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('content-graph'));
+    var myChart = echarts.init(document.getElementById('order-graph'));
     // 指定图表的配置项和数据
     var option = {
         color: ['blue'],

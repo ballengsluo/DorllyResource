@@ -1,5 +1,5 @@
 $(function() {
-    search({ pageIndex: currentNum, pageSize: limitCount });
+    search(paramsSet());
     operation();
     dropChange(1);
     if ($("#stime").length > 0) {
@@ -76,7 +76,7 @@ function operation() {
         mission("温馨提示，是否审核通过？", $(this));
     });
     //取消审核
-    $('#notpass').click(function() {
+    $('#npass').click(function() {
         mission("温馨提示，是否审核不通过？", $(this));
     });
     //绑定角色
@@ -89,7 +89,7 @@ function operation() {
         mission("郑重提醒,是否发布此资源？", $(this));
     });
     //取消发布
-    $('#unpub').click(function() {
+    $('#npub').click(function() {
         mission("严重警告,是否下架此资源？", $(this));
     });
     //作废

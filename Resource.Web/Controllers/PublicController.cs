@@ -13,8 +13,9 @@ namespace Resource.Web.Controllers
     {
         // GET: Public
         #region 首页
-        public ActionResult Index()
+        public ActionResult Index(string rid)
         {
+            ViewBag.id = rid;
             ViewBag.func = Func.GetFunc(user.Account, MenuPath);
             return View();
         }
