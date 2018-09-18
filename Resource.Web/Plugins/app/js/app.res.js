@@ -25,6 +25,9 @@ $(function() {
 
     $("form").submit(function() {
         $(this).attr("disabled", "disabled");
+        $("#price input").each(function() {
+
+        });
         var form = new FormData($("form")[0]);
         if ($('input[type=submit]').attr("data-url") == '' || !$('input[type=submit]').attr("data-url")) { return false; }
         ajaxForm("post", $('input[type=submit]').attr("data-url"), form, "json", function(data) {
@@ -103,4 +106,9 @@ function changeNodeName() {
     if ($("#room").length > 0) {
         $("#room").attr("name", "Loc5");
     }
+}
+
+function setPrice(max, min) {
+    $("#MaxPrice").val(max);
+    $("#MinPrice").val(min);
 }

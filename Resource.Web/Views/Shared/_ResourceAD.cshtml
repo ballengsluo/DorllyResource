@@ -56,8 +56,10 @@
         <input type="text" class="form-control" name="Size" value="@Model.Size">
     </div>
 </div>
+<div id="price">
+    @{Html.RenderPartial("_PriceAD");}
+</div>
 
-@{Html.RenderPartial("_PriceAD");}
 
 
 

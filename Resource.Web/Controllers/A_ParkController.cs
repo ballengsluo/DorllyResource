@@ -38,7 +38,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+                park.Enable = true;
                 dc.Set<T_Park>().Add(park);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());

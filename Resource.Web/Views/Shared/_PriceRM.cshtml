@@ -1,5 +1,4 @@
 ﻿@{ T_ResourcePrice price = ViewBag.price as T_ResourcePrice;}
-
 <div class="price">
     <div class="form-group">
         <label class="control-label col-lg-2 col-lg-4 col-md-4 col-sm-4 col-sm-2">计价方式</label>
@@ -30,11 +29,11 @@
             </label>*@
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最低价格/平米/月</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="MeterMinPrice" value="@price.MeterMinPrice" placeholder="最低价格/平米/月">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="MeterMinPrice" value="@price.MeterMinPrice" placeholder="最低价格/平米/月">
         </div>
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最高价格/平米/月</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="MeterMaxPrice" value="@price.MeterMaxPrice" placeholder="最高价格/平米/月">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="MeterMaxPrice" value="@price.MeterMaxPrice" placeholder="最高价格/平米/月">
         </div>
     </div>
     <div class="form-group">
@@ -44,11 +43,11 @@
             </label>*@
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最低价格/个/月</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="ISingleMinPrice" value="@price.ISingleMinPrice" placeholder="最低价格/个/月">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="ISingleMinPrice" value="@price.ISingleMinPrice" placeholder="最低价格/个/月">
         </div>
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最高价格/个/月</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="ISingleMaxPrice" value="@price.ISingleMaxPrice" placeholder="最高价格/个/月">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="ISingleMaxPrice" value="@price.ISingleMaxPrice" placeholder="最高价格/个/月">
         </div>
     </div>
     <div class="form-group">
@@ -58,11 +57,11 @@
             </label>*@
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最低价格/一口价</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="OnceMinPrice" value="@price.OnceMinPrice" placeholder="最低价格/一口价">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="OnceMinPrice" value="@price.OnceMinPrice" placeholder="最低价格/一口价">
         </div>
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最高价格/一口价</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="OnceMaxPrice" value="@price.OnceMaxPrice" placeholder="最高价格/一口价">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="OnceMaxPrice" value="@price.OnceMaxPrice" placeholder="最高价格/一口价">
         </div>
     </div>
     <div class="form-group">
@@ -72,12 +71,15 @@
             </label>*@
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最低价格/其他</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="OtherMinPrice" value="@price.OtherMinPrice" placeholder="最低价格/其他">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="OtherMinPrice" value="@price.OtherMinPrice" placeholder="最低价格/其他">
         </div>
         <label class="control-label col-lg-2 col-md-2 col-sm-2">最高价格/其他</label>
         <div class="col-lg-4 col-md-4 col-sm-4">
-            <input type="number" class="form-control" name="OtherMaxPrice" value="@price.OtherMaxPrice" placeholder="最高价格/其他">
+            <input type="number" min="0.01" step="0.01"class="form-control" name="OtherMaxPrice" value="@price.OtherMaxPrice" placeholder="最高价格/其他">
         </div>
     </div>
-
+</div>
+<div class="form-group" style="display:none;">
+    <input type="hidden" name="MaxPrice" id="MaxPrice" value="0" />
+    <input type="hidden" name="MinPrice" id="MinPrice" value="0" />
 </div>

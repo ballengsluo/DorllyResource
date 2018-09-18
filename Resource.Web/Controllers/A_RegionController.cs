@@ -47,7 +47,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+                region.Enable = true;
                 dc.Set<T_Region>().Add(region);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());

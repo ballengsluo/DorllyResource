@@ -17,6 +17,7 @@ namespace Resource.Model
         public int ID { get; set; }
         public Nullable<int> SysID { get; set; }
         public string ResourceID { get; set; }
+        public Nullable<decimal> RentArea { get; set; }
         public string BusinessID { get; set; }
         public Nullable<int> BusinessType { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }
@@ -50,24 +51,5 @@ namespace Resource.Model
         public string ResourceTypeID { get; set; }
         public string ResourceTypeName { get; set; }
         public Nullable<bool> ResourceEnable { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<decimal> MaxPrice { get; set; }
-        public Nullable<decimal> MinPrice { get; set; }
-        public Nullable<decimal> Area { get; set; }
-        public Nullable<decimal> RentArea { get; set; }
-        public Nullable<decimal> StartArea { get; set; }
-        public string RangeArea { get; set; }
-        public Nullable<int> Number { get; set; }
-        public Nullable<int> RentNum { get; set; }
-        public Nullable<int> StartNum { get; set; }
-        public string RangeNum { get; set; }
-        public string Size { get; set; }
-        public string RentSize { get; set; }
-        public string StartSize { get; set; }
-        public string RangeSize { get; set; }
-        public Nullable<decimal> Deposit { get; set; }
-        public string Content { get; set; }
-        public string ResourceRemark { get; set; }
-        public string Location { get; set; }
     }
 }

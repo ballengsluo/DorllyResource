@@ -37,6 +37,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
+                stage.Enable = true;
                 dc.Set<T_Stage>().Add(stage);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());

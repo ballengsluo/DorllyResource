@@ -7,11 +7,11 @@ namespace Resource.Web.Models
 {
     public class ConferenceRoom
     {
-        
+
         private string _CRNo;
         private string _CRName;
         private string _ParkNo;
-        private string _CRCapacity;
+        private int _CRCapacity;
         private decimal _CRBuildSize;
         private decimal _CRINPriceHour;
         private decimal _CRINPriceHalfDay;
@@ -33,8 +33,8 @@ namespace Resource.Web.Models
         private string _CRUpdateUser;
         private string _CRPic;
         private string _Content;
-        
-        
+
+
         /// <summary>缺省构造函数</summary>
         public ConferenceRoom() { }
 
@@ -70,7 +70,7 @@ namespace Resource.Web.Models
         /// <summary>
         /// 功能描述：容纳人数
         /// </summary>
-        public string CRCapacity
+        public int CRCapacity
         {
             get { return _CRCapacity; }
             set { _CRCapacity = value; }
@@ -102,7 +102,7 @@ namespace Resource.Web.Models
             get { return _CRINPriceHalfDay; }
             set { _CRINPriceHalfDay = value; }
         }
-        
+
         /// <summary>
         /// 功能描述：对内价格/全天
         /// </summary>
@@ -111,7 +111,7 @@ namespace Resource.Web.Models
             get { return _CRINPriceDay; }
             set { _CRINPriceDay = value; }
         }
-        
+
         /// <summary>
         /// 功能描述：对内延时价格/小时
         /// </summary>

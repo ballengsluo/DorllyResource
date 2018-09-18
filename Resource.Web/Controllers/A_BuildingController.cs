@@ -38,7 +38,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+                building.Enable = true;
                 dc.Set<T_Building>().Add(building);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 else return Json(Result.Fail());

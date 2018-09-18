@@ -93,7 +93,10 @@
         <input type="text" class="form-control" name="Location" value="@Model.Location" placeholder="请填写位置信息">
     </div>
 </div>
-@{Html.RenderPartial("_PriceCB");}
+<div id="price">
+    @{Html.RenderPartial("_PriceCB");}
+</div>
+
 <div class="form-group">
     <label class="control-label col-lg-2 col-md-2 col-sm-2">上传图片</label>
     <div class="col-lg-10 col-md-10 col-sm-10">
@@ -115,7 +118,7 @@
         <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
     </div>
 }
-@*<div class="cmtdiv col-md-offset-1">
-    <input type="submit" class="btn btn-primary" value="保存" data-url="@Url.Action("AddOrUpdate")">
-    <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
-</div>*@
+    @*<div class="cmtdiv col-md-offset-1">
+            <input type="submit" class="btn btn-primary" value="保存" data-url="@Url.Action("AddOrUpdate")">
+            <input type="button" class="btn btn-danger" value="关闭" onclick="javascript: parent.layer.closeAll();">
+        </div>*@

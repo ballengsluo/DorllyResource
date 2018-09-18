@@ -328,6 +328,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SysID" Type="int" />
           <Property Name="ResourceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="nvarchar" MaxLength="100" />
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
@@ -733,6 +734,7 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="SysID" Type="int" />
           <Property Name="ResourceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="nvarchar" MaxLength="100" />
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
@@ -766,25 +768,6 @@
           <Property Name="ResourceTypeID" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceTypeName" Type="nvarchar" MaxLength="30" />
           <Property Name="ResourceEnable" Type="bit" />
-          <Property Name="Price" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="MaxPrice" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="MinPrice" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="Area" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="StartArea" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="RangeArea" Type="nvarchar" MaxLength="50" />
-          <Property Name="Number" Type="int" />
-          <Property Name="RentNum" Type="int" />
-          <Property Name="StartNum" Type="int" />
-          <Property Name="RangeNum" Type="nvarchar" MaxLength="50" />
-          <Property Name="Size" Type="nvarchar" MaxLength="90" />
-          <Property Name="RentSize" Type="nvarchar" MaxLength="90" />
-          <Property Name="StartSize" Type="nvarchar" MaxLength="90" />
-          <Property Name="RangeSize" Type="nvarchar" MaxLength="90" />
-          <Property Name="Deposit" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="Content" Type="nvarchar(max)" />
-          <Property Name="ResourceRemark" Type="nvarchar" MaxLength="500" />
-          <Property Name="Location" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Stage”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -1295,6 +1278,7 @@
     [V_ResourceStatus].[ID] AS [ID], 
     [V_ResourceStatus].[SysID] AS [SysID], 
     [V_ResourceStatus].[ResourceID] AS [ResourceID], 
+    [V_ResourceStatus].[RentArea] AS [RentArea], 
     [V_ResourceStatus].[BusinessID] AS [BusinessID], 
     [V_ResourceStatus].[BusinessType] AS [BusinessType], 
     [V_ResourceStatus].[RentBeginTime] AS [RentBeginTime], 
@@ -1327,26 +1311,7 @@
     [V_ResourceStatus].[ResourceKindName] AS [ResourceKindName], 
     [V_ResourceStatus].[ResourceTypeID] AS [ResourceTypeID], 
     [V_ResourceStatus].[ResourceTypeName] AS [ResourceTypeName], 
-    [V_ResourceStatus].[ResourceEnable] AS [ResourceEnable], 
-    [V_ResourceStatus].[Price] AS [Price], 
-    [V_ResourceStatus].[MaxPrice] AS [MaxPrice], 
-    [V_ResourceStatus].[MinPrice] AS [MinPrice], 
-    [V_ResourceStatus].[Area] AS [Area], 
-    [V_ResourceStatus].[RentArea] AS [RentArea], 
-    [V_ResourceStatus].[StartArea] AS [StartArea], 
-    [V_ResourceStatus].[RangeArea] AS [RangeArea], 
-    [V_ResourceStatus].[Number] AS [Number], 
-    [V_ResourceStatus].[RentNum] AS [RentNum], 
-    [V_ResourceStatus].[StartNum] AS [StartNum], 
-    [V_ResourceStatus].[RangeNum] AS [RangeNum], 
-    [V_ResourceStatus].[Size] AS [Size], 
-    [V_ResourceStatus].[RentSize] AS [RentSize], 
-    [V_ResourceStatus].[StartSize] AS [StartSize], 
-    [V_ResourceStatus].[RangeSize] AS [RangeSize], 
-    [V_ResourceStatus].[Deposit] AS [Deposit], 
-    [V_ResourceStatus].[Content] AS [Content], 
-    [V_ResourceStatus].[ResourceRemark] AS [ResourceRemark], 
-    [V_ResourceStatus].[Location] AS [Location]
+    [V_ResourceStatus].[ResourceEnable] AS [ResourceEnable]
     FROM [dbo].[V_ResourceStatus] AS [V_ResourceStatus]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_Stage" EntityType="Self.V_Stage" store:Type="Views" store:Schema="dbo">
@@ -1878,6 +1843,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SysID" Type="Int32" />
           <Property Name="ResourceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
@@ -2270,6 +2236,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="SysID" Type="Int32" />
           <Property Name="ResourceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
@@ -2303,25 +2270,6 @@
           <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceEnable" Type="Boolean" />
-          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="RentNum" Type="Int32" />
-          <Property Name="StartNum" Type="Int32" />
-          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="V_Stage">
           <Key>
@@ -2887,6 +2835,7 @@
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -3264,25 +3213,6 @@
           <EntitySetMapping Name="V_ResourceStatus">
             <EntityTypeMapping TypeName="DorllyResourceModel.V_ResourceStatus">
               <MappingFragment StoreEntitySet="V_ResourceStatus">
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ResourceRemark" ColumnName="ResourceRemark" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
-                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
-                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
-                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
-                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
-                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
-                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
                 <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
                 <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
@@ -3316,6 +3246,7 @@
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

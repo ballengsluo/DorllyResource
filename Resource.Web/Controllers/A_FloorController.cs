@@ -39,7 +39,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+                floor.Enable = true;
                 dc.Set<T_Floor>().Add(floor);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());

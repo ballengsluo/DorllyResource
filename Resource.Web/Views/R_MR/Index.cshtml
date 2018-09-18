@@ -54,7 +54,6 @@
                         <th>所属园区</th>                        
                         <th>会议室编号</th>
                         <th>会议室名称</th> 
-                        <th>会议室类型</th>
                         <th>资源分组</th>                       
                         <th>容纳人数</th>
                         @*<th>状态</th>*@
@@ -70,10 +69,9 @@
         {{each data value i}}
         <tr>
             <td>{{i+1}}</td>
-            <td>{{value.ParkName}}</td>
+            <td>{{value.Loc1Name}}</td>
             <td class="key">{{value.ID}}</td>
             <td>{{value.Name}}</td>   
-            <td>{{value.ResourceTypeName}}</td>
             <td>{{value.GroupName}}</td>      
             <td>{{value.RangeNum}}</td>
             @*<td class="status" data-status="{{value.Status}}">

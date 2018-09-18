@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
             ViewBag.func = Func.GetFunc(user.Account, MenuPath);
             return View();
         }
-        public ActionResult Detail(string id)
+        public ActionResult Check(string id)
         {
             var pub = dc.Set<T_ResourcePublic>().AsNoTracking().Where(a => a.ID == id).FirstOrDefault();
             ViewBag.check = 1;

@@ -236,6 +236,10 @@ namespace Resource.Web.WebApi
                     result.Msg = "目标数据库存在此数据，随后进行更新操作；";
                 }
                 resource.ID = conferenceRoom.CRNo;
+                resource.Name = conferenceRoom.CRName;
+                resource.Number = conferenceRoom.CRCapacity;
+                resource.RangeNum = conferenceRoom.CRCapacity.ToString();
+                resource.Area = conferenceRoom.CRBuildSize;
                 resource.Loc1 = conferenceRoom.ParkNo;
                 resource.ResourceKindID = 3;
                 resource.Location = conferenceRoom.CRAddr;
@@ -245,7 +249,6 @@ namespace Resource.Web.WebApi
                 resource.CreateTime = conferenceRoom.CRCreateDate;
                 resource.UpdateTime = conferenceRoom.CRUpdateDate;
                 resource.UpdateUser = conferenceRoom.CRUpdateUser;
-                resource.Location = conferenceRoom.CRAddr;
 
                 price.ResourceID = conferenceRoom.CRNo;
                 price.HourEnable = conferenceRoom.CRIsHour;
@@ -267,16 +270,6 @@ namespace Resource.Web.WebApi
                 dc.SaveChanges();
                 result.Msg += "操作成功！";
                 result.Flag = 1;
-                //if (dc.SaveChanges() > 0)
-                //{
-                //    result.Msg += "操作成功！";
-                //    result.Flag = 1;
-                //}
-                //else
-                //{
-                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                //    result.Flag = 2;
-                //}
             }
             catch (Exception ex)
             {

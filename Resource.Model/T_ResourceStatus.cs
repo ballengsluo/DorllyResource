@@ -17,6 +17,7 @@ namespace Resource.Model
         public int ID { get; set; }
         public Nullable<int> SysID { get; set; }
         public string ResourceID { get; set; }
+        public Nullable<decimal> RentArea { get; set; }
         public string BusinessID { get; set; }
         public Nullable<int> BusinessType { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }

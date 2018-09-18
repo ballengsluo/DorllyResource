@@ -24,11 +24,11 @@
     </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/全天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="DayInPrice" value="@price.DayInPrice" placeholder="对内价格/全天">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DayInPrice" value="@price.DayInPrice" placeholder="对内价格/全天">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/全天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="DayOutPrice" value="@price.DayOutPrice" placeholder="对外价格/全天">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DayOutPrice" value="@price.DayOutPrice" placeholder="对外价格/全天">
     </div>
 </div>
 <div class="form-group">
@@ -38,11 +38,11 @@
     </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/半天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="HDayInPrice" value="@price.HDayInPrice" placeholder="对内价格/半天">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayInPrice" value="@price.HDayInPrice" placeholder="对内价格/半天">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/半天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="HDayOutPrice" value="@price.HDayOutPrice" placeholder="对外价格/半天">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayOutPrice" value="@price.HDayOutPrice" placeholder="对外价格/半天">
     </div>
 </div>
 <div class="form-group">
@@ -52,11 +52,11 @@
     </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/小时</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="HourInPrice" value="@price.HourInPrice" placeholder="对内价格/小时">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HourInPrice" value="@price.HourInPrice" placeholder="对内价格/小时">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/小时</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="HourOutPrice" value="@price.HourOutPrice" placeholder="对外价格/小时">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HourOutPrice" value="@price.HourOutPrice" placeholder="对外价格/小时">
     </div>
 </div>
 <div class="form-group">
@@ -64,12 +64,16 @@
         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>对内延时价格
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="DelayInPrice" value="@price.DelayInPrice" required placeholder="对内延时价格">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DelayInPrice" value="@price.DelayInPrice" required placeholder="对内延时价格">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">
         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>对外延时价格
     </label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="text" class="form-control" name="DelayOutPrice" value="@price.DelayOutPrice" required placeholder="对外延时价格">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="DelayOutPrice" value="@price.DelayOutPrice" required placeholder="对外延时价格">
     </div>
+</div>
+<div class="form-group" style="display:none;">
+    <input type="hidden" name="MaxPrice" id="MaxPrice" value="0" />
+    <input type="hidden" name="MinPrice" id="MinPrice" value="0" />
 </div>
