@@ -490,7 +490,6 @@ namespace Resource.Web.WebApi
                     if (obj != null)
                     {
                         obj.RentEndTime = item.RentEndTime;
-                        obj.Enable = false;
                         status.AddOrUpdate(obj);
                     }
 

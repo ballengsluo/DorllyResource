@@ -12,13 +12,12 @@ namespace Resource.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class T_ResourceStatus
+    public partial class V_RMContract
     {
-        public int ID { get; set; }
-        public Nullable<int> SysID { get; set; }
+        public string SYSID { get; set; }
         public string ResourceID { get; set; }
         public string BusinessID { get; set; }
-        public Nullable<int> BusinessType { get; set; }
+        public string BusinessType { get; set; }
         public Nullable<System.DateTime> RentBeginTime { get; set; }
         public Nullable<System.DateTime> RentEndTime { get; set; }
         public Nullable<decimal> RentArea { get; set; }
@@ -27,8 +26,8 @@ namespace Resource.Model
         public string CustTel { get; set; }
         public string ReserveDept { get; set; }
         public string ReserveName { get; set; }
+        public string Status { get; set; }
         public string Remark { get; set; }
-        public Nullable<int> Status { get; set; }
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
     }

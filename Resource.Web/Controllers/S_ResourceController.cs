@@ -110,7 +110,6 @@ namespace Resource.Web.Controllers
                     obj.SysID = 3;
                     obj.BusinessID = Guid.NewGuid().ToString();
                     obj.BusinessType = 5;
-                    obj.Enable = true;
                     add = true;
                 }
                 else
@@ -160,7 +159,6 @@ namespace Resource.Web.Controllers
                 int endType = Convert.ToInt32(form["EndType"]);
                 if (endType == 1)
                 {
-                    obj.Enable = false;
                     obj.UpdateTime = DateTime.Now;
                     obj.UpdateUser = user.Account;
                 }
@@ -169,7 +167,6 @@ namespace Resource.Web.Controllers
                     if (endTime <= obj.RentBeginTime || endTime >= obj.RentEndTime)
                         return Json(Result.Fail(msg: "违约停用时间必须处于占用时间内！"));
                     obj.RentEndTime = endTime;
-                    obj.Enable = false;
                     obj.UpdateTime = DateTime.Now;
                     obj.UpdateUser = user.Account;
                 }

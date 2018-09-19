@@ -54,6 +54,7 @@ namespace Resource.Model
         public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
+        public virtual DbSet<mstemp> mstemp { get; set; }
         public virtual DbSet<V_Building> V_Building { get; set; }
         public virtual DbSet<V_Floor> V_Floor { get; set; }
         public virtual DbSet<V_Func> V_Func { get; set; }
@@ -62,7 +63,9 @@ namespace Resource.Model
         public virtual DbSet<V_Public> V_Public { get; set; }
         public virtual DbSet<V_Resource> V_Resource { get; set; }
         public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
+        public virtual DbSet<V_RMContract> V_RMContract { get; set; }
         public virtual DbSet<V_Stage> V_Stage { get; set; }
+        public virtual DbSet<V_WYContract> V_WYContract { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
         {

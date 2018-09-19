@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DorllyResourceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DorllyResource.dbo.mstemp”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="mstemp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="btime" Type="datetime" />
+          <Property Name="etime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Mstr_Customer">
           <Key>
             <PropertyRef Name="CustNo" />
@@ -328,11 +338,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SysID" Type="int" />
           <Property Name="ResourceID" Type="nvarchar" MaxLength="50" />
-          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="nvarchar" MaxLength="100" />
           <Property Name="BusinessType" Type="int" />
           <Property Name="RentBeginTime" Type="datetime" />
           <Property Name="RentEndTime" Type="datetime" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
@@ -340,7 +350,6 @@
           <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="int" />
-          <Property Name="Enable" Type="bit" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
@@ -770,6 +779,35 @@
           <Property Name="ResourceEnable" Type="bit" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“DorllyResource.dbo.V_RMContract”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_RMContract">
+          <Key>
+            <PropertyRef Name="SYSID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="CustTel" />
+            <PropertyRef Name="ReserveDept" />
+            <PropertyRef Name="ReserveName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Remark" />
+          </Key>
+          <Property Name="SYSID" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ResourceID" Type="nvarchar" MaxLength="30" />
+          <Property Name="BusinessID" Type="nvarchar" MaxLength="36" />
+          <Property Name="BusinessType" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="RentBeginTime" Type="datetime" />
+          <Property Name="RentEndTime" Type="datetime" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="CustLongName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustShortName" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustTel" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ReserveDept" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ReserveName" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Stage”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_Stage">
           <Key>
@@ -785,6 +823,35 @@
           <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
           <Property Name="CityID" Type="nvarchar" MaxLength="30" />
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“DorllyResource.dbo.V_WYContract”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_WYContract">
+          <Key>
+            <PropertyRef Name="SYSID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="CustTel" />
+            <PropertyRef Name="ReserveDept" />
+            <PropertyRef Name="ReserveName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Remark" />
+          </Key>
+          <Property Name="SYSID" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ResourceID" Type="nvarchar" MaxLength="30" />
+          <Property Name="BusinessID" Type="nvarchar" MaxLength="36" />
+          <Property Name="BusinessType" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="RentBeginTime" Type="datetime" />
+          <Property Name="RentEndTime" Type="datetime" />
+          <Property Name="RentArea" Type="decimal" Precision="15" Scale="4" />
+          <Property Name="CustLongName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustShortName" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustTel" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ReserveDept" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ReserveName" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
+          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <Association Name="FK_Group_RKind">
           <End Role="T_ResourceKind" Type="Self.T_ResourceKind" Multiplicity="1" />
@@ -998,6 +1065,13 @@
           <EntitySet Name="T_Stage" EntityType="Self.T_Stage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_User" EntityType="Self.T_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_UserRole" EntityType="Self.T_UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mstemp" EntityType="Self.mstemp" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mstemp].[id] AS [id], 
+    [mstemp].[btime] AS [btime], 
+    [mstemp].[etime] AS [etime]
+    FROM [dbo].[mstemp] AS [mstemp]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_Building" EntityType="Self.V_Building" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_Building].[ID] AS [ID], 
@@ -1314,6 +1388,26 @@
     [V_ResourceStatus].[ResourceEnable] AS [ResourceEnable]
     FROM [dbo].[V_ResourceStatus] AS [V_ResourceStatus]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_RMContract" EntityType="Self.V_RMContract" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_RMContract].[SYSID] AS [SYSID], 
+    [V_RMContract].[ResourceID] AS [ResourceID], 
+    [V_RMContract].[BusinessID] AS [BusinessID], 
+    [V_RMContract].[BusinessType] AS [BusinessType], 
+    [V_RMContract].[RentBeginTime] AS [RentBeginTime], 
+    [V_RMContract].[RentEndTime] AS [RentEndTime], 
+    [V_RMContract].[RentArea] AS [RentArea], 
+    [V_RMContract].[CustLongName] AS [CustLongName], 
+    [V_RMContract].[CustShortName] AS [CustShortName], 
+    [V_RMContract].[CustTel] AS [CustTel], 
+    [V_RMContract].[ReserveDept] AS [ReserveDept], 
+    [V_RMContract].[ReserveName] AS [ReserveName], 
+    [V_RMContract].[Status] AS [Status], 
+    [V_RMContract].[Remark] AS [Remark], 
+    [V_RMContract].[UpdateUser] AS [UpdateUser], 
+    [V_RMContract].[UpdateTime] AS [UpdateTime]
+    FROM [dbo].[V_RMContract] AS [V_RMContract]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_Stage" EntityType="Self.V_Stage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_Stage].[ID] AS [ID], 
@@ -1327,6 +1421,26 @@
     [V_Stage].[CityID] AS [CityID], 
     [V_Stage].[CityName] AS [CityName]
     FROM [dbo].[V_Stage] AS [V_Stage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_WYContract" EntityType="Self.V_WYContract" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_WYContract].[SYSID] AS [SYSID], 
+    [V_WYContract].[ResourceID] AS [ResourceID], 
+    [V_WYContract].[BusinessID] AS [BusinessID], 
+    [V_WYContract].[BusinessType] AS [BusinessType], 
+    [V_WYContract].[RentBeginTime] AS [RentBeginTime], 
+    [V_WYContract].[RentEndTime] AS [RentEndTime], 
+    [V_WYContract].[RentArea] AS [RentArea], 
+    [V_WYContract].[CustLongName] AS [CustLongName], 
+    [V_WYContract].[CustShortName] AS [CustShortName], 
+    [V_WYContract].[CustTel] AS [CustTel], 
+    [V_WYContract].[ReserveDept] AS [ReserveDept], 
+    [V_WYContract].[ReserveName] AS [ReserveName], 
+    [V_WYContract].[Status] AS [Status], 
+    [V_WYContract].[Remark] AS [Remark], 
+    [V_WYContract].[UpdateUser] AS [UpdateUser], 
+    [V_WYContract].[UpdateTime] AS [UpdateTime]
+    FROM [dbo].[V_WYContract] AS [V_WYContract]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Group_RKind" Association="Self.FK_Group_RKind">
             <End Role="T_ResourceKind" EntitySet="T_ResourceKind" />
@@ -1425,6 +1539,7 @@
           <EntitySet Name="T_Stage" EntityType="DorllyResourceModel.T_Stage" />
           <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
           <EntitySet Name="T_UserRole" EntityType="DorllyResourceModel.T_UserRole" />
+          <EntitySet Name="mstemp" EntityType="DorllyResourceModel.mstemp" />
           <EntitySet Name="V_Building" EntityType="DorllyResourceModel.V_Building" />
           <EntitySet Name="V_Floor" EntityType="DorllyResourceModel.V_Floor" />
           <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
@@ -1433,7 +1548,9 @@
           <EntitySet Name="V_Public" EntityType="DorllyResourceModel.V_Public" />
           <EntitySet Name="V_Resource" EntityType="DorllyResourceModel.V_Resource" />
           <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
+          <EntitySet Name="V_RMContract" EntityType="DorllyResourceModel.V_RMContract" />
           <EntitySet Name="V_Stage" EntityType="DorllyResourceModel.V_Stage" />
+          <EntitySet Name="V_WYContract" EntityType="DorllyResourceModel.V_WYContract" />
           <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_LoginInfo" EntitySet="T_LoginInfo" />
@@ -1843,11 +1960,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SysID" Type="Int32" />
           <Property Name="ResourceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="BusinessID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="BusinessType" Type="Int32" />
           <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
           <Property Name="RentEndTime" Type="DateTime" Precision="3" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1855,7 +1972,6 @@
           <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
-          <Property Name="Enable" Type="Boolean" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -1942,6 +2058,14 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="T_Role" Relationship="DorllyResourceModel.FK_UR_Role" FromRole="T_UserRole" ToRole="T_Role" />
           <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_UR_User" FromRole="T_UserRole" ToRole="T_User" />
+        </EntityType>
+        <EntityType Name="mstemp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="btime" Type="DateTime" Precision="3" />
+          <Property Name="etime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="V_Building">
           <Key>
@@ -2271,6 +2395,33 @@
           <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceEnable" Type="Boolean" />
         </EntityType>
+        <EntityType Name="V_RMContract">
+          <Key>
+            <PropertyRef Name="SYSID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="CustTel" />
+            <PropertyRef Name="ReserveDept" />
+            <PropertyRef Name="ReserveName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Remark" />
+          </Key>
+          <Property Name="SYSID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ResourceID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="CustLongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ReserveDept" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ReserveName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="V_Stage">
           <Key>
             <PropertyRef Name="ID" />
@@ -2285,6 +2436,33 @@
           <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_WYContract">
+          <Key>
+            <PropertyRef Name="SYSID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="CustTel" />
+            <PropertyRef Name="ReserveDept" />
+            <PropertyRef Name="ReserveName" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="Remark" />
+          </Key>
+          <Property Name="SYSID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ResourceID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="4" />
+          <Property Name="CustLongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ReserveDept" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ReserveName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Login_MF">
           <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
@@ -2823,7 +3001,6 @@
               <MappingFragment StoreEntitySet="T_ResourceStatus">
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
@@ -2831,11 +3008,11 @@
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -2918,6 +3095,15 @@
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mstemp">
+            <EntityTypeMapping TypeName="DorllyResourceModel.mstemp">
+              <MappingFragment StoreEntitySet="mstemp">
+                <ScalarProperty Name="etime" ColumnName="etime" />
+                <ScalarProperty Name="btime" ColumnName="btime" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3253,6 +3439,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_RMContract">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_RMContract">
+              <MappingFragment StoreEntitySet="V_RMContract">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
+                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
+                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_Stage">
             <EntityTypeMapping TypeName="DorllyResourceModel.V_Stage">
               <MappingFragment StoreEntitySet="V_Stage">
@@ -3266,6 +3474,28 @@
                 <ScalarProperty Name="ParkID" ColumnName="ParkID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_WYContract">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_WYContract">
+              <MappingFragment StoreEntitySet="V_WYContract">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
+                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
+                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
