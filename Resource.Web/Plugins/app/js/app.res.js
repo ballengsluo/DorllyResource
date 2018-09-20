@@ -24,10 +24,8 @@ $(function() {
 
 
     $("form").submit(function() {
+        setPrice();
         $(this).attr("disabled", "disabled");
-        $("#price input").each(function() {
-
-        });
         var form = new FormData($("form")[0]);
         if ($('input[type=submit]').attr("data-url") == '' || !$('input[type=submit]').attr("data-url")) { return false; }
         ajaxForm("post", $('input[type=submit]').attr("data-url"), form, "json", function(data) {
@@ -108,7 +106,26 @@ function changeNodeName() {
     }
 }
 
-function setPrice(max, min) {
+function setPrice() {
+    var min = 0;
+    var max = 0;
+    var index = 0;
+    $("#price input[type=number]").each(function() {
+        var number = $(this).val();
+        if (number.length > 0) {
+            if (index == 0) {
+                max = number;
+                min = number;
+                index++;
+            }
+            if (max < number) {
+                max = number;
+            }
+            if (min > number) {
+                min = number;
+            }
+        }
+    });
     $("#MaxPrice").val(max);
     $("#MinPrice").val(min);
 }

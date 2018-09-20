@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            
+
             var list = from a in dc.Set<T_ResourceGroup>()
                        join b in dc.Set<T_Park>() on a.ParkID equals b.ID into t1
                        from park in t1.DefaultIfEmpty()
@@ -36,6 +36,7 @@ namespace Resource.Web.Controllers
                            ResourceKindName = type.Name
                        };
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
@@ -53,7 +54,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_User user = RouteData.Values["user"] as T_User;
                 group.CreateTime = DateTime.Now;
                 group.CreateUser = user.Account;
@@ -71,7 +72,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            
+
             var group = dc.Set<T_ResourceGroup>().AsNoTracking().Where(a => a.ID == id).FirstOrDefault();
             return View(group);
         }
@@ -81,7 +82,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_User user = RouteData.Values["user"] as T_User;
-                
+
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 group.UpdateTime = DateTime.Now;
                 group.UpdateUser = user.Account;
@@ -101,7 +102,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_ResourceGroup>().Remove(group);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -118,7 +119,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_User user = RouteData.Values["user"] as T_User;
-                
+
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 group.Enable = true;
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -135,7 +136,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_User user = RouteData.Values["user"] as T_User;
-                
+
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 group.Enable = false;
                 if (dc.SaveChanges() > 0) return Json(Result.Success());

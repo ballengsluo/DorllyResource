@@ -22,6 +22,7 @@ namespace Resource.Web.Controllers
 
             var list = dc.Set<V_Stage>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             int count = list.Count();

@@ -19,6 +19,7 @@ namespace Resource.Web.Controllers
         {
             var list = dc.Set<V_Order>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);

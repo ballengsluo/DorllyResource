@@ -42,10 +42,11 @@ namespace Resource.Web.Controllers
         public ActionResult ParkDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var plist = user.Park.Split(',');
+            var plist = user.T_UserData.Select(a => a.DataID).ToList();
             var list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID));
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.RegionID == pid);
-            ViewData["dataList"] = new SelectList(list.Select(a => new { a.ID, a.Name }).ToList(), "ID", "Name", id);
+            var result = list.Select(a => new { a.ID, a.Name }).ToList();
+            ViewData["dataList"] = new SelectList(result, "ID", "Name", id);
             return PartialView();
         }
         public ActionResult ParkDropList(string pid)

@@ -1,10 +1,26 @@
 ﻿@helper park()
 {
-    foreach (var item in ViewBag.park)
+    if (ViewBag.Park != null && ViewBag.Park.Count > 0)
     {
-        <label class="checkbox-inline" style="margin-left:10px;">
-            <input type="checkbox" class="mypark" value="@item.ID"> @item.Name
-        </label>
+        <div class="form-group">
+            <label class="control-label col-md-3">所属园区</label>
+            <div class="col-md-8">
+                <input type="hidden" name="Park" id="Park" />
+                @foreach (var item in ViewBag.Park)
+                {
+                    <label class="checkbox-inline" style="margin-left:10px;">
+                        @if (item.Enable == true)
+                        {
+                            <input type="checkbox" class="park" value="@item.ID" checked> @item.Name
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="park" value="@item.ID"> @item.Name
+                        }
+                    </label>
+                }
+            </div>
+        </div>
     }
 }
 <!DOCTYPE html>
@@ -30,7 +46,9 @@
             }, new { @class = "form-horizontal" }))
             {
                 <div class="form-group">
-                    <label class="control-label col-md-3"><font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>登录账户</label>
+                    <label class="control-label col-md-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>登录账户
+                    </label>
                     <div class="col-md-8">
                         @Html.TextBox("Account", "", new { @class = "form-control", @required = "required" })
                     </div>
@@ -42,22 +60,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3"><font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>登录密码</label>
+                    <label class="control-label col-md-3">
+                        <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>登录密码
+                    </label>
                     <div class="col-md-8">
                         @Html.Password("PWD", "", new { @class = "form-control", @id = "" })
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3">所属园区</label>
-                    <div class="col-md-8">
-                        <input type="hidden" name="Park" id="Park" />
-                        @park()
-                    </div>
-                </div>
+                @park()
                 <div class="form-group">
                     <label class="control-label col-md-3">初始角色</label>
                     <div class="col-md-3">
-                        <select class="selectpicker form-control pull-righ" name="InitRole" title="请选择...">
+                        <select class="selectpicker form-control pull-righ" name="Role" title="请选择...">
                             <option value="1">管理员角色</option>
                             <option value="2">一般角色</option>
                         </select>
@@ -96,13 +110,14 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     <script>
         $(function () {
-            $(".mypark").change(function () {
+            $(".park").change(function () {
                 var park = "";
-                $("input:checkbox[class='mypark']:checked").each(function () {
+                $("input:checkbox[class='park']:checked").each(function () {
                     park = park + $(this).val() + ",";
                 });
                 $("#Park").val(park.substring(0, park.length - 1));
             });
+            
         });
     </script>
 </body>

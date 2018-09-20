@@ -161,6 +161,9 @@
     <Compile Include="T_User.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_UserData.cs">
+      <DependentUpon>DorllyResource.tt</DependentUpon>
+    </Compile>
     <Compile Include="T_UserRole.cs">
       <DependentUpon>DorllyResource.tt</DependentUpon>
     </Compile>

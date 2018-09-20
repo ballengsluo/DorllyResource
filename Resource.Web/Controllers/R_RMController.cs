@@ -34,6 +34,7 @@ namespace Resource.Web.Controllers
             else if (!string.IsNullOrEmpty(param.Build)) list = list.Where(a => a.Loc3 == param.Build);
             else if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.Loc2 == param.Stage);
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             int count = list.Count();

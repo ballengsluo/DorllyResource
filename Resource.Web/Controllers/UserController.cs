@@ -44,32 +44,44 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Create()
         {
-            var parklist = user.Park.Split(',');
-            var obj = user.Account == "admin" ?
-                dc.Set<T_Park>().Select(a => new { a.ID, a.Name }).ToList() :
-                dc.Set<T_Park>().Where(a => parklist.Contains(a.ID)).Select(a => new { a.ID, a.Name }).ToList();
-            ViewBag.park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj));
-            return View(user);
+            SetPark(null);
+            return View();
         }
         [HttpPost]
-        public JsonResult Create(T_User users)
+        public JsonResult Create(FormCollection form)
         {
             try
             {
-                if (string.IsNullOrEmpty(users.PWD)) users.PWD = Encrypt.EncryptDES("888888", 1);
-                else users.PWD = Encrypt.EncryptDES(users.PWD, 1);
-                users.Enable = true;
-                users.CreateDate = DateTime.Now;
-                dc.Set<T_User>().Add(users);
-                T_UserRole ur = new T_UserRole();
-                ur.UserID = users.Account;
-                if (!string.IsNullOrEmpty(Request.Form["InitRole"]) && Request.Form["InitRole"] == "1")
-                    ur.RoleID = 1;
+                //数据转换对象
+                T_User newUser = new T_User();
+                if (!TryUpdateModel(newUser, "", form.AllKeys))
+                    return Json(Result.Fail());
+                //密码加密
+                if (string.IsNullOrEmpty(newUser.PWD)) newUser.PWD = Encrypt.EncryptDES("888888", 1);
+                else newUser.PWD = Encrypt.EncryptDES(newUser.PWD, 1);
+                //其余数据补充
+                newUser.Enable = true;
+                newUser.CreateTime = DateTime.Now;
+                newUser.CreateUser = user.Account;
+                dc.Set<T_User>().Add(newUser);
+                //绑定数据权限
+                foreach (var item in form["Park"].Split(','))
+                {
+                    T_UserData ud = new T_UserData();
+                    ud.UserID = newUser.Account;
+                    ud.DataID = item;
+                    dc.Set<T_UserData>().Add(ud);
+                }
+                //绑定角色权限
+                T_UserRole role = new T_UserRole();
+                role.UserID = newUser.Account;
+                if (!string.IsNullOrEmpty(form["Role"]) && form["Role"] == "1")
+                    role.RoleID = 1;
                 else
-                    ur.RoleID = 2;
-                dc.Set<T_UserRole>().Add(ur);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                    role.RoleID = 2;
+                dc.Set<T_UserRole>().Add(role);
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -78,25 +90,32 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            var parklist = user.Park.Split(',');
-            var obj = user.Account == "admin" ?
-                dc.Set<T_Park>().Select(a => new { a.ID, a.Name }).ToList() :
-                dc.Set<T_Park>().Where(a => parklist.Contains(a.ID)).Select(a => new { a.ID, a.Name }).ToList();
-            ViewBag.park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj));
-            var userObj = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
-            return View(userObj);
+            var user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
+            SetPark(user);
+            return View(user);
         }
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
         {
             try
             {
-                T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
-                if (TryUpdateModel(user, "", form.AllKeys, new string[] { "Enable", "PWD", "CreateDate" }))
+                T_User updateUser = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
+                if (updateUser == null) return Json(Result.Fail(msg: "系统无此用户，更新失败！"));
+                if (!TryUpdateModel(updateUser, "", form.AllKeys, new string[] { "Enable", "PWD", "CreateTime", "CreateUser" }))
+                    return Json(Result.Fail());
+                updateUser.UpdateTime = DateTime.Now;
+                updateUser.UpdateUser = user.Account;
+                //绑定数据权限
+                dc.Database.ExecuteSqlCommand(string.Format("delete from t_userdata where userid='{0}'", updateUser.Account));
+                foreach (var item in form["Park"].Split(','))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    T_UserData ud = new T_UserData();
+                    ud.UserID = updateUser.Account;
+                    ud.DataID = item;
+                    dc.Set<T_UserData>().Add(ud);
                 }
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -108,6 +127,7 @@ namespace Resource.Web.Controllers
             T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
             return View(user);
         }
+
         public ActionResult SingleReset()
         {
             return View(user);
@@ -132,6 +152,7 @@ namespace Resource.Web.Controllers
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
+
         [HttpPost]
         public JsonResult Reset(string id, FormCollection form)
         {
@@ -229,6 +250,46 @@ namespace Resource.Web.Controllers
             {
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
+        }
+
+        public void SetPark(T_User cust)
+        {
+            List<T_UserData> custPark = null;
+            if (cust != null)
+                custPark = cust.T_UserData.ToList();
+            if (custPark != null && custPark.Count() > 0)
+            {
+                var mastPark = user.T_UserData
+                .Select(a => new
+                {
+                    a.DataID,
+                    Enable = custPark.Where(b => b.DataID == a.DataID).Count() > 0
+                })
+                .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
+                {
+                    ID = a.DataID,
+                    Name = b.Name,
+                    Enable = a.Enable
+                }).ToList();
+                ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(mastPark));
+            }
+            else
+            {
+                var mastPark = user.T_UserData
+                 .Select(a => new
+                 {
+                     a.DataID,
+                     Enable = false
+                 })
+                 .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
+                 {
+                     ID = a.DataID,
+                     Name = b.Name,
+                     Enable = a.Enable
+                 }).ToList();
+                ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(mastPark));
+            }
+
         }
     }
 }

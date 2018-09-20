@@ -53,6 +53,7 @@ namespace Resource.Model
         public virtual DbSet<T_RoleMenu> T_RoleMenu { get; set; }
         public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
+        public virtual DbSet<T_UserData> T_UserData { get; set; }
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
         public virtual DbSet<mstemp> mstemp { get; set; }
         public virtual DbSet<V_Building> V_Building { get; set; }

@@ -18,6 +18,7 @@ namespace Resource.Model
         public T_User()
         {
             this.T_LoginInfo = new HashSet<T_LoginInfo>();
+            this.T_UserData = new HashSet<T_UserData>();
             this.T_UserRole = new HashSet<T_UserRole>();
         }
     
@@ -37,6 +38,8 @@ namespace Resource.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_LoginInfo> T_LoginInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_UserData> T_UserData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_UserRole> T_UserRole { get; set; }
     }

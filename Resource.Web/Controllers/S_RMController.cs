@@ -17,13 +17,9 @@ namespace Resource.Web.Controllers
         }
         public ContentResult Search(string park)
         {
-            var parkDefalut = user.Park.Split(',')[0];
             var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 1);
             if (!string.IsNullOrEmpty(park)) list = list.Where(a => a.Loc1 == park);
-            else
-            {
-                list = list.Where(a => a.Loc1 == parkDefalut);
-            }
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             var buildList = list
                 .GroupBy(a => new { a.Loc3, a.Loc3Name })
                 .Select(a => new { a.Key.Loc3, a.Key.Loc3Name })
@@ -59,7 +55,7 @@ namespace Resource.Web.Controllers
             {
                 DateFormatString = "yyyy-MM-dd"
             };
-            var obj = JsonConvert.SerializeObject(result,setting).Replace("null", "\"\"");
+            var obj = JsonConvert.SerializeObject(result, setting).Replace("null", "\"\"");
             return Content(obj);
         }
     }

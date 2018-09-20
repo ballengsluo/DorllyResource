@@ -34,7 +34,7 @@ namespace Resource.Web.Controllers
         {
             get
             {
-                return user.Park.Split(',').ToList();
+                return user.T_UserData.Select(a => a.DataID).ToList();
             }
         }
         public string MenuPath

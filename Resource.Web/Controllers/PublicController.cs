@@ -29,6 +29,7 @@ namespace Resource.Web.Controllers
         {
             var list = dc.Set<V_Public>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ResourceID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.ResourceName.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
@@ -55,6 +56,7 @@ namespace Resource.Web.Controllers
             string[] pubList = dc.Set<T_ResourcePublic>().Where(a => a.Status != 6).Select(a => a.ResourceID).ToArray();
             var list = dc.Set<V_Resource>().Where(a => !pubList.Contains(a.ID));
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
+            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);

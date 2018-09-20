@@ -1,33 +1,30 @@
 ﻿@model Resource.Model.T_User
-<!DOCTYPE html>
 @helper park()
 {
-    
-    foreach (var item in ViewBag.park)
+    if (ViewBag.Park != null && ViewBag.Park.Count > 0)
     {
-        bool flag = false;
-        string[] list = Model.Park.Split(',');
-        for (int i = 0; i < list.Length; i++)
-        {
-            if (list[i] == Convert.ToString(item.ID))
-            {
-                flag = true;
-                break;
-            }
-        }
-        <label class="checkbox-inline" style="margin-left:10px;">
-            @if (flag == true)
-            {
-                <input type="checkbox" class="mypark" value="@item.ID" checked> @item.Name
-
-            }
-            else
-            {
-                <input type="checkbox" class="mypark" value="@item.ID"> @item.Name
-            }
-        </label>
+        <div class="form-group">
+            <label class="control-label col-md-3">所属园区</label>
+            <div class="col-md-8">
+                <input type="hidden" name="Park" id="Park" />
+                @foreach (var item in ViewBag.Park)
+                {
+                    <label class="checkbox-inline" style="margin-left:10px;">
+                        @if (item.Enable == true)
+                        {
+                            <input type="checkbox" class="park" value="@item.ID" checked> @item.Name
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="park" value="@item.ID"> @item.Name
+                        }
+                    </label>
+                }
+            </div>
+        </div>
     }
 }
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -54,25 +51,13 @@
                         @Html.TextBox("Account", Model.Account, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
-                @*<div class="form-group">
-                        <label class="control-label col-md-3">登录密码</label>
-                        <div class="col-md-8">
-                            @Html.Password("PWD", Model.PWD, new { @class = "form-control", @id = "" })
-                        </div>
-                    </div>*@
                 <div class="form-group">
                     <label class="control-label col-md-3">用户姓名</label>
                     <div class="col-md-8">
                         @Html.TextBox("UserName", @Model.UserName, new { @class = "form-control" })
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3">所属园区</label>
-                    <div class="col-md-8">
-                        <input type="hidden" name="Park" id="Park" />
-                        @park()
-                    </div>
-                </div>
+                @park()
                 <div class="form-group">
                     <label class="control-label col-md-3">联系电话</label>
                     <div class="col-md-8">
@@ -106,13 +91,16 @@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     <script>
         $(function () {
-            $(".mypark").change(function () {
+            $(".park").change(function () {
                 var park = "";
-                $("input:checkbox[class='mypark']:checked").each(function () {
+                $("input:checkbox[class='park']:checked").each(function () {
                     park = park + $(this).val() + ",";
                 });
                 $("#Park").val(park.substring(0, park.length - 1));
             });
+            if ($("#Park").length > 0) {
+                $("input:checkbox[class='park']:checked").trigger("change");
+            }
         });
     </script>
 
