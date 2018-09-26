@@ -1,0 +1,171 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>资源统计列表</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+    @Styles.Render("~/Plugins/app/css/app.statistics.css")
+</head>
+<body>
+    <div class="container">
+        <div class="select-action">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">园区</span>
+                        @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">查询时间</span>
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <input class="form-control" id="stime">
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1">
+                            <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <input class="form-control" id="etime">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                    <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab  layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">列表数据</li>
+                <li>图形数据</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="statistics-panel">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 statistics-title">
+                                房屋
+                            </div>
+                            <div class="col-lg-3 col-md-3 statistics-total">
+                                <div>总面积</div>
+                                <div class="statistics-num"><span id="rm-total">12345670.98</span><span>㎡</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>客户租赁面积</div>
+                                <div class="statistics-rate"><span id="rm-rentRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="rm-rent">345670.98</span><span>㎡</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>内部使用面积</div>
+                                <div class="statistics-rate"><span id="rm-selfRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="rm-self">345670.98</span><span>㎡</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>空置面积</div>
+                                <div class="statistics-rate"><span id="rm-freeRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="rm-free">670.98</span><span>㎡</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 statistics-title">
+                                工位
+                            </div>
+                            <div class="col-lg-3 col-md-3 statistics-total">
+                                <div>工位总数</div>
+                                <div class="statistics-num"><span id="wp-total">5</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>客户租赁个数</div>
+                                <div class="statistics-rate"><span id="wp-rentRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="wp-rent">5</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>内部使用个数</div>
+                                <div class="statistics-rate"><span id="wp-selfRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="wp-self">5</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>空置个数</div>
+                                <div class="statistics-rate"><span id="wp-freeRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="wp-free">5</span><span>次</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 statistics-title">
+                                会议室
+                            </div>
+                            <div class="col-lg-3 col-md-3 statistics-total">
+                                <div>总租赁次数</div>
+                                <div class="statistics-num"><span id="cr-total">@ViewBag.num</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>客户租赁次数</div>
+                                <div class="statistics-rate"><span id="cr-rentRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="cr-rent">5</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>内部使用次数</div>
+                                <div class="statistics-rate"><span id="cr-selfRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="cr-self">5</span><span>次</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>空置次数数</div>
+                                <div class="statistics-rate" style="visibility:hidden;"><span></span>0<span></span>%</div>
+                                <div class="statistics-num"><span>0</span><span>次</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 statistics-title">
+                                广告位
+                            </div>
+                            <div class="col-lg-3 col-md-3 statistics-total">
+                                <div>广告位总数</div>
+                                <div class="statistics-num"><span id="ad-total">5</span><span>个</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>客户租赁个数</div>
+                                <div class="statistics-rate"><span id="ad-rentRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="ad-rent">5</span><span>个</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>内部使用个数</div>
+                                <div class="statistics-rate"><span id="ad-selfRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="ad-self">5</span><span>个</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div>空置个数</div>
+                                <div class="statistics-rate"><span id="ad-freeRate">22.22</span><span>%</span></div>
+                                <div class="statistics-num"><span id="ad-free">5</span><span>个</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item">内容4</div>
+                <div class="layui-tab-item">内容5</div>
+            </div>
+        </div>
+
+
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/app.statistics-all.js")
+</body>
+</html>

@@ -790,6 +790,7 @@
     <Content Include="Views\Shared\_Func.cshtml" />
     <Content Include="Views\Admin\_Order - 复制.cshtml" />
     <Content Include="Views\Admin\_Resource - 复制.cshtml" />
+    <Content Include="Views\StatisticsAll\Index.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -836,6 +837,7 @@
     <Compile Include="Controllers\R_CBController.cs" />
     <Compile Include="Controllers\R_MRController.cs" />
     <Compile Include="Controllers\R_RMController.cs" />
+    <Compile Include="Controllers\StatisticsAllController.cs" />
     <Compile Include="Controllers\StatisticsListController.cs" />
     <Compile Include="Controllers\StatisticsList_BBController.cs" />
     <Compile Include="Controllers\StatisticsList_CRController.cs" />

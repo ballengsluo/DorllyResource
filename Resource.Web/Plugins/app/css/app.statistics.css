@@ -1,0 +1,53 @@
+/* 
+    Tab样式调整
+*/
+
+.layui-tab-title>li {
+    width: 50%;
+}
+
+
+/* 
+    数据平面样式
+*/
+
+.statistics-panel>.row>div {
+    border-right: 2px solid #ccc;
+    height: 90px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.statistics-panel .statistics-title {
+    line-height: 90px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 0px;
+}
+
+.statistics-panel>.row>div>div:first-of-type {
+    color: #ccc;
+    font-weight: 500;
+}
+
+.statistics-panel>.row>div>div:last-of-type {
+    position: absolute;
+    left: 20px;
+    bottom: 5px;
+}
+
+.statistics-panel .statistics-rate {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.statistics-panel .statistics-rate>span:first-of-type {
+    font-weight: 600;
+}
+
+.statistics-panel .statistics-num>span:first-of-type {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 4px;
+}
