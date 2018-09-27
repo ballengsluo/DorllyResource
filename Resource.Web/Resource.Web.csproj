@@ -791,6 +791,11 @@
     <Content Include="Views\Admin\_Order - 复制.cshtml" />
     <Content Include="Views\Admin\_Resource - 复制.cshtml" />
     <Content Include="Views\StatisticsAll\Index.cshtml" />
+    <Content Include="Views\StatisticsRM\Index.cshtml" />
+    <Content Include="Views\StatisticsWP\Index.cshtml" />
+    <Content Include="Views\StatisticsRM\_Template.cshtml" />
+    <Content Include="Views\StatisticsAD\Index.cshtml" />
+    <Content Include="Views\StatisticsCR\Index.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -837,12 +842,16 @@
     <Compile Include="Controllers\R_CBController.cs" />
     <Compile Include="Controllers\R_MRController.cs" />
     <Compile Include="Controllers\R_RMController.cs" />
+    <Compile Include="Controllers\StatisticsADController.cs" />
     <Compile Include="Controllers\StatisticsAllController.cs" />
+    <Compile Include="Controllers\StatisticsCRController.cs" />
     <Compile Include="Controllers\StatisticsListController.cs" />
     <Compile Include="Controllers\StatisticsList_BBController.cs" />
     <Compile Include="Controllers\StatisticsList_CRController.cs" />
     <Compile Include="Controllers\StatisticsList_RMController.cs" />
     <Compile Include="Controllers\StatisticsList_WPController.cs" />
+    <Compile Include="Controllers\StatisticsRMController.cs" />
+    <Compile Include="Controllers\StatisticsWPController.cs" />
     <Compile Include="Controllers\S_ADController.cs" />
     <Compile Include="Controllers\S_CBController.cs" />
     <Compile Include="Controllers\S_MRController.cs" />

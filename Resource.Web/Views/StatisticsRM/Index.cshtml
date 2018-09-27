@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>房屋统计报表</title>
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
+    @Styles.Render("~/Plugins/app/css/app.index.css")
+    @Styles.Render("~/Plugins/app/css/app.statistics.css")
+</head>
+<body>
+    <div class="container">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">汇总统计</li>
+                <li>趋势分析</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="select-action">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <div class="input-group">
+                                    <span class="input-group-addon">园区</span>
+                                    @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5">
+                                <div class="input-group">
+                                    <span class="input-group-addon">查询时间</span>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <input class="form-control" id="stime">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                        <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <input class="form-control" id="etime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-primary" id="searchDay" data-url="@Url.Action("SearchDay")" style="font-size:15px;">
+                                    <i class="layui-icon layui-icon-search"></i> 查 询
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-tab layui-tab-card">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">列表</li>
+                            <li>图表</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show" id="statistics-panel">  
+                            </div>
+                            <div class="layui-tab-item">
+                                <div style="text-align:center;line-height:300px;">暂无数据！</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-tab-item">
+                    <div class="select-action">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-0">
+                                <div class="input-group">
+                                    <span class="input-group-addon">查询时间</span>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <input class="form-control" id="stime1">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                        <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <input class="form-control" id="etime2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-primary" id="searchMonth" data-url="@Url.Action("SearchMonth")" style="font-size:15px;">
+                                    <i class="layui-icon layui-icon-search"></i> 查 询
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
+    @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/app/js/app.common.js")
+    @Scripts.Render("~/Plugins/app/js/app.statistics-rm.js")
+    <script>
+
+    </script>
+</body>
+</html>
