@@ -26,7 +26,7 @@ function park(data) {
             parkList = data.Part1;
         }
         if (parkList.length <= 0) {
-            $("#statistics-panel").html(" <div style='text-align:center;line-height:300px;'>暂无数据！</div>");
+            $("#statistics-panel").html("<div style='text-align:center;line-height:300px;'>暂无数据！</div>");
             return false;
         }
         var parkContainer = $("<div class='statistics-panel'></div>");

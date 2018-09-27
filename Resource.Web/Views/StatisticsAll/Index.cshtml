@@ -47,11 +47,11 @@
         </div>
         <div class="layui-tab  layui-tab-brief">
             <ul class="layui-tab-title">
-                <li class="layui-this">列表</li>
-                <li>图表</li>
+                <li>列表</li>
+                <li class="layui-this">图表</li>
             </ul>
             <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">
+                <div class="layui-tab-item">
                     <div class="statistics-panel">
                         <div class="row">
                             <div class="col-lg-1 col-md-1 statistics-title">
@@ -75,8 +75,6 @@
                                 <div class="statistics-name">空置面积</div>
                                 <div class="statistics-rate"><span id="rm-freeRate">0</span><span>%</span></div>
                                 <div class="statistics-num"><span id="rm-free">0</span><span>㎡</span></div>
-                            </div>
-                            <div class="col-lg-1 col-md-1 statistics-detail" style="display:none;">
                             </div>
                         </div>
                         <div class="row">
@@ -102,8 +100,6 @@
                                 <div class="statistics-rate"><span id="wp-freeRate">0</span><span>%</span></div>
                                 <div class="statistics-num"><span id="wp-free">0</span><span>次</span></div>
                             </div>
-                            <div class="col-lg-1 col-md-1 statistics-detail" style="display:none;">
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1 col-md-1 statistics-title">
@@ -128,8 +124,6 @@
                                 <div class="statistics-rate" style="visibility:hidden;"><span id="cr-freeRate"></span>0<span></span>%</div>
                                 <div class="statistics-num"><span id="cr-free">0</span><span>次</span></div>
                             </div>
-                            <div class="col-lg-1 col-md-1 statistics-detail" style="display:none;">
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1 col-md-1 statistics-title">
@@ -153,13 +147,17 @@
                                 <div class="statistics-name">空置个数</div>
                                 <div class="statistics-rate"><span id="ad-freeRate">0</span><span>%</span></div>
                                 <div class="statistics-num"><span id="ad-free">0</span><span>个</span></div>
-                            </div>
-                            <div class="col-lg-1 col-md-1 statistics-detail" style="display:none;">
-                            </div>
+                            </div>                     
                         </div>
                     </div>
+
+                    <div class="row" id="graph">
+                    </div>
                 </div>
-                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item layui-show">
+                    <div class="row statistics-graph" id="statistics-graph">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -170,6 +168,7 @@
     @Scripts.Render("~/Plugins/layui/layui.js")
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
+    @Scripts.Render("~/Plugins/echarts/echarts.common.min.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.statistics-all.js")
 </body>

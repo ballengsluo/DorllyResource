@@ -77,3 +77,17 @@
     color: blue;
     cursor: pointer;
 }
+
+
+/* 
+    图表样式
+*/
+
+
+/* .statistics-graph {
+    min-height: 300px;
+} */
+
+.statistics-graph>div {
+    height: 400px;
+}
