@@ -88,6 +88,13 @@
     min-height: 300px;
 } */
 
-.statistics-graph>div {
-    height: 400px;
+.statistics-graph>div>div {
+    height: 300px;
+    width: 100%;
+    float: left;
+}
+
+#graph>div {
+    height: 300px;
+    width: 50%;
 }
