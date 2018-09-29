@@ -1,81 +1,14 @@
 $(function() {
-    init();
-    searchDay();
-    searchMonth();
     $('#searchDay').trigger("click");
     $('#searchMonth').trigger("click");
 });
 
-function init() {
-    layui.use('element', function() {
-        var element = layui.element
-    });
-    if ($('#stime').length > 0) {
-        layui.use('laydate', function() {
-            var laydate = layui.laydate
-            laydate.render({
-                elem: '#stime'
-            });
-        });
-    }
-    if ($('#etime').length > 0) {
-        layui.use('laydate', function() {
-            var laydate = layui.laydate
-            laydate.render({
-                elem: '#etime'
-            });
-        });
-    }
-    if ($('#stime1').length > 0) {
-        layui.use('laydate', function() {
-            var laydate = layui.laydate
-            laydate.render({
-                elem: '#stime1',
-                type: 'month'
-            });
-        });
-    }
-    if ($('#etime1').length > 0) {
-        layui.use('laydate', function() {
-            var laydate = layui.laydate
-            laydate.render({
-                elem: '#etime1',
-                type: 'month'
-            });
-        });
-    }
-}
-
-function searchDay() {
-    $('#searchDay').click(function() {
-        ajax('get', $(this).attr('data-url'), {
-            beginTime: $('#stime').val(),
-            endTime: $('#etime').val()
-        }, 'json', function(data) {
-
-            park(data);
-        });
-    });
-}
-
-function searchMonth() {
-    $('#searchMonth').click(function() {
-        ajax('get', $(this).attr('data-url'), {
-            beginTime: $('#stime1').val(),
-            endTime: $('#etime1').val()
-        }, 'json', function(data) {
-            console.log(data);
-            if (data.Flag == 1) {
-                var html = template('tableTpl', { park: data.park, month: data.month });
-                $("#tb").html(html);
-            }
-        });
-    });
-}
-
-function park(data) {
+function dealDayData(data) {
+    // console.log(data);
+    var $container = $("#statistics-list-normal");
     if (data.Flag == 1) {
         var parkList;
+        //筛选园区数据
         if ($("#park").val().length > 0) {
             parkList = $.grep(data.Part1, function(obj, i) {
                 return obj.ParkID == $("#park").val();
@@ -83,12 +16,14 @@ function park(data) {
         } else {
             parkList = data.Part1;
         }
+
         if (parkList.length <= 0) {
-            $("#statistics-panel").html("<div style='text-align:center;line-height:300px;'>暂无数据！</div>");
+            $container.html("<div style='text-align:center;line-height:300px;'>暂无数据！</div>");
             return false;
         }
-        $("#statistics-graph").html("");
-        var parkContainer = $("<div class='statistics-panel'></div>");
+        //组装数据
+        $("#statistics-graph-pie").html(""); //清除图表数据
+        var parkContainer = $("<div class='statistics-list'></div>");
         $.each(parkList, function(idx, park) {
             var parkHtml = $("<div class='row'></div>");
             parkHtml.append("<div class='col-lg-1 col-md-1 statistics-title'>" + park.ParkName + "</div>");
@@ -103,7 +38,7 @@ function park(data) {
             // 楼栋数据处理
             if (buildList.length > 0) {
                 parkHtml.append("<div class='col-lg-1 col-md-1 statistics-detail'><div data-id='" + park.ParkID + "'>查看楼栋<i class='glyphicon glyphicon-menu-down'></i></div></div>");
-                var buildContainer = $("<div class='statistics-panel' style='display:none;' data-pid='" + park.ParkID + "'></div>");
+                var buildContainer = $("<div class='statistics-list' style='display:none;' data-pid='" + park.ParkID + "'></div>");
                 $.each(buildList, function(idx, build) {
                     var buildHtml = $("<div class='row'></div>");
                     buildHtml.append("<div class='col-lg-offset-1 col-md-offset-1 col-lg-1 col-md-1 statistics-title'>" + build.Name + "</div>");
@@ -118,18 +53,17 @@ function park(data) {
             parkContainer.append(parkHtml);
             parkContainer.append(buildContainer);
             // 图表处理
-            var len = parkList.length;
-            var title = park.ParkName;
             var graphData = new Array();
             graphData.push({ name: "客户租赁", value: park.RentRate });
             graphData.push({ name: "内部使用", value: park.SelfRate });
             graphData.push({ name: "空置", value: park.FreeRate });
-            graph(park.ParkID, len, park.ParkName, graphData);
+            graphPie(park.ParkID, parkList.length, park.ParkName, graphData);
         });
-        $("#statistics-panel").html(parkContainer);
-        checkBuild();
+        $container.html(parkContainer);
+        checkBuild(); //查看楼栋事件绑定
     } else {
-        $("#statistics-panel").html(" <div style='text-align:center;line-height:300px;'>数据异常！</div>");
+        layer.msg(data.Msg);
+        console.log(data.ExMsg);
     }
 
 }
@@ -149,57 +83,17 @@ function checkBuild() {
     });
 }
 
+function dealMonthData(data) {
 
-function graph(id, len, title, data) {
-    if (len == 1) {
-        $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() + "px;height:400px;'></div></div>");
+    if (data.Flag == 1) {
+        // 表格数据处理
+        var html = template('tableTpl', { park: data.park, month: data.monthData });
+        $("#statistics-list-table").html(html);
+        // 图表数据处理
+        graphLine("房屋租用率趋势图", data.park, data.month, lineSeries(data.parkData));
     } else {
-        $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() / 2 + "px;height:300px;'></div></div>");
+        layer.msg(data.Msg);
+        console.log(data.ExMsg);
     }
-    var myChart = echarts.init(document.getElementById(id));
-    var option = {
-        title: {
-            text: title,
-            left: '0'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{b} : {c} %"
-        },
 
-        legend: {
-            orient: 'vertical',
-            top: '10%',
-            bottom: 10,
-            left: '0',
-            data: ['客户租赁', '内部使用', '空置']
-        },
-        series: [{
-            type: 'pie',
-            radius: '70%',
-            center: ['50%', '50%'],
-            selectedMode: 'single',
-            label: {
-                position: 'outside',
-                formatter: '{b}: {c}%'
-            },
-            labelLine: {
-                length2: 0,
-                smooth: true,
-                lineStyle: {
-                    type: 'dotted'
-                }
-            },
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            },
-            data: data
-        }]
-    };
-    myChart.setOption(option);
-    $("#" + id).removeAttr("style");
 }

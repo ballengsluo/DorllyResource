@@ -878,6 +878,7 @@
     <Compile Include="Models\SMRView.cs" />
     <Compile Include="Models\Util\Result.cs" />
     <Compile Include="Models\View\OrderStatistics.cs" />
+    <Compile Include="Models\View\StatisticsMonthView.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Plugins\ueditor\net\App_Code\CrawlerHandler.cs" />

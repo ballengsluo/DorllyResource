@@ -27,62 +27,7 @@ function init() {
     $("#search").trigger("click");
 }
 
-function graph() {
-    // $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6' id='rm'></div>");
-    // $("#statistics-graph").html("<div class='col-lg-6 col-md-6 col-sm-6' id='rm'></div>");
-    // alert($("#statistics-graph").outerHeight());
-    // alert($("#statistics-graph").outerWidth());
-    // var myChart = echarts.init(document.getElementById('statistics-graph'));
-    // alert($("#rm").outerHeight());
-    // alert($("#rm").outerWidth());
-    // $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6' id='rm'></div>");
-    // $("#statistics-graph").html("<div class='col-lg-6 col-md-6 col-sm-6' id='rm'></div>");
-    // alert($("#statistics-graph").outerHeight());
-    // alert($("#statistics-graph").outerWidth());
-    // alert($("#graph1").outerHeight());
-    // alert($("#graph1").outerWidth());
-    var myChart = echarts.init(document.getElementById('graph1'));
-    var option = {
-        title: {
-            text: '房屋使用率',
-            left: '10%'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{b} : {c} ({d}%)"
-        },
 
-        legend: {
-            orient: 'vertical',
-            top: '10%',
-            bottom: 10,
-            left: '10%',
-            data: ['客户租赁', '内部使用', '空置']
-        },
-        series: [{
-            type: 'pie',
-            radius: '70%',
-            center: ['60%', '50%'],
-            selectedMode: 'single',
-            label: { position: 'outside' },
-            data: [
-                { value: 68527.67, name: '客户租赁' },
-                { value: 330, name: '内部使用' },
-                { value: 59489.66, name: '空置' }
-            ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }]
-    };
-    myChart.setOption(option);
-    $("#statistics-graph").append($("#graph>div"));
-    $("#graph>div").remove();
-}
 
 function search() {
     $('#search').click(function() {
@@ -93,8 +38,10 @@ function search() {
         }, 'json', function(data) {
             console.log(data);
             if (data.length > 0) {
+                var title = "";
                 $(".statistics-rate>span:first-of-type").html(0);
                 $(".statistics-num>span:first-of-type").html(0);
+                $("#statistics-graph").html("");
                 $.each(data, function(idx, item) {
                     if (item.Kind == 1) {
                         $("#rm-total").html(item.Total);
@@ -104,6 +51,7 @@ function search() {
                         $("#rm-selfRate").html(item.SelfRate);
                         $("#rm-free").html(item.Free);
                         $("#rm-freeRate").html(item.FreeRate);
+                        title = "房屋使用率";
                     } else if (item.Kind == 2) {
                         $("#wp-total").html(item.Total);
                         $("#wp-rent").html(item.Rent);
@@ -112,6 +60,7 @@ function search() {
                         $("#wp-selfRate").html(item.SelfRate);
                         $("#wp-free").html(item.Free);
                         $("#wp-freeRate").html(item.FreeRate);
+                        title = "工位使用率";
                     } else if (item.Kind == 3) {
                         $("#cr-total").html(item.Total);
                         $("#cr-rent").html(item.Rent);
@@ -120,6 +69,7 @@ function search() {
                         $("#cr-selfRate").html(item.SelfRate);
                         $("#cr-free").html(item.Free);
                         $("#cr-freeRate").html(item.FreeRate);
+                        title = "会议室使用率";
                     } else if (item.Kind == 4) {
                         $("#ad-total").html(item.Total);
                         $("#ad-rent").html(item.Rent);
@@ -128,12 +78,17 @@ function search() {
                         $("#ad-selfRate").html(item.SelfRate);
                         $("#ad-free").html(item.Free);
                         $("#ad-freeRate").html(item.FreeRate);
+                        title = "广告位使用率";
                     }
                     var data = new Array();
-                    data.push({ name: "客户租赁", num: item.Rent, rate: item.RentRate });
-                    data.push({ name: "内部使用", num: item.Self, rate: item.SelfRate });
-                    data.push({ name: "空置", num: item.Free, rate: item.FreeRate });
-                    g2("grapy" + idx, data);
+                    // data.push({ name: "客户租赁", num: item.Rent, rate: item.RentRate });
+                    // data.push({ name: "内部使用", num: item.Self, rate: item.SelfRate });
+                    // data.push({ name: "空置", num: item.Free, rate: item.FreeRate });
+                    data.push({ name: "客户租赁", value: item.RentRate });
+                    data.push({ name: "内部使用", value: item.SelfRate });
+                    data.push({ name: "空置", value: item.FreeRate });
+                    graph("graph_" + idx, title, data);
+                    // g2("grapy" + idx, data);
                 });
 
             } else {
@@ -141,6 +96,56 @@ function search() {
             }
         });
     });
+}
+
+function graph(id, title, data) {
+    $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() / 2 + "px;height:300px;'></div></div>");
+    var myChart = echarts.init(document.getElementById(id));
+    var option = {
+        title: {
+            text: title,
+            left: '0'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{b} : {c} %"
+        },
+
+        legend: {
+            orient: 'vertical',
+            top: '10%',
+            bottom: 10,
+            left: '0',
+            data: ['客户租赁', '内部使用', '空置']
+        },
+        series: [{
+            type: 'pie',
+            radius: '70%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            label: {
+                position: 'outside',
+                formatter: '{b}: {c}%'
+            },
+            labelLine: {
+                length2: 0,
+                smooth: true,
+                lineStyle: {
+                    type: 'dotted'
+                }
+            },
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            },
+            data: data
+        }]
+    };
+    myChart.setOption(option);
+    $("#" + id).removeAttr("style");
 }
 
 function g2(id, data) {

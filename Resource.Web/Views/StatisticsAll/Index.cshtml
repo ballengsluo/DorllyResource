@@ -52,7 +52,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <div class="statistics-panel">
+                    <div class="statistics-panel" id="statistics-panel">
                         <div class="row">
                             <div class="col-lg-1 col-md-1 statistics-title">
                                 房屋
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2">
                                 <div class="statistics-name">空置次数数</div>
-                                <div class="statistics-rate" style="visibility:hidden;"><span id="cr-freeRate"></span>0<span></span>%</div>
+                                <div class="statistics-rate"><span id="cr-freeRate"></span><span></span>%</div>
                                 <div class="statistics-num"><span id="cr-free">0</span><span>次</span></div>
                             </div>
                         </div>
@@ -147,22 +147,7 @@
                                 <div class="statistics-name">空置个数</div>
                                 <div class="statistics-rate"><span id="ad-freeRate">0</span><span>%</span></div>
                                 <div class="statistics-num"><span id="ad-free">0</span><span>个</span></div>
-                            </div>                     
-                        </div>
-                    </div>
-
-                    <div class="row" id="graph" style="visibility:hidden;">
-                        <div id="graph1">
-
-                        </div>
-                        <div id="graph2">
-
-                        </div>
-                        <div id="graph3">
-
-                        </div>
-                        <div id="graph4">
-
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,7 +166,7 @@
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/echarts/echarts.common.min.js")
-    @Scripts.Render("~/Plugins/app/js/g2.min.js")
+    @*@Scripts.Render("~/Plugins/app/js/g2.min.js")*@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.statistics-all.js")
 </body>

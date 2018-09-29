@@ -34,7 +34,7 @@
  *  数据表格样式
 */
 
-.data-action>table>thead>tr>th {
+.data-action table>thead>tr>th {
     background-color: #E0FFFF;
 }
 
@@ -47,6 +47,7 @@
 .data-action .table tr td {
     text-align: center;
     vertical-align: middle;
+    padding: 8px 0px;
 }
 
 
