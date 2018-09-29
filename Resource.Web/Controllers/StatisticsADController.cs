@@ -69,51 +69,61 @@ namespace Resource.Web.Controllers
                 DataSet ds = SQLFactory.Create().GetDataSet("Pro_StatisticsAD", CommandType.StoredProcedure, spList.ToArray());
                 var result = JsonConvert.DeserializeObject<List<StatisticsMonthView>>(JsonConvert.SerializeObject(ds.Tables[0]));
                 /*
-                 * 园区数据组装:为图表服务
-                 */
-                var parkList = result.GroupBy(a => new { ParkID = a.ParkID, a.ParkName })
-                    .OrderBy(a => a.Key.ParkID)
-                    .Select(a => new { a.Key.ParkID, a.Key.ParkName })
+                  * 园区数据组装:为图表服务
+                  */
+                var titleList = result.GroupBy(a => new { a.ID, a.Name })
+                    .OrderBy(a => a.Key.ID)
+                    .Select(a => new { a.Key.ID, a.Key.Name })
                     .ToList();
-                List<object> parkDataList = new List<object>();
-                foreach (var item in parkList)
+                var monthList = result.GroupBy(a => a.MonthTime)
+                    .OrderBy(a => a.Key)
+                    .Select(a => a.Key)
+                    .ToList();
+                var seriesData = new List<object>();
+                foreach (var item in titleList)
                 {
-                    parkDataList.Add(new
+                    seriesData.Add(new
                     {
-                        parkName = item.ParkName,
-                        parkData = result.Where(a => a.ParkID == item.ParkID)
+                        name = item.Name,
+                        data = result.Where(a => a.ID == item.ID)
                         .OrderBy(a => a.MonthTime)
                         .Select(a => a.RentRate)
                         .ToList()
                     });
                 }
+                var graph = new
+                {
+                    legend = titleList.Select(a => a.Name).ToList(),
+                    xAxis = monthList,
+                    series = seriesData
+                };
                 /*
                  * 月份数据组装:为表格服务
                  */
-                List<string> monthList = result.GroupBy(a => a.MonthTime)
-                    .OrderBy(a => a.Key)
-                    .Select(a => a.Key)
-                    .ToList();
-                List<object> monthDataList = new List<object>();
+                var rowsData = new List<object>();
                 foreach (var item in monthList)
                 {
-                    monthDataList.Add(new
+                    rowsData.Add(new
                     {
-                        monthName = item,
-                        monthData = result.Where(a => a.MonthTime == item)
-                            .OrderBy(a => a.ParkID)
+                        name = item,
+                        data = result.Where(a => a.MonthTime == item)
+                            .OrderBy(a => a.ID)
                             .Select(a => a.RentRate)
                             .ToList()
                     });
                 }
+                var table = new
+                {
+                    title = titleList.Select(a => a.Name).ToList(),
+                    rows = rowsData
+                };
                 var obj = JsonConvert.SerializeObject(new
                 {
                     Flag = 1,
-                    park = parkList.Select(a => a.ParkName).ToList(),
-                    parkData = parkDataList,
-                    month = monthList,
-                    monthData = monthDataList
+                    graph = graph,
+                    table = table
                 });
+                return Content(obj);
                 return Content(obj);
             }
             catch (Exception ex)

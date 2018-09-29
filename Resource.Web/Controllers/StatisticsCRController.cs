@@ -42,7 +42,7 @@ namespace Resource.Web.Controllers
             }
             catch (Exception ex)
             {
-                return Content(JsonConvert.SerializeObject(Result.Exception(exmsg:ex.StackTrace)));
+                return Content(JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace)));
             }
         }
 
@@ -70,51 +70,62 @@ namespace Resource.Web.Controllers
             };
                 DataSet ds = SQLFactory.Create().GetDataSet("Pro_StatisticsCR", CommandType.StoredProcedure, spList.ToArray());
                 var result = JsonConvert.DeserializeObject<List<StatisticsMonthView>>(JsonConvert.SerializeObject(ds.Tables[0]));
-                /*
-                 * 园区数据组装:为图表服务
-                 */
-                var parkList = result.GroupBy(a => new { ParkID = a.ParkID, a.ParkName })
-                    .OrderBy(a => a.Key.ParkID)
-                    .Select(a => new { a.Key.ParkID, a.Key.ParkName })
+
+                var titleList = result.GroupBy(a => new { a.ID, a.Name, a.ParkName })
+                    .OrderBy(a => a.Key.ID)
+                    .Select(a => new { a.Key.ID, a.Key.Name, a.Key.ParkName })
                     .ToList();
-                List<object> parkDataList = new List<object>();
-                foreach (var item in parkList)
+                var monthList = result.GroupBy(a => a.MonthTime)
+                    .OrderBy(a => a.Key)
+                    .Select(a => a.Key)
+                    .ToList();
+                /*
+                 * 图表
+                 */                
+                var seriesData = new List<object>();
+                foreach (var item in titleList)
                 {
-                    parkDataList.Add(new
+                    seriesData.Add(new
                     {
-                        parkName = item.ParkName,
-                        parkData = result.Where(a => a.ParkID == item.ParkID)
+                        name = item.Name,
+                        data = result.Where(a => a.ID == item.ID)
                         .OrderBy(a => a.MonthTime)
                         .Select(a => a.RentRate)
                         .ToList()
                     });
                 }
-                /*
-                 * 月份数据组装:为表格服务
-                 */
-                List<string> monthList = result.GroupBy(a => a.MonthTime)
-                    .OrderBy(a => a.Key)
-                    .Select(a => a.Key)
-                    .ToList();
-                List<object> monthDataList = new List<object>();
-                foreach (var item in monthList)
+                var graph = new
                 {
-                    monthDataList.Add(new
+                    legend = titleList.Select(a => a.Name).ToList(),
+                    xAxis = monthList,
+                    series = seriesData
+                };
+                /*
+                 * 表格
+                 */
+                var rowsData = new List<object>();
+                foreach (var item in titleList)
+                {
+                    rowsData.Add(new
                     {
-                        monthName = item,
-                        monthData = result.Where(a => a.MonthTime == item)
-                            .OrderBy(a => a.ParkID)
+                        name = item.Name,
+                        parkName= item.ParkName,
+                        data = result.Where(a => a.ID==item.ID)
+                            .OrderBy(a => a.MonthTime)
                             .Select(a => a.RentRate)
                             .ToList()
                     });
                 }
+                var table = new
+                {
+                    title = monthList,
+                    rows = rowsData
+                };
                 var obj = JsonConvert.SerializeObject(new
                 {
                     Flag = 1,
-                    park = parkList.Select(a => a.ParkName).ToList(),
-                    parkData = parkDataList,
-                    month = monthList,
-                    monthData = monthDataList
+                    graph = graph,
+                    table = table
                 });
                 return Content(obj);
             }

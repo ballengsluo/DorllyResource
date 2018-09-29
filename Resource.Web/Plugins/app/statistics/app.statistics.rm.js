@@ -87,10 +87,10 @@ function dealMonthData(data) {
 
     if (data.Flag == 1) {
         // 表格数据处理
-        var html = template('tableTpl', { park: data.park, month: data.monthData });
+        var html = template('tableTpl', { title: data.table.title, rows: data.table.rows });
         $("#statistics-list-table").html(html);
         // 图表数据处理
-        graphLine("房屋租用率趋势图", data.park, data.month, lineSeries(data.parkData));
+        graphLine("房屋租用率趋势图", data.graph.legend, data.graph.xAxis, lineSeries(data.graph.series));
     } else {
         layer.msg(data.Msg);
         console.log(data.ExMsg);

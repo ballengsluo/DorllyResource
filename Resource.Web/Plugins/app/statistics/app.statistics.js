@@ -119,7 +119,7 @@ function graphPie(id, len, title, data) {
 
 
 
-function graphLine(title, legendData, xAxisData, data) {
+function graphLine(title, legend, xAxis, series) {
     $("#statistics-graph-line").css("width", $(".container").width());
     var myChart = echarts.init(document.getElementById('statistics-graph-line'));
     var option = {
@@ -133,14 +133,14 @@ function graphLine(title, legendData, xAxisData, data) {
         },
         legend: {
             bottom: -5,
-            data: legendData
+            data: legend
         },
         xAxis: {
             type: 'category',
             name: '月份',
             splitLine: { show: false },
             nameGap: 5,
-            data: xAxisData
+            data: xAxis
         },
         grid: {
             left: '3%',
@@ -154,7 +154,7 @@ function graphLine(title, legendData, xAxisData, data) {
             nameGap: 12,
             max: 100
         },
-        series: data
+        series: series
     }
     myChart.setOption(option);
     $("#statistics-graph-line").removeAttr("style");
@@ -162,15 +162,17 @@ function graphLine(title, legendData, xAxisData, data) {
 var symbolArray = ['emptyCircle', 'rect', 'circle', 'triangle', 'diamond'];
 
 function lineSeries(data) {
+    console.log("serrs:");
+    console.log(data);
     var series = new Array();
     var index = 0;
     $.each(data, function(idx, obj) {
         series.push({
-            name: obj.parkName,
+            name: obj.name,
             type: 'line',
             symbol: symbolArray[index],
             symbolSize: 10,
-            data: obj.parkData
+            data: obj.data
         });
         if (index <= 5) {
             index++;

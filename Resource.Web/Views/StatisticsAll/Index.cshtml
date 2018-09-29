@@ -12,7 +12,7 @@
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
-    @Styles.Render("~/Plugins/app/css/app.statistics.css")
+    @Styles.Render("~/Plugins/app/statistics/app.statistics.css")
 </head>
 <body>
     <div class="container">
@@ -52,7 +52,7 @@
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <div class="statistics-panel" id="statistics-panel">
+                    <div class="statistics-list">
                         <div class="row">
                             <div class="col-lg-1 col-md-1 statistics-title">
                                 房屋
@@ -152,13 +152,11 @@
                     </div>
                 </div>
                 <div class="layui-tab-item">
-                    <div class="row statistics-graph" id="statistics-graph">
+                    <div class="row" id="statistics-graph-pie">
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
     @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
@@ -166,8 +164,8 @@
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/echarts/echarts.common.min.js")
-    @*@Scripts.Render("~/Plugins/app/js/g2.min.js")*@
     @Scripts.Render("~/Plugins/app/js/app.common.js")
-    @Scripts.Render("~/Plugins/app/js/app.statistics-all.js")
+    @Scripts.Render("~/Plugins/app/statistics/app.statistics.js")
+    @Scripts.Render("~/Plugins/app/statistics/app.statistics.all.js")
 </body>
 </html>

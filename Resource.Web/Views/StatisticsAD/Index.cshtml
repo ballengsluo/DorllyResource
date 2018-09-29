@@ -121,16 +121,16 @@
             <thead>
                 <tr>
                     <th>月份</th>
-                    {{each park value i}}
+                    {{each title value i}}
                     <th>{{value}}</th>
                     {{/each}}
                 </tr>
             </thead>
             <tbody>
-                {{each month value i}}
+                {{each rows value i}}
                 <tr>
-                    <td>{{value.monthName}}</td>
-                    {{each value.monthData item i}}
+                    <td>{{value.name}}</td>
+                    {{each value.data item i}}
                     <td>{{item}}%</td>
                     {{/each}}
                 </tr>

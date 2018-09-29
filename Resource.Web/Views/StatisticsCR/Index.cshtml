@@ -12,7 +12,7 @@
     @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
     @Styles.Render("~/Plugins/bootstrap-select/css/bootstrap-select.min.css")
     @Styles.Render("~/Plugins/app/css/app.index.css")
-    @Styles.Render("~/Plugins/app/css/app.statistics.css")
+    @Styles.Render("~/Plugins/app/statistics/app.statistics.css")
 </head>
 <body>
     <div class="container">
@@ -142,17 +142,19 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>月份</th>
-                    {{each park value i}}
+                    <th>园区</th>
+                    <th>会议室</th>
+                    {{each title value i}}
                     <th>{{value}}</th>
                     {{/each}}
                 </tr>
             </thead>
             <tbody>
-                {{each month value i}}
+                {{each rows value i}}
                 <tr>
-                    <td>{{value.monthName}}</td>
-                    {{each value.monthData item i}}
+                    <td>{{value.parkName}}</td>
+                    <td>{{value.name}}</td>
+                    {{each value.data item i}}
                     <td>{{item}}%</td>
                     {{/each}}
                 </tr>
