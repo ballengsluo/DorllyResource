@@ -27,7 +27,7 @@ namespace Resource.Web.Controllers
             if (param.Stime != null) list = list.Where(a => a.CreateTime >= param.Stime);
             if (param.Etime != null) list = list.Where(a => a.CreateTime <= param.Etime);
             int count = list.Count();
-            list = list.OrderBy(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
+            list = list.OrderByDescending(a=>a.CreateTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             JsonSerializerSettings setting = new JsonSerializerSettings
             {
                 DateFormatString = "yyyy-MM-dd HH:mm"

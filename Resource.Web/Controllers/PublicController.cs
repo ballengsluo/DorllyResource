@@ -36,11 +36,11 @@ namespace Resource.Web.Controllers
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
-            list = list.OrderBy(a => a.Level).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
+            list = list.OrderByDescending(a => a.UpdateTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             JsonSerializerSettings setting = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                DateFormatString = "yyyy-MM-dd"
+                DateFormatString = "yyyy-MM-dd HH:mm"
             };
             var obj = JsonConvert.SerializeObject(new { count = count, data = list.ToList() }, setting);
             return Content(obj);
@@ -125,6 +125,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 2) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (pub.Status != 1) return Json(Result.Fail(msg: "请选择正确的操作！"));
             pub.Status = 2;
+            pub.UpdateTime = DateTime.Now;
+            pub.UpdateUser = user.Account;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
@@ -134,6 +136,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 3) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (pub.Status != 1) return Json(Result.Fail(msg: "请选择正确的操作！"));
             pub.Status = 3;
+            pub.UpdateTime = DateTime.Now;
+            pub.UpdateUser = user.Account;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
@@ -143,6 +147,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 4) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (pub.Status != 2 && pub.Status != 5) return Json(Result.Fail(msg: "请选择正确的操作！"));
             pub.Status = 4;
+            pub.UpdateTime = DateTime.Now;
+            pub.UpdateUser = user.Account;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
@@ -152,6 +158,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 5) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (pub.Status != 4) return Json(Result.Fail(msg: "请选择正确的操作！"));
             pub.Status = 5;
+            pub.UpdateTime = DateTime.Now;
+            pub.UpdateUser = user.Account;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }
@@ -161,6 +169,8 @@ namespace Resource.Web.Controllers
             if (pub.Status == 6) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (pub.Status == 4) return Json(Result.Fail(msg: "请选择正确的操作！"));
             pub.Status = 6;
+            pub.UpdateTime = DateTime.Now;
+            pub.UpdateUser = user.Account;
             if (dc.SaveChanges() > 0) return Json(Result.Success());
             return Json(Result.Fail());
         }

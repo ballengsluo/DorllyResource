@@ -25,7 +25,6 @@ namespace Resource.Model
         public string Account { get; set; }
         public string PWD { get; set; }
         public string UserName { get; set; }
-        public string Park { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Addr { get; set; }

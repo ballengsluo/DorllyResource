@@ -28,9 +28,13 @@ namespace Resource.Web.Controllers
             try
             {
                 role.Enable = true;
+                role.CreateTime = DateTime.Now;
+                role.CreateUser = user.Account;
+                role.UpdateTime = DateTime.Now;
+                role.UpdateUser = user.Account;
                 dc.Set<T_Role>().Add(role);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -50,7 +54,10 @@ namespace Resource.Web.Controllers
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(role, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    role.UpdateTime = DateTime.Now;
+                    role.UpdateUser = user.Account;
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -66,8 +73,8 @@ namespace Resource.Web.Controllers
             {
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Role>().Remove(role);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -81,8 +88,9 @@ namespace Resource.Web.Controllers
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
                 role.Enable = true;
                 dc.Set<T_Role>().AddOrUpdate(role);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
+
             }
             catch (Exception ex)
             {
@@ -96,8 +104,8 @@ namespace Resource.Web.Controllers
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
                 role.Enable = false;
                 dc.Set<T_Role>().AddOrUpdate(role);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -144,8 +152,9 @@ namespace Resource.Web.Controllers
                         dc.Set<T_RoleFunc>().Add(item);
                     }
                 }
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
+
             }
             catch (Exception ex)
             {

@@ -63,6 +63,8 @@ namespace Resource.Web.Controllers
                 newUser.Enable = true;
                 newUser.CreateTime = DateTime.Now;
                 newUser.CreateUser = user.Account;
+                newUser.UpdateTime = DateTime.Now;
+                newUser.UpdateUser = user.Account;
                 dc.Set<T_User>().Add(newUser);
                 //绑定数据权限
                 foreach (var item in form["Park"].Split(','))
@@ -137,9 +139,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
-                user.PWD = Encrypt.EncryptDES(form["PWD"], 1);
-                var list = dc.Set<T_LoginInfo>().Where(a => a.UserID == user.Account).ToList();
+                T_User updateUser = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
+                updateUser.PWD = Encrypt.EncryptDES(form["PWD"], 1);
+                updateUser.UpdateTime = DateTime.Now;
+                updateUser.UpdateUser = user.Account;
+                var list = dc.Set<T_LoginInfo>().Where(a => a.UserID == updateUser.Account).ToList();
                 foreach (var item in list)
                 {
                     dc.Set<T_LoginInfo>().Remove(item);
@@ -158,8 +162,10 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                T_User user = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
-                user.PWD = Encrypt.EncryptDES(form["PWD"], 1);
+                T_User updateUser = dc.Set<T_User>().Where(a => a.Account.Equals(id)).FirstOrDefault();
+                updateUser.PWD = Encrypt.EncryptDES(form["PWD"], 1);
+                updateUser.UpdateTime = DateTime.Now;
+                updateUser.UpdateUser = user.Account;
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
             }
@@ -225,9 +231,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
-                user.Enable = true;
-                dc.Set<T_User>().AddOrUpdate(user);
+                T_User updateUser = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
+                updateUser.Enable = true;
+                updateUser.UpdateTime = DateTime.Now;
+                updateUser.UpdateUser = user.Account;
+                dc.Set<T_User>().AddOrUpdate(updateUser);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
             }
@@ -240,9 +248,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                T_User user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
-                user.Enable = false;
-                dc.Set<T_User>().AddOrUpdate(user);
+                T_User updateUser = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
+                updateUser.Enable = false;
+                updateUser.UpdateTime = DateTime.Now;
+                updateUser.UpdateUser = user.Account;
+                dc.Set<T_User>().AddOrUpdate(updateUser);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
                 return Json(Result.Fail());
             }

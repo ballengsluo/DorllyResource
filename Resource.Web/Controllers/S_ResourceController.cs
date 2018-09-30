@@ -26,22 +26,21 @@ namespace Resource.Web.Controllers
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             if (param.IType != null) list = list.Where(a => a.BusinessType == param.IType);
-            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
+            if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             if (param.Stime != null) list = list.Where(a => param.Stime <= a.RentEndTime && param.Etime >= a.RentBeginTime);
             int count = list.Count();
             list = list.OrderByDescending(a => a.RentBeginTime).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             var result = list.Select(a => new
             {
                 a.ID,
-                a.Enable,
                 a.SysID,
+                a.Status,
                 a.ResourceID,
                 a.ResourceName,
                 a.ResourceKindName,
                 a.GroupName,
                 a.Loc1Name,
                 a.BusinessType,
-                a.CustLongName,
                 a.CustShortName,
                 a.RentBeginTime,
                 a.RentEndTime,
@@ -70,24 +69,71 @@ namespace Resource.Web.Controllers
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             int count = list.Count();
             list = list.OrderByDescending(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            var result = list.Select(a => new { a.ID, a.Name, a.Loc1Name, a.GroupName });
+            var result = list.Select(a => new { a.ID, a.Name, a.Loc1Name, a.GroupName,a.RentArea });
             var obj = JsonConvert.SerializeObject(new { count = count, data = result.ToList() });
             return Content(obj);
         }
-        public ActionResult IReserve()
+        public ActionResult InsideRent()
         {
-            var obj = new T_ResourceStatus();
-            obj.RentBeginTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
-            obj.RentEndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
-            return View(obj);
+            return View();
         }
-        public ActionResult OReserve()
+        public ActionResult OutsideRent()
         {
-            var obj = new T_ResourceStatus();
-            obj.RentBeginTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd") + " 00:00");
-            obj.RentEndTime = Convert.ToDateTime(DateTime.Now.AddDays(1).ToString("yyyy-MM-dd") + " 00:00");
-            return View(obj);
+            return View();
         }
+        [HttpPost]
+        public JsonResult InsideRent(FormCollection form)
+        {
+            try
+            {
+                T_ResourceStatus status = new T_ResourceStatus();
+                if (!TryUpdateModel(status, "", form.AllKeys))
+                    return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
+                var begin = status.RentBeginTime;
+                var end = status.RentEndTime;
+                if (begin > end || CheckTime(begin, end))
+                    return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
+                status.SysID = 3;
+                status.BusinessType = 6;
+                status.Status = 2;
+                status.UpdateTime = DateTime.Now;
+                status.UpdateUser = user.Account;
+                dc.Set<T_ResourceStatus>().Add(status);
+                dc.SaveChanges();
+                return Json(Result.Success());
+            }
+            catch (Exception ex)
+            {
+                return Json(Result.Exception(exmsg: ex.StackTrace));
+            }
+        }
+        [HttpPost]
+        public JsonResult OutsideRent(FormCollection form)
+        {
+            try
+            {
+                T_ResourceStatus status = new T_ResourceStatus();
+                if (!TryUpdateModel(status, "", form.AllKeys))
+                    return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
+                var begin = status.RentBeginTime;
+                var end = status.RentEndTime;
+                if (begin > end || CheckTime(begin, end))
+                    return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
+                status.SysID = 3;
+                status.BusinessType = 5;
+                status.Status = 1;
+                status.UpdateTime = DateTime.Now;
+                status.UpdateUser = user.Account;
+                dc.Set<T_ResourceStatus>().Add(status);
+                dc.SaveChanges();
+                return Json(Result.Success());
+            }
+            catch (Exception ex)
+            {
+                return Json(Result.Exception(exmsg: ex.StackTrace));
+            }
+        }
+
         [HttpPost]
         public ActionResult Reserve(int id, FormCollection form)
         {
@@ -137,18 +183,18 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Free(int id)
         {
-            ViewBag.id = id;
-            return View();
+            var status = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
+            return View(status);
         }
         [HttpPost]
         public ActionResult Free(int id, FormCollection form)
         {
             DateTime endTime = DateTime.Now;
-            var obj = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
-            if (obj.SysID != 3) return Json(Result.Fail(msg: "业务系统数据不允许更改！"));
+            var status = dc.Set<T_ResourceStatus>().Where(a => a.ID == id).FirstOrDefault();
+            if (status.SysID != 3) return Json(Result.Fail(msg: "业务系统数据不允许更改！"));
             try
             {
-                endTime = Convert.ToDateTime(form["RealEndTime"]);
+                endTime = Convert.ToDateTime(form["RentEndTime"]);
             }
             catch (Exception)
             {
@@ -156,32 +202,32 @@ namespace Resource.Web.Controllers
             }
             try
             {
-                int endType = Convert.ToInt32(form["EndType"]);
-                if (endType == 1)
+                if (endTime <= status.RentBeginTime ||
+                    dc.Set<T_ResourceStatus>().Where(a => a.ID != status.ID && a.RentBeginTime <= endTime && a.RentEndTime <= endTime).Count() > 0)
                 {
-                    obj.UpdateTime = DateTime.Now;
-                    obj.UpdateUser = user.Account;
+                    return Json(Result.Fail(msg: "结束时间和其他占用时间有冲突！"));
                 }
-                else if (endType == 2)
-                {
-                    if (endTime <= obj.RentBeginTime || endTime >= obj.RentEndTime)
-                        return Json(Result.Fail(msg: "违约停用时间必须处于占用时间内！"));
-                    obj.RentEndTime = endTime;
-                    obj.UpdateTime = DateTime.Now;
-                    obj.UpdateUser = user.Account;
-                }
-                else if (endType == 3)
-                {
-                    dc.Set<T_ResourceStatus>().Remove(obj);
-                }
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                status.RentEndTime = endTime;
+                status.Status = 3;
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
 
+        }
+
+        public bool CheckTime(DateTime begin, DateTime end)
+        {
+            bool success = false;
+            int count = dc.Set<T_ResourceStatus>().Where(a =>
+                        (a.RentBeginTime <= begin && begin <= a.RentEndTime) ||
+                        (a.RentBeginTime <= end && end <= a.RentEndTime)
+                        ).Count();
+            if (count > 0) success = true;
+            return success;
         }
     }
 }

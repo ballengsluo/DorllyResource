@@ -27,7 +27,14 @@ namespace Resource.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Mstr_Customer> Mstr_Customer { get; set; }
+        public virtual DbSet<V_Building> V_Building { get; set; }
+        public virtual DbSet<V_Floor> V_Floor { get; set; }
+        public virtual DbSet<V_Func> V_Func { get; set; }
+        public virtual DbSet<V_Order> V_Order { get; set; }
+        public virtual DbSet<V_Park> V_Park { get; set; }
+        public virtual DbSet<V_Public> V_Public { get; set; }
+        public virtual DbSet<V_Resource> V_Resource { get; set; }
+        public virtual DbSet<V_Stage> V_Stage { get; set; }
         public virtual DbSet<T_Building> T_Building { get; set; }
         public virtual DbSet<T_City> T_City { get; set; }
         public virtual DbSet<T_Cust> T_Cust { get; set; }
@@ -46,7 +53,6 @@ namespace Resource.Model
         public virtual DbSet<T_ResourceKind> T_ResourceKind { get; set; }
         public virtual DbSet<T_ResourcePrice> T_ResourcePrice { get; set; }
         public virtual DbSet<T_ResourcePublic> T_ResourcePublic { get; set; }
-        public virtual DbSet<T_ResourceStatus> T_ResourceStatus { get; set; }
         public virtual DbSet<T_ResourceType> T_ResourceType { get; set; }
         public virtual DbSet<T_Role> T_Role { get; set; }
         public virtual DbSet<T_RoleFunc> T_RoleFunc { get; set; }
@@ -55,18 +61,8 @@ namespace Resource.Model
         public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_UserData> T_UserData { get; set; }
         public virtual DbSet<T_UserRole> T_UserRole { get; set; }
-        public virtual DbSet<mstemp> mstemp { get; set; }
-        public virtual DbSet<V_Building> V_Building { get; set; }
-        public virtual DbSet<V_Floor> V_Floor { get; set; }
-        public virtual DbSet<V_Func> V_Func { get; set; }
-        public virtual DbSet<V_Order> V_Order { get; set; }
-        public virtual DbSet<V_Park> V_Park { get; set; }
-        public virtual DbSet<V_Public> V_Public { get; set; }
-        public virtual DbSet<V_Resource> V_Resource { get; set; }
+        public virtual DbSet<T_ResourceStatus> T_ResourceStatus { get; set; }
         public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
-        public virtual DbSet<V_RMContract> V_RMContract { get; set; }
-        public virtual DbSet<V_Stage> V_Stage { get; set; }
-        public virtual DbSet<V_WYContract> V_WYContract { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
         {

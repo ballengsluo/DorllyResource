@@ -37,55 +37,67 @@ body {
     padding: 8px 15px;
 }
 
-#res-data>.row {
-    margin-top: 5px;
-    border: 1px solid #ccc;
+.statistics-list>.row>div {
+    border-right: 2px solid #ccc;
+    height: 90px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 20%;
 }
 
-#res-data>.row>div {
-    border-right: 3px solid #ccc;
-    padding-left: 0px;
-    margin: 5px 0px;
-    height: 65px;
+.statistics-list .statistics-totalNum {
+    width: 11%!important;
 }
 
-#res-data>.row>div:first-of-type {
+.statistics-list .statistics-title {
+    line-height: 90px;
     text-align: center;
     font-size: 16px;
-    font-weight: bold;
-    line-height: 65px;
+    font-weight: 600;
+    padding: 0px 10px;
+    width: 12%!important;
 }
 
-#res-data>.row>div:nth-of-type(2)>div:first-of-type {
-    font-size: 16px;
-}
-
-#res-data>.row>div:not(:first-of-type)>div:first-of-type {
+.statistics-list .statistics-name {
     color: #ccc;
+    font-weight: 500;
 }
 
-#res-data .res-num {
-    position: absolute;
-    bottom: 5px;
-    left: 15px;
-}
-
-#res-data .res-num>span:first-of-type {
-    font-size: 22px;
-    padding-right: 5px;
-}
-
-#res-data .res-num>span:last-of-type {
-    padding-top: 5px;
-}
-
-#res-data .res-rate {
+.statistics-list .statistics-rate {
     text-align: right;
+    margin-top: 12px;
 }
 
-#res-data .res-rate>span:first-of-type {
-    font-size: 15px;
-    font-weight: bold;
+.statistics-list .statistics-rate>span:first-of-type {
+    font-weight: 600;
+    margin-right: 3px;
+}
+
+.statistics-list .statistics-num {
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+}
+
+.statistics-list .statistics-num>span:first-of-type {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.statistics-list .statistics-detail {
+    width: 8%!important;
+    border-right: none!important;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.statistics-list .statistics-detail>div {
+    text-align: center;
+    position: absolute;
+    top: 50px;
+    color: blue;
+    cursor: pointer;
 }
 
 

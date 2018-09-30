@@ -27,9 +27,9 @@ namespace Resource.Web.Controllers
             string BeginTime = DateTime.Now.ToString("yyyy-MM-dd");
             string EndTime = DateTime.Now.ToString("yyyy-MM-dd");
             string PackNo = "01";
-            if (param.StrParam1 != null) BeginTime = param.StrParam1;
-            if (param.StrParam2 != null) EndTime = param.StrParam2;
-            if (param.StrParam3 != null) PackNo = param.StrParam3;
+            if (param.Stime != null) BeginTime = Convert.ToDateTime(param.Stime).ToString("yyyy-MM-dd");
+            if (param.Etime != null) EndTime = Convert.ToDateTime(param.Etime).ToString("yyyy-MM-dd");
+            if (param.Park != null) PackNo = param.Park;
 
             DataTable dt = null;
             if (PackNo == "01")
@@ -47,7 +47,7 @@ namespace Resource.Web.Controllers
             string BeginTime = DateTime.Now.ToString("yyyy-MM-dd");
             string EndTime = DateTime.Now.ToString("yyyy-MM-dd");
             string PackNo = "01";
-            if (param.StrParam3 != null) PackNo = param.StrParam3;
+            if (param.Park != null) PackNo = param.Park;
 
             DataTable dt = null;
             if (PackNo == "01")

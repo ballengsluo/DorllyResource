@@ -1,137 +1,94 @@
-﻿@helper rm()
-{
-    <table class="table">
-        <tr>
-            <td>楼栋</td>
-            <td>空置面积</td>
-            <td>空置套数</td>
-        </tr>
-        @if (ViewBag.rm != null && ViewBag.rm.Count > 0)
-        {
-            foreach (var item in ViewBag.rm)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Area</td>
-                    <td>@item.Count</td>
-                </tr>
-            }
-            <tr class="rmcount">
-                <td>汇总</td>
-                <td>@ViewBag.AreaCount</td>
-                <td>@ViewBag.NumberCount</td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-        }
-    </table>
-}
-@helper cb()
-{
-    <table class="table">
-        <tr>
-            <td>工位总数</td>
-            <td>已租个数</td>
-            <td>空置个数</td>
-            <td>出租率</td>
-        </tr>
-        @if (ViewBag.cb != null && ViewBag.cb.Count > 0)
-        {
-            foreach (var item in ViewBag.cb)
-            {
-                <tr>
-                    <td>@item.Count</td>
-                    <td>@item.Rent</td>
-                    <td>@item.Free</td>
-                    <td>@item.Rate%</td>
-                </tr>
-            }
-        }
-    </table>
-}
-
-@helper mr()
-{
-    <table class="table">
-        <tr>
-            <td>会议室总数</td>
-            <td>已租个数</td>
-            <td>空置个数</td>
-            <td>出租率</td>
-        </tr>
-        @if (ViewBag.mr != null && ViewBag.mr.Count > 0)
-        {
-            foreach (var item in ViewBag.mr)
-            {
-                <tr>
-                    <td>@item.Count</td>
-                    <td>@item.Rent</td>
-                    <td>@item.Free</td>
-                    <td>@item.Rate%</td>
-                </tr>
-            }
-        }
-    </table>
-}
-
-@helper ad()
-{
-    <table class="table">
-        <tr>
-            <td>广告位总数</td>
-            <td>已租个数</td>
-            <td>空置个数</td>
-            <td>出租率</td>
-        </tr>
-
-        @if (ViewBag.ad != null && ViewBag.ad.Count > 0)
-        {
-            foreach (var item in ViewBag.ad)
-            {
-                <tr>
-                    <td>@item.Count</td>
-                    <td>@item.Rent</td>
-                    <td>@item.Free</td>
-                    <td>@item.Rate%</td>
-                </tr>
-            }
-        }
-    </table>
-}
-
-
-<div class="col-lg-6 col-md-6 col-sm-6 res" id="rm">
-    <div class="reskind">
-        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 房屋
+﻿<div class="row" id="resource">
+    <div class="row wt-title">
+        <div class="col-lg-2 col-md-2 pull-left" style="line-height:34px;font-size:16px;">
+            <i class="fa fa-circle-thin" style="color:orange; font-size:14px;"></i>  业务概览
+        </div>
     </div>
-    @rm()
-</div>
-
-<div class="col-lg-6 col-md-6 col-sm-6 res" id="cb">
-    <div class="reskind">
-        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 工位
+    <div class="row" id="res-search">
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="input-group">
+                <span class="input-group-addon">园区</span>
+                @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+            </div>
+        </div>
     </div>
-    @cb()
-</div>
-
-<div class="col-lg-6 col-md-6 col-sm-6 res" id="mr">
-    <div class="reskind">
-        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 会议室
+    <div id="res-data">
+        <div class="row">
+            <div class="col-lg-1 col-md-1">
+                房屋
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>总面积</div>
+                <div class="res-num"><span>12345670.98</span><span>㎡</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>已租面积</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>345670.98</span><span>㎡</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>空置面积</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>670.98</span><span>㎡</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1">
+                会议室
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>总租赁次数</div>
+                <div class="res-num"><span>@ViewBag.num</span><span>次</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>客户使用次数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>次</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>内部使用次数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>次</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1">
+                工位
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>工位总数</div>
+                <div class="res-num"><span>5</span><span>次</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>已租个数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>次</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>空置个数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>次</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1">
+                广告位
+            </div>
+            <div class ="col-lg-3 col-md-3">
+                <div>广告位总数</div>
+                <div class="res-num"><span>5</span><span>个</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>已租个数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>个</span></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div>空置个数</div>
+                <div class="res-rate"><span>22.22</span><span>%</span></div>
+                <div class="res-num"><span>5</span><span>个</span></div>
+            </div>
+        </div>
     </div>
-    @mr()
+
 </div>
-
-<div class="col-lg-6 col-md-6 col-sm-6 res" id="ad">
-    <div class="reskind">
-        <i class="fa fa-circle-thin" style="color:blue; font-size:10px;"></i> 广告位
-    </div>
-    @ad()
-</div>
-
-

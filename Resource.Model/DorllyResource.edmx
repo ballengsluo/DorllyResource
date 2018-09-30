@@ -5,40 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DorllyResourceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“DorllyResource.dbo.mstemp”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="mstemp">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="btime" Type="datetime" />
-          <Property Name="etime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Mstr_Customer">
-          <Key>
-            <PropertyRef Name="CustNo" />
-          </Key>
-          <Property Name="CustNo" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="CustName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustShortName" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustType" Type="nvarchar" MaxLength="30" />
-          <Property Name="Representative" Type="nvarchar" MaxLength="30" />
-          <Property Name="BusinessScope" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustLicenseNo" Type="nvarchar" MaxLength="30" />
-          <Property Name="RepIDCard" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustContact" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustTel" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustContactMobile" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustEmail" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustBankTitle" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustBankAccount" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustBank" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustStatus" Type="nvarchar" MaxLength="10" />
-          <Property Name="CustCreateDate" Type="datetime" />
-          <Property Name="CustCreator" Type="nvarchar" MaxLength="30" />
-          <Property Name="IsExternal" Type="bit" />
-        </EntityType>
         <EntityType Name="T_Building">
           <Key>
             <PropertyRef Name="ID" />
@@ -336,12 +302,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SysID" Type="int" />
-          <Property Name="ResourceID" Type="nvarchar" MaxLength="50" />
-          <Property Name="BusinessID" Type="nvarchar" MaxLength="100" />
-          <Property Name="BusinessType" Type="int" />
-          <Property Name="RentBeginTime" Type="datetime" />
-          <Property Name="RentEndTime" Type="datetime" />
+          <Property Name="SysID" Type="int" Nullable="false" />
+          <Property Name="ResourceID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BusinessID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BusinessType" Type="int" Nullable="false" />
+          <Property Name="RentBeginTime" Type="datetime" Nullable="false" />
+          <Property Name="RentEndTime" Type="datetime" Nullable="false" />
           <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
@@ -349,7 +315,7 @@
           <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
           <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
@@ -406,7 +372,6 @@
           <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PWD" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Park" Type="nvarchar" MaxLength="500" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Addr" Type="nvarchar" MaxLength="200" />
@@ -433,15 +398,6 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6013: 表/视图“DorllyResource.dbo.tem”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
-        <EntityType Name="tem">
-          <Property Name="id" Type="int" />
-          <Property Name="num" Type="int" />
-          <Property Name="lnum" Type="int" />
-          <Property Name="cust" Type="nvarchar" MaxLength="100" />
-          <Property Name="custd" Type="nvarchar" MaxLength="100" />
-        </EntityType>-->
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Building”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_Building">
@@ -747,23 +703,29 @@
         <EntityType Name="V_ResourceStatus">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="SysID" />
+            <PropertyRef Name="ResourceID" />
+            <PropertyRef Name="BusinessID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="RentBeginTime" />
+            <PropertyRef Name="RentEndTime" />
+            <PropertyRef Name="Status" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="SysID" Type="int" />
-          <Property Name="ResourceID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SysID" Type="int" Nullable="false" />
+          <Property Name="ResourceID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BusinessID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BusinessType" Type="int" Nullable="false" />
+          <Property Name="RentBeginTime" Type="datetime" Nullable="false" />
+          <Property Name="RentEndTime" Type="datetime" Nullable="false" />
           <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="BusinessID" Type="nvarchar" MaxLength="100" />
-          <Property Name="BusinessType" Type="int" />
-          <Property Name="RentBeginTime" Type="datetime" />
-          <Property Name="RentEndTime" Type="datetime" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
           <Property Name="ReserveDept" Type="nvarchar" MaxLength="100" />
           <Property Name="ReserveName" Type="nvarchar" MaxLength="30" />
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-          <Property Name="Status" Type="int" />
-          <Property Name="Enable" Type="bit" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateTime" Type="datetime" />
           <Property Name="ResourceName" Type="nvarchar" MaxLength="30" />
@@ -787,35 +749,6 @@
           <Property Name="ResourceEnable" Type="bit" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“DorllyResource.dbo.V_RMContract”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="V_RMContract">
-          <Key>
-            <PropertyRef Name="SYSID" />
-            <PropertyRef Name="BusinessType" />
-            <PropertyRef Name="CustTel" />
-            <PropertyRef Name="ReserveDept" />
-            <PropertyRef Name="ReserveName" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="Remark" />
-          </Key>
-          <Property Name="SYSID" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ResourceID" Type="nvarchar" MaxLength="30" />
-          <Property Name="BusinessID" Type="nvarchar" MaxLength="36" />
-          <Property Name="BusinessType" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="RentBeginTime" Type="datetime" />
-          <Property Name="RentEndTime" Type="datetime" />
-          <Property Name="RentArea" Type="decimal" Precision="15" Scale="4" />
-          <Property Name="CustLongName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustShortName" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustTel" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ReserveDept" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ReserveName" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Remark" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
-          <Property Name="UpdateTime" Type="datetime" />
-        </EntityType>
-        <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Stage”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_Stage">
           <Key>
@@ -831,35 +764,6 @@
           <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
           <Property Name="CityID" Type="nvarchar" MaxLength="30" />
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“DorllyResource.dbo.V_WYContract”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="V_WYContract">
-          <Key>
-            <PropertyRef Name="SYSID" />
-            <PropertyRef Name="BusinessType" />
-            <PropertyRef Name="CustTel" />
-            <PropertyRef Name="ReserveDept" />
-            <PropertyRef Name="ReserveName" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="Remark" />
-          </Key>
-          <Property Name="SYSID" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ResourceID" Type="nvarchar" MaxLength="30" />
-          <Property Name="BusinessID" Type="nvarchar" MaxLength="36" />
-          <Property Name="BusinessType" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="RentBeginTime" Type="datetime" />
-          <Property Name="RentEndTime" Type="datetime" />
-          <Property Name="RentArea" Type="decimal" Precision="15" Scale="4" />
-          <Property Name="CustLongName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustShortName" Type="nvarchar" MaxLength="30" />
-          <Property Name="CustTel" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ReserveDept" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="ReserveName" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="Remark" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="UpdateUser" Type="nvarchar" MaxLength="30" />
-          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <Association Name="FK_Group_RKind">
           <End Role="T_ResourceKind" Type="Self.T_ResourceKind" Multiplicity="1" />
@@ -1058,7 +962,6 @@
           <Parameter Name="MenuPath" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="DorllyResourceModelStoreContainer">
-          <EntitySet Name="Mstr_Customer" EntityType="Self.Mstr_Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Building" EntityType="Self.T_Building" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_City" EntityType="Self.T_City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_Cust" EntityType="Self.T_Cust" Schema="dbo" store:Type="Tables" />
@@ -1086,13 +989,6 @@
           <EntitySet Name="T_User" EntityType="Self.T_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_UserData" EntityType="Self.T_UserData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_UserRole" EntityType="Self.T_UserRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="mstemp" EntityType="Self.mstemp" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [mstemp].[id] AS [id], 
-    [mstemp].[btime] AS [btime], 
-    [mstemp].[etime] AS [etime]
-    FROM [dbo].[mstemp] AS [mstemp]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_Building" EntityType="Self.V_Building" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_Building].[ID] AS [ID], 
@@ -1373,11 +1269,11 @@
     [V_ResourceStatus].[ID] AS [ID], 
     [V_ResourceStatus].[SysID] AS [SysID], 
     [V_ResourceStatus].[ResourceID] AS [ResourceID], 
-    [V_ResourceStatus].[RentArea] AS [RentArea], 
     [V_ResourceStatus].[BusinessID] AS [BusinessID], 
     [V_ResourceStatus].[BusinessType] AS [BusinessType], 
     [V_ResourceStatus].[RentBeginTime] AS [RentBeginTime], 
     [V_ResourceStatus].[RentEndTime] AS [RentEndTime], 
+    [V_ResourceStatus].[RentArea] AS [RentArea], 
     [V_ResourceStatus].[CustLongName] AS [CustLongName], 
     [V_ResourceStatus].[CustShortName] AS [CustShortName], 
     [V_ResourceStatus].[CustTel] AS [CustTel], 
@@ -1385,7 +1281,6 @@
     [V_ResourceStatus].[ReserveName] AS [ReserveName], 
     [V_ResourceStatus].[Remark] AS [Remark], 
     [V_ResourceStatus].[Status] AS [Status], 
-    [V_ResourceStatus].[Enable] AS [Enable], 
     [V_ResourceStatus].[UpdateUser] AS [UpdateUser], 
     [V_ResourceStatus].[UpdateTime] AS [UpdateTime], 
     [V_ResourceStatus].[ResourceName] AS [ResourceName], 
@@ -1409,26 +1304,6 @@
     [V_ResourceStatus].[ResourceEnable] AS [ResourceEnable]
     FROM [dbo].[V_ResourceStatus] AS [V_ResourceStatus]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_RMContract" EntityType="Self.V_RMContract" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [V_RMContract].[SYSID] AS [SYSID], 
-    [V_RMContract].[ResourceID] AS [ResourceID], 
-    [V_RMContract].[BusinessID] AS [BusinessID], 
-    [V_RMContract].[BusinessType] AS [BusinessType], 
-    [V_RMContract].[RentBeginTime] AS [RentBeginTime], 
-    [V_RMContract].[RentEndTime] AS [RentEndTime], 
-    [V_RMContract].[RentArea] AS [RentArea], 
-    [V_RMContract].[CustLongName] AS [CustLongName], 
-    [V_RMContract].[CustShortName] AS [CustShortName], 
-    [V_RMContract].[CustTel] AS [CustTel], 
-    [V_RMContract].[ReserveDept] AS [ReserveDept], 
-    [V_RMContract].[ReserveName] AS [ReserveName], 
-    [V_RMContract].[Status] AS [Status], 
-    [V_RMContract].[Remark] AS [Remark], 
-    [V_RMContract].[UpdateUser] AS [UpdateUser], 
-    [V_RMContract].[UpdateTime] AS [UpdateTime]
-    FROM [dbo].[V_RMContract] AS [V_RMContract]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_Stage" EntityType="Self.V_Stage" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_Stage].[ID] AS [ID], 
@@ -1442,26 +1317,6 @@
     [V_Stage].[CityID] AS [CityID], 
     [V_Stage].[CityName] AS [CityName]
     FROM [dbo].[V_Stage] AS [V_Stage]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_WYContract" EntityType="Self.V_WYContract" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [V_WYContract].[SYSID] AS [SYSID], 
-    [V_WYContract].[ResourceID] AS [ResourceID], 
-    [V_WYContract].[BusinessID] AS [BusinessID], 
-    [V_WYContract].[BusinessType] AS [BusinessType], 
-    [V_WYContract].[RentBeginTime] AS [RentBeginTime], 
-    [V_WYContract].[RentEndTime] AS [RentEndTime], 
-    [V_WYContract].[RentArea] AS [RentArea], 
-    [V_WYContract].[CustLongName] AS [CustLongName], 
-    [V_WYContract].[CustShortName] AS [CustShortName], 
-    [V_WYContract].[CustTel] AS [CustTel], 
-    [V_WYContract].[ReserveDept] AS [ReserveDept], 
-    [V_WYContract].[ReserveName] AS [ReserveName], 
-    [V_WYContract].[Status] AS [Status], 
-    [V_WYContract].[Remark] AS [Remark], 
-    [V_WYContract].[UpdateUser] AS [UpdateUser], 
-    [V_WYContract].[UpdateTime] AS [UpdateTime]
-    FROM [dbo].[V_WYContract] AS [V_WYContract]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Group_RKind" Association="Self.FK_Group_RKind">
             <End Role="T_ResourceKind" EntitySet="T_ResourceKind" />
@@ -1537,7 +1392,14 @@
             <Parameter Name="Account" Mode="In" Type="String" />
             <Parameter Name="MenuPath" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Mstr_Customer" EntityType="DorllyResourceModel.Mstr_Customer" />
+          <EntitySet Name="V_Building" EntityType="DorllyResourceModel.V_Building" />
+          <EntitySet Name="V_Floor" EntityType="DorllyResourceModel.V_Floor" />
+          <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
+          <EntitySet Name="V_Order" EntityType="DorllyResourceModel.V_Order" />
+          <EntitySet Name="V_Park" EntityType="DorllyResourceModel.V_Park" />
+          <EntitySet Name="V_Public" EntityType="DorllyResourceModel.V_Public" />
+          <EntitySet Name="V_Resource" EntityType="DorllyResourceModel.V_Resource" />
+          <EntitySet Name="V_Stage" EntityType="DorllyResourceModel.V_Stage" />
           <EntitySet Name="T_Building" EntityType="DorllyResourceModel.T_Building" />
           <EntitySet Name="T_City" EntityType="DorllyResourceModel.T_City" />
           <EntitySet Name="T_Cust" EntityType="DorllyResourceModel.T_Cust" />
@@ -1556,7 +1418,6 @@
           <EntitySet Name="T_ResourceKind" EntityType="DorllyResourceModel.T_ResourceKind" />
           <EntitySet Name="T_ResourcePrice" EntityType="DorllyResourceModel.T_ResourcePrice" />
           <EntitySet Name="T_ResourcePublic" EntityType="DorllyResourceModel.T_ResourcePublic" />
-          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
           <EntitySet Name="T_ResourceType" EntityType="DorllyResourceModel.T_ResourceType" />
           <EntitySet Name="T_Role" EntityType="DorllyResourceModel.T_Role" />
           <EntitySet Name="T_RoleFunc" EntityType="DorllyResourceModel.T_RoleFunc" />
@@ -1565,18 +1426,6 @@
           <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
           <EntitySet Name="T_UserData" EntityType="DorllyResourceModel.T_UserData" />
           <EntitySet Name="T_UserRole" EntityType="DorllyResourceModel.T_UserRole" />
-          <EntitySet Name="mstemp" EntityType="DorllyResourceModel.mstemp" />
-          <EntitySet Name="V_Building" EntityType="DorllyResourceModel.V_Building" />
-          <EntitySet Name="V_Floor" EntityType="DorllyResourceModel.V_Floor" />
-          <EntitySet Name="V_Func" EntityType="DorllyResourceModel.V_Func" />
-          <EntitySet Name="V_Order" EntityType="DorllyResourceModel.V_Order" />
-          <EntitySet Name="V_Park" EntityType="DorllyResourceModel.V_Park" />
-          <EntitySet Name="V_Public" EntityType="DorllyResourceModel.V_Public" />
-          <EntitySet Name="V_Resource" EntityType="DorllyResourceModel.V_Resource" />
-          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
-          <EntitySet Name="V_RMContract" EntityType="DorllyResourceModel.V_RMContract" />
-          <EntitySet Name="V_Stage" EntityType="DorllyResourceModel.V_Stage" />
-          <EntitySet Name="V_WYContract" EntityType="DorllyResourceModel.V_WYContract" />
           <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_LoginInfo" EntitySet="T_LoginInfo" />
@@ -1641,6 +1490,8 @@
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserRole" EntitySet="T_UserRole" />
           </AssociationSet>
+          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
+          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
           </EntityContainer>
         <ComplexType Name="Pro_GetFunc_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -1649,29 +1500,306 @@
           <Property Type="String" Name="Class" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Mstr_Customer">
+        <EntityType Name="V_Building">
           <Key>
-            <PropertyRef Name="CustNo" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CustNo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="FullPosition" Type="String" MaxLength="203" FixedLength="false" Unicode="true" />
+          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Floor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="FullPosition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Func">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FuncCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FuncName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FuncColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Order">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CustName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Representative" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessScope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustLicenseNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RepIDCard" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustContact" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustContactMobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustBankTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustBankAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustBank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CustCreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CustCreator" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="IsExternal" Type="Boolean" />
+          <Property Name="CustPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CustAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="BeginTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="AuthUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RStatus" Type="Int32" />
+          <Property Name="REnable" Type="Boolean" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="RentNum" Type="Int32" />
+          <Property Name="StartNum" Type="Int32" />
+          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Park">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GisX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GisY" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ContactsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactsPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="ContactsMobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="ContactsEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactsAddr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="FullPosition" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Public">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="BeginTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="AZWEnable" Type="Boolean" />
+          <Property Name="AZGJEnable" Type="Boolean" />
+          <Property Name="ZYPTEnable" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceEnable" Type="Boolean" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="RentNum" Type="Int32" />
+          <Property Name="StartNum" Type="Int32" />
+          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ResourceKindID" />
+            <PropertyRef Name="RentStatus" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="RentNum" Type="Int32" />
+          <Property Name="StartNum" Type="Int32" />
+          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
+          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="RentStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="YearEnable" Type="Boolean" />
+          <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="YearOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="QuaterEnable" Type="Boolean" />
+          <Property Name="QuaterInPrcie" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="QuaterOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthEnable" Type="Boolean" />
+          <Property Name="MonthInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="WeekEnable" Type="Boolean" />
+          <Property Name="WeekInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="WeekOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DayEnable" Type="Boolean" />
+          <Property Name="DayInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DayOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="HDayEnable" Type="Boolean" />
+          <Property Name="HDayInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="HDayOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="HourEnable" Type="Boolean" />
+          <Property Name="HourInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="HourOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="SingleEnable" Type="Boolean" />
+          <Property Name="SingleInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="SingleOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DelayEnable" Type="Boolean" />
+          <Property Name="DelayInPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DelayOutPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MeterEnable" Type="Boolean" />
+          <Property Name="MeterMinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MeterMaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="IMonthEnable" Type="Boolean" />
+          <Property Name="IMonthMinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="IMonthMaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ISingleEnable" Type="Boolean" />
+          <Property Name="ISingleMinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="ISingleMaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OnceEnable" Type="Boolean" />
+          <Property Name="OnceMinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OnceMaxPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OtherEnable" Type="Boolean" />
+          <Property Name="OtherMinPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OtherMaxPrice" Type="Decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="V_Stage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="FullPosition" Type="String" MaxLength="152" FixedLength="false" Unicode="true" />
+          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="T_Building">
           <Key>
@@ -1983,28 +2111,6 @@
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="T_Resource" Relationship="DorllyResourceModel.FK_Public_RID" FromRole="T_ResourcePublic" ToRole="T_Resource" />
         </EntityType>
-        <EntityType Name="T_ResourceStatus">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SysID" Type="Int32" />
-          <Property Name="ResourceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="Int32" />
-          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="T_ResourceType">
           <Key>
             <PropertyRef Name="ID" />
@@ -2066,7 +2172,6 @@
           <Property Name="Account" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PWD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Park" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -2098,411 +2203,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="T_Role" Relationship="DorllyResourceModel.FK_UR_Role" FromRole="T_UserRole" ToRole="T_Role" />
           <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_UR_User" FromRole="T_UserRole" ToRole="T_User" />
-        </EntityType>
-        <EntityType Name="mstemp">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="btime" Type="DateTime" Precision="3" />
-          <Property Name="etime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_Building">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="203" FixedLength="false" Unicode="true" />
-          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Floor">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BuildingID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="BuildingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Func">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenuPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="FuncCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="FuncName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FuncClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FuncColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Order">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="ResourceID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="CustAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="BeginTime" Type="DateTime" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="AuthUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" />
-          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RStatus" Type="Int32" />
-          <Property Name="REnable" Type="Boolean" />
-          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="RentNum" Type="Int32" />
-          <Property Name="StartNum" Type="Int32" />
-          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Park">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="GisX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GisY" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ContactsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactsPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="ContactsMobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="ContactsEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactsAddr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ReMark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Public">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="ResourceID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Level" Type="Int32" />
-          <Property Name="BeginTime" Type="DateTime" Precision="3" />
-          <Property Name="EndTime" Type="DateTime" Precision="3" />
-          <Property Name="AZWEnable" Type="Boolean" />
-          <Property Name="AZGJEnable" Type="Boolean" />
-          <Property Name="ZYPTEnable" Type="Boolean" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceEnable" Type="Boolean" />
-          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="RentNum" Type="Int32" />
-          <Property Name="StartNum" Type="Int32" />
-          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_Resource">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="ResourceKindID" />
-            <PropertyRef Name="RentStatus" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" Nullable="false" />
-          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Area" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="StartArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="RangeArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="RentNum" Type="Int32" />
-          <Property Name="StartNum" Type="Int32" />
-          <Property Name="RangeNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RentSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="StartSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="RangeSize" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Deposit" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
-          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="RentStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="YearEnable" Type="Boolean" />
-          <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="YearOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="QuaterEnable" Type="Boolean" />
-          <Property Name="QuaterInPrcie" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="QuaterOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MonthEnable" Type="Boolean" />
-          <Property Name="MonthInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MonthOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="WeekEnable" Type="Boolean" />
-          <Property Name="WeekInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="WeekOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="DayEnable" Type="Boolean" />
-          <Property Name="DayInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="DayOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="HDayEnable" Type="Boolean" />
-          <Property Name="HDayInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="HDayOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="HourEnable" Type="Boolean" />
-          <Property Name="HourInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="HourOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="SingleEnable" Type="Boolean" />
-          <Property Name="SingleInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="SingleOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="DelayEnable" Type="Boolean" />
-          <Property Name="DelayInPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="DelayOutPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MeterEnable" Type="Boolean" />
-          <Property Name="MeterMinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="MeterMaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="IMonthEnable" Type="Boolean" />
-          <Property Name="IMonthMinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="IMonthMaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="ISingleEnable" Type="Boolean" />
-          <Property Name="ISingleMinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="ISingleMaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OnceEnable" Type="Boolean" />
-          <Property Name="OnceMinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OnceMaxPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OtherEnable" Type="Boolean" />
-          <Property Name="OtherMinPrice" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OtherMaxPrice" Type="Decimal" Precision="15" Scale="2" />
-        </EntityType>
-        <EntityType Name="V_ResourceStatus">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="SysID" Type="Int32" />
-          <Property Name="ResourceID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="BusinessID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="Int32" />
-          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceEnable" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="V_RMContract">
-          <Key>
-            <PropertyRef Name="SYSID" />
-            <PropertyRef Name="BusinessType" />
-            <PropertyRef Name="CustTel" />
-            <PropertyRef Name="ReserveDept" />
-            <PropertyRef Name="ReserveName" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="Remark" />
-          </Key>
-          <Property Name="SYSID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ResourceID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="4" />
-          <Property Name="CustLongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ReserveDept" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ReserveName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_Stage">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="152" FixedLength="false" Unicode="true" />
-          <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RegionID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CityID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_WYContract">
-          <Key>
-            <PropertyRef Name="SYSID" />
-            <PropertyRef Name="BusinessType" />
-            <PropertyRef Name="CustTel" />
-            <PropertyRef Name="ReserveDept" />
-            <PropertyRef Name="ReserveName" />
-            <PropertyRef Name="Status" />
-            <PropertyRef Name="Remark" />
-          </Key>
-          <Property Name="SYSID" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ResourceID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="RentBeginTime" Type="DateTime" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Precision="3" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="4" />
-          <Property Name="CustLongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ReserveDept" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ReserveName" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Remark" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="UpdateUser" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Login_MF">
           <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
@@ -2696,6 +2396,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="T_ResourceStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SysID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="Int32" Nullable="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_ResourceStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="SysID" />
+            <PropertyRef Name="ResourceID" />
+            <PropertyRef Name="BusinessID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="RentBeginTime" />
+            <PropertyRef Name="RentEndTime" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SysID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="Int32" Nullable="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceEnable" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2713,28 +2483,308 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Mstr_Customer">
-            <EntityTypeMapping TypeName="DorllyResourceModel.Mstr_Customer">
-              <MappingFragment StoreEntitySet="Mstr_Customer">
-                <ScalarProperty Name="IsExternal" ColumnName="IsExternal" />
-                <ScalarProperty Name="CustCreator" ColumnName="CustCreator" />
-                <ScalarProperty Name="CustCreateDate" ColumnName="CustCreateDate" />
-                <ScalarProperty Name="CustStatus" ColumnName="CustStatus" />
-                <ScalarProperty Name="CustBank" ColumnName="CustBank" />
-                <ScalarProperty Name="CustBankAccount" ColumnName="CustBankAccount" />
-                <ScalarProperty Name="CustBankTitle" ColumnName="CustBankTitle" />
-                <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
-                <ScalarProperty Name="CustContactMobile" ColumnName="CustContactMobile" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustContact" ColumnName="CustContact" />
-                <ScalarProperty Name="RepIDCard" ColumnName="RepIDCard" />
-                <ScalarProperty Name="CustLicenseNo" ColumnName="CustLicenseNo" />
-                <ScalarProperty Name="BusinessScope" ColumnName="BusinessScope" />
-                <ScalarProperty Name="Representative" ColumnName="Representative" />
-                <ScalarProperty Name="CustType" ColumnName="CustType" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+          <EntitySetMapping Name="V_Building">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Building">
+              <MappingFragment StoreEntitySet="V_Building">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
+                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+                <ScalarProperty Name="StageName" ColumnName="StageName" />
+                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Floor">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Floor">
+              <MappingFragment StoreEntitySet="V_Floor">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
+                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+                <ScalarProperty Name="StageName" ColumnName="StageName" />
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Func">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Func">
+              <MappingFragment StoreEntitySet="V_Func">
+                <ScalarProperty Name="FuncColor" ColumnName="FuncColor" />
+                <ScalarProperty Name="FuncClass" ColumnName="FuncClass" />
+                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
+                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
+                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Order">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Order">
+              <MappingFragment StoreEntitySet="V_Order">
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
+                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
+                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
+                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
+                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
+                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="REnable" ColumnName="REnable" />
+                <ScalarProperty Name="RStatus" ColumnName="RStatus" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
+                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AuthUser" ColumnName="AuthUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CustAddr" ColumnName="CustAddr" />
+                <ScalarProperty Name="CustPhone" ColumnName="CustPhone" />
                 <ScalarProperty Name="CustName" ColumnName="CustName" />
-                <ScalarProperty Name="CustNo" ColumnName="CustNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Park">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Park">
+              <MappingFragment StoreEntitySet="V_Park">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="ReMark" ColumnName="ReMark" />
+                <ScalarProperty Name="ContactsAddr" ColumnName="ContactsAddr" />
+                <ScalarProperty Name="ContactsEmail" ColumnName="ContactsEmail" />
+                <ScalarProperty Name="ContactsMobile" ColumnName="ContactsMobile" />
+                <ScalarProperty Name="ContactsPhone" ColumnName="ContactsPhone" />
+                <ScalarProperty Name="ContactsName" ColumnName="ContactsName" />
+                <ScalarProperty Name="GisY" ColumnName="GisY" />
+                <ScalarProperty Name="GisX" ColumnName="GisX" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Public">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Public">
+              <MappingFragment StoreEntitySet="V_Public">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ResourceRemark" ColumnName="ResourceRemark" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
+                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
+                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
+                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
+                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
+                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
+                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
+                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
+                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ZYPTEnable" ColumnName="ZYPTEnable" />
+                <ScalarProperty Name="AZGJEnable" ColumnName="AZGJEnable" />
+                <ScalarProperty Name="AZWEnable" ColumnName="AZWEnable" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Resource">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Resource">
+              <MappingFragment StoreEntitySet="V_Resource">
+                <ScalarProperty Name="OtherMaxPrice" ColumnName="OtherMaxPrice" />
+                <ScalarProperty Name="OtherMinPrice" ColumnName="OtherMinPrice" />
+                <ScalarProperty Name="OtherEnable" ColumnName="OtherEnable" />
+                <ScalarProperty Name="OnceMaxPrice" ColumnName="OnceMaxPrice" />
+                <ScalarProperty Name="OnceMinPrice" ColumnName="OnceMinPrice" />
+                <ScalarProperty Name="OnceEnable" ColumnName="OnceEnable" />
+                <ScalarProperty Name="ISingleMaxPrice" ColumnName="ISingleMaxPrice" />
+                <ScalarProperty Name="ISingleMinPrice" ColumnName="ISingleMinPrice" />
+                <ScalarProperty Name="ISingleEnable" ColumnName="ISingleEnable" />
+                <ScalarProperty Name="IMonthMaxPrice" ColumnName="IMonthMaxPrice" />
+                <ScalarProperty Name="IMonthMinPrice" ColumnName="IMonthMinPrice" />
+                <ScalarProperty Name="IMonthEnable" ColumnName="IMonthEnable" />
+                <ScalarProperty Name="MeterMaxPrice" ColumnName="MeterMaxPrice" />
+                <ScalarProperty Name="MeterMinPrice" ColumnName="MeterMinPrice" />
+                <ScalarProperty Name="MeterEnable" ColumnName="MeterEnable" />
+                <ScalarProperty Name="DelayOutPrice" ColumnName="DelayOutPrice" />
+                <ScalarProperty Name="DelayInPrice" ColumnName="DelayInPrice" />
+                <ScalarProperty Name="DelayEnable" ColumnName="DelayEnable" />
+                <ScalarProperty Name="SingleOutPrice" ColumnName="SingleOutPrice" />
+                <ScalarProperty Name="SingleInPrice" ColumnName="SingleInPrice" />
+                <ScalarProperty Name="SingleEnable" ColumnName="SingleEnable" />
+                <ScalarProperty Name="HourOutPrice" ColumnName="HourOutPrice" />
+                <ScalarProperty Name="HourInPrice" ColumnName="HourInPrice" />
+                <ScalarProperty Name="HourEnable" ColumnName="HourEnable" />
+                <ScalarProperty Name="HDayOutPrice" ColumnName="HDayOutPrice" />
+                <ScalarProperty Name="HDayInPrice" ColumnName="HDayInPrice" />
+                <ScalarProperty Name="HDayEnable" ColumnName="HDayEnable" />
+                <ScalarProperty Name="DayOutPrice" ColumnName="DayOutPrice" />
+                <ScalarProperty Name="DayInPrice" ColumnName="DayInPrice" />
+                <ScalarProperty Name="DayEnable" ColumnName="DayEnable" />
+                <ScalarProperty Name="WeekOutPrice" ColumnName="WeekOutPrice" />
+                <ScalarProperty Name="WeekInPrice" ColumnName="WeekInPrice" />
+                <ScalarProperty Name="WeekEnable" ColumnName="WeekEnable" />
+                <ScalarProperty Name="MonthOutPrice" ColumnName="MonthOutPrice" />
+                <ScalarProperty Name="MonthInPrice" ColumnName="MonthInPrice" />
+                <ScalarProperty Name="MonthEnable" ColumnName="MonthEnable" />
+                <ScalarProperty Name="QuaterOutPrice" ColumnName="QuaterOutPrice" />
+                <ScalarProperty Name="QuaterInPrcie" ColumnName="QuaterInPrcie" />
+                <ScalarProperty Name="QuaterEnable" ColumnName="QuaterEnable" />
+                <ScalarProperty Name="YearOutPrice" ColumnName="YearOutPrice" />
+                <ScalarProperty Name="YearInPrice" ColumnName="YearInPrice" />
+                <ScalarProperty Name="YearEnable" ColumnName="YearEnable" />
+                <ScalarProperty Name="RentStatus" ColumnName="RentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
+                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
+                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
+                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
+                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
+                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
+                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
+                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
+                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Stage">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_Stage">
+              <MappingFragment StoreEntitySet="V_Stage">
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
+                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3048,29 +3098,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="T_ResourceStatus">
-            <EntityTypeMapping TypeName="DorllyResourceModel.T_ResourceStatus">
-              <MappingFragment StoreEntitySet="T_ResourceStatus">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
-                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
-                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
-                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="SysID" ColumnName="SysID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="T_ResourceType">
             <EntityTypeMapping TypeName="DorllyResourceModel.T_ResourceType">
               <MappingFragment StoreEntitySet="T_ResourceType">
@@ -3134,7 +3161,6 @@
                 <ScalarProperty Name="Addr" ColumnName="Addr" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Park" ColumnName="Park" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PWD" ColumnName="PWD" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
@@ -3159,300 +3185,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="mstemp">
-            <EntityTypeMapping TypeName="DorllyResourceModel.mstemp">
-              <MappingFragment StoreEntitySet="mstemp">
-                <ScalarProperty Name="etime" ColumnName="etime" />
-                <ScalarProperty Name="btime" ColumnName="btime" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Building">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Building">
-              <MappingFragment StoreEntitySet="V_Building">
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
-                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
-                <ScalarProperty Name="StageName" ColumnName="StageName" />
-                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="StageID" ColumnName="StageID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Floor">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Floor">
-              <MappingFragment StoreEntitySet="V_Floor">
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
-                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
-                <ScalarProperty Name="StageName" ColumnName="StageName" />
-                <ScalarProperty Name="StageID" ColumnName="StageID" />
-                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
-                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Func">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Func">
-              <MappingFragment StoreEntitySet="V_Func">
-                <ScalarProperty Name="FuncColor" ColumnName="FuncColor" />
-                <ScalarProperty Name="FuncClass" ColumnName="FuncClass" />
-                <ScalarProperty Name="FuncName" ColumnName="FuncName" />
-                <ScalarProperty Name="FuncCode" ColumnName="FuncCode" />
-                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Order">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Order">
-              <MappingFragment StoreEntitySet="V_Order">
-                <ScalarProperty Name="LocText" ColumnName="LocText" />
-                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
-                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
-                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
-                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
-                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
-                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
-                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
-                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
-                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
-                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
-                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
-                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="REnable" ColumnName="REnable" />
-                <ScalarProperty Name="RStatus" ColumnName="RStatus" />
-                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
-                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
-                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
-                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
-                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
-                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AuthUser" ColumnName="AuthUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CustAddr" ColumnName="CustAddr" />
-                <ScalarProperty Name="CustPhone" ColumnName="CustPhone" />
-                <ScalarProperty Name="CustName" ColumnName="CustName" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="CustID" ColumnName="CustID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Park">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Park">
-              <MappingFragment StoreEntitySet="V_Park">
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="ReMark" ColumnName="ReMark" />
-                <ScalarProperty Name="ContactsAddr" ColumnName="ContactsAddr" />
-                <ScalarProperty Name="ContactsEmail" ColumnName="ContactsEmail" />
-                <ScalarProperty Name="ContactsMobile" ColumnName="ContactsMobile" />
-                <ScalarProperty Name="ContactsPhone" ColumnName="ContactsPhone" />
-                <ScalarProperty Name="ContactsName" ColumnName="ContactsName" />
-                <ScalarProperty Name="GisY" ColumnName="GisY" />
-                <ScalarProperty Name="GisX" ColumnName="GisX" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Public">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Public">
-              <MappingFragment StoreEntitySet="V_Public">
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ResourceRemark" ColumnName="ResourceRemark" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
-                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
-                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
-                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
-                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
-                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
-                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
-                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
-                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
-                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
-                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="LocText" ColumnName="LocText" />
-                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
-                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
-                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
-                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
-                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
-                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
-                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
-                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
-                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
-                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
-                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+          <EntitySetMapping Name="T_ResourceStatus">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_ResourceStatus">
+              <MappingFragment StoreEntitySet="T_ResourceStatus">
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ZYPTEnable" ColumnName="ZYPTEnable" />
-                <ScalarProperty Name="AZGJEnable" ColumnName="AZGJEnable" />
-                <ScalarProperty Name="AZWEnable" ColumnName="AZWEnable" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Resource">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Resource">
-              <MappingFragment StoreEntitySet="V_Resource">
-                <ScalarProperty Name="OtherMaxPrice" ColumnName="OtherMaxPrice" />
-                <ScalarProperty Name="OtherMinPrice" ColumnName="OtherMinPrice" />
-                <ScalarProperty Name="OtherEnable" ColumnName="OtherEnable" />
-                <ScalarProperty Name="OnceMaxPrice" ColumnName="OnceMaxPrice" />
-                <ScalarProperty Name="OnceMinPrice" ColumnName="OnceMinPrice" />
-                <ScalarProperty Name="OnceEnable" ColumnName="OnceEnable" />
-                <ScalarProperty Name="ISingleMaxPrice" ColumnName="ISingleMaxPrice" />
-                <ScalarProperty Name="ISingleMinPrice" ColumnName="ISingleMinPrice" />
-                <ScalarProperty Name="ISingleEnable" ColumnName="ISingleEnable" />
-                <ScalarProperty Name="IMonthMaxPrice" ColumnName="IMonthMaxPrice" />
-                <ScalarProperty Name="IMonthMinPrice" ColumnName="IMonthMinPrice" />
-                <ScalarProperty Name="IMonthEnable" ColumnName="IMonthEnable" />
-                <ScalarProperty Name="MeterMaxPrice" ColumnName="MeterMaxPrice" />
-                <ScalarProperty Name="MeterMinPrice" ColumnName="MeterMinPrice" />
-                <ScalarProperty Name="MeterEnable" ColumnName="MeterEnable" />
-                <ScalarProperty Name="DelayOutPrice" ColumnName="DelayOutPrice" />
-                <ScalarProperty Name="DelayInPrice" ColumnName="DelayInPrice" />
-                <ScalarProperty Name="DelayEnable" ColumnName="DelayEnable" />
-                <ScalarProperty Name="SingleOutPrice" ColumnName="SingleOutPrice" />
-                <ScalarProperty Name="SingleInPrice" ColumnName="SingleInPrice" />
-                <ScalarProperty Name="SingleEnable" ColumnName="SingleEnable" />
-                <ScalarProperty Name="HourOutPrice" ColumnName="HourOutPrice" />
-                <ScalarProperty Name="HourInPrice" ColumnName="HourInPrice" />
-                <ScalarProperty Name="HourEnable" ColumnName="HourEnable" />
-                <ScalarProperty Name="HDayOutPrice" ColumnName="HDayOutPrice" />
-                <ScalarProperty Name="HDayInPrice" ColumnName="HDayInPrice" />
-                <ScalarProperty Name="HDayEnable" ColumnName="HDayEnable" />
-                <ScalarProperty Name="DayOutPrice" ColumnName="DayOutPrice" />
-                <ScalarProperty Name="DayInPrice" ColumnName="DayInPrice" />
-                <ScalarProperty Name="DayEnable" ColumnName="DayEnable" />
-                <ScalarProperty Name="WeekOutPrice" ColumnName="WeekOutPrice" />
-                <ScalarProperty Name="WeekInPrice" ColumnName="WeekInPrice" />
-                <ScalarProperty Name="WeekEnable" ColumnName="WeekEnable" />
-                <ScalarProperty Name="MonthOutPrice" ColumnName="MonthOutPrice" />
-                <ScalarProperty Name="MonthInPrice" ColumnName="MonthInPrice" />
-                <ScalarProperty Name="MonthEnable" ColumnName="MonthEnable" />
-                <ScalarProperty Name="QuaterOutPrice" ColumnName="QuaterOutPrice" />
-                <ScalarProperty Name="QuaterInPrcie" ColumnName="QuaterInPrcie" />
-                <ScalarProperty Name="QuaterEnable" ColumnName="QuaterEnable" />
-                <ScalarProperty Name="YearOutPrice" ColumnName="YearOutPrice" />
-                <ScalarProperty Name="YearInPrice" ColumnName="YearInPrice" />
-                <ScalarProperty Name="YearEnable" ColumnName="YearEnable" />
-                <ScalarProperty Name="RentStatus" ColumnName="RentStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="LocText" ColumnName="LocText" />
-                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
-                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
-                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
-                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
-                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
-                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
-                <ScalarProperty Name="RangeSize" ColumnName="RangeSize" />
-                <ScalarProperty Name="StartSize" ColumnName="StartSize" />
-                <ScalarProperty Name="RentSize" ColumnName="RentSize" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="RangeNum" ColumnName="RangeNum" />
-                <ScalarProperty Name="StartNum" ColumnName="StartNum" />
-                <ScalarProperty Name="RentNum" ColumnName="RentNum" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="RangeArea" ColumnName="RangeArea" />
-                <ScalarProperty Name="StartArea" ColumnName="StartArea" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
-                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
-                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
-                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
-                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
-                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
-                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3481,7 +3232,6 @@
                 <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
@@ -3489,74 +3239,14 @@
                 <ScalarProperty Name="CustTel" ColumnName="CustTel" />
                 <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
                 <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
                 <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
                 <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_RMContract">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_RMContract">
-              <MappingFragment StoreEntitySet="V_RMContract">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
-                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
-                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
-                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_Stage">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_Stage">
-              <MappingFragment StoreEntitySet="V_Stage">
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="CityID" ColumnName="CityID" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
-                <ScalarProperty Name="FullPosition" ColumnName="FullPosition" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_WYContract">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_WYContract">
-              <MappingFragment StoreEntitySet="V_WYContract">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
-                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
-                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
-                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="SYSID" ColumnName="SYSID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

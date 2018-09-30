@@ -5,88 +5,110 @@
         </div>
     </div>
     <div class="row" id="res-search">
-        <div class="col-lg-2 col-md-2 col-sm-2">
+        <div class="col-lg-3 col-md-3" style="width:200px;">
             <div class="input-group">
                 <span class="input-group-addon">园区</span>
-                @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
+                @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
             </div>
         </div>
     </div>
     <div id="res-data">
-        <div class="row">
-            <div class="col-lg-1 col-md-1">
-                房屋
+        <div class="statistics-list">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 statistics-title">
+                    房屋
+                </div>
+                <div class="col-lg-2 col-md-2 statistics-total">
+                    <div class="statistics-name">总面积</div>
+                    <div class="statistics-num"><span id="rm-total">0</span><span>㎡</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">客户租赁面积</div>
+                    <div class="statistics-rate"><span id="rm-rentRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="rm-rent">0</span><span>㎡</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">内部使用面积</div>
+                    <div class="statistics-rate"><span id="rm-selfRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="rm-self">0</span><span>㎡</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">空置面积</div>
+                    <div class="statistics-rate"><span id="rm-freeRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="rm-free">0</span><span>㎡</span></div>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-3">
-                <div>总面积</div>
-                <div class="res-num"><span>12345670.98</span><span>㎡</span></div>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 statistics-title">
+                    工位
+                </div>
+                <div class="col-lg-2 col-md-2 statistics-total">
+                    <div class="statistics-name">工位总数</div>
+                    <div class="statistics-num"><span id="wp-total">0</span><span>次</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">客户租赁个数</div>
+                    <div class="statistics-rate"><span id="wp-rentRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="wp-rent">0</span><span>个</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">内部使用个数</div>
+                    <div class="statistics-rate"><span id="wp-selfRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="wp-self">0</span><span>个</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">空置个数</div>
+                    <div class="statistics-rate"><span id="wp-freeRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="wp-free">0</span><span>个</span></div>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-3">
-                <div>已租面积</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>345670.98</span><span>㎡</span></div>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 statistics-title">
+                    会议室
+                </div>
+                <div class="col-lg-2 col-md-2 statistics-total">
+                    <div class="statistics-name">总租赁次数</div>
+                    <div class="statistics-num"><span id="cr-total">0</span><span>次</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">客户租赁次数</div>
+                    <div class="statistics-rate"><span id="cr-rentRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="cr-rent">0</span><span>次</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">内部使用次数</div>
+                    <div class="statistics-rate"><span id="cr-selfRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="cr-self">0</span><span>次</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">空置次数数</div>
+                    <div class="statistics-rate"><span id="cr-freeRate"></span><span></span>%</div>
+                    <div class="statistics-num"><span id="cr-free">0</span><span>次</span></div>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-3">
-                <div>空置面积</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>670.98</span><span>㎡</span></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-1 col-md-1">
-                会议室
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>总租赁次数</div>
-                <div class="res-num"><span>@ViewBag.num</span><span>次</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>客户使用次数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>次</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>内部使用次数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>次</span></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-1 col-md-1">
-                工位
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>工位总数</div>
-                <div class="res-num"><span>5</span><span>次</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>已租个数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>次</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>空置个数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>次</span></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-1 col-md-1">
-                广告位
-            </div>
-            <div class ="col-lg-3 col-md-3">
-                <div>广告位总数</div>
-                <div class="res-num"><span>5</span><span>个</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>已租个数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>个</span></div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div>空置个数</div>
-                <div class="res-rate"><span>22.22</span><span>%</span></div>
-                <div class="res-num"><span>5</span><span>个</span></div>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 statistics-title">
+                    广告位
+                </div>
+                <div class="col-lg-2 col-md-2 statistics-total">
+                    <div class="statistics-name">广告位总数</div>
+                    <div class="statistics-num"><span id="ad-total">0</span><span>个</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">客户租赁个数</div>
+                    <div class="statistics-rate"><span id="ad-rentRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="ad-rent">0</span><span>个</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">内部使用个数</div>
+                    <div class="statistics-rate"><span id="ad-selfRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="ad-self">0</span><span>个</span></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="statistics-name">空置个数</div>
+                    <div class="statistics-rate"><span id="ad-freeRate">0</span><span>%</span></div>
+                    <div class="statistics-num"><span id="ad-free">0</span><span>个</span></div>
+                </div>
             </div>
         </div>
     </div>

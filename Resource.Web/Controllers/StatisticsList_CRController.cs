@@ -25,7 +25,7 @@ namespace Resource.Web.Controllers
         public ContentResult Search(SearchParam param)
         {
             string PackNo = "01";
-            if (param.StrParam3 != null) PackNo = param.StrParam3;
+            if (param.Park != null) PackNo = param.Park;
 
             butlerservice.AppService service1 = new butlerservice.AppService();
             service1.Url = "http://wx.dorlly.com/api/AppService.asmx";
@@ -37,7 +37,7 @@ namespace Resource.Web.Controllers
         public ContentResult Search2(SearchParam param)
         {
             string PackNo = "01";
-            if (param.StrParam3 != null) PackNo = param.StrParam3;
+            if (param.Park != null) PackNo = param.Park;
 
             butlerservice.AppService service1 = new butlerservice.AppService();
             service1.Url = "http://wx.dorlly.com/api/AppService.asmx";
@@ -51,9 +51,9 @@ namespace Resource.Web.Controllers
             string BeginTime = DateTime.Now.ToString("yyyy-MM-dd");
             string EndTime = DateTime.Now.ToString("yyyy-MM-dd");
             string PackNo = "01";
-            if (param.StrParam1 != null) BeginTime = param.StrParam1;
-            if (param.StrParam2 != null) EndTime = param.StrParam2;
-            if (param.StrParam3 != null) PackNo = param.StrParam3;
+            if (param.Stime != null) BeginTime = Convert.ToDateTime(param.Stime).ToString("yyyy-MM-dd");
+            if (param.Etime != null) EndTime = Convert.ToDateTime(param.Etime).ToString("yyyy-MM-dd");
+            if (param.Park != null) PackNo = param.Park;
 
             butlerservice.AppService service1 = new butlerservice.AppService();
             service1.Url = "http://wx.dorlly.com/api/AppService.asmx";

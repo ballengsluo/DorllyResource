@@ -44,6 +44,14 @@ function initModule() {
     // 事件初始化
     if ($('#searchDay').length > 0) {
         $('#searchDay').click(function() {
+            var start = $('#stime').val();
+            var end = $('#etime').val();
+            if (start.length > 0 || end.length > 0) {
+                if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                    layer.msg("结束时间比开始时间小！");
+                    return false;
+                }
+            }
             ajax('get', $(this).attr('data-url'), {
                 beginTime: $('#stime').val(),
                 endTime: $('#etime').val()
@@ -54,6 +62,14 @@ function initModule() {
     }
     if ($('#searchMonth').length > 0) {
         $('#searchMonth').click(function() {
+            var start = $('#stime1').val();
+            var end = $('#etime1').val();
+            if (start.length > 0 || end.length > 0) {
+                if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                    layer.msg("结束时间比开始时间小！");
+                    return false;
+                }
+            }
             ajax('get', $(this).attr('data-url'), {
                 beginTime: $('#stime1').val(),
                 endTime: $('#etime1').val()

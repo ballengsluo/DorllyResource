@@ -39,17 +39,18 @@ namespace Resource.Web.Controllers
         }
         public ActionResult GetResourceData(string park)
         {
-            SQLHelper sq = SQLFactory.Create();
-            DataSet ds = sq.GetDataSet("Pro_MainResourceReport", CommandType.StoredProcedure,
-                new List<SqlParameter> { new SqlParameter("Park", park) }.ToArray());
-            //ViewBag.AreaCount = ds.Tables[0].Compute("SUM(Area)", "true");
-            //ViewBag.NumberCount = ds.Tables[0].Compute("SUM(Count)", "true");
-            ViewBag.rm = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[0]));
-            ViewBag.cb = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[1]));
-            ViewBag.mr = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[2]));
-            ViewBag.ad = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(ds.Tables[3]));
-           
-            return PartialView("_Resource");
+            var beginTime = DateTime.Now.ToString("yyyy-MM-dd");
+            var endTime = DateTime.Now.ToString("yyyy-MM-dd");
+            List<SqlParameter> spList = new List<SqlParameter>
+            {
+                new SqlParameter("Park",park),
+                new SqlParameter("BeginTime",beginTime),
+                new SqlParameter("EndTime",endTime),
+                new SqlParameter("Account",user.Account)
+            };
+            DataSet ds = SQLFactory.Create().GetDataSet("Pro_StatisticsAll", CommandType.StoredProcedure, spList.ToArray());
+            var obj = JsonConvert.SerializeObject(ds.Tables[0]);
+            return Content(obj);
         }
         public ActionResult GetOrderData(string stime, string etime)
         {

@@ -15,12 +15,12 @@ namespace Resource.Model
     public partial class T_ResourceStatus
     {
         public int ID { get; set; }
-        public Nullable<int> SysID { get; set; }
+        public int SysID { get; set; }
         public string ResourceID { get; set; }
         public string BusinessID { get; set; }
-        public Nullable<int> BusinessType { get; set; }
-        public Nullable<System.DateTime> RentBeginTime { get; set; }
-        public Nullable<System.DateTime> RentEndTime { get; set; }
+        public int BusinessType { get; set; }
+        public System.DateTime RentBeginTime { get; set; }
+        public System.DateTime RentEndTime { get; set; }
         public Nullable<decimal> RentArea { get; set; }
         public string CustLongName { get; set; }
         public string CustShortName { get; set; }
@@ -28,7 +28,7 @@ namespace Resource.Model
         public string ReserveDept { get; set; }
         public string ReserveName { get; set; }
         public string Remark { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int Status { get; set; }
         public string UpdateUser { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
     }

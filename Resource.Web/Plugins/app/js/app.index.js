@@ -201,7 +201,8 @@ function search(params) {
         page();
         if ($("[data-url*='RSSearch']").length > 0) {
             $(".table tr").dblclick(function() {
-                parent.window.document.getElementById("rid").value = $(this).find(".key").html();
+                parent.window.document.getElementById("ResourceID").value = $(this).find(".key").html();
+                parent.window.document.getElementById("RentArea").value = $(this).find(".area").html();
                 parent.layer.closeAll();
             });
         }

@@ -1,7 +1,6 @@
 ﻿@{
     Layout = null;
 }
-@model Resource.Model.T_ResourceStatus
 
 <!DOCTYPE html>
 
@@ -18,7 +17,7 @@
     <div class="container">
         <div style="margin:0 auto;max-width:900px;">
             <h3 style="margin:30px 0px;text-align:center">内部占用</h3>
-            @using (Ajax.BeginForm("Reserve", new { id = Model.ID }, new AjaxOptions
+            @using (Ajax.BeginForm("InsideRent", null, new AjaxOptions
             {
                 HttpMethod = "POST",
                 OnSuccess = "cmtSuccess",
@@ -30,8 +29,8 @@
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>资源编号
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="hidden" name="Status" value="2">
-                        <input type="text" class="form-control" id="rid" name="RID" value="@Model.ResourceID" readonly required>
+                        <input type="hidden" name="RentArea" id="RentArea">
+                        <input type="text" class="form-control" id="ResourceID" name="ResourceID" readonly required>
                         <button type="button" class="btn btn-primary" id="rschoice" data-url="@Url.Action("RSIndex")" style="position:absolute;top:0;right:15px;">
                             <i class="glyphicon glyphicon-search"></i> 添加
                         </button>
@@ -39,50 +38,54 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">
-                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>公司名称
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>公司(企业/个人)
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" name="Company" value="@Model.CustLongName" required>
+                        <input type="text" class="form-control" name="CustLongName" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">
-                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>联系人
+                        <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>联系人(企业/个人)
                     </label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" name="ContactName" value="@Model.CustShortName" required>
+                        <input type="text" class="form-control" name="CustShortName" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">联系电话</label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="tel" class="form-control" name="ContactTel" value="@Model.CustTel">
+                        <input type="tel" class="form-control" name="CustTel">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">
                         <font color="red" style="position:relative; top:3px;margin-right:2px;">*</font>占用时间
                     </label>
-                    <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" id="time" name="Time" value="@Convert.ToDateTime(Model.RentBeginTime).ToString("yyyy-MM-dd HH:mm:ss") ~ @Convert.ToDateTime(Model.RentEndTime).ToString(" yyyy-mm-dd hh:mm:ss")" readonly required >
+                    <div class="col-lg-3 col-md-3 col-sm-3" style="padding-right:0px;">
+                        <input type="text" class="form-control" id="stime" name="RentBeginTime" required>
+                    </div>
+                    <label class="control-label col-lg-1 col-md-1 col-sm-1" style="width:20px;height:34px;line-height:34px;padding:0px 15px 0px 10px;text-align:center;">-</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <input type="text" class="form-control" id="etime" name="RentEndTime" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">使用部门</label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" name="ReserveDept" value="@Model.ReserveDept">
+                        <input type="text" class="form-control" name="ReserveDept">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">使用人</label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" name="ReserveName" value="@Model.ReserveName">
+                        <input type="text" class="form-control" name="ReserveName">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-lg-3 col-md-3 col-sm-3">备注/用途</label>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                        <input type="text" class="form-control" name="Remark" value="@Model.Remark">
+                        <input type="text" class="form-control" name="Remark">
                     </div>
                 </div>
                 <div class="cmtdiv col-md-offset-1">
@@ -112,8 +115,11 @@
             layui.use('laydate', function () {
                 var laydate = layui.laydate;
                 laydate.render({
-                    elem: '#time',
-                    range: '~',
+                    elem: '#stime',
+                    type: 'datetime'
+                });
+                laydate.render({
+                    elem: '#etime',
                     type: 'datetime'
                 });
             });

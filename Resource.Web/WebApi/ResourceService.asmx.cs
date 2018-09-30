@@ -24,16 +24,6 @@ namespace Resource.Web.WebApi
     {
         #region 房屋基本信息操作
 
-        //[WebMethod]
-        //public string AddRoom(string rmJsonObject)
-        //{
-        //    return AddOrUpdateRoom(rmJsonObject);
-        //}
-        //[WebMethod]
-        //public string UpdateRoom(string rmJsonObject)
-        //{
-        //    return AddOrUpdateRoom(rmJsonObject);
-        //}
         [WebMethod]
         public string AddOrUpdateRoom(string rmJsonObject)
         {
@@ -73,7 +63,7 @@ namespace Resource.Web.WebApi
                 resource.ResourceTypeID = room.RMRentType;
                 resource.Area = room.RMBuildSize;
                 resource.RentArea = room.RMRentSize;
-                resource.Enable = room.RMISEnable;
+                resource.Enable = !room.RMISEnable;
                 resource.CreateUser = room.RMCreator;
                 resource.CreateTime = room.RMCreateDate;
                 resource.Location = room.RMAddr;
@@ -88,16 +78,6 @@ namespace Resource.Web.WebApi
                 dc.SaveChanges();
                 result.Msg += "操作成功！";
                 result.Flag = 1;
-                //if (dc.SaveChanges() > 0)
-                //{
-                //    result.Msg += "操作成功！";
-                //    result.Flag = 1;
-                //}
-                //else
-                //{
-                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                //    result.Flag = 2;
-                //}
             }
             catch (Exception ex)
             {
@@ -109,16 +89,6 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 工位基本信息操作
-        //[WebMethod]
-        //public string AddWorkPlace(string wpJsonObject)
-        //{
-        //    return AddOrUpdateWorkPlace(wpJsonObject);
-        //}
-        //[WebMethod]
-        //public string UpdateWorkPlace(string wpJsonObject)
-        //{
-        //    return AddOrUpdateWorkPlace(wpJsonObject);
-        //}
         [WebMethod]
         public string AddOrUpdateWorkPlace(string wpJsonObject)
         {
@@ -158,7 +128,7 @@ namespace Resource.Web.WebApi
                 resource.ResourceTypeID = workplace.WPType;
                 resource.Number = workplace.WPSeat;
                 resource.Price = workplace.WPSeatPrice;
-                resource.Enable = workplace.WPISEnable;
+                resource.Enable =! workplace.WPISEnable;
                 resource.Location = workplace.WPAddr;
                 resource.CreateUser = workplace.WPCreator;
                 resource.CreateTime = workplace.WPCreateDate;
@@ -193,16 +163,6 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 会议室基本信息操作
-        //[WebMethod]
-        //public string AddConferenceRoom(string crJsonObject)
-        //{
-        //    return AddOrUpdateConferenceRoom(crJsonObject);
-        //}
-        //[WebMethod]
-        //public string UpdateConferenceRoom(string crJsonObject)
-        //{
-        //    return AddOrUpdateConferenceRoom(crJsonObject);
-        //}
         [WebMethod]
         public string AddOrUpdateConferenceRoom(string crJsonObject)
         {
@@ -280,16 +240,6 @@ namespace Resource.Web.WebApi
         #endregion
 
         #region 广告位基本信息操作
-        //[WebMethod]
-        //public string AddBillboard(string bbJsonObject)
-        //{
-        //    return AddOrUpdateBillboard(bbJsonObject);
-        //}
-        //[WebMethod]
-        //public string UpdateBillboard(string bbJsonObject)
-        //{
-        //    return AddOrUpdateBillboard(bbJsonObject);
-        //}
         [WebMethod]
         public string AddOrUpdateBillboard(string bbJsonObject)
         {
@@ -329,7 +279,7 @@ namespace Resource.Web.WebApi
                 resource.Size = billboard.BBSize;
                 resource.ResourceTypeID = billboard.BBType;
                 resource.Deposit = billboard.BBDeposit;
-                resource.Enable = billboard.BBISEnable;
+                resource.Enable = !billboard.BBISEnable;
                 resource.CreateUser = billboard.BBCreator;
                 resource.CreateTime = billboard.BBCreateDate;
                 resource.Location = billboard.BBAddr;
@@ -351,16 +301,6 @@ namespace Resource.Web.WebApi
                 dc.SaveChanges();
                 result.Msg += "操作成功！";
                 result.Flag = 1;
-                //if (dc.SaveChanges() > 0)
-                //{
-                //    result.Msg += "操作成功！";
-                //    result.Flag = 1;
-                //}
-                //else
-                //{
-                //    result.Msg += "操作失败！可能存在非空、数据类型、约束等条件不满足！";
-                //    result.Flag = 2;
-                //}
             }
             catch (Exception ex)
             {
@@ -372,6 +312,7 @@ namespace Resource.Web.WebApi
 
 
         #region 共有操作
+
         [WebMethod]
         public string DeleteResource(string resourceId)
         {
@@ -543,6 +484,7 @@ namespace Resource.Web.WebApi
                 return JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace));
             }
         }
+
         #endregion
 
 

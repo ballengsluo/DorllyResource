@@ -6,13 +6,49 @@ $(function() {
 
 function initResourceData() {
     // $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-    // $("#park").change(function() {
-    //     $.get("/Admin/GetResourceData", { park: $(this).val() }, function(data) {
-    //         $("#resourceData").html(data);
-    //         $("#rm").height($("#ad").outerHeight() + $("#cb").outerHeight() + $("#mr").outerHeight() - 1);
-    //     });
-    // });
-    $("#park option:first").attr("selected", true).trigger("change");
+    $("#park").change(function() {
+        ajax('get', "/Admin/GetResourceData", { park: $(this).val() }, 'json', function(data) {
+            $(".statistics-rate>span:first-of-type").html(0);
+            $(".statistics-num>span:first-of-type").html(0);
+            $.each(data, function(idx, item) {
+                if (item.Kind == 1) {
+                    $("#rm-total").html(item.Total);
+                    $("#rm-rent").html(item.Rent);
+                    $("#rm-rentRate").html(item.RentRate);
+                    $("#rm-self").html(item.Self);
+                    $("#rm-selfRate").html(item.SelfRate);
+                    $("#rm-free").html(item.Free);
+                    $("#rm-freeRate").html(item.FreeRate);
+                } else if (item.Kind == 2) {
+                    $("#wp-total").html(item.Total);
+                    $("#wp-rent").html(item.Rent);
+                    $("#wp-rentRate").html(item.RentRate);
+                    $("#wp-self").html(item.Self);
+                    $("#wp-selfRate").html(item.SelfRate);
+                    $("#wp-free").html(item.Free);
+                    $("#wp-freeRate").html(item.FreeRate);
+                } else if (item.Kind == 3) {
+                    $("#cr-total").html(item.Total);
+                    $("#cr-rent").html(item.Rent);
+                    $("#cr-rentRate").html(item.RentRate);
+                    $("#cr-self").html(item.Self);
+                    $("#cr-selfRate").html(item.SelfRate);
+                    $("#cr-free").html(item.Free);
+                    $("#cr-freeRate").html(item.FreeRate);
+                } else if (item.Kind == 4) {
+                    $("#ad-total").html(item.Total);
+                    $("#ad-rent").html(item.Rent);
+                    $("#ad-rentRate").html(item.RentRate);
+                    $("#ad-self").html(item.Self);
+                    $("#ad-selfRate").html(item.SelfRate);
+                    $("#ad-free").html(item.Free);
+                    $("#ad-freeRate").html(item.FreeRate);
+                }
+            });
+        });
+    });
+    $("#park").trigger("change");
+    // $("#park option:first").attr("selected", true).trigger("change");
 }
 
 function initTransaction() {

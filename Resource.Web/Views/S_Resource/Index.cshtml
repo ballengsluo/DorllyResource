@@ -38,25 +38,15 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">资源状态</span>
-                        <select class="selectpicker form-control" id="enable">
-                            <option value="">全部</option>
-                            <option value="false">空闲</option>
-                            <option value="true">占用</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                    <div class="input-group">
-                        <span class="input-group-addon">业务类型</span>
-                        <select class="selectpicker form-control" id="itype">
+                        <select class="selectpicker form-control" id="status">
                             <option value="">全部</option>
                             <option value="1">客户占用</option>
                             <option value="2">内部占用</option>
+                            <option value="3">空闲</option>
                         </select>
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="input-group">
@@ -102,10 +92,9 @@
                         <th>资源类别</th>
                         <th>资源分组</th>
                         <th>操作来源</th>
-                        <th>业务类型</th>
                         <th>资源状态</th>
                         <th>占用客户</th>
-                        <th>占用日期</th>
+                        <th>占用时间</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -128,15 +117,11 @@
                 {{else if value.SysID==3}}资源系统
                 {{/if}}
             </td>
-            <td data-type="{{value.Status}}">
-                {{if value.BusinessType==1}} 客户占用
-                {{else if value.BusinessType==2}}内部占用
+            <td data-status="{{value.Status}}">
+                {{if value.Status==1}} 客户占用
+                {{else if value.Status==2}}内部占用
+                {{else}}空闲
                 {{/if}} 
-            </td>
-            <td data-enable="{{value.Enable}}">
-                {{if value.Enable==0}}空闲
-                {{else if value.Enable==1}}占用
-                {{/if}}
             </td>
             <td>{{value.CustShortName}}</td>
             <td>{{value.RentBeginTime}} - {{value.RentEndTime}}</td>

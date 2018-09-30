@@ -5,6 +5,14 @@ $(function() {
 
 function search() {
     $('#search').click(function() {
+        var start = $('#stime').val();
+        var end = $('#etime').val();
+        if (start.length > 0 || end.length > 0) {
+            if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                layer.msg("结束时间比开始时间小！");
+                return false;
+            }
+        }
         ajax('get', $('#search').attr('data-url'), {
             park: $('#park').val(),
             beginTime: $('#stime').val(),
