@@ -22,7 +22,7 @@ function search() {
                 var title = "";
                 $(".statistics-rate>span:first-of-type").html(0);
                 $(".statistics-num>span:first-of-type").html(0);
-                $("#statistics-graph").html("");
+                $("#statistics-graph-pie").html("");
                 $.each(data, function(idx, item) {
                     if (item.Kind == 1) {
                         $("#rm-total").html(item.Total);
@@ -76,7 +76,7 @@ function search() {
 }
 
 function graph(id, title, data) {
-    $("#statistics-graph").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() / 2 + "px;height:300px;'></div></div>");
+    $("#statistics-graph-pie").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() / 2 + "px;height:300px;'></div></div>");
     var myChart = echarts.init(document.getElementById(id));
     var option = {
         title: {

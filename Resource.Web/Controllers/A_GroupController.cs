@@ -47,6 +47,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.id = GetNumber();
             return View();
         }
         [HttpPost]
@@ -146,6 +147,35 @@ namespace Resource.Web.Controllers
             {
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
+        }
+
+        public string GetNumber()
+        {
+            string result = string.Empty;
+            string num = (Convert.ToInt32(dc.Set<T_ResourceGroup>().Max(a => a.ID).Split('-')[1]) + 1).ToString();
+            int len = num.Length;
+            switch (len)
+            {
+                case 1:
+                    result = "G-0000" + num;
+                    break;
+                case 2:
+                    result = "G-000" + num;
+                    break;
+                case 3:
+                    result = "G-00" + num;
+                    break;
+                case 4:
+                    result = "G-0" + num;
+                    break;
+                case 5:
+                    result = "G-" + num;
+                    break;
+                default:
+                    result = "G-00001";
+                    break;
+            }
+            return result;
         }
     }
 }

@@ -14,15 +14,6 @@
 <body>
     <div class="container">
         @Html.Partial("_Func")
-        @*@Html.Partial("_FuncPage", Model)*@
-        @*<div class="func-action">
-                <button type="button" class="btn btn-primary" id="add" data-url="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                <button type="button" class="btn btn-primary" id="edit" data-url="@Url.Action("Edit")"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
-                <button type="button" class="btn btn-danger" id="del" data-url="@Url.Action("Del")"><i class="glyphicon glyphicon-trash"></i> 删除</button>
-                <button type="button" class="btn btn-success" id="open" data-url="@Url.Action("Open")"><i class="glyphicon glyphicon-ok"></i> 启用</button>
-                <button type="button" class="btn btn-warning" id="close" data-url="@Url.Action("Close")"><i class="glyphicon glyphicon-remove"></i> 停用</button>
-            </div>*@
-        @* 查询操作 *@
         <div class="select-action">
             <div class="row">
                 <div class="col-md-2">
@@ -40,7 +31,8 @@
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">状态</span>
-                        <select class="selectpicker form-control pull-righ" id="enable" title="请选择...">
+                        <select class="selectpicker form-control pull-righ" id="enable">
+                            <option value="">全部</option>
                             <option value="false">停用</option>
                             <option value="true">启用</option>
                         </select>
@@ -106,18 +98,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //function paramsSet() {
-        //    return obj = {
-        //        ParkID: $("#park").val(),
-        //        ID: $("#id").val(),
-        //        Name: $("#name").val(),
-        //        Kind: $("#kind").val(),
-        //        Enable: $("#enable").val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 </html>

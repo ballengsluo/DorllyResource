@@ -33,6 +33,8 @@ namespace Resource.Web.Controllers
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ResourceID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.ResourceName.Contains(param.Name));
             if (!string.IsNullOrEmpty(param.Group)) list = list.Where(a => a.GroupID == param.Group);
+            if (param.Stime != null) list = list.Where(a=>a.UpdateTime>=param.Stime);
+            if (param.Etime != null) list = list.Where(a => a.UpdateTime <= param.Etime);
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             if (param.Status != null) list = list.Where(a => a.Status == param.Status);
             int count = list.Count();
