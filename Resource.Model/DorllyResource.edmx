@@ -371,11 +371,11 @@
           </Key>
           <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PWD" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="11" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Addr" Type="nvarchar" MaxLength="200" />
-          <Property Name="CreateDate" Type="datetime" />
           <Property Name="Enable" Type="bit" />
           <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
@@ -389,14 +389,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="50" />
           <Property Name="DataID" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="T_UserRole">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“DorllyResource.dbo.V_Building”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -909,6 +901,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Role_User">
+          <End Role="T_Role" Type="Self.T_Role" Multiplicity="0..1" />
+          <End Role="T_User" Type="Self.T_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RT_RK">
           <End Role="T_ResourceKind" Type="Self.T_ResourceKind" Multiplicity="0..1" />
           <End Role="T_ResourceType" Type="Self.T_ResourceType" Multiplicity="*" />
@@ -929,30 +933,6 @@
               <PropertyRef Name="Account" />
             </Principal>
             <Dependent Role="T_UserData">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UR_Role">
-          <End Role="T_Role" Type="Self.T_Role" Multiplicity="1" />
-          <End Role="T_UserRole" Type="Self.T_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Role">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_UserRole">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UR_User">
-          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
-          <End Role="T_UserRole" Type="Self.T_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_User">
-              <PropertyRef Name="Account" />
-            </Principal>
-            <Dependent Role="T_UserRole">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -988,7 +968,6 @@
           <EntitySet Name="T_Stage" EntityType="Self.T_Stage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_User" EntityType="Self.T_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_UserData" EntityType="Self.T_UserData" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="T_UserRole" EntityType="Self.T_UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="V_Building" EntityType="Self.V_Building" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_Building].[ID] AS [ID], 
@@ -1366,6 +1345,10 @@
             <End Role="T_Role" EntitySet="T_Role" />
             <End Role="T_RoleFunc" EntitySet="T_RoleFunc" />
           </AssociationSet>
+          <AssociationSet Name="FK_Role_User" Association="Self.FK_Role_User">
+            <End Role="T_Role" EntitySet="T_Role" />
+            <End Role="T_User" EntitySet="T_User" />
+          </AssociationSet>
           <AssociationSet Name="FK_RT_RK" Association="Self.FK_RT_RK">
             <End Role="T_ResourceKind" EntitySet="T_ResourceKind" />
             <End Role="T_ResourceType" EntitySet="T_ResourceType" />
@@ -1373,14 +1356,6 @@
           <AssociationSet Name="FK_UD_User" Association="Self.FK_UD_User">
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserData" EntitySet="T_UserData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UR_Role" Association="Self.FK_UR_Role">
-            <End Role="T_Role" EntitySet="T_Role" />
-            <End Role="T_UserRole" EntitySet="T_UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UR_User" Association="Self.FK_UR_User">
-            <End Role="T_User" EntitySet="T_User" />
-            <End Role="T_UserRole" EntitySet="T_UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1423,13 +1398,7 @@
           <EntitySet Name="T_RoleFunc" EntityType="DorllyResourceModel.T_RoleFunc" />
           <EntitySet Name="T_RoleMenu" EntityType="DorllyResourceModel.T_RoleMenu" />
           <EntitySet Name="T_Stage" EntityType="DorllyResourceModel.T_Stage" />
-          <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
           <EntitySet Name="T_UserData" EntityType="DorllyResourceModel.T_UserData" />
-          <EntitySet Name="T_UserRole" EntityType="DorllyResourceModel.T_UserRole" />
-          <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
-            <End Role="T_User" EntitySet="T_User" />
-            <End Role="T_LoginInfo" EntitySet="T_LoginInfo" />
-          </AssociationSet>
           <AssociationSet Name="FK_MF_M" Association="DorllyResourceModel.FK_MF_M">
             <End Role="T_Menu" EntitySet="T_Menu" />
             <End Role="T_MenuFunc" EntitySet="T_MenuFunc" />
@@ -1478,20 +1447,21 @@
             <End Role="T_Role" EntitySet="T_Role" />
             <End Role="T_RoleFunc" EntitySet="T_RoleFunc" />
           </AssociationSet>
-          <AssociationSet Name="FK_UR_Role" Association="DorllyResourceModel.FK_UR_Role">
+          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
+          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
+          <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
+          <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="T_LoginInfo" EntitySet="T_LoginInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_User" Association="DorllyResourceModel.FK_Role_User">
             <End Role="T_Role" EntitySet="T_Role" />
-            <End Role="T_UserRole" EntitySet="T_UserRole" />
+            <End Role="T_User" EntitySet="T_User" />
           </AssociationSet>
           <AssociationSet Name="FK_UD_User" Association="DorllyResourceModel.FK_UD_User">
             <End Role="T_User" EntitySet="T_User" />
             <End Role="T_UserData" EntitySet="T_UserData" />
           </AssociationSet>
-          <AssociationSet Name="FK_UR_User" Association="DorllyResourceModel.FK_UR_User">
-            <End Role="T_User" EntitySet="T_User" />
-            <End Role="T_UserRole" EntitySet="T_UserRole" />
-          </AssociationSet>
-          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
-          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
           </EntityContainer>
         <ComplexType Name="Pro_GetFunc_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -2134,7 +2104,7 @@
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="T_RoleMenu" Relationship="DorllyResourceModel.FK_RM_Role" FromRole="T_Role" ToRole="T_RoleMenu" />
           <NavigationProperty Name="T_RoleFunc" Relationship="DorllyResourceModel.FK_RMF_Role" FromRole="T_Role" ToRole="T_RoleFunc" />
-          <NavigationProperty Name="T_UserRole" Relationship="DorllyResourceModel.FK_UR_Role" FromRole="T_Role" ToRole="T_UserRole" />
+          <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_Role_User" FromRole="T_Role" ToRole="T_User" />
         </EntityType>
         <EntityType Name="T_RoleFunc">
           <Key>
@@ -2165,26 +2135,6 @@
           <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" />
         </EntityType>
-        <EntityType Name="T_User">
-          <Key>
-            <PropertyRef Name="Account" />
-          </Key>
-          <Property Name="Account" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PWD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="Enable" Type="Boolean" />
-          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="T_LoginInfo" Relationship="DorllyResourceModel.FK_Login_MF" FromRole="T_User" ToRole="T_LoginInfo" />
-          <NavigationProperty Name="T_UserData" Relationship="DorllyResourceModel.FK_UD_User" FromRole="T_User" ToRole="T_UserData" />
-          <NavigationProperty Name="T_UserRole" Relationship="DorllyResourceModel.FK_UR_User" FromRole="T_User" ToRole="T_UserRole" />
-        </EntityType>
         <EntityType Name="T_UserData">
           <Key>
             <PropertyRef Name="ID" />
@@ -2194,28 +2144,6 @@
           <Property Name="DataID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_UD_User" FromRole="T_UserData" ToRole="T_User" />
         </EntityType>
-        <EntityType Name="T_UserRole">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="T_Role" Relationship="DorllyResourceModel.FK_UR_Role" FromRole="T_UserRole" ToRole="T_Role" />
-          <NavigationProperty Name="T_User" Relationship="DorllyResourceModel.FK_UR_User" FromRole="T_UserRole" ToRole="T_User" />
-        </EntityType>
-        <Association Name="FK_Login_MF">
-          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
-          <End Type="DorllyResourceModel.T_LoginInfo" Role="T_LoginInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_User">
-              <PropertyRef Name="Account" />
-            </Principal>
-            <Dependent Role="T_LoginInfo">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MF_M">
           <End Type="DorllyResourceModel.T_Menu" Role="T_Menu" Multiplicity="1" />
           <End Type="DorllyResourceModel.T_MenuFunc" Role="T_MenuFunc" Multiplicity="*" />
@@ -2360,42 +2288,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UR_Role">
-          <End Type="DorllyResourceModel.T_Role" Role="T_Role" Multiplicity="1" />
-          <End Type="DorllyResourceModel.T_UserRole" Role="T_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Role">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="T_UserRole">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UD_User">
-          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
-          <End Type="DorllyResourceModel.T_UserData" Role="T_UserData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_User">
-              <PropertyRef Name="Account" />
-            </Principal>
-            <Dependent Role="T_UserData">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UR_User">
-          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="1" />
-          <End Type="DorllyResourceModel.T_UserRole" Role="T_UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_User">
-              <PropertyRef Name="Account" />
-            </Principal>
-            <Dependent Role="T_UserRole">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="T_ResourceStatus">
           <Key>
             <PropertyRef Name="ID" />
@@ -2466,6 +2358,62 @@
           <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ResourceEnable" Type="Boolean" />
         </EntityType>
+        <EntityType Name="T_User">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PWD" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Addr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Enable" Type="Boolean" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_LoginInfo" Relationship="DorllyResourceModel.FK_Login_MF" FromRole="T_User" ToRole="T_LoginInfo" />
+          <NavigationProperty Name="T_Role" Relationship="DorllyResourceModel.FK_Role_User" FromRole="T_User" ToRole="T_Role" />
+          <NavigationProperty Name="T_UserData" Relationship="DorllyResourceModel.FK_UD_User" FromRole="T_User" ToRole="T_UserData" />
+        </EntityType>
+        <Association Name="FK_Login_MF">
+          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
+          <End Type="DorllyResourceModel.T_LoginInfo" Role="T_LoginInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="Account" />
+            </Principal>
+            <Dependent Role="T_LoginInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_User">
+          <End Type="DorllyResourceModel.T_Role" Role="T_Role" Multiplicity="0..1" />
+          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="T_User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UD_User">
+          <End Type="DorllyResourceModel.T_User" Role="T_User" Multiplicity="0..1" />
+          <End Type="DorllyResourceModel.T_UserData" Role="T_UserData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="Account" />
+            </Principal>
+            <Dependent Role="T_UserData">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3149,37 +3097,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="T_User">
-            <EntityTypeMapping TypeName="DorllyResourceModel.T_User">
-              <MappingFragment StoreEntitySet="T_User">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="PWD" ColumnName="PWD" />
-                <ScalarProperty Name="Account" ColumnName="Account" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="T_UserData">
             <EntityTypeMapping TypeName="DorllyResourceModel.T_UserData">
               <MappingFragment StoreEntitySet="T_UserData">
                 <ScalarProperty Name="DataID" ColumnName="DataID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_UserRole">
-            <EntityTypeMapping TypeName="DorllyResourceModel.T_UserRole">
-              <MappingFragment StoreEntitySet="T_UserRole">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -3247,6 +3168,24 @@
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
                 <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_User">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_User">
+              <MappingFragment StoreEntitySet="T_User">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="PWD" ColumnName="PWD" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

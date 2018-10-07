@@ -69,12 +69,13 @@
                 </div>
                 @park()
                 <div class="form-group">
-                    <label class="control-label col-md-3">初始角色</label>
+                    <label class="control-label col-md-3">用户角色</label>
                     <div class="col-md-3">
-                        <select class="selectpicker form-control pull-righ" name="Role" title="请选择...">
+                        @{ Html.RenderAction("RoleDrop", "Drop");}
+                        @*<select class="selectpicker form-control pull-righ" name="Role" title="请选择...">
                             <option value="1">管理员角色</option>
                             <option value="2">一般角色</option>
-                        </select>
+                        </select>*@
                     </div>
                 </div>
                 <div class="form-group">

@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class DropController : ResourceBusinessController
+    public class DropController : BaseController
     {
         #region 节点下拉
         public ActionResult CityDrop(string id, int model)
@@ -110,6 +110,7 @@ namespace Resource.Web.Controllers
             return Content(JsonConvert.SerializeObject(list));
         }
         #endregion
+
         public ActionResult GroupDrop(int kind, string id, int model)
         {
             ViewBag.model = model;
@@ -134,6 +135,7 @@ namespace Resource.Web.Controllers
             var list = dc.Set<T_ResourceKind>().Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
+
         public ActionResult ResourceTypeDrop(int kind, string id, int model)
         {
             ViewBag.model = model;
@@ -146,5 +148,13 @@ namespace Resource.Web.Controllers
             var list = dc.Set<T_ResourceType>().Where(a => a.ResourceKindID == kind).Select(a => new { a.ID, a.Name }).ToList();
             return Content(JsonConvert.SerializeObject(list));
         }
+
+        public ActionResult RoleDrop(int? id)
+        {
+            var list = dc.Set<T_Role>().Select(a => new { a.ID, a.Name });
+            ViewData["dataList"] = new SelectList(list.ToList(), "ID", "Name", id);
+            return PartialView();
+        }
+
     }
 }

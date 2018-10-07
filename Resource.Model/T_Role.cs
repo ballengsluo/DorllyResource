@@ -19,7 +19,7 @@ namespace Resource.Model
         {
             this.T_RoleMenu = new HashSet<T_RoleMenu>();
             this.T_RoleFunc = new HashSet<T_RoleFunc>();
-            this.T_UserRole = new HashSet<T_UserRole>();
+            this.T_User = new HashSet<T_User>();
         }
     
         public int ID { get; set; }
@@ -36,6 +36,6 @@ namespace Resource.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_RoleFunc> T_RoleFunc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_UserRole> T_UserRole { get; set; }
+        public virtual ICollection<T_User> T_User { get; set; }
     }
 }

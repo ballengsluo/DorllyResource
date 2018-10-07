@@ -1,4 +1,4 @@
-﻿@model List<Resource.Model.T_RoleMenu>
+﻿@model List<Resource.Model.T_Menu>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,12 +46,12 @@
                             </a>
                         </li>*@
                     @{
-                        foreach (var item1 in Model.Where(a => a.T_Menu.Level == 1).OrderBy(a => a.T_Menu.OrderNum))
+                        foreach (var item1 in Model.Where(a => a.Level == 1).OrderBy(a => a.OrderNum))
                         {
-                            var level2 = Model.Where(a => a.T_Menu.PID == item1.T_Menu.ID).OrderBy(a => a.T_Menu.OrderNum);
+                            var level2 = Model.Where(a => a.PID == item1.ID).OrderBy(a => a.OrderNum);
                             <li class="treeview">
-                                <a href="#" data-href="@item1.T_Menu.Path" data-title="@item1.T_Menu.Name">
-                                    <i class="@item1.T_Menu.Class"></i> <span>@item1.T_Menu.Name</span>
+                                <a href="#" data-href="@item1.Path" data-title="@item1.Name">
+                                    <i class="@item1.Class"></i> <span>@item1.Name</span>
                                     <span class="pull-right-container">
                                         @if (level2.Count() > 0)
                                         {
@@ -64,18 +64,18 @@
                                     <ul class="treeview-menu">
                                         @foreach (var item2 in level2)
                                         {
-                                            var level3 = Model.Where(a => a.T_Menu.PID == item2.T_Menu.ID).OrderBy(a => a.T_Menu.OrderNum);
+                                            var level3 = Model.Where(a => a.PID == item2.ID).OrderBy(a => a.OrderNum);
                                             if (level3.Count() > 0)
                                             {
                                                 <li class="treeview">
                                                     <a>
-                                                        <i class="@item2.T_Menu.Class"></i> <span>@item2.T_Menu.Name</span>
+                                                        <i class="@item2.Class"></i> <span>@item2.Name</span>
                                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                                                     </a>
                                                     <ul class="treeview-menu">
                                                         @foreach (var item3 in level3)
                                                         {
-                                                            <li><a href="#" data-href="@item3.T_Menu.Path" data-title="@item3.T_Menu.Name"> @item3.T_Menu.Name</a></li>
+                                                            <li><a href="#" data-href="@item3.Path" data-title="@item3.Name"> @item3.Name</a></li>
                                                         }
                                                     </ul>
                                                 </li>
@@ -83,7 +83,7 @@
                                             }
                                             else
                                             {
-                                                <li><a href="#" data-href="@item2.T_Menu.Path" data-title="@item2.T_Menu.Name"> @item2.T_Menu.Name</a></li>
+                                                <li><a href="#" data-href="@item2.Path" data-title="@item2.Name"> @item2.Name</a></li>
                                             }
                                         }
                                     </ul>

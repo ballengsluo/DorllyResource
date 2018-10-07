@@ -18,19 +18,28 @@ namespace Resource.Web.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            var menuList = new List<T_Menu>();
             List<T_RoleMenu> rmList = new List<T_RoleMenu>();
-            foreach (var role in user.T_UserRole)
+            if (user.RoleID == 1)
             {
-                foreach (var rm in role.T_Role.T_RoleMenu)
-                {
-                    foreach (var item in rmList)
-                    {
-                        if (rm.MenuID == item.MenuID) continue;
-                    }
-                    rmList.Add(rm);
-                }
+                menuList = dc.Set<T_Menu>().ToList();
             }
-            return View(rmList);
+            else
+            {
+                menuList = user.T_Role.T_RoleMenu.Select(a => a.T_Menu).ToList();
+            }
+            //foreach (var role in user.T_UserRole)
+            //{
+            //    foreach (var rm in role.T_Role.T_RoleMenu)
+            //    {
+            //        foreach (var item in rmList)
+            //        {
+            //            if (rm.MenuID == item.MenuID) continue;
+            //        }
+            //        rmList.Add(rm);
+            //    }
+            //}
+            return View(menuList);
         }
         public ActionResult Main()
         {

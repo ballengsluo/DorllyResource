@@ -57,7 +57,16 @@
                         @Html.TextBox("UserName", @Model.UserName, new { @class = "form-control" })
                     </div>
                 </div>
-                @park()
+                if (Model.Account != "admin")
+                {
+                    @park()
+                    <div class="form-group">
+                        <label class="control-label col-md-3">用户角色</label>
+                        <div class="col-md-3">
+                            @{ Html.RenderAction("RoleDrop", "Drop", new { id = Model.RoleID });}
+                        </div>
+                    </div>
+                }
                 <div class="form-group">
                     <label class="control-label col-md-3">联系电话</label>
                     <div class="col-md-8">

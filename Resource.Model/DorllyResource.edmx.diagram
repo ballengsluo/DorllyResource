@@ -36,10 +36,7 @@
         <EntityTypeShape EntityType="DorllyResourceModel.T_RoleFunc" Width="1.5" PointX="6" PointY="27.625" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_RoleMenu" Width="1.5" PointX="6" PointY="24.625" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_Stage" Width="1.5" PointX="20.75" PointY="5.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_User" Width="1.5" PointX="0.75" PointY="18.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_UserData" Width="1.5" PointX="3" PointY="23.625" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_UserRole" Width="1.5" PointX="6" PointY="19.625" />
-        <AssociationConnector Association="DorllyResourceModel.FK_Login_MF" />
         <AssociationConnector Association="DorllyResourceModel.FK_MF_M" />
         <AssociationConnector Association="DorllyResourceModel.FK_RM_Menu" />
         <AssociationConnector Association="DorllyResourceModel.FK_RMF_MF" />
@@ -52,12 +49,13 @@
         <AssociationConnector Association="DorllyResourceModel.FK_RT_RK" />
         <AssociationConnector Association="DorllyResourceModel.FK_RM_Role" />
         <AssociationConnector Association="DorllyResourceModel.FK_RMF_Role" />
-        <AssociationConnector Association="DorllyResourceModel.FK_UR_Role" />
-        <AssociationConnector Association="DorllyResourceModel.FK_UD_User" />
-        <AssociationConnector Association="DorllyResourceModel.FK_UR_User" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceStatus" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_ResourceStatus" Width="1.5" PointX="20.375" PointY="8.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="DorllyResourceModel.T_User" Width="1.5" PointX="6" PointY="30.75" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Login_MF" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Role_User" />
+        <AssociationConnector Association="DorllyResourceModel.FK_UD_User" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

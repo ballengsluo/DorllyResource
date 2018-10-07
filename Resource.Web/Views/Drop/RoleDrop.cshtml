@@ -1,0 +1,7 @@
+﻿@Html.DropDownList("RoleID", ViewData["dataList"] as SelectList,
+    new
+    {
+        @class = "selectpicker form-control",
+        @required = "required",
+        @title = "请选择..."
+    })

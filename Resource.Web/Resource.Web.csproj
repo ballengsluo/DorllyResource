@@ -802,6 +802,7 @@
     <Content Include="Views\StatisticsAD\Index.cshtml" />
     <Content Include="Views\StatisticsCR\Index.cshtml" />
     <Content Include="Views\Admin\_Resource - 复制.cshtml" />
+    <Content Include="Views\Drop\RoleDrop.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -870,7 +871,6 @@
     </Compile>
     <Compile Include="Models\BusinessModel.cs" />
     <Compile Include="Models\Util\Encrypt.cs" />
-    <Compile Include="Models\FuncView.cs" />
     <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\Util\Func.cs" />
     <Compile Include="Models\View\LoginView.cs" />

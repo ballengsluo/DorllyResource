@@ -19,16 +19,15 @@ namespace Resource.Model
         {
             this.T_LoginInfo = new HashSet<T_LoginInfo>();
             this.T_UserData = new HashSet<T_UserData>();
-            this.T_UserRole = new HashSet<T_UserRole>();
         }
     
         public string Account { get; set; }
         public string PWD { get; set; }
+        public Nullable<int> RoleID { get; set; }
         public string UserName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Addr { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> Enable { get; set; }
         public string CreateUser { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
@@ -37,9 +36,8 @@ namespace Resource.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_LoginInfo> T_LoginInfo { get; set; }
+        public virtual T_Role T_Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_UserData> T_UserData { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_UserRole> T_UserRole { get; set; }
     }
 }

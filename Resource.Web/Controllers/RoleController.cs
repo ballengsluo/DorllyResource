@@ -44,6 +44,7 @@ namespace Resource.Web.Controllers
         public ActionResult Edit(int id)
         {
             T_Role role = dc.Set<T_Role>().AsNoTracking().Where(a => a.ID == id).FirstOrDefault();
+            if (role.ID == 1) return Content("<script>window.parent.layer.closeAll();window.parent.layer.msg('无法操作超级管理角色!')</script>");
             return View(role);
         }
         [HttpPost]
@@ -72,6 +73,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
+                if (role.ID == 1) return Json(Result.Fail(msg: "无法删除超级管理员角色！"));
                 dc.Set<T_Role>().Remove(role);
                 dc.SaveChanges();
                 return Json(Result.Success());
@@ -86,6 +88,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
+                if (role.ID == 1) return Json(Result.Fail(msg: "无法启用超级管理员角色！"));
                 role.Enable = true;
                 dc.Set<T_Role>().AddOrUpdate(role);
                 dc.SaveChanges();
@@ -102,6 +105,7 @@ namespace Resource.Web.Controllers
             try
             {
                 T_Role role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
+                if (role.ID == 1) return Json(Result.Fail(msg: "无法停用超级管理员角色！"));
                 role.Enable = false;
                 dc.Set<T_Role>().AddOrUpdate(role);
                 dc.SaveChanges();
@@ -115,6 +119,7 @@ namespace Resource.Web.Controllers
         public ActionResult Func(int id)
         {
             var role = dc.Set<T_Role>().Where(a => a.ID == id).FirstOrDefault();
+            if (role.ID == 1) return Content("<script>window.parent.layer.closeAll();window.parent.layer.msg('无法操作超级管理角色!')</script>");
             ViewBag.role = role;
             ViewBag.order = 1;
             var list = dc.Set<T_Menu>().ToList();
