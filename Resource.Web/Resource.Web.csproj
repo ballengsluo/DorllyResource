@@ -785,11 +785,11 @@
     <Content Include="Views\S_Resource\Index.cshtml" />
     <Content Include="Views\Public\Detail_AD.cshtml" />
     <Content Include="Views\Shared\_RSStatus.cshtml" />
-    <Content Include="Views\HomePage\Detail.cshtml" />
+    <Content Include="Views\HomePage\Check.cshtml" />
     <Content Include="Views\Admin\_Resource.cshtml" />
     <Content Include="Views\S_Resource\Reserve.cshtml" />
-    <Content Include="Views\S_Resource\InsideRent.cshtml" />
-    <Content Include="Views\S_Resource\OutsideRent.cshtml" />
+    <Content Include="Views\S_Resource\MUse.cshtml" />
+    <Content Include="Views\S_Resource\CUse.cshtml" />
     <Content Include="Views\S_Resource\RSIndex.cshtml" />
     <Content Include="Views\S_Resource\Free.cshtml" />
     <Content Include="Views\Admin\_Order.cshtml" />
@@ -803,6 +803,7 @@
     <Content Include="Views\StatisticsCR\Index.cshtml" />
     <Content Include="Views\Admin\_Resource - 复制.cshtml" />
     <Content Include="Views\Drop\RoleDrop.cshtml" />
+    <Content Include="Views\Order\Deal.cshtml" />
     <None Include="Web References\butlerservice\AppService.disco" />
     <Content Include="Web References\doservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

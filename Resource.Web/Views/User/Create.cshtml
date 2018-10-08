@@ -64,7 +64,7 @@
                         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>登录密码
                     </label>
                     <div class="col-md-8">
-                        @Html.Password("PWD", "", new { @class = "form-control", @id = "" })
+                        @Html.Password("PWD", "", new { @class = "form-control", @id = "", @placeholder="不填写密码则默认6个8" })
                     </div>
                 </div>
                 @park()

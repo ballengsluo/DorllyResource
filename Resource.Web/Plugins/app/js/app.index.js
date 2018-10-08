@@ -23,6 +23,7 @@ $(function() {
 function operation() {
     //查询
     $('#search').click(function() {
+        currentNum = 1;
         search(paramsSet());
     });
     //添加
@@ -114,6 +115,25 @@ function operation() {
             type: 2,
             content: url,
             area: ['410px', '200px'],
+            closeBtn: 2,
+            zIndex: 1000,
+            title: false,
+            end: function() {
+                if (refresh == true) {
+                    refresh = false;
+                    search(paramsSet());
+                }
+            }
+        });
+    });
+    //预约申请处理
+    $('#deal').click(function() {
+        if (!id || id == "") { layer.msg('请选择数据！'); return false; }
+        var url = $(this).attr('data-url') + '?id=' + id;
+        var index = layer.open({
+            type: 2,
+            content: url,
+            area: ['590px', '370px'],
             closeBtn: 2,
             zIndex: 1000,
             title: false,

@@ -19,17 +19,20 @@ $(function() {
 
 });
 
+function execData(data) {
+    $.each(data.blist, function(idx, build) { //楼栋
+        $.each(data.flist, function(idx, floor) { //楼层
+            $.each(data.rmlist, function(idx, rm) { //房间
+
+            });
+        });
+    });
+}
+
+
+
 function execrm(data) {
     var buildul = $("<ul></ul>");
-
-    // 园区数据处理
-    // var parkSelect = "";
-    // $.each(data.park, function(idx, park) {
-    //     parkSelect = parkSelect + "<option value='" + park.ID + "'>" + park.Name + "</option>";
-    // });
-    // $("#park").html(parkSelect).selectpicker("refresh");
-
-    // 房间数据处理
     console.log(data);
     $.each(data, function(idx, build) {
 
@@ -67,8 +70,6 @@ function execrm(data) {
     $(".building").html(buildul);
     changeBuild();
     $(".building li:first-of-type").click();
-    // $("div[data-status='1']").addClass("rmfree");
-    // $("div[data-status='2']").addClass("rmrent");
     hoverShow();
 }
 

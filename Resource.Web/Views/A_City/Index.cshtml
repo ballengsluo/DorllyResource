@@ -22,6 +22,16 @@
                     </div>
                 </div>
                 <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select class="selectpicker form-control pull-righ" id="enable">
+                            <option value="">全部</option>
+                            <option value="false">停用</option>
+                            <option value="true">启用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
@@ -64,14 +74,5 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //function paramsSet() {
-        //    return obj = {
-        //        Name: $("#name").val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 </html>

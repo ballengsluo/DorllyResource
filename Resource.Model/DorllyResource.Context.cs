@@ -30,7 +30,6 @@ namespace Resource.Model
         public virtual DbSet<V_Building> V_Building { get; set; }
         public virtual DbSet<V_Floor> V_Floor { get; set; }
         public virtual DbSet<V_Func> V_Func { get; set; }
-        public virtual DbSet<V_Order> V_Order { get; set; }
         public virtual DbSet<V_Park> V_Park { get; set; }
         public virtual DbSet<V_Public> V_Public { get; set; }
         public virtual DbSet<V_Resource> V_Resource { get; set; }
@@ -43,7 +42,6 @@ namespace Resource.Model
         public virtual DbSet<T_LoginInfo> T_LoginInfo { get; set; }
         public virtual DbSet<T_Menu> T_Menu { get; set; }
         public virtual DbSet<T_MenuFunc> T_MenuFunc { get; set; }
-        public virtual DbSet<T_Order> T_Order { get; set; }
         public virtual DbSet<T_PageFoot> T_PageFoot { get; set; }
         public virtual DbSet<T_Park> T_Park { get; set; }
         public virtual DbSet<T_Region> T_Region { get; set; }
@@ -62,6 +60,8 @@ namespace Resource.Model
         public virtual DbSet<T_ResourceStatus> T_ResourceStatus { get; set; }
         public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
+        public virtual DbSet<T_Order> T_Order { get; set; }
+        public virtual DbSet<V_Order> V_Order { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
         {

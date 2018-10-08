@@ -43,9 +43,8 @@ namespace Resource.Web.Controllers
             list = list.OrderBy(a => a.OrderNum).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Detail(int id)
+        public ActionResult Check(int id)
         {
-
             T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
             return View(hp);
         }
@@ -60,18 +59,16 @@ namespace Resource.Web.Controllers
             string newPath = string.Empty;
             try
             {
-
                 newPath = SaveImg();
                 hp.ImgUrl = newPath;
                 hp.Status = 1;
-                T_User user = RouteData.Values["user"] as T_User;
                 hp.CreateTime = DateTime.Now;
                 hp.CreateUser = user.Account;
                 hp.UpdateTime = DateTime.Now;
                 hp.UpdateUser = user.Account;
                 dc.Set<T_HomePage>().Add(hp);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -94,8 +91,6 @@ namespace Resource.Web.Controllers
             string newPath = string.Empty;
             try
             {
-
-                T_User user = RouteData.Values["user"] as T_User;
                 T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
                 if (Request.Files.Count > 0 && !string.IsNullOrEmpty(Request.Files[0].FileName))
                 {
@@ -151,22 +146,6 @@ namespace Resource.Web.Controllers
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
-        public JsonResult Pass(int id)
-        {
-
-            T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
-            hp.Status = 2;
-            if (dc.SaveChanges() > 0) return Json(Result.Success());
-            return Json(Result.Fail());
-        }
-        public JsonResult NPass(int id)
-        {
-
-            T_HomePage hp = dc.Set<T_HomePage>().Where(a => a.ID == id).FirstOrDefault();
-            hp.Status = 3;
-            if (dc.SaveChanges() > 0) return Json(Result.Success());
-            return Json(Result.Fail());
-        }
         public JsonResult Pub(int id)
         {
 
@@ -174,8 +153,8 @@ namespace Resource.Web.Controllers
             if (hp.Status == 4) return Json(Result.Fail(msg: "状态一致，无从改变！"));
             else if (hp.Status != 1 && hp.Status != 5) return Json(Result.Fail(msg: "请选择正确的操作！"));
             hp.Status = 4;
-            if (dc.SaveChanges() > 0) return Json(Result.Success());
-            return Json(Result.Fail());
+            dc.SaveChanges();
+            return Json(Result.Success());
         }
         public JsonResult NPub(int id)
         {

@@ -19,12 +19,13 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            
+
             var list = dc.Set<V_Building>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.StageID == param.Stage);
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
+            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);
@@ -50,7 +51,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            
+
             var obj = dc.Set<V_Building>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -59,7 +60,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(building, "", form.AllKeys, new string[] { "Enable" }))
                 {
@@ -77,7 +78,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Building>().Remove(building);
                 if (dc.SaveChanges() > 0) return Json(Result.Success());
@@ -92,7 +93,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = true;
                 dc.Set<T_Building>().AddOrUpdate(building);
@@ -108,7 +109,7 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = false;
                 dc.Set<T_Building>().AddOrUpdate(building);

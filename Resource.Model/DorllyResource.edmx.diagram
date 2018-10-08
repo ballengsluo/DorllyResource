@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="DorllyResourceModel.V_Building" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Floor" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Func" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.V_Order" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Park" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Public" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Resource" Width="1.5" PointX="8.75" PointY="0.75" />
@@ -21,7 +20,6 @@
         <EntityTypeShape EntityType="DorllyResourceModel.T_LoginInfo" Width="1.5" PointX="3" PointY="18.5" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_Menu" Width="1.5" PointX="3.75" PointY="31.25" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_MenuFunc" Width="1.5" PointX="3.75" PointY="35.375" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_Order" Width="1.5" PointX="18.25" PointY="25.25" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_PageFoot" Width="1.5" PointX="18.75" PointY="0.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_Park" Width="1.5" PointX="8.75" PointY="19.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_Region" Width="1.5" PointX="5.75" PointY="16.75" />
@@ -40,7 +38,6 @@
         <AssociationConnector Association="DorllyResourceModel.FK_MF_M" />
         <AssociationConnector Association="DorllyResourceModel.FK_RM_Menu" />
         <AssociationConnector Association="DorllyResourceModel.FK_RMF_MF" />
-        <AssociationConnector Association="DorllyResourceModel.FK_Order_RID" />
         <AssociationConnector Association="DorllyResourceModel.FK_Img_RID" />
         <AssociationConnector Association="DorllyResourceModel.FK_Price_RID" />
         <AssociationConnector Association="DorllyResourceModel.FK_Public_RID" />
@@ -55,6 +52,9 @@
         <AssociationConnector Association="DorllyResourceModel.FK_Login_MF" />
         <AssociationConnector Association="DorllyResourceModel.FK_Role_User" />
         <AssociationConnector Association="DorllyResourceModel.FK_UD_User" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_Order" Width="1.5" PointX="18.25" PointY="26" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_Order" Width="1.5" PointX="3.375" PointY="5.75" />
+        <AssociationConnector Association="DorllyResourceModel.FK_Order_RID" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

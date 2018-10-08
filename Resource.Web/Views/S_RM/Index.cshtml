@@ -24,7 +24,6 @@
 </head>
 <body>
     <div class="container">
-        @*<div class="row rmsearch">*@
         <div class="checkArea">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -36,7 +35,7 @@
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">房间号</span>
-                        <input type="text" class="form-control" id="rmno" placeholder="房间号" />
+                        <input type="text" class="form-control" id="name" placeholder="房间号" />
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -46,31 +45,27 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="rent" checked /> 占用
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="free" checked /> 空闲
-                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select class="selectpicker form-control pull-righ" id="status">
+                            <option value="">全部</option>
+                            <option value="1">客户占用</option>
+                            <option value="2">内部占用</option>
+                            <option value="3">空闲</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                    <button type="button" class="btn btn-primary" id="search" style="font-size:15px;" data-url="@Url.Action("Search")">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
                 </div>
             </div>
             <div class="row">
                 <div class="building">
                 </div>
-                <div class="rmstatus" style="margin-left:30px;">
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="rent" checked /> 占用
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="free" checked /> 空闲
-                    </label>
-                </div>
             </div>
         </div>
-
-        @*<div class="roomContainer">
-
-            </div>*@
         <div class="resourceContainer">
 
         </div>

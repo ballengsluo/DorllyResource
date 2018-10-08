@@ -15,6 +15,7 @@
 </head>
 <body>
     <div class="container-fluid">
+        @Html.Partial("_Func")
         <div class="select-action">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
@@ -23,7 +24,7 @@
                         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
                     </div>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <div class="input-group">
                         <span class="input-group-addon">服务号</span>
@@ -37,7 +38,16 @@
                         <input type="text" class="form-control" id="name">
                     </div>
                 </div>
-                
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">处理状态</span>
+                        <select class="selectpicker form-control pull-righ" id="status">
+                            <option value="">全部</option>
+                            <option value="1">未处理</option>
+                            <option value="2">已处理</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3">
@@ -53,19 +63,20 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="input-group" style="z-index:1;">
-                        <span class="input-group-addon">申请日期</span>
-                        <div class="col-lg-5 col-md-5">
+                        <span class="input-group-addon">提交时间</span>
+                        <div class="col-lg-5 col-md-5" style="width:45%;">
                             <input class="form-control" id="stime">
                         </div>
-                        <div class="col-lg-1 col-md-1">
+                        <div class="col-lg-1 col-md-1" style="width:10%;">
                             <label style="margin:0px;width:100%;height:34px;text-align:center;line-height:34px;">-</label>
                         </div>
-                        <div class="col-lg-5 col-md-5 ">
+                        <div class="col-lg-5 col-md-5" style="width:45%;">
                             <input class="form-control" id="etime">
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-1 col-sm-1">
+                
+                <div class="col-lg-1 col-md-1">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
@@ -83,9 +94,9 @@
                         <th>资源编号</th>
                         <th>资源名称</th>
                         <th>资源类别</th>
-                        <th>资源分组</th>
                         <th>申请人</th>
                         <th>联系电话</th>
+                        <th>状态</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -103,14 +114,13 @@
             <td>{{value.ResourceID}}</td>
             <td>{{value.Name}}</td>
             <td>{{value.ResourceKindName}}</td>
-            <td>{{value.GroupName}}</td>
             <td>{{value.CustName}}</td>
             <td>{{value.CustPhone}}</td>
-            @*<td class="status" data-status="{{value.Status}}">
-                {{if value.Status==0}}
-                {{else}}启用
+            <td class="status" data-status="{{value.Status}}">
+                {{if value.Status==1}}未处理
+                {{else}}已处理
                 {{/if}}
-            </td>*@
+            </td>
         </tr>
         {{/each}}
     </script>
@@ -121,5 +131,6 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
+
 </body>
 </html>

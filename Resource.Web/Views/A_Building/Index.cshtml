@@ -13,13 +13,7 @@
 </head>
 <body>
     <div class="container">
-        @*@Html.Partial("_FuncPage", Model)*@
         @Html.Partial("_Func")
-        @*<div class="func-action">
-                <button type="button" class="btn btn-primary" id="add"><i class="glyphicon glyphicon-plus"></i> 新增</button>
-                <button type="button" class="btn btn-primary" id="edit"><i class="glyphicon glyphicon-edit"></i> 编辑</button>
-                <button type="button" class="btn btn-danger" id="del"><i class="glyphicon glyphicon-trash"></i> 删除</button>
-            </div>*@
         <div class="select-action">
             <div class="row">
                 <div class="col-md-2">
@@ -44,6 +38,16 @@
                     <div class="input-group">
                         <span class="input-group-addon">名称</span>
                         <input type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select class="selectpicker form-control pull-righ" id="enable">
+                            <option value="">全部</option>
+                            <option value="false">停用</option>
+                            <option value="true">启用</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -91,18 +95,6 @@
     @Scripts.Render("~/Plugins/artTemplate/template-web.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     @Scripts.Render("~/Plugins/app/js/app.index.js")
-    <script>
-        //function paramsSet() {
-        //    return obj = {
-        //        ParkID: $("#park").val(),
-        //        StageID: $("#stage").val(),
-        //        ID: $("#id").val(),
-        //        Name: $("#name").val(),
-        //        PageIndex: currentNum,
-        //        PageSize: limitCount
-        //    };
-        //};
-    </script>
 </body>
 
 </html>

@@ -34,7 +34,7 @@ namespace Resource.Web.Controllers
         {
             get
             {
-                if (user.Account == "admin")
+                if (user.RoleID == 1)
                     return dc.Set<T_Park>().Select(a => a.ID).ToList();
                 else
                     return user.T_UserData.Select(a => a.DataID).ToList();

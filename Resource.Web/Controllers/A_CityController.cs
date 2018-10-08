@@ -19,6 +19,7 @@ namespace Resource.Web.Controllers
         {
             var list = dc.Set<T_City>().Where(a => true);
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
+            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);

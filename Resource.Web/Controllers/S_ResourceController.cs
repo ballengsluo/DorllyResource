@@ -73,16 +73,16 @@ namespace Resource.Web.Controllers
             var obj = JsonConvert.SerializeObject(new { count = count, data = result.ToList() });
             return Content(obj);
         }
-        public ActionResult InsideRent()
+        public ActionResult MUse()
         {
             return View();
         }
-        public ActionResult OutsideRent()
+        public ActionResult CUse()
         {
             return View();
         }
         [HttpPost]
-        public JsonResult InsideRent(FormCollection form)
+        public JsonResult MUse(FormCollection form)
         {
             try
             {
@@ -91,9 +91,10 @@ namespace Resource.Web.Controllers
                     return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
                 var begin = status.RentBeginTime;
                 var end = status.RentEndTime;
-                if (begin > end || CheckTime(begin, end))
+                if (begin > end || CheckTime(begin, end,status.ResourceID))
                     return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
                 status.SysID = 3;
+                status.BusinessID = Guid.NewGuid().ToString();
                 status.BusinessType = 6;
                 status.Status = 2;
                 status.UpdateTime = DateTime.Now;
@@ -108,7 +109,7 @@ namespace Resource.Web.Controllers
             }
         }
         [HttpPost]
-        public JsonResult OutsideRent(FormCollection form)
+        public JsonResult CUse(FormCollection form)
         {
             try
             {
@@ -117,9 +118,10 @@ namespace Resource.Web.Controllers
                     return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
                 var begin = status.RentBeginTime;
                 var end = status.RentEndTime;
-                if (begin > end || CheckTime(begin, end))
+                if (begin > end || CheckTime(begin, end,status.ResourceID))
                     return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
                 status.SysID = 3;
+                status.BusinessID = Guid.NewGuid().ToString();
                 status.BusinessType = 5;
                 status.Status = 1;
                 status.UpdateTime = DateTime.Now;
@@ -202,7 +204,7 @@ namespace Resource.Web.Controllers
             }
             try
             {
-                if (endTime <= status.RentBeginTime ||
+                if ((endTime <= status.RentBeginTime && status.RentBeginTime< endTime) ||
                     dc.Set<T_ResourceStatus>().Where(a => a.ID != status.ID && a.RentBeginTime <= endTime && a.RentEndTime <= endTime).Count() > 0)
                 {
                     return Json(Result.Fail(msg: "结束时间和其他占用时间有冲突！"));
@@ -219,12 +221,12 @@ namespace Resource.Web.Controllers
 
         }
 
-        public bool CheckTime(DateTime begin, DateTime end)
+        public bool CheckTime(DateTime begin, DateTime end,string resourceID)
         {
             bool success = false;
-            int count = dc.Set<T_ResourceStatus>().Where(a =>
-                        (a.RentBeginTime <= begin && begin <= a.RentEndTime) ||
-                        (a.RentBeginTime <= end && end <= a.RentEndTime)
+            int count = dc.Set<T_ResourceStatus>().Where(a => a.ResourceID==resourceID &&
+                        ((a.RentBeginTime <= begin && begin <= a.RentEndTime) ||
+                        (a.RentBeginTime <= end && end <= a.RentEndTime))
                         ).Count();
             if (count > 0) success = true;
             return success;

@@ -26,6 +26,7 @@ namespace Resource.Web.Controllers
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
+            if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
             int count = list.Count();
             list = list.OrderBy(a => a.ID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
             return Json(new { count = count, data = list.ToList() }, JsonRequestBehavior.AllowGet);

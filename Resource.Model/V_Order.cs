@@ -16,16 +16,13 @@ namespace Resource.Model
     {
         public string ID { get; set; }
         public string ResourceID { get; set; }
-        public string CustID { get; set; }
         public string City { get; set; }
         public string CustName { get; set; }
         public string CustPhone { get; set; }
-        public string CustAddr { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> BeginTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
         public Nullable<int> Status { get; set; }
         public string AuthUser { get; set; }
+        public string AuthMark { get; set; }
         public string Name { get; set; }
         public string Loc1 { get; set; }
         public string Loc2 { get; set; }

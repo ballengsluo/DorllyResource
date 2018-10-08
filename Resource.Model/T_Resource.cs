@@ -17,10 +17,10 @@ namespace Resource.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public T_Resource()
         {
-            this.T_Order = new HashSet<T_Order>();
             this.T_ResourceImg = new HashSet<T_ResourceImg>();
             this.T_ResourcePrice = new HashSet<T_ResourcePrice>();
             this.T_ResourcePublic = new HashSet<T_ResourcePublic>();
+            this.T_Order = new HashSet<T_Order>();
         }
     
         public string ID { get; set; }
@@ -59,13 +59,13 @@ namespace Resource.Model
         public Nullable<System.DateTime> UpdateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_Order> T_Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_ResourceImg> T_ResourceImg { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_ResourcePrice> T_ResourcePrice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<T_ResourcePublic> T_ResourcePublic { get; set; }
         public virtual T_ResourceKind T_ResourceKind { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<T_Order> T_Order { get; set; }
     }
 }
