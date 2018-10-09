@@ -62,7 +62,7 @@ namespace Resource.Model
         public string CustLongName { get; set; }
         public string CustShortName { get; set; }
         public string CustTel { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int Status { get; set; }
         public string RentStatus { get; set; }
         public Nullable<bool> YearEnable { get; set; }
         public Nullable<decimal> YearInPrice { get; set; }

@@ -91,10 +91,11 @@
                         <th>所属园区</th>
                         <th>资源类别</th>
                         <th>资源分组</th>
-                        <th>操作来源</th>
-                        <th>资源状态</th>
+                        <th>数据来源</th>
+                        <th>占用类别</th>
                         <th>占用客户</th>
                         <th>占用时间</th>
+                        <th>资源状态</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>
@@ -117,14 +118,18 @@
                 {{else if value.SysID==3}}资源系统
                 {{/if}}
             </td>
-            <td data-status="{{value.Status}}">
-                {{if value.Status==1}} 客户占用
-                {{else if value.Status==2}}内部占用
-                {{else}}空闲
+            <td>
+                {{if value.RentType==1}} 客户占用
+                {{else if value.RentType==2}}内部占用
                 {{/if}} 
             </td>
             <td>{{value.CustShortName}}</td>
             <td>{{value.RentBeginTime}} - {{value.RentEndTime}}</td>
+            <td>
+                {{if value.Status==1}} 占用
+                {{else if value.Status==2}}空闲
+                {{/if}}
+            </td>
         </tr>
         {{/each}}
     </script>

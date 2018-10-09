@@ -305,6 +305,7 @@
           <Property Name="BusinessType" Type="int" Nullable="false" />
           <Property Name="RentBeginTime" Type="datetime" Nullable="false" />
           <Property Name="RentEndTime" Type="datetime" Nullable="false" />
+          <Property Name="RentType" Type="int" />
           <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
@@ -397,7 +398,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="StageID" Type="nvarchar" MaxLength="30" />
           <Property Name="Enable" Type="bit" />
-          <Property Name="FullPosition" Type="nvarchar" MaxLength="203" />
+          <Property Name="FullPosition" Type="nvarchar" MaxLength="101" />
           <Property Name="StageName" Type="nvarchar" MaxLength="50" />
           <Property Name="ParkID" Type="nvarchar" MaxLength="30" />
           <Property Name="ParkName" Type="nvarchar" MaxLength="50" />
@@ -416,7 +417,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="BuildingID" Type="nvarchar" MaxLength="30" />
           <Property Name="Enable" Type="bit" />
-          <Property Name="FullPosition" Type="nvarchar" MaxLength="254" />
+          <Property Name="FullPosition" Type="nvarchar" MaxLength="152" />
           <Property Name="BuildingName" Type="nvarchar" MaxLength="50" />
           <Property Name="StageID" Type="nvarchar" MaxLength="30" />
           <Property Name="StageName" Type="nvarchar" MaxLength="50" />
@@ -589,6 +590,7 @@
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="ResourceKindID" />
+            
             <PropertyRef Name="RentStatus" />
           </Key>
           <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -639,7 +641,7 @@
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
           <Property Name="CustTel" Type="nvarchar" MaxLength="20" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="RentStatus" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="YearEnable" Type="bit" />
           <Property Name="YearInPrice" Type="decimal" Precision="15" Scale="2" />
@@ -704,6 +706,7 @@
           <Property Name="BusinessType" Type="int" Nullable="false" />
           <Property Name="RentBeginTime" Type="datetime" Nullable="false" />
           <Property Name="RentEndTime" Type="datetime" Nullable="false" />
+          <Property Name="RentType" Type="int" />
           <Property Name="RentArea" Type="decimal" Precision="15" Scale="2" />
           <Property Name="CustLongName" Type="nvarchar" MaxLength="200" />
           <Property Name="CustShortName" Type="nvarchar" MaxLength="100" />
@@ -1243,6 +1246,7 @@
     [V_ResourceStatus].[BusinessType] AS [BusinessType], 
     [V_ResourceStatus].[RentBeginTime] AS [RentBeginTime], 
     [V_ResourceStatus].[RentEndTime] AS [RentEndTime], 
+    [V_ResourceStatus].[RentType] AS [RentType], 
     [V_ResourceStatus].[RentArea] AS [RentArea], 
     [V_ResourceStatus].[CustLongName] AS [CustLongName], 
     [V_ResourceStatus].[CustShortName] AS [CustShortName], 
@@ -1432,8 +1436,6 @@
             <End Role="T_Role" EntitySet="T_Role" />
             <End Role="T_RoleFunc" EntitySet="T_RoleFunc" />
           </AssociationSet>
-          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
-          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
           <EntitySet Name="T_User" EntityType="DorllyResourceModel.T_User" />
           <AssociationSet Name="FK_Login_MF" Association="DorllyResourceModel.FK_Login_MF">
             <End Role="T_User" EntitySet="T_User" />
@@ -1453,6 +1455,8 @@
             <End Role="T_Resource" EntitySet="T_Resource" />
             <End Role="T_Order" EntitySet="T_Order" />
           </AssociationSet>
+          <EntitySet Name="T_ResourceStatus" EntityType="DorllyResourceModel.T_ResourceStatus" />
+          <EntitySet Name="V_ResourceStatus" EntityType="DorllyResourceModel.V_ResourceStatus" />
           </EntityContainer>
         <ComplexType Name="Pro_GetFunc_Result">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -1469,7 +1473,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="203" FixedLength="false" Unicode="true" />
+          <Property Name="FullPosition" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParkID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="ParkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1486,7 +1490,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BuildingID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Enable" Type="Boolean" />
-          <Property Name="FullPosition" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FullPosition" Type="String" MaxLength="152" FixedLength="false" Unicode="true" />
           <Property Name="BuildingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StageID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1645,7 +1649,7 @@
           <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="RentStatus" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="YearEnable" Type="Boolean" />
           <Property Name="YearInPrice" Type="Decimal" Precision="15" Scale="2" />
@@ -2192,76 +2196,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="T_ResourceStatus">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SysID" Type="Int32" Nullable="false" />
-          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="Int32" Nullable="false" />
-          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="V_ResourceStatus">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="SysID" />
-            <PropertyRef Name="ResourceID" />
-            <PropertyRef Name="BusinessID" />
-            <PropertyRef Name="BusinessType" />
-            <PropertyRef Name="RentBeginTime" />
-            <PropertyRef Name="RentEndTime" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="SysID" Type="Int32" Nullable="false" />
-          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BusinessType" Type="Int32" Nullable="false" />
-          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceKindID" Type="Int32" />
-          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ResourceEnable" Type="Boolean" />
-        </EntityType>
         <EntityType Name="T_User">
           <Key>
             <PropertyRef Name="Account" />
@@ -2399,6 +2333,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="T_ResourceStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SysID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="Int32" Nullable="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentType" Type="Int32" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="V_ResourceStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="SysID" />
+            <PropertyRef Name="ResourceID" />
+            <PropertyRef Name="BusinessID" />
+            <PropertyRef Name="BusinessType" />
+            <PropertyRef Name="RentBeginTime" />
+            <PropertyRef Name="RentEndTime" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SysID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessType" Type="Int32" Nullable="false" />
+          <Property Name="RentBeginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RentType" Type="Int32" />
+          <Property Name="RentArea" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CustLongName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CustShortName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveDept" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReserveName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ResourceName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc1Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc2Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc3Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc4Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loc5Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LocText" Type="String" MaxLength="234" FixedLength="false" Unicode="true" />
+          <Property Name="GroupID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceKindID" Type="Int32" />
+          <Property Name="ResourceKindName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceEnable" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3016,71 +3022,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="T_ResourceStatus">
-            <EntityTypeMapping TypeName="DorllyResourceModel.T_ResourceStatus">
-              <MappingFragment StoreEntitySet="T_ResourceStatus">
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
-                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
-                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
-                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="SysID" ColumnName="SysID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_ResourceStatus">
-            <EntityTypeMapping TypeName="DorllyResourceModel.V_ResourceStatus">
-              <MappingFragment StoreEntitySet="V_ResourceStatus">
-                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
-                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
-                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
-                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
-                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="LocText" ColumnName="LocText" />
-                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
-                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
-                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
-                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
-                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
-                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
-                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
-                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
-                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
-                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
-                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
-                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
-                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
-                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
-                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
-                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
-                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
-                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
-                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
-                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
-                <ScalarProperty Name="SysID" ColumnName="SysID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="T_User">
             <EntityTypeMapping TypeName="DorllyResourceModel.T_User">
               <MappingFragment StoreEntitySet="T_User">
@@ -3164,6 +3105,73 @@
                 <ScalarProperty Name="CustName" ColumnName="CustName" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_ResourceStatus">
+            <EntityTypeMapping TypeName="DorllyResourceModel.T_ResourceStatus">
+              <MappingFragment StoreEntitySet="T_ResourceStatus">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
+                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="RentType" ColumnName="RentType" />
+                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
+                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ResourceStatus">
+            <EntityTypeMapping TypeName="DorllyResourceModel.V_ResourceStatus">
+              <MappingFragment StoreEntitySet="V_ResourceStatus">
+                <ScalarProperty Name="ResourceEnable" ColumnName="ResourceEnable" />
+                <ScalarProperty Name="ResourceTypeName" ColumnName="ResourceTypeName" />
+                <ScalarProperty Name="ResourceTypeID" ColumnName="ResourceTypeID" />
+                <ScalarProperty Name="ResourceKindName" ColumnName="ResourceKindName" />
+                <ScalarProperty Name="ResourceKindID" ColumnName="ResourceKindID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="LocText" ColumnName="LocText" />
+                <ScalarProperty Name="Loc5Name" ColumnName="Loc5Name" />
+                <ScalarProperty Name="Loc5" ColumnName="Loc5" />
+                <ScalarProperty Name="Loc4Name" ColumnName="Loc4Name" />
+                <ScalarProperty Name="Loc4" ColumnName="Loc4" />
+                <ScalarProperty Name="Loc3Name" ColumnName="Loc3Name" />
+                <ScalarProperty Name="Loc3" ColumnName="Loc3" />
+                <ScalarProperty Name="Loc2Name" ColumnName="Loc2Name" />
+                <ScalarProperty Name="Loc2" ColumnName="Loc2" />
+                <ScalarProperty Name="Loc1Name" ColumnName="Loc1Name" />
+                <ScalarProperty Name="Loc1" ColumnName="Loc1" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="ReserveName" ColumnName="ReserveName" />
+                <ScalarProperty Name="ReserveDept" ColumnName="ReserveDept" />
+                <ScalarProperty Name="CustTel" ColumnName="CustTel" />
+                <ScalarProperty Name="CustShortName" ColumnName="CustShortName" />
+                <ScalarProperty Name="CustLongName" ColumnName="CustLongName" />
+                <ScalarProperty Name="RentArea" ColumnName="RentArea" />
+                <ScalarProperty Name="RentType" ColumnName="RentType" />
+                <ScalarProperty Name="RentEndTime" ColumnName="RentEndTime" />
+                <ScalarProperty Name="RentBeginTime" ColumnName="RentBeginTime" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="SysID" ColumnName="SysID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

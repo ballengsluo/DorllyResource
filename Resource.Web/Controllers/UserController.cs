@@ -84,9 +84,9 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            var user = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
-            SetPark(user);
-            return View(user);
+            var cust = dc.Set<T_User>().Where(a => a.Account == id).FirstOrDefault();
+            SetPark(cust);
+            return View(cust);
         }
         [HttpPost]
         public JsonResult Edit(string id, FormCollection form)
@@ -273,47 +273,93 @@ namespace Resource.Web.Controllers
         }
         public void SetPark(T_User cust)
         {
-            List<T_UserData> custPark = null;
-            if ((cust != null && cust.Account == "admin") || user.Account == "admin")
+            if (cust != null)
             {
-                var mastPark = dc.Set<T_Park>().Select(a => new { a.ID, a.Name, Enable = true }).ToList();
-                ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(mastPark));
-            }
-            else if (cust != null)
-            {
-                custPark = cust.T_UserData.ToList();
-                if (custPark.Count() > 0)
+                List<T_UserData> custPark = null;
+                if (cust.Account != "admin")
                 {
-                    var mastPark = user.T_UserData
-                    .Select(a => new
+                    custPark = dc.Set<T_UserData>().Where(a => a.UserID == cust.Account).ToList();
+                }
+                else
+                {
+                    custPark = new List<T_UserData>();
+                }
+                if (user.Account == "admin")
+                {
+                    var park = dc.Set<T_Park>()
+                        .Where(a => a.Enable == true)
+                        .Select(a => new
+                        {
+                            a.ID,
+                            a.Name
+                        }).ToList();
+                    var result = park.Select(a => new
                     {
-                        a.DataID,
-                        Enable = custPark.Where(b => b.DataID == a.DataID).Count() > 0
-                    })
-                    .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
-                    {
-                        ID = a.DataID,
-                        Name = b.Name,
-                        Enable = a.Enable
+                        a.ID,
+                        a.Name,
+                        Enable = custPark.Where(b => b.DataID == a.ID).Count() > 0
                     }).ToList();
-                    ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(mastPark));
+                    ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(result));
+
+                }
+                else
+                {
+                    var park = dc.Set<T_UserData>().Where(a => a.UserID == user.Account)
+                        .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
+                        {
+                            ID = a.DataID,
+                            Name = b.Name,
+                            Enable = b.Enable
+                        })
+                        .Where(a => a.Enable == true)
+                        .Select(a => new
+                        {
+                            a.ID,
+                            a.Name
+                        }).ToList();
+                    var result = park.Select(a => new
+                    {
+                        a.ID,
+                        a.Name,
+                        Enable = custPark.Where(b => b.DataID == a.ID).Count() > 0
+                    }).ToList();
+                    ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(result));
+
                 }
             }
             else
             {
-                var mastPark = user.T_UserData
-                .Select(a => new
+                if (user.Account == "admin")
                 {
-                    a.DataID,
-                    Enable = false
-                })
-                .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
+                    var park = dc.Set<T_Park>()
+                       .Where(a => a.Enable == true)
+                       .Select(a => new
+                       {
+                           a.ID,
+                           a.Name,
+                           Enable = false
+                       }).ToList();
+                    ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(park));
+                }
+                else
                 {
-                    ID = a.DataID,
-                    Name = b.Name,
-                    Enable = a.Enable
-                }).ToList();
-                ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(mastPark));
+                    var park = dc.Set<T_UserData>()
+                        .Where(a => a.UserID == user.Account)
+                        .Join(dc.Set<T_Park>(), a => a.DataID, b => b.ID, (a, b) => new
+                        {
+                            ID = a.DataID,
+                            Name = b.Name,
+                            Enable = b.Enable
+                        })
+                        .Where(a => a.Enable == true)
+                    .Select(a => new
+                    {
+                        a.ID,
+                        a.Name,
+                        Enable = false
+                    }).ToList();
+                    ViewBag.Park = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(park));
+                }
             }
         }
     }

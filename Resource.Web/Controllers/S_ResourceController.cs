@@ -40,6 +40,7 @@ namespace Resource.Web.Controllers
                 a.ResourceKindName,
                 a.GroupName,
                 a.Loc1Name,
+                a.RentType,
                 a.BusinessType,
                 a.CustShortName,
                 a.RentBeginTime,
@@ -69,7 +70,7 @@ namespace Resource.Web.Controllers
             if (param.Kind != null) list = list.Where(a => a.ResourceKindID == param.Kind);
             int count = list.Count();
             list = list.OrderByDescending(a => a.ResourceKindID).Skip((param.PageIndex - 1) * param.PageSize).Take(param.PageSize);
-            var result = list.Select(a => new { a.ID, a.Name, a.Loc1Name, a.GroupName,a.RentArea });
+            var result = list.Select(a => new { a.ID, a.Name, a.Loc1Name, a.GroupName, a.RentArea });
             var obj = JsonConvert.SerializeObject(new { count = count, data = result.ToList() });
             return Content(obj);
         }
@@ -91,11 +92,12 @@ namespace Resource.Web.Controllers
                     return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
                 var begin = status.RentBeginTime;
                 var end = status.RentEndTime;
-                if (begin > end || CheckTime(begin, end,status.ResourceID))
+                if (begin > end || CheckTime(begin, end, status.ResourceID))
                     return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
                 status.SysID = 3;
                 status.BusinessID = Guid.NewGuid().ToString();
                 status.BusinessType = 6;
+                status.RentType = 2;
                 status.Status = 2;
                 status.UpdateTime = DateTime.Now;
                 status.UpdateUser = user.Account;
@@ -118,9 +120,10 @@ namespace Resource.Web.Controllers
                     return Json(Result.Fail(msg: "操作数据失败,请检查数据的准确性！"));
                 var begin = status.RentBeginTime;
                 var end = status.RentEndTime;
-                if (begin > end || CheckTime(begin, end,status.ResourceID))
+                if (begin > end || CheckTime(begin, end, status.ResourceID))
                     return Json(Result.Fail(msg: "时间冲突,请选择正确的时间！"));
                 status.SysID = 3;
+                status.RentType = 1;
                 status.BusinessID = Guid.NewGuid().ToString();
                 status.BusinessType = 5;
                 status.Status = 1;
@@ -204,13 +207,14 @@ namespace Resource.Web.Controllers
             }
             try
             {
-                if ((endTime <= status.RentBeginTime && status.RentBeginTime< endTime) ||
-                    dc.Set<T_ResourceStatus>().Where(a => a.ID != status.ID && a.RentBeginTime <= endTime && a.RentEndTime <= endTime).Count() > 0)
+                if ((status.RentBeginTime < endTime && endTime <= status.RentBeginTime) ||
+                    dc.Set<T_ResourceStatus>().Where(a => a.ID != status.ID && a.ResourceID == status.ResourceID &&
+                        a.RentBeginTime <= endTime && endTime <= a.RentEndTime).Count() > 0)
                 {
                     return Json(Result.Fail(msg: "结束时间和其他占用时间有冲突！"));
                 }
                 status.RentEndTime = endTime;
-                status.Status = 3;
+                status.Status = 2;
                 dc.SaveChanges();
                 return Json(Result.Success());
             }
@@ -221,10 +225,10 @@ namespace Resource.Web.Controllers
 
         }
 
-        public bool CheckTime(DateTime begin, DateTime end,string resourceID)
+        public bool CheckTime(DateTime begin, DateTime end, string resourceID)
         {
             bool success = false;
-            int count = dc.Set<T_ResourceStatus>().Where(a => a.ResourceID==resourceID &&
+            int count = dc.Set<T_ResourceStatus>().Where(a => a.ResourceID == resourceID &&
                         ((a.RentBeginTime <= begin && begin <= a.RentEndTime) ||
                         (a.RentBeginTime <= end && end <= a.RentEndTime))
                         ).Count();

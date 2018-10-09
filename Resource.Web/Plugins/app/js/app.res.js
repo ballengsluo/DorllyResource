@@ -11,7 +11,6 @@ $(function() {
 
     $("input[type='file']").change(function() {
         var $file = $(this);
-        console.log($file[0].files.length);
         var fileObj = $file[0];
         $(this).parents(".imgContainer").find("div[data-insert]").remove();
         for (var i = 0; i < fileObj.files.length; i++) {
@@ -62,7 +61,6 @@ $(function() {
         if (id == "" || !id) { return false; }
         ajax("post", "/public/delimgaction", { id: id }, "json", function(data) {
             layer.msg(data.Msg);
-            Console.log(data.ExMsg);
             if (data.Flag == 1) {
                 $this.parents(".imgbox").remove();
             }
@@ -77,7 +75,6 @@ $(function() {
         if (id == "" || !id) { return false; }
         ajax("post", "/base/setimgaction", { id: id, rid: rid }, "json", function(data) {
             layer.msg(data.Msg);
-            console.log(data.ExMsg);
             if (data.Flag == 1) {
                 $(".imgbox").css("border", "none");
                 $(".imgset i").remove();

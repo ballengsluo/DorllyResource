@@ -42,8 +42,12 @@ namespace Resource.Web.Controllers
         public ActionResult ParkDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var plist = user.T_UserData.Select(a => a.DataID).ToList();
-            var list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID));
+            var list = dc.Set<T_Park>().Where(a => true);
+            if (user.Account != "admin")
+            {
+                var plist = user.T_UserData.Select(a => a.DataID).ToList();
+                list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID) && a.Enable == true);
+            }
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.RegionID == pid);
             var result = list.Select(a => new { a.ID, a.Name }).ToList();
             ViewData["dataList"] = new SelectList(result, "ID", "Name", id);

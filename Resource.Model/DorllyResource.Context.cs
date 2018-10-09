@@ -57,11 +57,11 @@ namespace Resource.Model
         public virtual DbSet<T_RoleMenu> T_RoleMenu { get; set; }
         public virtual DbSet<T_Stage> T_Stage { get; set; }
         public virtual DbSet<T_UserData> T_UserData { get; set; }
-        public virtual DbSet<T_ResourceStatus> T_ResourceStatus { get; set; }
-        public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
         public virtual DbSet<T_User> T_User { get; set; }
         public virtual DbSet<T_Order> T_Order { get; set; }
         public virtual DbSet<V_Order> V_Order { get; set; }
+        public virtual DbSet<T_ResourceStatus> T_ResourceStatus { get; set; }
+        public virtual DbSet<V_ResourceStatus> V_ResourceStatus { get; set; }
     
         public virtual ObjectResult<Pro_GetFunc_Result> Pro_GetFunc(string account, string menuPath)
         {

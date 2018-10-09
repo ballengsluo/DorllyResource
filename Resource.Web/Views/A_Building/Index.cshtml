@@ -22,7 +22,7 @@
                         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 2 });}
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">建设期</span>
                         <select class="selectpicker form-control pull-righ" id="stage" title="请选择..."></select>
@@ -50,7 +50,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <button type="button" class="btn btn-primary" id="search" data-url="@Url.Action("Search")" style="font-size:15px;">
                         <i class="layui-icon layui-icon-search"></i> 查 询
                     </button>
@@ -62,10 +62,10 @@
                 <thead>
                     <tr>
                         <th>序号</th>
-                        <th>位置</th>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>状态</th>
+                        <th>园区/建设期</th>
+                        <th>楼栋编号</th>
+                        <th>楼栋名称</th>
+                        <th>楼栋状态</th>
                     </tr>
                 </thead>
                 <tbody id="tb"></tbody>

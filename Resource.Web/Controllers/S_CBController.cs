@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Resource.Model;
+using Resource.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 namespace Resource.Web.Controllers
 {
-    public class S_CBController : ResourceBusinessController
+    public class S_CBController : BaseController
     {
         // GET: S_CB
         public ActionResult Index()
         {
             return View();
         }
-        public ContentResult Search(string parkID)
+        public ContentResult Search(SearchParam param)
         {
-            var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 2);
-            if (!string.IsNullOrEmpty(parkID)) list = list.Where(a => a.Loc1 == parkID);
-            else list = list.Where(a => ParkList.Contains(a.Loc1));
+            //园区字段
+            string park = string.Empty;
+            if (!string.IsNullOrEmpty(param.Park)) park = param.Park;
+            else park = ParkList.FirstOrDefault();
+
+            var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 2 && a.Loc1==park);
             var cbTypeList = list
                 .GroupBy(a => new { a.ResourceTypeID, a.ResourceTypeName })
                 .OrderBy(a => a.Key.ResourceTypeName)

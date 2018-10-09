@@ -20,16 +20,19 @@
     <div class="container">
         <div class="checkArea">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">园区</span>
                         @{ Html.RenderAction("ParkDrop", "Drop", new { pid = "", id = "", model = 1 });}
                     </div>
                 </div>
+                <div class="col-lg-1 col-md-1">
+                    <button type="button" class="btn btn-primary" id="search" style="font-size:15px;" data-url="@Url.Action("Search")">
+                        <i class="layui-icon layui-icon-search"></i> 查 询
+                    </button>
+                </div>
             </div>
         </div>
-        
-
         <div class="resourceContainer">
            
         </div>

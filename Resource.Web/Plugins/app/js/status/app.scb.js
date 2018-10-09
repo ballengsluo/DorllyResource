@@ -1,14 +1,37 @@
 $(function() {
-    $.post("/s_cb/search", '', function(data) {
-        console.log(data);
-        execrm(data);
-    }, 'json')
-
+    // $.post("/s_cb/search", '', function(data) {
+    //     console.log(data);
+    //     execrm(data);
+    // }, 'json')
+    $('#search').click(function() {
+        search(paramsSet());
+    });
+    search(paramsSet());
 });
 
-function execrm(data) {
+function search(params) {
+    ajax("get", $('#search').attr('data-url'), params, "json", function(data) {
+        // console.log(data);
+        layer.msg("查询成功");
+        execData(data);
+    });
+};
+
+function paramsSet() {
+    return obj = {
+        park: $("#park").val()
+    };
+};
+
+function execData(data) {
     var park = "";
     // 房间数据处理
+    if (data.length > 0) {
+        $(".resourceContainer").html("");
+    } else {
+        $(".resourceContainer").html("<h3 style='text-align:center;'>暂无数据！</h3>");
+        return;
+    }
     $.each(data, function(idx, cbtype) {
         var typebox = $("<div class='row cbtype'><h3>" + cbtype.TName + "</h3>");
         $.each(cbtype.RM, function(idx, rm) {

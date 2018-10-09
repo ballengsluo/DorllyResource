@@ -46,8 +46,6 @@
         <AssociationConnector Association="DorllyResourceModel.FK_RT_RK" />
         <AssociationConnector Association="DorllyResourceModel.FK_RM_Role" />
         <AssociationConnector Association="DorllyResourceModel.FK_RMF_Role" />
-        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceStatus" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="DorllyResourceModel.V_ResourceStatus" Width="1.5" PointX="20.375" PointY="8.75" />
         <EntityTypeShape EntityType="DorllyResourceModel.T_User" Width="1.5" PointX="6" PointY="30.75" />
         <AssociationConnector Association="DorllyResourceModel.FK_Login_MF" />
         <AssociationConnector Association="DorllyResourceModel.FK_Role_User" />
@@ -55,6 +53,8 @@
         <EntityTypeShape EntityType="DorllyResourceModel.T_Order" Width="1.5" PointX="18.25" PointY="26" />
         <EntityTypeShape EntityType="DorllyResourceModel.V_Order" Width="1.5" PointX="3.375" PointY="5.75" />
         <AssociationConnector Association="DorllyResourceModel.FK_Order_RID" />
+        <EntityTypeShape EntityType="DorllyResourceModel.T_ResourceStatus" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DorllyResourceModel.V_ResourceStatus" Width="1.5" PointX="20.375" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
