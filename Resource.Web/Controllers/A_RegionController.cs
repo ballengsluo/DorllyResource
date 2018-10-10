@@ -19,7 +19,7 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            
+
             var list = from a in dc.Set<T_Region>()
                        join b in dc.Set<T_City>() on a.CityID equals b.ID into t1
                        from city in t1.DefaultIfEmpty()
@@ -50,8 +50,8 @@ namespace Resource.Web.Controllers
             {
                 region.Enable = true;
                 dc.Set<T_Region>().Add(region);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            
+
             var obj = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -69,11 +69,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Region region = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(region, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -87,11 +88,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Region region = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Region>().Remove(region);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -103,12 +104,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Region region = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
                 region.Enable = true;
                 dc.Set<T_Region>().AddOrUpdate(region);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -120,12 +121,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Region region = dc.Set<T_Region>().Where(a => a.ID == id).FirstOrDefault();
                 region.Enable = false;
                 dc.Set<T_Region>().AddOrUpdate(region);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {

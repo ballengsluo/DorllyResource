@@ -29,12 +29,11 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 2);
+            var list = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 2 && ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.Floor)) list = list.Where(a => a.Loc4 == param.Floor);
             else if (!string.IsNullOrEmpty(param.Build)) list = list.Where(a => a.Loc3 == param.Build);
             else if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.Loc2 == param.Stage);
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.Loc1 == param.Park);
-            else list = list.Where(a => ParkList.Contains(a.Loc1));
             if (!string.IsNullOrEmpty(param.Room)) list = list.Where(a => a.Loc5.Contains(param.Room));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             int count = list.Count();

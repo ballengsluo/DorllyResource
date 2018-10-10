@@ -55,16 +55,14 @@ namespace Resource.Web.Controllers
         {
             try
             {
-
-                T_User user = RouteData.Values["user"] as T_User;
                 group.CreateTime = DateTime.Now;
                 group.CreateUser = user.Account;
                 group.UpdateTime = DateTime.Now;
                 group.UpdateUser = user.Account;
                 group.Enable = true;
                 dc.Set<T_ResourceGroup>().Add(group);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -89,7 +87,8 @@ namespace Resource.Web.Controllers
                 group.UpdateUser = user.Account;
                 if (TryUpdateModel(group, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -106,8 +105,8 @@ namespace Resource.Web.Controllers
 
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_ResourceGroup>().Remove(group);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -123,8 +122,8 @@ namespace Resource.Web.Controllers
 
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 group.Enable = true;
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -140,8 +139,8 @@ namespace Resource.Web.Controllers
 
                 T_ResourceGroup group = dc.Set<T_ResourceGroup>().Where(a => a.ID == id).FirstOrDefault();
                 group.Enable = false;
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -152,7 +151,7 @@ namespace Resource.Web.Controllers
         public string GetNumber()
         {
             string result = string.Empty;
-            string num = (Convert.ToInt32(dc.Set<T_ResourceGroup>().Max(a => a.ID).Split('-')[1]) + 1).ToString();
+            string num = (dc.Set<T_ResourceGroup>().Count() + 2).ToString();
             int len = num.Length;
             switch (len)
             {

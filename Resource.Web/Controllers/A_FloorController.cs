@@ -19,8 +19,8 @@ namespace Resource.Web.Controllers
         }
         public JsonResult Search(SearchParam param)
         {
-            
-            var list = dc.Set<V_Floor>().Where(a => true);
+
+            var list = dc.Set<V_Floor>().Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.Build)) list = list.Where(a => a.BuildingID == param.Build);
             else if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.StageID == param.Stage);
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
@@ -42,8 +42,8 @@ namespace Resource.Web.Controllers
             {
                 floor.Enable = true;
                 dc.Set<T_Floor>().Add(floor);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            
+
             var obj = dc.Set<V_Floor>().Where(a => a.ID == id).FirstOrDefault();
             return View(obj);
         }
@@ -61,11 +61,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(floor, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -79,11 +80,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Floor>().Remove(floor);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -95,12 +96,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 floor.Enable = true;
                 dc.Set<T_Floor>().AddOrUpdate(floor);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -112,12 +113,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_Floor floor = dc.Set<T_Floor>().Where(a => a.ID == id).FirstOrDefault();
                 floor.Enable = false;
                 dc.Set<T_Floor>().AddOrUpdate(floor);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {

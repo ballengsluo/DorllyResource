@@ -98,7 +98,7 @@ namespace Resource.Web.Controllers
                 status.BusinessID = Guid.NewGuid().ToString();
                 status.BusinessType = 6;
                 status.RentType = 2;
-                status.Status = 2;
+                status.Status = 1;
                 status.UpdateTime = DateTime.Now;
                 status.UpdateUser = user.Account;
                 dc.Set<T_ResourceStatus>().Add(status);

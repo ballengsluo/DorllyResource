@@ -54,20 +54,25 @@ function initResourceData() {
 function initTransaction() {
     if ($("#transaction").length > 0) {
         ajax("get", "/Admin/GetTransactionData", {}, "json", function(data) {
-            var html = template('transTpl', data);
-            $("#trans-table").html(html);
-            $("#trans-table a").click(function() {
-                var url = $(this).attr("data-url")
-                var index = layer.open({
-                    type: 2,
-                    content: url,
-                    title: ' ',
-                    end: function() {
-                        initTransaction();
-                    }
+            if (data.length > 0) {
+                var html = template('transTpl', data);
+                $("#trans-table").html(html);
+                $("#trans-table a").click(function() {
+                    var url = $(this).attr("data-url")
+                    var index = layer.open({
+                        type: 2,
+                        content: url,
+                        title: ' ',
+                        end: function() {
+                            initTransaction();
+                        }
+                    });
+                    layer.full(index);
                 });
-                layer.full(index);
-            });
+            } else {
+                $("#trans-table").html("<td colspan='2' style='text-align:center;'>暂无数据</td>");
+            }
+
         });
     }
 }
@@ -133,7 +138,15 @@ function graphData(title, count) {
         yAxis: {},
         series: [{
             type: 'bar',
-            data: count
+            data: count,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        var colorList = ['#f8cb6a', '#89c6fa', '#f7a769', '#96a4fe', '#f5c2e5'];
+                        return colorList[params.dataIndex];
+                    }
+                }
+            }
         }]
     };
     // 使用刚指定的配置项和数据显示图表。

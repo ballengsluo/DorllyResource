@@ -1,5 +1,5 @@
 .container {
-    width: 80%;
+    width: 90%;
 }
 
 
@@ -33,12 +33,12 @@
 }
 
 .statistics-list .statistics-title {
-    line-height: 90px;
+    /* line-height: 90px; */
     text-align: center;
     font-size: 16px;
     font-weight: 600;
-    padding: 0px 10px;
-    width: 10%!important;
+    padding: 35px 10px;
+    width: 12%!important;
 }
 
 .statistics-list .statistics-name {
@@ -72,7 +72,8 @@
     width: 8%!important;
     border-right: none!important;
     padding: 0px;
-    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
 }
 
 .statistics-list .statistics-detail>div {

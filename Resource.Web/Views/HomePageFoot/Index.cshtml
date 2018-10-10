@@ -198,8 +198,7 @@
                 var form = new FormData($("form")[0]);
                 var id = $("#Position").val();
                 ajaxForm("post", "/HomePageFoot/Edit/"+id, form, "json", function (data) {
-                    layer.msg(data.msg, { icon: data.result });
-
+                    layer.msg(data.Msg);
                 });
                 $this.prop("disabled", false);
             });

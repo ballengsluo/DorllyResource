@@ -102,18 +102,10 @@ namespace Resource.Web.Controllers
                 hp.UpdateUser = user.Account;
                 if (TryUpdateModel(hp, "", form.AllKeys, new string[] { "ImgUrl", "Status" }))
                 {
-                    if (dc.SaveChanges() > 0)
-                    {
-                        try
-                        {
-                            if (!string.IsNullOrEmpty(oldPath)) DelImg(oldPath);
-                        }
-                        catch (Exception)
-                        {
-                        }
-                        return Json(Result.Success());
-                    }
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
+                if (!string.IsNullOrEmpty(oldPath)) DelImg(oldPath);
                 return Json(Result.Fail());
             }
             catch (Exception ex)

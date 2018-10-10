@@ -20,9 +20,8 @@ namespace Resource.Web.Controllers
         public JsonResult Search(SearchParam param)
         {
 
-            var list = dc.Set<V_Stage>().Where(a => true);
+            var list = dc.Set<V_Stage>().Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
-            else list = list.Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
             if (!string.IsNullOrEmpty(param.Name)) list = list.Where(a => a.Name.Contains(param.Name));
             if (param.Enable != null) list = list.Where(a => a.Enable == param.Enable);
@@ -41,8 +40,8 @@ namespace Resource.Web.Controllers
             {
                 stage.Enable = true;
                 dc.Set<T_Stage>().Add(stage);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -63,7 +62,8 @@ namespace Resource.Web.Controllers
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(stage, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -80,8 +80,8 @@ namespace Resource.Web.Controllers
 
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Stage>().Remove(stage);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -97,8 +97,8 @@ namespace Resource.Web.Controllers
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 stage.Enable = true;
                 dc.Set<T_Stage>().AddOrUpdate(stage);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -114,8 +114,8 @@ namespace Resource.Web.Controllers
                 T_Stage stage = dc.Set<T_Stage>().Where(a => a.ID == id).FirstOrDefault();
                 stage.Enable = false;
                 dc.Set<T_Stage>().AddOrUpdate(stage);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {

@@ -20,7 +20,7 @@ namespace Resource.Web.Controllers
         public JsonResult Search(SearchParam param)
         {
 
-            var list = dc.Set<V_Building>().Where(a => true);
+            var list = dc.Set<V_Building>().Where(a => ParkList.Contains(a.ParkID));
             if (!string.IsNullOrEmpty(param.Stage)) list = list.Where(a => a.StageID == param.Stage);
             else if (!string.IsNullOrEmpty(param.Park)) list = list.Where(a => a.ParkID == param.Park);
             if (!string.IsNullOrEmpty(param.ID)) list = list.Where(a => a.ID.Contains(param.ID));
@@ -41,8 +41,8 @@ namespace Resource.Web.Controllers
             {
                 building.Enable = true;
                 dc.Set<T_Building>().Add(building);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -64,7 +64,8 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(building, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -81,8 +82,8 @@ namespace Resource.Web.Controllers
 
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Building>().Remove(building);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -97,8 +98,8 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = true;
                 dc.Set<T_Building>().AddOrUpdate(building);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -113,8 +114,8 @@ namespace Resource.Web.Controllers
                 T_Building building = dc.Set<T_Building>().Where(a => a.ID == id).FirstOrDefault();
                 building.Enable = false;
                 dc.Set<T_Building>().AddOrUpdate(building);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                else return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {

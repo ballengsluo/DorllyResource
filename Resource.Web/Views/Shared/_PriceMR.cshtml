@@ -7,21 +7,26 @@
             <span>全天预定</span>
         </label>
         <label class="checkbox-inline">
-           @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
-        <span>半天预定</span>
+            @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
+            <span>半天预定</span>
         </label>
         <label class="checkbox-inline">
             @Html.CheckBox("HourEnable", Convert.ToBoolean(price.HourEnable))
             <span>小时预定</span>
         </label>
+        <label class="checkbox-inline">
+            @*<input id="DelayEnable" type="checkbox" name="DelayEnable" checked disabled value="true" />*@
+            @Html.CheckBox("DelayEnable", true, new { @readonly = "readonly" })
+            <span>延时价格</span>
+        </label>
     </div>
 </div>
 <div class="form-group">
     @*<label class="control-label col-md-1">计价方式</label>
-    <label class="control-label col-md-1 priceLabel">
-        @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))
-        <span>全天预定</span>
-    </label>*@
+        <label class="control-label col-md-1 priceLabel">
+            @Html.CheckBox("DayEnable", Convert.ToBoolean(price.DayEnable))
+            <span>全天预定</span>
+        </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/全天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <input type="number" min="0.01" step="0.01" class="form-control" name="DayInPrice" value="@price.DayInPrice" placeholder="对内价格/全天">
@@ -33,12 +38,12 @@
 </div>
 <div class="form-group">
     @*<label class="control-label col-md-1 col-md-offset-1 priceLabel">
-        @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
-        <span>半天预定</span>
-    </label>*@
+            @Html.CheckBox("HDayEnable", Convert.ToBoolean(price.HDayEnable))
+            <span>半天预定</span>
+        </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/半天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayInPrice" value="@price.HDayInPrice" placeholder="对内价格/半天">
+        <input type="number" min="0.01" step="0.01" class="form-control" name="HDayInPrice"  value="@price.HDayInPrice" placeholder="对内价格/半天">
     </div>
     <label class="control-label col-lg-2 col-md-2 col-sm-2" style="max-width:120px;">对外价格/半天</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
@@ -47,9 +52,9 @@
 </div>
 <div class="form-group">
     @*<label class="control-label col-md-1 col-md-offset-1 priceLabel">
-        @Html.CheckBox("HourEnable", Convert.ToBoolean(price.HourEnable))
-        <span>小时预定</span>
-    </label>*@
+            @Html.CheckBox("HourEnable", Convert.ToBoolean(price.HourEnable))
+            <span>小时预定</span>
+        </label>*@
     <label class="control-label col-lg-2 col-md-2 col-sm-2">对内价格/小时</label>
     <div class="col-lg-4 col-md-4 col-sm-4">
         <input type="number" min="0.01" step="0.01" class="form-control" name="HourInPrice" value="@price.HourInPrice" placeholder="对内价格/小时">

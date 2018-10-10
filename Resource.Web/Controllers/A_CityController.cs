@@ -36,8 +36,8 @@ namespace Resource.Web.Controllers
                 city.Enable = true;
                 city.IsDefault = false;
                 dc.Set<T_City>().Add(city);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace Resource.Web.Controllers
         }
         public ActionResult Edit(string id)
         {
-            
+
             var entity = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
             return View(entity);
         }
@@ -55,11 +55,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(city, "", form.AllKeys, new string[] { "Enable", "IsDefault" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -73,11 +74,11 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_City>().Remove(city);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -89,12 +90,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = true;
                 dc.Set<T_City>().AddOrUpdate(city);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -106,12 +107,12 @@ namespace Resource.Web.Controllers
         {
             try
             {
-                
+
                 T_City city = dc.Set<T_City>().Where(a => a.ID == id).FirstOrDefault();
                 city.Enable = false;
                 dc.Set<T_City>().AddOrUpdate(city);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {

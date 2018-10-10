@@ -18,11 +18,12 @@ function search(params) {
             layer.msg("数据加载成功");
             $("tbody").html(data.table);
             $(".detailContainer").html(data.detail);
+            hoverShow();
         } else {
-            layer.msg(data.Msg);
+            layer.msg("加载失败...");
         }
     });
-    hoverShow();
+
 };
 
 function hoverShow() {

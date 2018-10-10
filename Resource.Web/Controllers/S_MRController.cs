@@ -25,44 +25,62 @@ namespace Resource.Web.Controllers
                 if (param.Stime == null) return Json(Result.Fail(msg: "请选择时间！"), JsonRequestBehavior.AllowGet);
                 DateTime begin = Convert.ToDateTime(Convert.ToDateTime(param.Stime).ToString("yyyy-MM-dd") + " 09:00:00");
                 DateTime end = Convert.ToDateTime(Convert.ToDateTime(param.Stime).ToString("yyyy-MM-dd") + " 21:00:00");
+                DateTime selectTime1 = begin.Date;
+                DateTime selectTime2 = begin.Date.AddDays(1);
                 string tableStr = string.Empty;
                 string detailStr = string.Empty;
-                var crList = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 3);
-                //园区筛选
+                var crList = dc.Set<V_Resource>().Where(a => a.ResourceKindID == 3 && ParkList.Contains(a.Loc1));
+                //会议室数据
                 if (!string.IsNullOrEmpty(param.Park)) crList = crList.Where(a => a.Loc1 == param.Park);
-                else
-                {
-                    var parkList = dc.Set<T_UserData>().Where(a => a.UserID == user.Account).Select(a => a.DataID).ToList();
-                    crList = crList.Where(a => parkList.Contains(a.Loc1));
-                }
-
                 var crTable = crList.Select(a => new { a.ID, a.Name }).ToList();
                 if (crTable.Count() <= 0)
                 {
                     tableStr += "<tr><td colspan='25' style='text-align:center;'>暂无数据</td></tr>";
                 }
-                foreach (var item in crTable)
+                foreach (var item in crTable)//遍历会议室
                 {
                     var tempTime = begin;
-                    
+
                     tableStr += string.Format("<tr><td>{0}</td>", item.Name);
-                    if (dc.Set<V_ResourceStatus>().Where(a =>
-                                a.ResourceID == item.ID
-                                && begin <= a.RentBeginTime
-                                && a.RentEndTime <= end).Count() > 0)
+
+                    var statusList = dc.Set<V_ResourceStatus>()
+                    .Where(a => a.ResourceID == item.ID && selectTime1 < a.RentBeginTime && a.RentEndTime < selectTime2)
+                    .OrderBy(a => a.RentBeginTime)
+                    .ToList();
+                    if (statusList.Count() > 0)
                     {
-                        var statusList = dc.Set<V_ResourceStatus>()
-                        .Where(a => a.ResourceID == item.ID && begin <= a.RentBeginTime && a.RentEndTime <= end)
-                        .OrderBy(a => a.RentBeginTime)
-                        .ToList();
+                        //存在数据
                         foreach (var status in statusList)
                         {
-                            if (tempTime < status.RentBeginTime)//时间刻度数据组装：前面空格
+                            if (status.RentBeginTime <= tempTime)//小于正常开始时间
                             {
-                                tableStr += TimeSplit(tempTime, Convert.ToDateTime(status.RentBeginTime), null);//时间刻度数据组装：数据时间
+                                if (status.RentEndTime <= end)
+                                {
+                                    tableStr += TimeSplit(tempTime, status.RentEndTime, status);
+                                    tempTime = Convert.ToDateTime(status.RentEndTime);
+                                }
+                                else//大于正常结束时间
+                                {
+                                    tableStr += TimeSplit(tempTime, end, status);
+                                    tempTime = end;
+                                }
                             }
-                            tableStr += TimeSplit(Convert.ToDateTime(status.RentBeginTime), Convert.ToDateTime(status.RentEndTime), status);
-                            tempTime = Convert.ToDateTime(status.RentEndTime);
+                            else
+                            {
+
+                                tableStr += TimeSplit(tempTime, Convert.ToDateTime(status.RentBeginTime), null);//空隙
+                                if (end < status.RentEndTime)//超越正常时间
+                                {
+                                    tableStr += TimeSplit(tempTime, end, status);
+                                    tempTime = end;
+                                }
+                                else
+                                {
+                                    tableStr += TimeSplit(Convert.ToDateTime(status.RentBeginTime), Convert.ToDateTime(status.RentEndTime), status);
+                                    tempTime = Convert.ToDateTime(status.RentEndTime);
+                                }
+                            }
+                            
                             //状态详情组装
                             detailStr += string.Format(@"<div class='detail' data-id='{0}'>
                                                                 <p><span>资源编号：</span><span>{1}</span></p>
@@ -83,11 +101,11 @@ namespace Resource.Web.Controllers
                             tableStr += TimeSplit(tempTime, end, null);
                         }
                     }
-                    else//时间刻度数据组装:没有数据
+                    else
                     {
+                        //没有数据
                         tableStr += TimeSplit(begin, end, null);
                     }
-
                 }
 
                 return Json(new { Flag = 1, table = tableStr, detail = detailStr }, JsonRequestBehavior.AllowGet);
@@ -107,7 +125,7 @@ namespace Resource.Web.Controllers
             {
                 for (int n = 0; n < tdNum; n++)
                 {
-                    str += string.Format("<td data-pid='{0}' data-status='{1}' id='{2}'></td>", status.ID, status.Status,Guid.NewGuid().ToString());
+                    str += string.Format("<td data-pid='{0}' data-status='{1}' id='{2}'></td>", status.ID, status.Status, Guid.NewGuid().ToString());
                 }
             }
             else

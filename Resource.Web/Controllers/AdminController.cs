@@ -63,6 +63,10 @@ namespace Resource.Web.Controllers
         }
         public ActionResult GetOrderData(string stime, string etime)
         {
+            if (!string.IsNullOrEmpty(etime))
+            {
+                etime = etime + " 23:59:59";
+            }
             var spList = new List<SqlParameter> { 
                 new SqlParameter("BeginTime", stime), 
                 new SqlParameter("EndTime", etime) 

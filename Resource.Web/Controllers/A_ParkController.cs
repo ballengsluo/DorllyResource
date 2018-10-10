@@ -41,8 +41,8 @@ namespace Resource.Web.Controllers
             {
                 park.Enable = true;
                 dc.Set<T_Park>().Add(park);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -64,7 +64,8 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 if (TryUpdateModel(park, "", form.AllKeys, new string[] { "Enable" }))
                 {
-                    if (dc.SaveChanges() > 0) return Json(Result.Success());
+                    dc.SaveChanges();
+                    return Json(Result.Success());
                 }
                 return Json(Result.Fail());
             }
@@ -81,8 +82,8 @@ namespace Resource.Web.Controllers
 
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 dc.Set<T_Park>().Remove(park);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -98,8 +99,8 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = true;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
@@ -115,8 +116,8 @@ namespace Resource.Web.Controllers
                 T_Park park = dc.Set<T_Park>().Where(a => a.ID == id).FirstOrDefault();
                 park.Enable = false;
                 dc.Set<T_Park>().AddOrUpdate(park);
-                if (dc.SaveChanges() > 0) return Json(Result.Success());
-                return Json(Result.Fail());
+                dc.SaveChanges();
+                return Json(Result.Success());
             }
             catch (Exception ex)
             {
