@@ -19,8 +19,8 @@ namespace Resource.Model
         public string City { get; set; }
         public string CustName { get; set; }
         public string CustPhone { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<int> Status { get; set; }
+        public System.DateTime CreateTime { get; set; }
+        public int Status { get; set; }
         public string AuthUser { get; set; }
         public string AuthMark { get; set; }
     

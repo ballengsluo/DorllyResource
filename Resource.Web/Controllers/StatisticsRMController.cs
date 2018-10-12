@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using NPOI.HSSF.UserModel;
 using Resource.Model.DB;
 using Resource.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -130,6 +132,24 @@ namespace Resource.Web.Controllers
             {
                 return Content(JsonConvert.SerializeObject(Result.Exception(exmsg: ex.StackTrace)));
             }
+        }
+
+        public FileResult ImportToExcel(string park,string stime,string etime,int model)
+        {
+            HSSFWorkbook book = new HSSFWorkbook();
+            if (model == 1)
+            {
+                //汇总数据导出
+
+            }
+            else
+            {
+                //趋势图数据导出
+            }
+            MemoryStream ms = new MemoryStream();
+            book.Write(ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            return File(ms, "application/vnd.ms-excel", "xinxin.xls");
         }
     }
 }

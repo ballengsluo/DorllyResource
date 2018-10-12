@@ -392,8 +392,6 @@ namespace Resource.Web.WebApi
                 }
                 dc.SaveChanges();
                 return JsonConvert.SerializeObject(Result.Success());
-                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
-                //return JsonConvert.SerializeObject(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -431,15 +429,13 @@ namespace Resource.Web.WebApi
                     if (obj != null)
                     {
                         obj.RentEndTime = item.RentEndTime;
+                        obj.Status = 2;
                         status.AddOrUpdate(obj);
                     }
 
                 }
                 dc.SaveChanges();
                 return JsonConvert.SerializeObject(Result.Success());
-                //JsonConvert.SerializeObject();
-                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
-                //return JsonConvert.SerializeObject(Result.Fail());
             }
             catch (Exception ex)
             {
@@ -476,8 +472,6 @@ namespace Resource.Web.WebApi
                 }
                 dc.SaveChanges();
                 return JsonConvert.SerializeObject(Result.Success());
-                //if (dc.SaveChanges() > 0) return JsonConvert.SerializeObject(Result.Success());
-                //return JsonConvert.SerializeObject(Result.Fail());
             }
             catch (Exception ex)
             {

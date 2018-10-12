@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Resource.Model;
 using Resource.Web.Models;
 using System;
@@ -6,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NPOI;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using System.IO;
 namespace Resource.Web.Controllers
 {
     public class OrderController : BaseController
@@ -59,6 +64,65 @@ namespace Resource.Web.Controllers
             {
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
+        }
+        public ActionResult Check(string id)
+        {
+            ViewBag.oid = id;
+            return View();
+        }
+
+        public string GetOrderInfo(string id)
+        {
+            try
+            {
+                var order = dc.Set<V_Order>().Where(a => a.ID == id).Select(a => new
+                {
+                    a.ID,
+                    a.CreateTime,
+                    a.CustName,
+                    a.CustPhone,
+                    a.Status,
+                    a.AuthUser,
+                    a.AuthMark,
+                    a.ResourceID,
+                    a.Name,
+                    a.ResourceTypeName,
+                    a.ResourceKindName,
+                    a.Loc1Name,
+                    a.LocText,
+                    a.Location
+                }).FirstOrDefault();
+                //IsoDateTimeConverter setting = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" };
+                JsonSerializerSettings setting = new JsonSerializerSettings { DateFormatString = "yyyy-MM-dd HH:mm:ss" };
+                return JsonConvert.SerializeObject(new { Flag = 1, obj = order }, Formatting.Indented, setting);
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(new { Flag = 3, obj = ex });
+            }
+        }
+
+        public FileResult GetFile(string id,string tt)
+        {
+            try
+            {
+                throw new Exception("dddd");
+                HSSFWorkbook book = new HSSFWorkbook();
+                ISheet sheet = book.CreateSheet("baobiao");
+                IRow row = sheet.CreateRow(0);
+                row.CreateCell(0).SetCellValue(id);
+                row.CreateCell(0).SetCellValue(tt);
+                MemoryStream ms = new MemoryStream();
+                book.Write(ms);
+                ms.Seek(0, SeekOrigin.Begin);
+                return File(ms, "application/vnd.ms-excel", "xinxin.xls");
+                
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
     }
 }

@@ -1,0 +1,161 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>预约详情</title>
+    @Styles.Render("~/Plugins/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Plugins/layui/css/layui.css")
+    <style>
+        .info-title {
+            color: #f6850a;
+            border-bottom: 2px solid #0094ff;
+            font-size: 20px;
+            font-weight: 300;
+            padding: 3px 0px;
+            margin: 15px 0px;
+            text-indent: 5px;
+        }
+
+        .container {
+            /*width: 400px;
+            height: 500px;*/
+            padding: 0px;
+        }
+
+        #content {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        p {
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+
+        label {
+            font-size: 17px;
+        }
+
+            label:first-of-type {
+                font-weight: 600;
+            }
+
+            label:nth-of-type(2) {
+                font-weight: 500;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @*<div id="load">
+                <i class="layui-icon layui-icon-loading" style="font-size:50px;"></i>
+            </div>*@
+        <div id="content" style="display:none;">
+            <div class="info-title">预约信息</div>
+            <p><label>服务号：</label><label id="oid"></label></p>
+            <p><label>预约人：</label><label id="ocust"></label></p>
+            <p><label>联系方式：</label><label id="otel"></label></p>
+            <p><label>提交时间：</label><label id="otime"></label></p>
+            <p><label>处理状态：</label><label id="ostatus">未处理</label></p>
+            <p><label>处理人：</label><label id="oauthor">无</label></p>
+            <p><label>处理详情：</label><label id="omark">无</label></p>
+            <div class="info-title">资源信息</div>
+            <p><label>资源种类：</label><label id="rkind"></label></p>
+            <p><label>资源类型：</label><label id="rtype"></label></p>
+            <p><label>资源编号：</label><label id="rid"></label></p>
+            <p><label>资源名称：</label><label id="rname"></label></p>
+            <p><label>所在园区：</label><label id="rpark"></label></p>
+            <p><label>资源位置：</label><label id="rposition"></label></p>
+            <p><label>资源地址：</label><label id="raddr"></label></p>
+        </div>
+        <button  data-url="@Url.Action("GetFile")" onclick="test()" class="btn btn-primary">content</button>
+    </div>
+    @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
+    @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Plugins/layui/layui.js")
+    <script>
+        function test() {
+            //$("a").attr("href", $("a").attr("data-url") + "?id=1&&tt=2");
+            //alert($("button").attr("data-url"));
+            
+            var url = $("button").attr("data-url") + "?id=1&&t1=2&&ts=2&&tt=3";
+            //alert(url);
+            window.location.href = url;
+        }
+        window.onbeforeunload = function (event) {
+            layer.msg("获取数据失败！下载失败！")
+           
+        }
+        //window.addEventListener('beforeunload', function (event) {
+        //    if (event.preventDefault) {
+        //        return false;
+        //        //event.preventDefault();
+        //        //layer.msg("获取数据失败！下载失败！");
+        //        //return true;
+        //    } else {
+        //        event.returnValue = '你确认要离开吗？';
+        //        //layer.msg("获取数据失败！下载失败！");
+        //    }
+        //});
+        $(function () {
+            var layer;
+            layui.use('layer', function () {
+                layer = layui.layer;
+                index = layer.load();
+            });
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("GetOrderInfo")',
+                data: { id: '@ViewBag.oid' },
+                dataType: 'json',
+                complete: function () {
+                    layer.close(index);
+                    console.log(index);
+                },
+                success: function (data) {
+                    if (data.Flag == 1) {
+                        $("#oid").html(data.obj.ID);
+                        $("#ocust").html(data.obj.CustName);
+                        $("#otel").html(data.obj.CustPhone);
+                        $("#otime").html(data.obj.CreateTime);
+                        if (data.obj.Status == 2) {
+                            $("#ostatus").html("已处理");
+                        }
+                        if (data.obj.AuthUser != null) {
+                            $("#oauthor").html(data.obj.AuthUser);
+                        }
+                        if (data.obj.AuthMark != null) {
+                            $("#omark").html(data.obj.AuthMark);
+                        }
+                        $("#rkind").html(data.obj.ResourceKindName);
+                        $("#rtype").html(data.obj.ResourceTypeName);
+                        $("#rid").html(data.obj.ResourceID);
+                        $("#rname").html(data.obj.Name);
+                        $("#rpark").html(data.obj.Loc1Name);
+                        $("#rposition").html(data.obj.LocText);
+                        $("#raddr").html(data.obj.Location);
+                        $("#content").show();
+                        layer.msg("加载成功！", { time: 1000 });
+                    } else {
+                        window.parent.layer.msg("获取数据失败！");
+                        window.parent.layer.closeAll();
+                    }
+                },
+                error: function () {
+                    window.parent.layer.msg("请求失败！");
+                    window.parent.layer.closeAll();
+                }
+            });
+
+        });
+        fun
+
+    </script>
+</body>
+</html>
