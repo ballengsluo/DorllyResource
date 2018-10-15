@@ -53,9 +53,6 @@
 </head>
 <body>
     <div class="container">
-        @*<div id="load">
-                <i class="layui-icon layui-icon-loading" style="font-size:50px;"></i>
-            </div>*@
         <div id="content" style="display:none;">
             <div class="info-title">预约信息</div>
             <p><label>服务号：</label><label id="oid"></label></p>
@@ -74,35 +71,12 @@
             <p><label>资源位置：</label><label id="rposition"></label></p>
             <p><label>资源地址：</label><label id="raddr"></label></p>
         </div>
-        <button  data-url="@Url.Action("GetFile")" onclick="test()" class="btn btn-primary">content</button>
+        <button data-url="@Url.Action("GetFile")" onclick="test()" class="btn btn-primary">content</button>
     </div>
     @Scripts.Render("~/Plugins/jquery/jquery-2.2.4.js")
     @Scripts.Render("~/Plugins/bootstrap/js/bootstrap.min.js")
     @Scripts.Render("~/Plugins/layui/layui.js")
     <script>
-        function test() {
-            //$("a").attr("href", $("a").attr("data-url") + "?id=1&&tt=2");
-            //alert($("button").attr("data-url"));
-            
-            var url = $("button").attr("data-url") + "?id=1&&t1=2&&ts=2&&tt=3";
-            //alert(url);
-            window.location.href = url;
-        }
-        window.onbeforeunload = function (event) {
-            layer.msg("获取数据失败！下载失败！")
-           
-        }
-        //window.addEventListener('beforeunload', function (event) {
-        //    if (event.preventDefault) {
-        //        return false;
-        //        //event.preventDefault();
-        //        //layer.msg("获取数据失败！下载失败！");
-        //        //return true;
-        //    } else {
-        //        event.returnValue = '你确认要离开吗？';
-        //        //layer.msg("获取数据失败！下载失败！");
-        //    }
-        //});
         $(function () {
             var layer;
             layui.use('layer', function () {
@@ -154,8 +128,6 @@
             });
 
         });
-        fun
-
     </script>
 </body>
 </html>

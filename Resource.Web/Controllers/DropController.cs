@@ -42,11 +42,11 @@ namespace Resource.Web.Controllers
         public ActionResult ParkDrop(string pid, string id, int model)
         {
             ViewBag.model = model;
-            var list = dc.Set<T_Park>().Where(a => true);
+            var list = dc.Set<T_Park>().Where(a => a.Enable == true);
             if (user.Account != "admin")
             {
                 var plist = user.T_UserData.Select(a => a.DataID).ToList();
-                list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID) && a.Enable == true);
+                list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID));
             }
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.RegionID == pid);
             var result = list.Select(a => new { a.ID, a.Name }).ToList();
@@ -55,8 +55,15 @@ namespace Resource.Web.Controllers
         }
         public ActionResult ParkDropList(string pid)
         {
-            var list = dc.Set<T_Park>().Where(a => a.RegionID == pid && a.Enable == true).Select(a => new { a.ID, a.Name }).ToList();
-            return Content(JsonConvert.SerializeObject(list));
+            var list = dc.Set<T_Park>().Where(a => a.Enable==true);
+            if (user.Account != "admin")
+            {
+                var plist = user.T_UserData.Select(a => a.DataID).ToList();
+                list = dc.Set<T_Park>().Where(a => plist.Contains(a.ID));
+            }
+            if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.RegionID == pid);
+            var result = list.Select(a => new { a.ID, a.Name }).ToList();
+            return Content(JsonConvert.SerializeObject(result));
         }
         public ActionResult StageDrop(string pid, string id, int model)
         {

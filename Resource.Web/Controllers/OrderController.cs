@@ -101,28 +101,5 @@ namespace Resource.Web.Controllers
                 return JsonConvert.SerializeObject(new { Flag = 3, obj = ex });
             }
         }
-
-        public FileResult GetFile(string id,string tt)
-        {
-            try
-            {
-                throw new Exception("dddd");
-                HSSFWorkbook book = new HSSFWorkbook();
-                ISheet sheet = book.CreateSheet("baobiao");
-                IRow row = sheet.CreateRow(0);
-                row.CreateCell(0).SetCellValue(id);
-                row.CreateCell(0).SetCellValue(tt);
-                MemoryStream ms = new MemoryStream();
-                book.Write(ms);
-                ms.Seek(0, SeekOrigin.Begin);
-                return File(ms, "application/vnd.ms-excel", "xinxin.xls");
-                
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-            
-        }
     }
 }

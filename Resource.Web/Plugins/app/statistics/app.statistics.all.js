@@ -1,5 +1,6 @@
 $(function() {
     search();
+    imp();
     $("#search").trigger("click");
 });
 
@@ -123,4 +124,19 @@ function graph(id, title, data) {
     };
     myChart.setOption(option);
     $("#" + id).removeAttr("style");
+}
+
+function imp() {
+    $('#import').click(function() {
+        var start = $('#stime').val();
+        var end = $('#etime').val();
+        if (start.length > 0 || end.length > 0) {
+            if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                layer.msg("结束时间比开始时间小！");
+                return false;
+            }
+        }
+        var url = $(this).attr('data-url') + "?park=" + $("#park").val() + "&&" + "stime=" + $("#stime").val() + "&&" + "etime=" + $("#etime").val() + "&&" + "model=1";
+        window.location.href = url;
+    });
 }

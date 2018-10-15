@@ -41,6 +41,27 @@ function initModule() {
             });
         });
     }
+    // if ($('#park>option:nth-child(2)').length <= 0) {
+    //     $.getJSON("/Drop/ParkDropList", {}, function(data) {
+
+    //         var html = "";
+    //         html += "<option value=''>全部</option>";
+    //         for (var i = 0; i < data.length; i++) {
+    //             html += "<option value='" + data[i].ID + "'>" + data[i].Name + "</option>";
+    //         }
+    //         $("#park").html(html).selectpicker("refresh");
+    //     });
+    // }
+    if ($('#parkMonth').length > 0) {
+        $.getJSON("/Drop/ParkDropList", {}, function(data) {
+            var html = "";
+            html += "<option value=''>全部</option>";
+            for (var i = 0; i < data.length; i++) {
+                html += "<option value='" + data[i].ID + "'>" + data[i].Name + "</option>";
+            }
+            $("#parkMonth").html(html).selectpicker("refresh");
+        });
+    }
     // 事件初始化
     if ($('#searchDay').length > 0) {
         $('#searchDay').click(function() {
@@ -71,11 +92,40 @@ function initModule() {
                 }
             }
             ajax('get', $(this).attr('data-url'), {
+                park: $('#parkMonth').val(),
                 beginTime: $('#stime1').val(),
                 endTime: $('#etime1').val()
             }, 'json', function(data) {
                 dealMonthData(data);
             });
+        });
+    }
+    if ($('#importDay').length > 0) {
+        $('#importDay').click(function() {
+            var start = $('#stime1').val();
+            var end = $('#etime1').val();
+            if (start.length > 0 || end.length > 0) {
+                if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                    layer.msg("结束时间比开始时间小！");
+                    return false;
+                }
+            }
+            var url = $(this).attr('data-url') + "?park=" + $("#park").val() + "&&" + "stime=" + $("#stime").val() + "&&" + "etime=" + $("#etime").val() + "&&" + "model=1";
+            window.location.href = url;
+        });
+    }
+    if ($('#importMonth').length > 0) {
+        $('#importMonth').click(function() {
+            var start = $('#stime1').val();
+            var end = $('#etime1').val();
+            if (start.length > 0 || end.length > 0) {
+                if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
+                    layer.msg("结束时间比开始时间小！");
+                    return false;
+                }
+            }
+            var url = $(this).attr('data-url') + "?park=" + $("#parkMonth").val() + "&&" + "stime=" + $("#stime1").val() + "&&" + "etime=" + $("#etime1").val() + "&&" + "model=2";
+            window.location.href = url;
         });
     }
 }
@@ -178,8 +228,6 @@ function graphLine(title, legend, xAxis, series) {
 var symbolArray = ['emptyCircle', 'rect', 'circle', 'triangle', 'diamond'];
 
 function lineSeries(data) {
-    console.log("serrs:");
-    console.log(data);
     var series = new Array();
     var index = 0;
     $.each(data, function(idx, obj) {
