@@ -130,5 +130,11 @@ namespace Resource.Web.Controllers
             if (!string.IsNullOrEmpty(pid)) list = list.Where(a => a.ParkID == pid);
             return Json(list.Select(a => new { a.ID, a.Name }).ToList(), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetID(string pid)
+        {
+            var count = dc.Set<T_Stage>().Where(a => a.ParkID == pid).Count();
+            count++;
+            return Json(new { id = pid + "-" + count }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

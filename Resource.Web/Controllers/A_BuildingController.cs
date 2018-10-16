@@ -122,5 +122,15 @@ namespace Resource.Web.Controllers
                 return Json(Result.Exception(exmsg: ex.StackTrace));
             }
         }
+
+        public JsonResult GetID(string pid)
+        {
+            string num = string.Empty;
+            var count = dc.Set<T_Building>().Where(a => a.StageID == pid).Count();
+            count++;
+            if (count < 10) num = "0" + count;
+            else num = count.ToString();
+            return Json(new { id = pid + "-" + num }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

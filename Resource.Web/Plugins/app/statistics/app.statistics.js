@@ -102,8 +102,8 @@ function initModule() {
     }
     if ($('#importDay').length > 0) {
         $('#importDay').click(function() {
-            var start = $('#stime1').val();
-            var end = $('#etime1').val();
+            var start = $('#stime').val();
+            var end = $('#etime').val();
             if (start.length > 0 || end.length > 0) {
                 if (new Date(start.replace("-", "/").replace("-", "/")) > new Date(end.replace("-", "/").replace("-", "/"))) {
                     layer.msg("结束时间比开始时间小！");
@@ -153,6 +153,15 @@ function graphPie(id, len, title, data) {
             left: '0',
             data: ['客户租赁', '内部使用', '空置']
         },
+        toolbox: {
+            show: true,
+            right: 40,
+            feature: {
+                saveAsImage: {
+                    pixelRatio: 2
+                }
+            }
+        },
         series: [{
             type: 'pie',
             radius: '70%',
@@ -198,8 +207,17 @@ function graphLine(title, legend, xAxis, series) {
             formatter: '{b} : {c}%'
         },
         legend: {
-            bottom: -5,
+            bottom: 0,
             data: legend
+        },
+        toolbox: {
+            show: true,
+            right: 40,
+            feature: {
+                saveAsImage: {
+                    pixelRatio: 2
+                }
+            }
         },
         xAxis: {
             type: 'category',

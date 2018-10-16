@@ -32,8 +32,9 @@
                         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>编号
                     </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="ID" required maxlength="50">
-                    </div>
+                        <input type="text" class="form-control" id="ID" name="ID" required maxlength="50" placeholder="编号自动生成" title="编号自动生成，无特殊情况请勿改动">
+                        <i id="load" class="layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop" style="position:absolute;top:8px;right:23px;display:none;"></i>
+                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-4">
@@ -56,5 +57,18 @@
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
+    <script>
+        $(function () {
+            $("#park").change(function () {
+                $("#load").show();
+                $.getJSON("@Url.Action("GetID")", {
+                    pid: $(this).val()
+                }, function (data) {
+                    $("#ID").val(data.id);
+                    $("#load").hide();
+                });
+            });
+        });
+    </script>
 </body>
 </html>

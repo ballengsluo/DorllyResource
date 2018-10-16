@@ -37,13 +37,13 @@
                         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>园区编号
                     </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="ID" required maxlength="50">
+                        <input type="text" class="form-control" id="ID" name="ID" required maxlength="50" placeholder="编号自动生成,无需填写" title="编号会根据园区名称自动生成，无特殊情况请勿改动！">
                     </div>
                     <label class="control-label col-md-2">
                         <font color="red" style="position:relative; top:3px;margin-right:3px;">*</font>园区名称
                     </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="Name" required maxlength="50">
+                        <input type="text" class="form-control" id="Name" name="Name" required maxlength="50">
                     </div>
                 </div>
 
@@ -117,10 +117,14 @@
     @Scripts.Render("~/Plugins/layui/layui.js")
     @Scripts.Render("~/Plugins/bootstrap-select/js/bootstrap-select.min.js")
     @Scripts.Render("~/Plugins/jquery/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Plugins/pinyin/ChinesePY.js")
     @Scripts.Render("~/Plugins/app/js/app.common.js")
     <script>
         $(function () {
-            dropChange(2)
+            dropChange(2);
+            $("#Name").change(function () {
+                $("#ID").val(Pinyin.GetJP($(this).val()));
+            });
         });
     </script>
 </body>

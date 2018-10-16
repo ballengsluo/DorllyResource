@@ -76,56 +76,6 @@ function search() {
     });
 }
 
-function graph(id, title, data) {
-    $("#statistics-graph-pie").append("<div class='col-lg-6 col-md-6 col-sm-6'><div id='" + id + "' style='width:" + $(".container").width() / 2 + "px;height:300px;'></div></div>");
-    var myChart = echarts.init(document.getElementById(id));
-    var option = {
-        title: {
-            text: title,
-            left: '0'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{b} : {c} %"
-        },
-
-        legend: {
-            orient: 'vertical',
-            top: '10%',
-            bottom: 10,
-            left: '0',
-            data: ['客户租赁', '内部使用', '空置']
-        },
-        series: [{
-            type: 'pie',
-            radius: '70%',
-            center: ['50%', '50%'],
-            selectedMode: 'single',
-            label: {
-                position: 'outside',
-                formatter: '{b}: {c}%'
-            },
-            labelLine: {
-                length2: 0,
-                smooth: true,
-                lineStyle: {
-                    type: 'dotted'
-                }
-            },
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            },
-            data: data
-        }]
-    };
-    myChart.setOption(option);
-    $("#" + id).removeAttr("style");
-}
-
 function imp() {
     $('#import').click(function() {
         var start = $('#stime').val();
