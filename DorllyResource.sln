@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{80E00A3A-62CE-4A9A-A14A-5989F449B514}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resource.Model", "Resource.Model\Resource.Model.csproj", "{9AEA9F31-9981-41CE-AE22-F829C747774A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{B819328C-41C9-4160-B791-B371F4AF8715}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project", "Project\Project.csproj", "{B6B78951-FE58-4460-87D5-B67791CFDA47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resource.Web", "Resource.Web\Resource.Web.csproj", "{AB7B5FDA-151C-46B0-811F-2BC3459E0629}"
 EndProject
@@ -23,10 +17,6 @@ Global
 		{9AEA9F31-9981-41CE-AE22-F829C747774A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AEA9F31-9981-41CE-AE22-F829C747774A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AEA9F31-9981-41CE-AE22-F829C747774A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6B78951-FE58-4460-87D5-B67791CFDA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6B78951-FE58-4460-87D5-B67791CFDA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6B78951-FE58-4460-87D5-B67791CFDA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6B78951-FE58-4460-87D5-B67791CFDA47}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB7B5FDA-151C-46B0-811F-2BC3459E0629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB7B5FDA-151C-46B0-811F-2BC3459E0629}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB7B5FDA-151C-46B0-811F-2BC3459E0629}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,9 +25,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9AEA9F31-9981-41CE-AE22-F829C747774A} = {80E00A3A-62CE-4A9A-A14A-5989F449B514}
-		{B6B78951-FE58-4460-87D5-B67791CFDA47} = {80E00A3A-62CE-4A9A-A14A-5989F449B514}
-		{AB7B5FDA-151C-46B0-811F-2BC3459E0629} = {B819328C-41C9-4160-B791-B371F4AF8715}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9D48483-F4CE-456C-B3B2-83271C04E87E}
 	EndGlobalSection
 EndGlobal

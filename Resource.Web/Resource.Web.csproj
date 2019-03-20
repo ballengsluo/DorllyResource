@@ -20,6 +20,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1103,16 +1105,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Project\Project.csproj">
-      <Project>{b6b78951-fe58-4460-87d5-b67791cfda47}</Project>
-      <Name>Project</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resource.Model\Resource.Model.csproj">
-      <Project>{9aea9f31-9981-41ce-ae22-f829c747774a}</Project>
-      <Name>Resource.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
